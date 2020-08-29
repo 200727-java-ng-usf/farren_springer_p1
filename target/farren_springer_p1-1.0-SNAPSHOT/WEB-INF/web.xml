@@ -1,0 +1,28 @@
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+             http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+
+    <!-- servlet tags and servlet mapping tags here -->
+    <servlet>
+        <servlet-name>SessionServletObj</servlet-name>
+        <servlet-class>com.revature.ers.servlets.SessionServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>SessionServletObj</servlet-name>
+        <url-pattern>/sesserv</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>HelperSessionServletObj</servlet-name>
+        <servlet-class>com.revature.ers.servlets.HelperSessionServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>HelperSessionServletObj</servlet-name>
+        <url-pattern>/helpsesserv</url-pattern>
+    </servlet-mapping>
+
+</web-app>
