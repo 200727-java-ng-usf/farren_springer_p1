@@ -4,25 +4,38 @@
              http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
 
-    <!-- servlet tags and servlet mapping tags here -->
+    <display-name>Hello</display-name>
+
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+
+    <!-- FORWARDING MASTER SERVLET -->
     <servlet>
-        <servlet-name>SessionServletObj</servlet-name>
-        <servlet-class>com.revature.ers.servlets.SessionServlet</servlet-class>
+        <servlet-name>ForwardingMasterServlet</servlet-name>
+        <servlet-class>com.revature.ers.servlets.ForwardingMasterServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>SessionServletObj</servlet-name>
-        <url-pattern>/sesserv</url-pattern>
+        <servlet-name>ForwardingMasterServlet</servlet-name>
+        <url-pattern>/MasterServlet</url-pattern>
+        <!-- "*" is a wildcard. Can take an infinite amount of values as valid -->
+        <url-pattern>*.anything</url-pattern>
+        <url-pattern>/api/*</url-pattern>
+        <!-- YES...you can have multiple url-pattern tags -->
+        <url-pattern>/farren</url-pattern>
     </servlet-mapping>
 
+
+    <!-- DIRECT RESPONSE SERVLET -->
     <servlet>
-        <servlet-name>HelperSessionServletObj</servlet-name>
-        <servlet-class>com.revature.ers.servlets.HelperSessionServlet</servlet-class>
+        <servlet-name>JsonMasterServlet</servlet-name>
+        <servlet-class>com.revature.ers.jsonservlets.JsonMasterServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>HelperSessionServletObj</servlet-name>
-        <url-pattern>/helpsesserv</url-pattern>
+        <servlet-name>JsonMasterServlet</servlet-name>
+        <url-pattern>/json/*</url-pattern>
     </servlet-mapping>
 
 </web-app>
