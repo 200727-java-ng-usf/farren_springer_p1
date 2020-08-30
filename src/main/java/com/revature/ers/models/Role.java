@@ -8,7 +8,7 @@ public enum Role {
     // enum constructors are implicitly private
     Role(String name) { this.roleName = name; }
 
-    public static Role getByRole(String role) {
+    public static Role getByName(String role) {
         /**
          * For each constant in roles, if it is the same as the
          * parameter of getByRole, return it.

@@ -7,6 +7,11 @@ import java.util.Set;
 
 public class ReimbRepository implements CrudRepository<ErsReimbursement> {
 
+    public ReimbRepository() {
+
+//        System.out.println("[LOG] - Instantiating " + this.getClass().getName());
+    }
+
     @Override
     public Optional<ErsReimbursement> save(ErsReimbursement ersReimbursement) {
         return Optional.empty();

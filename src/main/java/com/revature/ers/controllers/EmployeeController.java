@@ -13,6 +13,9 @@ public class EmployeeController {
     public static void employeeFinder(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         ErsUser employee = new ErsUser("employeeUsername","password","firstname", "lastname", "employeeEmail", Role.EMPLOYEE);
 
+        /**
+         * response is returning the employee as a string
+         */
         resp.getWriter().write(new ObjectMapper().writeValueAsString(employee));
     }
 }

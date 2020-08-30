@@ -15,6 +15,10 @@ public class ErsUser {
     private String email;
     private Role role;
 
+    public ErsUser() {
+        super();
+    }
+
     /**
      * Constructor without role and id
      * @param username

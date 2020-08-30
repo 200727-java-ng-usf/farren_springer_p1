@@ -1,11 +1,14 @@
 com\revature\ers\servlets\RequestHelper.class
 com\revature\ers\jsonservlets\JsonRequestHelper.class
+com\revature\ers\controllers\RegisterController.class
 com\revature\ers\jsonservlets\JsonMasterServlet.class
 com\revature\ers\servlets\SessionServlet.class
 com\revature\ers\servlets\ForwardingMasterServlet.class
 com\revature\ers\controllers\LoginController.class
 com\revature\ers\controllers\FinanceManagerController.class
+com\revature\ers\controllers\SubmitController.class
 com\revature\ers\servlets\HelperSessionServlet.class
 com\revature\ers\controllers\AdminController.class
 com\revature\ers\controllers\EmployeeController.class
+com\revature\ers\util\AppState.class
 com\revature\ers\controllers\HomeController.class

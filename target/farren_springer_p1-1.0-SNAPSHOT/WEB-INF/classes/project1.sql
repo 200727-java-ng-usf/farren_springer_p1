@@ -85,6 +85,29 @@ CREATE TABLE ers_reimbursements(
 	references ers_reimbursement_types
 );
 
+-- create user role values
+insert into ers_user_roles (role_name)
+values ('Admin'), ('FinManager'), ('Employee');
+
+
+-- populate ers_users table with some dummy data
+insert into ers_users (username, password, first_name, last_name, email, user_role_id)
+values
+	('aanderson', 'password', 'Alice', 'Anderson', 'aanderson@revature.com', 1),
+	('bbailey', 'password', 'Bob', 'Bailey', 'bbailey@revature.com', 2),
+	('ccalhoun', 'password', 'Charles', 'Calhoun', 'ccalhoun@revature.com', 3),
+	('ddavis', 'password', 'Daniel', 'Davis', 'ddavis@revature.com', 3);
+
+-- create ers_reimbursement_types values
+insert into ers_reimbursement_types (reimb_type)
+values ('Lodging'), ('Travel'), ('Food'), ('Other');
+
+-- create ers_reimbursement_statuses values
+insert into ers_reimbursement_statuses (reimb_status)
+values ('Pending'), ('Approved'), ('Denied');
+
+delete from ers_user_roles 
+
 
 
 

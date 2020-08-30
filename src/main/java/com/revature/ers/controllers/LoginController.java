@@ -1,10 +1,16 @@
 package com.revature.ers.controllers;
 
+import com.revature.ers.repos.UserRepository;
+import com.revature.ers.services.UserService;
+
 import javax.servlet.http.HttpServletRequest;
 
 public class LoginController {
 
     public static String login(HttpServletRequest req) {
+
+        UserRepository userRepo = new UserRepository();
+        UserService userService = new UserService(userRepo);
 
         /**
          * You may want to implement route guarding for your endpoints
