@@ -12,8 +12,10 @@ C:\Users\Farren\Desktop\WorkFolder\farren_springer_p1\src\main\java\com\revature
 C:\Users\Farren\Desktop\WorkFolder\farren_springer_p1\src\main\java\com\revature\ers\exceptions\AuthenticationException.java
 C:\Users\Farren\Desktop\WorkFolder\farren_springer_p1\src\main\java\com\revature\ers\controllers\SubmitController.java
 C:\Users\Farren\Desktop\WorkFolder\farren_springer_p1\src\main\java\com\revature\ers\exceptions\ResourcePersistenceException.java
+C:\Users\Farren\Desktop\WorkFolder\farren_springer_p1\src\main\java\com\revature\ers\util\AppState.java
 C:\Users\Farren\Desktop\WorkFolder\farren_springer_p1\src\main\java\com\revature\ers\controllers\HomeController.java
 C:\Users\Farren\Desktop\WorkFolder\farren_springer_p1\src\main\java\com\revature\ers\services\UserService.java
+C:\Users\Farren\Desktop\WorkFolder\farren_springer_p1\src\main\java\com\revature\ers\controllers\RegisterController.java
 C:\Users\Farren\Desktop\WorkFolder\farren_springer_p1\src\main\java\com\revature\ers\exceptions\ResourceNotFoundException.java
 C:\Users\Farren\Desktop\WorkFolder\farren_springer_p1\src\main\java\com\revature\ers\models\Type.java
 C:\Users\Farren\Desktop\WorkFolder\farren_springer_p1\src\main\java\com\revature\ers\repos\ReimbRepository.java

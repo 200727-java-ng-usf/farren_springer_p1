@@ -5,6 +5,8 @@ import com.revature.ers.services.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 
+import static com.revature.ers.services.UserService.app;
+
 public class LoginController {
 
     public static String login(HttpServletRequest req) {
@@ -36,18 +38,30 @@ public class LoginController {
          * the DB and find the ACTUAL password that should be used, based on the username
          * they typed in.
          */
-        if(!(username.equals("cheese") && password.equals("louise"))) {
-            // this logic will trigger when the username and password are incorrect
-            return"/api/wrongcreds";
-        } else {
-            /**
-             * In YOUR project, you'll probably be storing the entire user object in the
-             * session (which will ALSO contain other user information like: role, likes, comments, etc)
-             */
+        try {
+            userService.authenticate(username, password);
+
             req.getSession().setAttribute("loggedUsername", username);
             req.getSession().setAttribute("loggedPassword", password);
             return "/api/home";
+
+        } catch (Exception e) { // TODO custom exception
+            e.printStackTrace();
+            return "/api/badlogin.html";
         }
+
+//        if(!(username.equals("cheese") && password.equals("louise"))) {
+//            // this logic will trigger when the username and password are incorrect
+//            return"/api/wrongcreds";
+//        } else {
+//            /**
+//             * In YOUR project, you'll probably be storing the entire user object in the
+//             * session (which will ALSO contain other user information like: role, likes, comments, etc)
+//             */
+//            req.getSession().setAttribute("loggedUsername", username);
+//            req.getSession().setAttribute("loggedPassword", password);
+//            return "/api/home";
+//        }
 
 //            return null;
     }

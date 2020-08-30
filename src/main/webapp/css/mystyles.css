@@ -2,8 +2,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 3px solid red;
+    border: 3px solid blue;
     text-align: center;
+}
+.header {
+  background-color: #F1F1F1;
+  text-align: center;
+  padding: 20px;
 }
 form {
     border: 2px solid black;
@@ -12,4 +17,9 @@ form {
 }
 input {
     margin: 3px;
+}
+.footer {
+  background-color: #F1F1F1;
+  text-align: center;
+  padding: 10px;
 }

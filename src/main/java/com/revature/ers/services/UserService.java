@@ -33,9 +33,7 @@ public class UserService {
         ErsUser authUser = userRepo.findUserByCredentials(username, password)
                 .orElseThrow(AuthenticationException::new);
 
-//        app.setCurrentUser(authUser);
-        // we don't have appState in this. Instead, direct
-        // user to another .html for now
+        app.setCurrentUser(authUser);
 
     }
 

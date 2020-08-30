@@ -26,7 +26,6 @@ public class RequestHelper {
                 System.out.println("in login case");
                 // NOT modularized
                 // return "/html/login.html"; // better than a "break" or your money back
-
                 // modularized
                 return LoginController.login(req);
 
