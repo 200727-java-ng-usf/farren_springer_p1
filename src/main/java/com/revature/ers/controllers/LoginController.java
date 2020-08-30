@@ -1,5 +1,6 @@
 package com.revature.ers.controllers;
 
+import com.revature.ers.exceptions.AuthenticationException;
 import com.revature.ers.repos.UserRepository;
 import com.revature.ers.services.UserService;
 
@@ -45,7 +46,7 @@ public class LoginController {
             req.getSession().setAttribute("loggedPassword", password);
             return "/api/home";
 
-        } catch (Exception e) { // TODO custom exception
+        } catch (AuthenticationException e) {
             e.printStackTrace();
             return "/api/badlogin.html";
         }
