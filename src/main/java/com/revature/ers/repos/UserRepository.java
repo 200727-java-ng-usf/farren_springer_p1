@@ -37,11 +37,11 @@ public class UserRepository implements CrudRepository<ErsUser>{
     public Optional<ErsUser> save(ErsUser newUser) {
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "INSERT INTO project0.ers_users (username, password, first_name, last_name, email, user_role_id) " +
+            String sql = "INSERT INTO project1.ers_users (username, password, first_name, last_name, email, user_role_id) " +
                     "VALUES (?, ?, ?, ?, ?, ?)";
 
             // second parameter here is used to indicate column names that will have generated values
-            PreparedStatement pstmt = conn.prepareStatement(sql, new String[] {"id"});
+            PreparedStatement pstmt = conn.prepareStatement(sql, new String[] {"ers_user_id"});
             pstmt.setString(1, newUser.getUsername());
             pstmt.setString(2, newUser.getPassword());
             pstmt.setString(3, newUser.getFirstName());

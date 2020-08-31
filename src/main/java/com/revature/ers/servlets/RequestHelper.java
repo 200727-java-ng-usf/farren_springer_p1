@@ -2,8 +2,8 @@ package com.revature.ers.servlets;
 
 import com.revature.ers.controllers.HomeController;
 import com.revature.ers.controllers.LoginController;
-import com.revature.ers.controllers.RegisterController;
-import com.revature.ers.controllers.SubmitController;
+import com.revature.ers.controllers.admin.RegisterController;
+import com.revature.ers.controllers.employee.SubmitController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;

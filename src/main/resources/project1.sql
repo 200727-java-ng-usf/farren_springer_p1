@@ -106,7 +106,6 @@ values ('Lodging'), ('Travel'), ('Food'), ('Other');
 insert into ers_reimbursement_statuses (reimb_status)
 values ('Pending'), ('Approved'), ('Denied');
 
-delete from ers_user_roles 
 
 
 

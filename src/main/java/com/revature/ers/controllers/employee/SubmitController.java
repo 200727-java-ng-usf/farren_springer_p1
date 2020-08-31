@@ -1,4 +1,4 @@
-package com.revature.ers.controllers;
+package com.revature.ers.controllers.employee;
 
 import javax.servlet.http.HttpServletRequest;
 

@@ -52,7 +52,13 @@ public class UserService {
         newUser.setRole(Role.EMPLOYEE);
         userRepo.save(newUser);
         System.out.println(newUser);
-        app.setCurrentUser(newUser);
+        /**
+         * Will not be setting the current user to the registered
+         * user here, because admin's are the only users who will
+         * be registering new users, and we still want them to be
+         * the current user after they register someone
+         */
+//        app.setCurrentUser(newUser);
 
     }
 
@@ -62,6 +68,7 @@ public class UserService {
         if (user.getLastName() == null || user.getLastName().trim().equals("")) return false;
         if (user.getUsername() == null || user.getUsername().trim().equals("")) return false;
         if (user.getPassword() == null || user.getPassword().trim().equals("")) return false;
+        if (user.getEmail() == null || user.getEmail().trim().equals("")) return false;
         return true;
     }
 }

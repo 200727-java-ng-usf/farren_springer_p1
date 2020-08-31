@@ -1,4 +1,4 @@
-package com.revature.ers.controllers;
+package com.revature.ers.controllers.financemanager;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.ers.models.ErsUser;
