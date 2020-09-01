@@ -1,11 +1,13 @@
 package com.revature.ers.controllers;
 
 import com.revature.ers.exceptions.AuthenticationException;
+import com.revature.ers.models.Role;
 import com.revature.ers.repos.UserRepository;
 import com.revature.ers.services.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 
+import static com.revature.ers.models.Role.*;
 import static com.revature.ers.services.UserService.app;
 
 public class LoginController {
@@ -45,6 +47,23 @@ public class LoginController {
             req.getSession().setAttribute("loggedUsername", username);
             req.getSession().setAttribute("loggedPassword", password);
             return "/api/home";
+//
+// TODO switch case that checks user_role_id
+
+//            switch(app.getCurrentUser().getRole()) {
+//                case ADMIN:
+//                    System.out.println("in admin case");
+//                    return "/api/admindash.html";
+//                case FINANCE_MANAGER:
+//                    System.out.println("in fmanager case");
+//                    return "/api/fmanagerdash.html";
+//                case EMPLOYEE:
+//                    System.out.println("in employee case");
+//                    return "/api/employeedash";
+//                default:
+//                    System.out.println("in default case");
+//                    return "/api/home.html";
+//            }
 
         } catch (AuthenticationException e) {
             e.printStackTrace();

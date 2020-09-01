@@ -1,12 +1,13 @@
 com\revature\ers\controllers\employee\EmployeeController.class
 com\revature\ers\servlets\RequestHelper.class
-com\revature\ers\controllers\employee\ViewReimbsController.class
+com\revature\ers\controllers\admin\FindUserController.class
 com\revature\ers\jsonservlets\JsonRequestHelper.class
 com\revature\ers\controllers\financemanager\ViewAllReimbsController.class
 com\revature\ers\controllers\admin\RegisterController.class
 com\revature\ers\controllers\admin\UpdateController.class
 com\revature\ers\controllers\financemanager\FinanceManagerController.class
 com\revature\ers\jsonservlets\JsonMasterServlet.class
+com\revature\ers\controllers\admin\DeleteUserController.class
 com\revature\ers\servlets\SessionServlet.class
 com\revature\ers\servlets\ForwardingMasterServlet.class
 com\revature\ers\controllers\LoginController.class
@@ -17,4 +18,5 @@ com\revature\ers\controllers\employee\SubmitController.class
 com\revature\ers\controllers\admin\DeleteController.class
 com\revature\ers\util\AppState.class
 com\revature\ers\controllers\financemanager\ApproveDenyController.class
+com\revature\ers\controllers\employee\ViewMyReimbsController.class
 com\revature\ers\controllers\HomeController.class

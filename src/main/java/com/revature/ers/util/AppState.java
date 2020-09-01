@@ -26,9 +26,9 @@ public class AppState {
         console = new BufferedReader(new InputStreamReader(System.in));
 
         final UserRepository userRepo = new UserRepository();
-        final ReimbRepository accountRepo = new ReimbRepository();
+        final ReimbRepository reimbRepo = new ReimbRepository();
         final UserService userService = new UserService(userRepo);
-        final ReimbService accountService = new ReimbService(reimbRepo);
+        final ReimbService reimbService = new ReimbService(reimbRepo);
 
 //        System.out.println("[LOG] - Application initialization complete.");
     }
@@ -55,7 +55,7 @@ public class AppState {
 
     public ErsReimbursement getCurrentReimbursement() { return currentReimbursement; }
 
-    public void setCurrentAccount(ErsReimbursement currentReimbursement) { this.currentReimbursement = currentReimbursement; }
+    public void setCurrentReimbursement(ErsReimbursement currentReimbursement) { this.currentReimbursement = currentReimbursement; }
 
     public void invalidateCurrentSession() {
         currentUser = null;

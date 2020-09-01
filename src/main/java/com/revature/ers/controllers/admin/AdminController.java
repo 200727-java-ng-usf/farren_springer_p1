@@ -13,10 +13,12 @@ import java.io.IOException;
  */
 public class AdminController {
 
-    public static void adminFinder(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    public static ErsUser adminFinder(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         ErsUser admin = new ErsUser("adminUsername","password","firstname", "lastname", "adminEmail", Role.ADMIN);
 
+        System.out.println("in admin finder");
         resp.getWriter().write(new ObjectMapper().writeValueAsString(admin));
+        return admin;
     }
 
 }

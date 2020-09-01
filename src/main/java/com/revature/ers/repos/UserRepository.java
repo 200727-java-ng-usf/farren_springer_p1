@@ -73,14 +73,58 @@ public class UserRepository implements CrudRepository<ErsUser>{
         return null;
     }
 
+    /**
+     * Not used yet...
+     * @param id
+     * @return
+     */
     @Override
     public Optional<ErsUser> findById(Integer id) {
-        return Optional.empty();
+
+        System.out.println("In findById method in UserRepository");
+
+        Optional<ErsUser> _user = Optional.empty();
+
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            String sql = baseQuery + "WHERE ers_user_id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, id);
+
+            ResultSet rs = pstmt.executeQuery();
+            _user = mapResultSet(rs).stream().findFirst();
+
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
+
+        return _user;
     }
 
     @Override
     public boolean update(ErsUser ersUser) {
-        return false;
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            String sql = "UPDATE project1.ers_users "
+                    + "SET email = '" + ersUser.getEmail() + "', "
+                    + "username = '" + ersUser.getUsername() + "', "
+                    + "password = '" + ersUser.getPassword() + "', "
+                    + "first_name = '" + ersUser.getFirstName() + "', "
+                    + "last_name = '" + ersUser.getLastName() + "' "
+//                    + "', " // TODO update role
+//                    + "role_id = " + appUser.getRole() + " " // role is a number
+                    + "WHERE id = " + ersUser.getId();
+
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.executeUpdate(); //
+            pstmt.close();
+
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
+
+        return true;
+
     }
 
     @Override
@@ -97,6 +141,7 @@ public class UserRepository implements CrudRepository<ErsUser>{
          */
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
+            System.out.println("Connection to db successful");
             String sql = baseQuery + "WHERE username = ? AND password = ?";
 
             /**

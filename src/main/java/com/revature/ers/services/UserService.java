@@ -62,6 +62,19 @@ public class UserService {
 
     }
 
+    public void update(ErsUser ersUser, String username, String password, String firstName, String lastName, String email) { // TODO role
+        if (!isUserValid(ersUser)) {
+            throw new InvalidRequestException("User not found...");
+        }
+
+        ersUser.setUsername(username);
+        ersUser.setPassword(password);
+        ersUser.setFirstName(firstName);
+        ersUser.setLastName(lastName);
+        ersUser.setEmail(email);
+        userRepo.update(ersUser);
+    }
+
     public boolean isUserValid(ErsUser user) {
         if (user == null) return false;
         if (user.getFirstName() == null || user.getFirstName().trim().equals("")) return false;

@@ -2,7 +2,9 @@ package com.revature.ers.servlets;
 
 import com.revature.ers.controllers.HomeController;
 import com.revature.ers.controllers.LoginController;
+import com.revature.ers.controllers.admin.FindUserController;
 import com.revature.ers.controllers.admin.RegisterController;
+import com.revature.ers.controllers.admin.UpdateController;
 import com.revature.ers.controllers.employee.SubmitController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -41,6 +43,12 @@ public class RequestHelper {
             case "/farren_springer_p1/api/register":
                 System.out.println("in register case");
                 return RegisterController.registerNewUser(req);
+            case "/farren_springer_p1/api/finduser":
+                System.out.println("in finduser case");
+                return FindUserController.findUser(req);
+            case "/farren_springer_p1/api/updateuser":
+                System.out.println("in updateuser case");
+                return UpdateController.updateUser(req);
             default:
                 System.out.println("in default");
                 return "/html/badlogin.html";

@@ -14,14 +14,54 @@ public class ErsReimbursement {
     private Timestamp submitted;
     private Timestamp resolved;
     private String description;
-    private Blob receipt;
+    private String receipt;
     private Integer authorId;
     private Integer resolverId;
-    private Integer reimbursementStatusId;
-    private Integer reimbursementTypeId;
+    private Status reimbursementStatusId;
+    private Type reimbursementTypeId;
+
+    public ErsReimbursement(Double amount, Type reimbursementTypeId) {
+        this.amount = amount;
+        this.reimbursementTypeId = reimbursementTypeId;
+    }
 
     /**
-     * Constructor with minimum parameter requirements
+     * Constructor
+     * @param amount
+     * @param reimbursementTypeId
+     * @param description
+     */
+    public ErsReimbursement(Double amount, Type reimbursementTypeId, String description) {
+        this(amount, reimbursementTypeId);
+        this.description = description;
+        System.out.println("In constructor");
+    }
+
+    public ErsReimbursement(Double amount, Type reimbursementTypeId, String description, Timestamp submitted) {
+        this(amount, reimbursementTypeId, description);
+        this.submitted = submitted;
+        System.out.println("In constructor");
+    }
+
+    public ErsReimbursement(Double amount, Type reimbursementTypeId, String description, Timestamp submitted, Status reimbursementStatusId) {
+        this(amount, reimbursementTypeId, description, submitted);
+        this.reimbursementStatusId = reimbursementStatusId;
+        System.out.println("In constructor");
+    }
+
+    /**
+     * Constructor
+     * @param amount
+     * @param description
+     * @param authorId
+     */
+    public ErsReimbursement(Double amount, Type reimbursementTypeId, String description, Integer authorId) {
+        this(amount, reimbursementTypeId, description);
+        this.authorId = authorId;
+    }
+
+    /**
+     * Constructor
      * @param amount
      * @param submitted
      * @param description
@@ -29,13 +69,11 @@ public class ErsReimbursement {
      * @param reimbursementStatusId
      * @param reimbursementTypeId
      */
-    public ErsReimbursement(Double amount, Timestamp submitted, String description, Integer authorId, Integer reimbursementStatusId, Integer reimbursementTypeId) {
-        this.amount = amount;
+    public ErsReimbursement(Double amount, Timestamp submitted, String description, Integer authorId, Status reimbursementStatusId, Type reimbursementTypeId) {
+        this(amount, reimbursementTypeId, description, authorId);
         this.submitted = submitted;
-        this.description = description;
-        this.authorId = authorId;
         this.reimbursementStatusId = reimbursementStatusId;
-        this.reimbursementTypeId = reimbursementTypeId;
+        this.authorId = authorId;
     }
 
     /**
@@ -50,16 +88,11 @@ public class ErsReimbursement {
      * @param reimbursementStatusId
      * @param reimbursementTypeId
      */
-    public ErsReimbursement(Double amount, Timestamp submitted, Timestamp resolved, String description, Blob receipt, Integer authorId, Integer resolverId, Integer reimbursementStatusId, Integer reimbursementTypeId) {
-        this.amount = amount;
-        this.submitted = submitted;
+    public ErsReimbursement(Double amount, Timestamp submitted, Timestamp resolved, String description, String receipt, Integer authorId, Integer resolverId, Status reimbursementStatusId, Type reimbursementTypeId) {
+        this(amount, submitted, description, authorId, reimbursementStatusId, reimbursementTypeId);
         this.resolved = resolved;
-        this.description = description;
         this.receipt = receipt;
-        this.authorId = authorId;
         this.resolverId = resolverId;
-        this.reimbursementStatusId = reimbursementStatusId;
-        this.reimbursementTypeId = reimbursementTypeId;
     }
 
     /**
@@ -75,17 +108,10 @@ public class ErsReimbursement {
      * @param reimbursementStatusId
      * @param reimbursementTypeId
      */
-    public ErsReimbursement(Integer id, Double amount, Timestamp submitted, Timestamp resolved, String description, Blob receipt, Integer authorId, Integer resolverId, Integer reimbursementStatusId, Integer reimbursementTypeId) {
+    public ErsReimbursement(Integer id, Double amount, Timestamp submitted, Timestamp resolved, String description, String receipt, Integer authorId, Integer resolverId, Status reimbursementStatusId, Type reimbursementTypeId) {
+        this(amount, submitted, resolved, description, receipt, authorId, resolverId, reimbursementStatusId, reimbursementTypeId);
         this.id = id;
-        this.amount = amount;
-        this.submitted = submitted;
-        this.resolved = resolved;
-        this.description = description;
-        this.receipt = receipt;
-        this.authorId = authorId;
-        this.resolverId = resolverId;
-        this.reimbursementStatusId = reimbursementStatusId;
-        this.reimbursementTypeId = reimbursementTypeId;
+
     }
 
     /**
@@ -141,11 +167,11 @@ public class ErsReimbursement {
         this.description = description;
     }
 
-    public Blob getReceipt() {
+    public String getReceipt() {
         return receipt;
     }
 
-    public void setReceipt(Blob receipt) {
+    public void setReceipt(String receipt) {
         this.receipt = receipt;
     }
 
@@ -165,19 +191,19 @@ public class ErsReimbursement {
         this.resolverId = resolverId;
     }
 
-    public Integer getReimbursementStatusId() {
+    public Status getReimbursementStatusId() {
         return reimbursementStatusId;
     }
 
-    public void setReimbursementStatusId(Integer reimbursementStatusId) {
+    public void setReimbursementStatusId(Status reimbursementStatusId) {
         this.reimbursementStatusId = reimbursementStatusId;
     }
 
-    public Integer getReimbursementTypeId() {
+    public Type getReimbursementTypeId() {
         return reimbursementTypeId;
     }
 
-    public void setReimbursementTypeId(Integer reimbursementTypeId) {
+    public void setReimbursementTypeId(Type reimbursementTypeId) {
         this.reimbursementTypeId = reimbursementTypeId;
     }
 

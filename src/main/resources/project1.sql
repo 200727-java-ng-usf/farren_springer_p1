@@ -98,6 +98,13 @@ values
 	('ccalhoun', 'password', 'Charles', 'Calhoun', 'ccalhoun@revature.com', 3),
 	('ddavis', 'password', 'Daniel', 'Davis', 'ddavis@revature.com', 3);
 
+-- populate ers_reimbursements with some dummy data
+insert into ers_reimbursements (amount, description, receipt, author_id, resolver_id, reimb_status_id, reimb_type_id)
+values 
+	(200, 'Marriot', 'receipt text here', 7, 6, 1, 1),
+	(50, 'Olive Garden', 'more receipt text here', 8, 6, 1, 3),
+	(350, 'SouthWest Airlines', 'even more receipt text here', 8, 6, 1, 2);
+
 -- create ers_reimbursement_types values
 insert into ers_reimbursement_types (reimb_type)
 values ('Lodging'), ('Travel'), ('Food'), ('Other');
