@@ -23,19 +23,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="acd0345a-037a-4ae4-bb0f-bf52e2b6afbe" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/servlets/employee/EmployeeServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/controllers/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/controllers/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/controllers/employee/SubmitController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/controllers/employee/SubmitController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/controllers/employee/ViewMyReimbsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/controllers/employee/ViewMyReimbsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/models/ErsReimbursement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/models/ErsReimbursement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/repos/ReimbRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/repos/ReimbRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/controllers/employee/EmployeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/controllers/employee/EmployeeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/jsonservlet/JsonRequestHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/jsonservlet/JsonRequestHelper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/repos/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/repos/UserRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/services/ReimbService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/services/ReimbService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/services/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/servlets/ForwardingMasterServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/servlets/ForwardingMasterServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/servlets/RequestHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/servlets/RequestHelper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/admindash.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/admindash.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/sessionservlet/SessionServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/sessionservlet/SessionServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/html/employeedash.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/employeedash.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/fmanagerdash.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/fmanagerdash.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT.war" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT.war" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -48,8 +47,8 @@
       <list>
         <option value="Enum" />
         <option value="Interface" />
-        <option value="Class" />
         <option value="HTML File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -71,7 +70,7 @@
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../demos/FrontControllerExample" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../demos/sessionDemos" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -145,10 +144,10 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="-1635" y="30" key="#com.intellij.ide.util.MemberChooser" timestamp="1598580844929">
+    <state x="-1635" y="30" key="#com.intellij.ide.util.MemberChooser" timestamp="1599010527802">
       <screen x="-1920" y="-209" width="1920" height="1040" />
     </state>
-    <state x="-1635" y="30" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/-1920.-209.1920.1040@-1920.-209.1920.1040" timestamp="1598580844929" />
+    <state x="-1635" y="30" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/-1920.-209.1920.1040@-1920.-209.1920.1040" timestamp="1599010527802" />
     <state x="-1657" y="183" width="433" height="268" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1598803288705">
       <screen x="-1920" y="-209" width="1920" height="1040" />
     </state>
@@ -157,10 +156,10 @@
       <screen x="-1920" y="-209" width="1920" height="1040" />
     </state>
     <state x="-1752" y="-88" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1040/-1920.-209.1920.1040@-1920.-209.1920.1040" timestamp="1598572033549" />
-    <state x="-1660" y="69" key="FileChooserDialogImpl" timestamp="1599005222720">
+    <state x="-1660" y="69" key="FileChooserDialogImpl" timestamp="1599008111351">
       <screen x="-1920" y="-209" width="1920" height="1040" />
     </state>
-    <state x="-1660" y="69" key="FileChooserDialogImpl/0.0.1920.1040/-1920.-209.1920.1040@-1920.-209.1920.1040" timestamp="1599005222720" />
+    <state x="-1660" y="69" key="FileChooserDialogImpl/0.0.1920.1040/-1920.-209.1920.1040@-1920.-209.1920.1040" timestamp="1599008111351" />
     <state width="914" height="281" key="GridCell.Tab.0.bottom" timestamp="1598583245803">
       <screen x="-1920" y="-209" width="1920" height="1040" />
     </state>

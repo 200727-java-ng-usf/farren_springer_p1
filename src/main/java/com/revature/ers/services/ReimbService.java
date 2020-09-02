@@ -75,13 +75,13 @@ public class ReimbService {
      * READ operation (Service Layer)
      * @param authorId
      */
-    public void findReimbursements(Integer authorId) {
+    public void findReimbursement(Integer authorId) {
 
         // validate that the provided id is not a non-value
         if (authorId == null ) {
             throw new InvalidRequestException("Invalid credential values provided!");
         }
-        System.out.println("Here are your account(s):"); // print to html?
+        System.out.println("Here are your reimbursement(s):"); // print to html?
         ErsReimbursement authReimb = reimbRepo.findReimbByAuthorId(authorId)
                 .orElseThrow(AuthenticationException::new);
 

@@ -38,7 +38,6 @@ public class UserRepository implements CrudRepository<ErsUser>{
      */
     @Override
     public Optional<ErsUser> save(ErsUser newUser) {
-
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
             String sql = "INSERT INTO project1.ers_users (username, password, first_name, last_name, email, user_role_id) " +

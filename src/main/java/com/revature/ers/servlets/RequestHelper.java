@@ -18,7 +18,7 @@ import java.io.IOException;
 
 public class RequestHelper {
 
-    public static String process(HttpServletRequest req) throws IOException {
+    public static String process(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
         System.out.println("THIS is the current URI active: " + req.getRequestURI());
 
@@ -31,7 +31,7 @@ public class RequestHelper {
                 // NOT modularized
                 // return "/html/login.html"; // better than a "break" or your money back
                 // modularized
-                return LoginController.login(req);
+                return LoginController.login(req, resp);
 
             case "/farren_springer_p1/api/home":
                 System.out.println("in home case");
@@ -51,6 +51,9 @@ public class RequestHelper {
             case "/farren_springer_p1/api/updateuser":
                 System.out.println("in updateuser case");
                 return UpdateController.updateUser(req);
+            case "/farren_springer_p1/api/employee":
+                System.out.println("in employee case");
+                return EmployeeController.displayDash(req, resp);
             default:
                 System.out.println("in default");
                 return "/html/badlogin.html";

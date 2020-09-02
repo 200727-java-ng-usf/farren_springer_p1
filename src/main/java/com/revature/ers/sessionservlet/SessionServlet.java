@@ -26,7 +26,7 @@ public class SessionServlet extends HttpServlet {
         // req.getSession(false); will return null if there is no session, it will NOT create one
         HttpSession session = req.getSession();
 
-        session.setAttribute("currentUser", ersUser);
+//        session.setAttribute("currentUser", ersUser);
 
         // THIS STUFF HAS NOTHING TO DO WITH SESSION
         System.out.println("in session doGet");

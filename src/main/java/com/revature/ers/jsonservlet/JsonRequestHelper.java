@@ -23,7 +23,7 @@ public class JsonRequestHelper {
                 AdminController.adminFinder(req, resp);
                 break;
             case "/farren_springer_p1/json/employee":
-                EmployeeController.employeeFinder(req, resp);
+                EmployeeController.displayDash(req, resp);
             case "/farren_springer_p1/json/financemanager":
                 FinanceManagerController.financeManagerFinder(req, resp);
             default:

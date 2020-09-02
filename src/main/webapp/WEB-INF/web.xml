@@ -30,6 +30,16 @@
         <url-pattern>/helpsesserv</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>EmployeeServletObj</servlet-name>
+        <servlet-class>com.revature.ers.servlets.employee.EmployeeServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>EmployeeServletObj</servlet-name>
+        <url-pattern>/employeeWelcome</url-pattern>
+    </servlet-mapping>
+
     <!-- FORWARDING MASTER SERVLET -->
     <servlet>
         <servlet-name>ForwardingMasterServlet</servlet-name>

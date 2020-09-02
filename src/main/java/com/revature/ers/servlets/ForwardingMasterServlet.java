@@ -11,13 +11,13 @@ public class ForwardingMasterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 //        req.getRequestDispatcher("String").forward(req,resp);
-        req.getRequestDispatcher(RequestHelper.process(req)).forward(req, resp);
+        req.getRequestDispatcher(RequestHelper.process(req, resp)).forward(req, resp);
 //        resp.getWriter().write("in get");
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher(RequestHelper.process(req)).forward(req, resp);
+        req.getRequestDispatcher(RequestHelper.process(req, resp)).forward(req, resp);
 //        resp.getWriter().write("in post");
     }
 }
