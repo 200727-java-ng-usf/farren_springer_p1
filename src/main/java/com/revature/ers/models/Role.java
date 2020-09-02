@@ -17,6 +17,8 @@ public enum Role {
             if (theRole.roleName.equals(role)) {
                 return theRole;
             }
+
+
         }
 
         /**

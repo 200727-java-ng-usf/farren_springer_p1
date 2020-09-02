@@ -88,6 +88,17 @@ public class UserService {
         return userRepo.findById(id);
     }
 
+    public Set<ErsUser> getAllUsers() {
+
+        Set<ErsUser> users = userRepo.findAll();
+
+        if (users.isEmpty()) {
+            throw new RuntimeException("No users found...");
+        }
+
+        return users;
+    }
+
     /**
      * READ operation
      * filter

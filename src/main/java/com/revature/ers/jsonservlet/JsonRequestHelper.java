@@ -1,9 +1,9 @@
 package com.revature.ers.jsonservlet;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.revature.ers.controllers.admin.AdminController;
-import com.revature.ers.controllers.employee.EmployeeController;
-import com.revature.ers.controllers.financemanager.FinanceManagerController;
+import com.revature.ers.controllers.AdminController;
+import com.revature.ers.controllers.EmployeeController;
+import com.revature.ers.controllers.FinanceManagerController;
 import com.revature.ers.models.ErsUser;
 
 import javax.servlet.http.HttpServletRequest;

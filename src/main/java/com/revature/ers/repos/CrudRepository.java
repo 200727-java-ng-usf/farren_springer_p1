@@ -20,7 +20,7 @@ public interface CrudRepository<T> {
      * READ
      * @return
      */
-    Set<Optional<T>> findAll();
+    Set<T> findAll();
     Optional<T> findById(Integer id);
 
     /**

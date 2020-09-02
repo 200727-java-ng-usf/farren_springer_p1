@@ -113,6 +113,9 @@ values ('Lodging'), ('Travel'), ('Food'), ('Other');
 insert into ers_reimbursement_statuses (reimb_status)
 values ('Pending'), ('Approved'), ('Denied');
 
+-- more dummy ers_users
+insert into ers_users (username, password, first_name, last_name, email, user_role_id)
+values ('bgriffin', 'password', 'Brian', 'Griffin', 'bgriffin@gmail.com', 2);
 
 
 

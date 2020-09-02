@@ -4,6 +4,7 @@ import com.revature.ers.models.ErsUser;
 import com.revature.ers.models.Role;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,6 +14,7 @@ import java.io.PrintWriter;
 
 // TODO understand how this works
 
+@WebServlet("/sesserv")
 public class SessionServlet extends HttpServlet {
 
     @Override

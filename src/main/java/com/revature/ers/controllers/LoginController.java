@@ -1,19 +1,15 @@
 package com.revature.ers.controllers;
 
-import com.revature.ers.controllers.employee.EmployeeController;
 import com.revature.ers.exceptions.AuthenticationException;
 import com.revature.ers.models.Role;
 import com.revature.ers.repos.UserRepository;
 import com.revature.ers.services.UserService;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-import static com.revature.ers.models.Role.*;
 import static com.revature.ers.services.UserService.app;
 
 public class LoginController {
@@ -35,6 +31,7 @@ public class LoginController {
          * for example, you may want to make sure only ADMINS can access admin endpoints
          */
         // ensure that the method is a POST http method, else send them back to the login page
+        // need to do this because the user will be entering form data on this page
         if(!req.getMethod().equals("POST")) {
             return "/html/login.html";
         }
@@ -43,11 +40,7 @@ public class LoginController {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
 
-        /**
-         * For YOUR project, you won't hardcode "cheese" and "louise"...you'll go to
-         * the DB and find the ACTUAL password that should be used, based on the username
-         * they typed in.
-         */
+        // try to authenticate the user before moving forward
         try {
 
             userService.authenticate(username, password);
@@ -63,11 +56,12 @@ public class LoginController {
                 case EMPLOYEE:
                     System.out.println("In employee case");
                     // TODO make the html document display the user
-                    return EmployeeController.displayDash(req, resp); // TODO Forward here instead?
+//                    return EmployeeController.displayDash(req, resp); // TODO Forward here instead?
+                return "/employeeWelcome";
                 case FINANCE_MANAGER:
                     System.out.println("In finance manager case");
                     // TODO make the html document display the user
-                    return "/api/fmanager";
+                    return "/api/financeManagerServlet";
                 case ADMIN:
                     System.out.println("In admin case");
                     // TODO make the html document display the user

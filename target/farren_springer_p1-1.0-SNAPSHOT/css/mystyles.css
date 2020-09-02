@@ -5,6 +5,13 @@
     border: 3px solid blue;
     text-align: center;
 }
+.employee-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 3px solid blue;
+    text-align: center;
+}
 .header {
   background-color: #F1F1F1;
   text-align: center;

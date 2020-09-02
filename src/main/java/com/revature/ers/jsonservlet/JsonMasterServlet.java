@@ -1,6 +1,7 @@
 package com.revature.ers.jsonservlet;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -41,6 +42,8 @@ import java.io.IOException;
  *     <child2> 50 </child2>
  * </xml>
  */
+
+@WebServlet("/json/*")
 public class JsonMasterServlet extends HttpServlet {
 
     @Override

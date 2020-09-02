@@ -4,10 +4,7 @@ import com.revature.ers.models.ErsUser;
 import com.revature.ers.models.Role;
 import com.revature.ers.util.ConnectionFactory;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -80,10 +77,9 @@ public class UserRepository implements CrudRepository<ErsUser>{
      * @return
      */
     @Override
-    public Set<Optional<ErsUser>> findAll() {
+    public Set<ErsUser> findAll() {
 
-        Optional<ErsUser> _user = Optional.empty();
-        Set<Optional<ErsUser>> _users = new HashSet<>();
+        Set<ErsUser> users = new HashSet<>();
 
         /**
          * Try with resources; the resource is the JDB
@@ -92,25 +88,15 @@ public class UserRepository implements CrudRepository<ErsUser>{
 
             String sql = baseQuery;
 
-            PreparedStatement pstmt = conn.prepareStatement(sql);
-
-            /**
-             * ExecuteQuery
-             */
-            ResultSet rs = pstmt.executeQuery();
-
-            /**
-             * Map the result set of the query to the _user Optional
-             * to be returned to the findUserByCredentials method.
-             */
-            _user = mapResultSet(rs).stream().findAny();
-            _users.add(_user);
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            users = mapResultSet(rs);
 
         } catch (SQLException sqle) {
             sqle.printStackTrace();
         }
 
-        return _users;
+        return users;
 
     }
 
@@ -286,7 +272,7 @@ public class UserRepository implements CrudRepository<ErsUser>{
             temp.setFirstName(rs.getString("first_name"));
             temp.setLastName(rs.getString("last_name"));
             temp.setEmail(rs.getString("email"));
-            temp.setRole(Role.getByName(rs.getString("user_role_id")));
+            temp.setRole(Role.getByName(rs.getString("user_role_id"))); // TODO fix bug where Service layer shows employee always
             System.out.println(temp);
             users.add(temp);
         }
