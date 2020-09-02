@@ -1,11 +1,13 @@
 package com.revature.ers.services;
 
+import com.revature.ers.exceptions.AuthenticationException;
 import com.revature.ers.exceptions.InvalidRequestException;
 import com.revature.ers.exceptions.ResourceNotFoundException;
 import com.revature.ers.models.ErsReimbursement;
 import com.revature.ers.repos.ReimbRepository;
 
 import java.io.IOException;
+import java.util.Set;
 
 import static com.revature.ers.services.UserService.app;
 
@@ -13,13 +15,34 @@ public class ReimbService {
 
     private static ReimbRepository reimbRepo;
 
+    /**
+     * Constructor
+     * @param repo
+     */
     public ReimbService(ReimbRepository repo) {
 //        System.out.println("[LOG] - Instantiating " + this.getClass().getName());
         reimbRepo = repo;
     }
 
     /**
-     * CREATE operation
+     * Authenticate that the reimbursement exists
+     * @param reimbId
+     */
+    public void authenticateByReimbId(Integer reimbId) {
+
+        if (reimbId == 0 || reimbId.equals("") ) {
+            throw new InvalidRequestException("Invalid credential values provided!");
+        }
+
+        ErsReimbursement authReimb = reimbRepo.findById(reimbId)
+                .orElseThrow(AuthenticationException::new);
+
+        app.setCurrentReimbursement(authReimb);
+
+    }
+
+    /**
+     * CREATE operation (Service Layer)
      * @param newReimbursement
      */
     public void register(ErsReimbursement newReimbursement) {
@@ -49,7 +72,25 @@ public class ReimbService {
     }
 
     /**
-     * UPDATE operation
+     * READ operation (Service Layer)
+     * @param authorId
+     */
+    public void findReimbursements(Integer authorId) {
+
+        // validate that the provided id is not a non-value
+        if (authorId == null ) {
+            throw new InvalidRequestException("Invalid credential values provided!");
+        }
+        System.out.println("Here are your account(s):"); // print to html?
+        ErsReimbursement authReimb = reimbRepo.findReimbByAuthorId(authorId)
+                .orElseThrow(AuthenticationException::new);
+
+        app.setCurrentReimbursement(authReimb); // redundant?
+
+    }
+
+    /**
+     * UPDATE operation (Service Layer)
      * @param reimbursement
      * @param amount
      * @throws IOException
@@ -62,10 +103,10 @@ public class ReimbService {
     }
 
     /**
-     * DELETE operation
+     * DELETE operation (Service Layer)
      * @param reimbursement
      */
-    public void deleteAccount(ErsReimbursement reimbursement) {
+    public void deleteReimbursement(ErsReimbursement reimbursement) {
         if (reimbursement == null ) {
             throw new ResourceNotFoundException("The Reimbursement does not exist!");
         }

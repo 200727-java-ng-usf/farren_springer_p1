@@ -6,8 +6,15 @@ import com.revature.ers.models.ErsUser;
 import com.revature.ers.models.Role;
 import com.revature.ers.repos.UserRepository;
 import com.revature.ers.util.AppState;
+import com.revature.ers.util.ConnectionFactory;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 public class UserService {
 
@@ -20,6 +27,11 @@ public class UserService {
     }
 
 
+    /**
+     * Make sure user exists.
+     * @param username
+     * @param password
+     */
     public void authenticate(String username, String password) {
 
         // validate that the provided username and password are not non-values
@@ -37,6 +49,10 @@ public class UserService {
 
     }
 
+    /**
+     * CREATE operation (Service Layer)
+     * @param newUser
+     */
     public void register(ErsUser newUser) {
 
         if (!isUserValid(newUser)) {
@@ -62,17 +78,55 @@ public class UserService {
 
     }
 
-    public void update(ErsUser ersUser, String username, String password, String firstName, String lastName, String email) { // TODO role
+    /**
+     * READ operation (Service Layer)
+     * @param id
+     * @return
+     */
+    public Optional<ErsUser> findById(Integer id) {
+
+        return userRepo.findById(id);
+    }
+
+    /**
+     * READ operation
+     * filter
+     * not in use yet...may not use at all
+     * @param role
+     * @return
+     */
+    public Set<Optional<ErsUser>> findAllByRole(Role role) {
+        return new HashSet<>();
+    }
+
+    /**
+     * UPDATE operation (Service Layer)
+     * @param ersUser
+     */
+    public void update(ErsUser ersUser) {
+
+        /**
+         * Before updating, check that the user is valid.
+         */
         if (!isUserValid(ersUser)) {
             throw new InvalidRequestException("User not found...");
         }
 
-        ersUser.setUsername(username);
-        ersUser.setPassword(password);
-        ersUser.setFirstName(firstName);
-        ersUser.setLastName(lastName);
-        ersUser.setEmail(email);
+        ersUser.setUsername(ersUser.getUsername());
+        ersUser.setPassword(ersUser.getPassword());
+        ersUser.setFirstName(ersUser.getFirstName());
+        ersUser.setLastName(ersUser.getLastName());
+        ersUser.setEmail(ersUser.getEmail());
+        ersUser.setRole(ersUser.getRole());
         userRepo.update(ersUser);
+    }
+
+    /**
+     * DELETE operation (Service Layer)
+     * @param ersUser
+     */
+    public void deleteUser(ErsUser ersUser) {
+        userRepo.deleteById(ersUser.getId());
     }
 
     public boolean isUserValid(ErsUser user) {

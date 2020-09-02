@@ -12,10 +12,13 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
+/**
+ * UserRepository connects to the Postgres DB
+ */
 public class UserRepository implements CrudRepository<ErsUser>{
 
     /**
-     * Extract common query clauses into a easily referenced member for reusability.
+     * Common query clauses goes into an easily referenced member for reusability.
      */
     private String baseQuery = "SELECT * FROM project1.ers_users eu " +
             "JOIN project1.ers_user_roles er " +
@@ -29,17 +32,21 @@ public class UserRepository implements CrudRepository<ErsUser>{
     }
 
     /**
-     * CREATE operation
+     * CREATE operation (Persistence Layer)
      * @param newUser
      * @return
      */
     @Override
     public Optional<ErsUser> save(ErsUser newUser) {
+
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
             String sql = "INSERT INTO project1.ers_users (username, password, first_name, last_name, email, user_role_id) " +
                     "VALUES (?, ?, ?, ?, ?, ?)";
 
+            /**
+             * Prepared Statement uses user generated values, denoted with ?s
+             */
             // second parameter here is used to indicate column names that will have generated values
             PreparedStatement pstmt = conn.prepareStatement(sql, new String[] {"ers_user_id"});
             pstmt.setString(1, newUser.getUsername());
@@ -68,12 +75,48 @@ public class UserRepository implements CrudRepository<ErsUser>{
 
     }
 
+    // TODO Read operation for admins
+    /**
+     * READ operation (Persistence Layer)
+     * @return
+     */
     @Override
     public Set<Optional<ErsUser>> findAll() {
-        return null;
+
+        Optional<ErsUser> _user = Optional.empty();
+        Set<Optional<ErsUser>> _users = new HashSet<>();
+
+        /**
+         * Try with resources; the resource is the JDB
+         */
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            String sql = baseQuery;
+
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            /**
+             * ExecuteQuery
+             */
+            ResultSet rs = pstmt.executeQuery();
+
+            /**
+             * Map the result set of the query to the _user Optional
+             * to be returned to the findUserByCredentials method.
+             */
+            _user = mapResultSet(rs).stream().findAny();
+            _users.add(_user);
+
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
+
+        return _users;
+
     }
 
     /**
+     * READ operation (Persistence Layer)
      * Not used yet...
      * @param id
      * @return
@@ -101,6 +144,72 @@ public class UserRepository implements CrudRepository<ErsUser>{
         return _user;
     }
 
+    /**
+     * READ operation (Persistence Layer)
+     * @param username
+     * @param password
+     * @return
+     */
+    public Optional<ErsUser> findUserByCredentials(String username, String password) {
+
+        Optional<ErsUser> _user = Optional.empty();
+
+        /**
+         * Try with resources; the resource is the JDB
+         */
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            String sql = baseQuery + "WHERE username = ? AND password = ?";
+
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, username);
+            pstmt.setString(2, password);
+
+            ResultSet rs = pstmt.executeQuery(); // assign the SQL query to a ResultSet object
+
+            /**
+             * Map the result set of the query to the _user Optional
+             */
+            _user = mapResultSet(rs).stream().findFirst();
+
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
+
+        return _user;
+    }
+
+    /**
+     * READ operation (Persistence Layer)
+     * @param username
+     * @return
+     */
+    public Optional<ErsUser> findUserByUsername(String username) {
+
+        Optional<ErsUser> _user = Optional.empty();
+
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            String sql = baseQuery + "WHERE username = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, username);
+
+            ResultSet rs = pstmt.executeQuery();
+            _user = mapResultSet(rs).stream().findFirst();
+
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
+
+        return _user;
+
+    }
+
+    /**
+     * UPDATE operation (Persistence Layer)
+     * @param ersUser
+     * @return
+     */
     @Override
     public boolean update(ErsUser ersUser) {
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
@@ -127,87 +236,37 @@ public class UserRepository implements CrudRepository<ErsUser>{
 
     }
 
+    /**
+     * DELETE operation (Persistence Layer)
+     * @param id
+     * @return
+     */
     @Override
     public boolean deleteById(Integer id) {
+
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            String sql = "DELETE from project1.ers_users WHERE ers_user_id = " + id;
+
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.executeUpdate();
+
+            ResultSet rs = pstmt.getGeneratedKeys();
+
+            rs.next();
+            return true;
+
+//            }
+
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
+
         return false;
     }
 
-    public Optional<ErsUser> findUserByCredentials(String username, String password) {
-
-        Optional<ErsUser> _user = Optional.empty();
-
-        /**
-         * Try with resources; the resource is the JDB
-         */
-        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
-
-            System.out.println("Connection to db successful");
-            String sql = baseQuery + "WHERE username = ? AND password = ?";
-
-            /**
-             * Create a Statement
-             *  PreparedStatement
-             *      no hardcoded values, instead it is a parameterized query (uses question marks)
-             *      the DB receives the parameterized query and compiles it and stores it in its memory
-             *      now when we fill in the parameters of our PreparedStatement and send a new query, it
-             *      is not compiled again,
-             *      instead the DB just fills in the blanks (?) and executes the query works
-             *      this prevents us from using up too much memory!
-             *      the pre-compiled nature of PreparedStatements also makes the resilient against
-             *      SQL Injection (SQLi) attacks
-             *      our query is sent and compiled prior to any values being provided
-             *      the values of the parameters are provided later
-             *      therefore, there is no need for them to be properly escaped!
-             */
-            PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, username);
-            pstmt.setString(2, password);
-
-            /**
-             * ExecuteQuery
-             */
-            ResultSet rs = pstmt.executeQuery();
-
-            /**
-             * Map the result set of the query to the _user Optional
-             * to be returned to the findUserByCredentials method.
-             */
-            _user = mapResultSet(rs).stream().findFirst();
-
-        } catch (SQLException sqle) {
-            sqle.printStackTrace();
-        }
-
-        return _user;
-    }
-
     /**
-     * READ operation
-     * @param username
-     * @return
-     */
-    public Optional<ErsUser> findUserByUsername(String username) {
-
-        Optional<ErsUser> _user = Optional.empty();
-
-        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
-
-            String sql = baseQuery + "WHERE username = ?";
-            PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, username);
-
-            ResultSet rs = pstmt.executeQuery();
-            _user = mapResultSet(rs).stream().findFirst();
-
-        } catch (SQLException sqle) {
-            sqle.printStackTrace();
-        }
-
-        return _user;
-
-    }
-
-    /**
+     * Convenience method
      * To use in READ operations
      * @param rs
      * @return

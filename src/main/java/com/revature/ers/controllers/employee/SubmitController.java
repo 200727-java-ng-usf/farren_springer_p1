@@ -37,27 +37,21 @@ public class SubmitController {
         Type reimbTypeAsType = Type.values()[reimbTypeInt];
 
         Date date = new Date();
-        Timestamp submitted = new Timestamp(date.getTime());
+        Timestamp submitted = new Timestamp(date.getTime()); // convert integer entered to type enum value
+        // TODO drop down menu for types?
 
-        Status reimbStatusId = Status.PENDING; // By default, status is pending at first
+        Status reimbStatusAsStatus = Status.PENDING; // By default, status is pending at first
 
         System.out.println("Data entered...");
 
         // TODO set the author ID to the current User's user_id. Pass that into the construction
         // TODO of the reimbursement.
 
+        // TODO ensure null values not entered
 
-//        /**
-//         * Ensure not null values are submitted
-//         */
-//        if(!(amount.equals(null) || reimbType.equals(""))) {
-//            System.out.println("whoops");
-//            // this logic will trigger when the amount is null or the type is empty
-//            return"/api/invalidinput";
-//        }
-        System.out.println(amount + reimbType + description + submitted + reimbStatusId);
+        System.out.println(amount + reimbType + description + submitted + reimbStatusAsStatus);
 
-        ErsReimbursement reimbursement = new ErsReimbursement(Double.parseDouble(amount), reimbTypeAsType, description, submitted, reimbStatusId);
+        ErsReimbursement reimbursement = new ErsReimbursement(Double.parseDouble(amount), reimbTypeAsType, description, submitted, reimbStatusAsStatus);
         System.out.println(reimbursement);
 
         try {
@@ -72,12 +66,12 @@ public class SubmitController {
             req.getSession().setAttribute("loggedType", reimbType);
             req.getSession().setAttribute("loggedDescription", description);
             req.getSession().setAttribute("loggedSubmitted", submitted);
-            req.getSession().setAttribute("loggedStatus", reimbStatusId);
+            req.getSession().setAttribute("loggedStatus", reimbStatusAsStatus);
 
             System.out.println("Attributes set...");
 
 
-            return "/api/home";
+            return "/html/employeedash.html";
 
         } catch (AuthenticationException e) {
             e.printStackTrace();

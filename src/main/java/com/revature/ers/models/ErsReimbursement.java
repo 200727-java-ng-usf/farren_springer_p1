@@ -20,6 +20,10 @@ public class ErsReimbursement {
     private Status reimbursementStatusId;
     private Type reimbursementTypeId;
 
+    public ErsReimbursement() {
+        super();
+    }
+
     public ErsReimbursement(Double amount, Type reimbursementTypeId) {
         this.amount = amount;
         this.reimbursementTypeId = reimbursementTypeId;

@@ -1,4 +1,4 @@
-package com.revature.ers.jsonservlets;
+package com.revature.ers.jsonservlet;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.ers.controllers.admin.AdminController;

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="2" failures="0" name="com.revature.ers.util.ConnectionFactoryTest" time="1.296" errors="0" skipped="0">
+<testsuite tests="2" failures="0" name="com.revature.ers.util.ConnectionFactoryTest" time="1.166" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="java.vm.version" value="14.0.2+12"/>
@@ -27,7 +27,7 @@
     <property name="os.name" value="Windows 10"/>
     <property name="classworlds.conf" value="C:\Users\Farren\Downloads\apache-maven-3.6.3-bin\apache-maven-3.6.3\bin\..\bin\m2.conf"/>
     <property name="sun.jnu.encoding" value="Cp1252"/>
-    <property name="java.library.path" value="C:\Program Files\AdoptOpenJDK\jdk-14.0.2.12-hotspot\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\AdoptOpenJDK\jdk-14.0.2.12-hotspot\bin;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\iCLS\;C:\Program Files\Intel\Intel(R) Management Engine Components\iCLS\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Git\cmd;C:\Users\Farren\Downloads\apache-maven-3.6.3-bin\apache-maven-3.6.3\bin;C:\Users\Farren\AppData\Local\Microsoft\WindowsApps;C:\Users\Farren\AppData\Local\GitHubDesktop\bin;C:\Users\Farren\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\Git\bin\;C:\Program Files\Git\cmd;;%USERPROFILE%\AppData\Local\Microsoft\WindowsApps;."/>
+    <property name="java.library.path" value="C:\Program Files\AdoptOpenJDK\jdk-14.0.2.12-hotspot\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\AdoptOpenJDK\jdk-14.0.2.12-hotspot\bin;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\iCLS\;C:\Program Files\Intel\Intel(R) Management Engine Components\iCLS\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Git\cmd;C:\Users\Farren\Downloads\apache-maven-3.6.3-bin\apache-maven-3.6.3\bin;;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\Users\Farren\AppData\Local\Microsoft\WindowsApps;C:\Users\Farren\AppData\Local\GitHubDesktop\bin;C:\Users\Farren\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\Git\bin\;C:\Program Files\Git\cmd;;%USERPROFILE%\AppData\Local\Microsoft\WindowsApps;."/>
     <property name="maven.conf" value="C:\Users\Farren\Downloads\apache-maven-3.6.3-bin\apache-maven-3.6.3\bin\../conf"/>
     <property name="jdk.debug" value="release"/>
     <property name="java.class.version" value="58.0"/>
@@ -61,6 +61,6 @@
     <property name="sun.stdout.encoding" value="cp437"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="com.revature.ers.util.ConnectionFactoryTest" name="ensureThatAConnectionIsObtained" time="1.296"/>
+  <testcase classname="com.revature.ers.util.ConnectionFactoryTest" name="ensureThatAConnectionIsObtained" time="1.166"/>
   <testcase classname="com.revature.ers.util.ConnectionFactoryTest" name="ensureConnectionFactoryIsSingleton" time="0"/>
 </testsuite>

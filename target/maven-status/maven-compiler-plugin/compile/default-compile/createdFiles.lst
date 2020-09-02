@@ -14,6 +14,7 @@ com\revature\ers\controllers\LoginController.class
 com\revature\ers\controllers\admin\AdminController.class
 com\revature\ers\controllers\employee\UpdateReimbController.class
 com\revature\ers\servlets\HelperSessionServlet.class
+com\revature\ers\controllers\LoginController$1.class
 com\revature\ers\controllers\employee\SubmitController.class
 com\revature\ers\controllers\admin\DeleteController.class
 com\revature\ers\util\AppState.class

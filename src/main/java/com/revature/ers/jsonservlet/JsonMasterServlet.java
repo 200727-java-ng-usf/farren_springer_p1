@@ -1,4 +1,4 @@
-package com.revature.ers.jsonservlets;
+package com.revature.ers.jsonservlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

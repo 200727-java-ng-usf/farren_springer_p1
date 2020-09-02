@@ -1,4 +1,4 @@
-package com.revature.ers.servlets;
+package com.revature.ers.sessionservlet;
 
 import com.revature.ers.models.ErsUser;
 import com.revature.ers.models.Role;
@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+
+// TODO understand how this works
 
 public class SessionServlet extends HttpServlet {
 
@@ -28,7 +30,7 @@ public class SessionServlet extends HttpServlet {
 
         // THIS STUFF HAS NOTHING TO DO WITH SESSION
         System.out.println("in session doGet");
-        resp.getWriter().write("ErsUser");
+        resp.getWriter().write("ErsUser is in session");
 
     }
 

@@ -10,6 +10,26 @@
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>
 
+    <servlet>
+        <servlet-name>SessionServletObj</servlet-name>
+        <servlet-class>com.revature.ers.sessionservlet.SessionServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>SessionServletObj</servlet-name>
+        <url-pattern>/sesserv</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>HelperSessionServletObj</servlet-name>
+        <servlet-class>com.revature.ers.sessionservlet.HelperSessionServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>HelperSessionServletObj</servlet-name>
+        <url-pattern>/helpsesserv</url-pattern>
+    </servlet-mapping>
+
     <!-- FORWARDING MASTER SERVLET -->
     <servlet>
         <servlet-name>ForwardingMasterServlet</servlet-name>
@@ -30,7 +50,7 @@
     <!-- DIRECT RESPONSE SERVLET -->
     <servlet>
         <servlet-name>JsonMasterServlet</servlet-name>
-        <servlet-class>com.revature.ers.jsonservlets.JsonMasterServlet</servlet-class>
+        <servlet-class>com.revature.ers.jsonservlet.JsonMasterServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>

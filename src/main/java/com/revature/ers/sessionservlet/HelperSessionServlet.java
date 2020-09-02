@@ -1,4 +1,4 @@
-package com.revature.ers.servlets;
+package com.revature.ers.sessionservlet;
 
 import com.revature.ers.models.ErsUser;
 

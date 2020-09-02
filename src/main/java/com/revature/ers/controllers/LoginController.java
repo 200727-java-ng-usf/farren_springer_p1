@@ -16,6 +16,7 @@ public class LoginController {
 
         UserRepository userRepo = new UserRepository();
         UserService userService = new UserService(userRepo);
+        Role userRole;
 
         /**
          * You may want to implement route guarding for your endpoints
@@ -42,48 +43,39 @@ public class LoginController {
          * they typed in.
          */
         try {
+
             userService.authenticate(username, password);
+
+            userRole = app.getCurrentUser().getRole();
 
             req.getSession().setAttribute("loggedUsername", username);
             req.getSession().setAttribute("loggedPassword", password);
-            return "/api/home";
-//
-// TODO switch case that checks user_role_id
+//            return "/api/home";
 
-//            switch(app.getCurrentUser().getRole()) {
-//                case ADMIN:
-//                    System.out.println("in admin case");
-//                    return "/api/admindash.html";
-//                case FINANCE_MANAGER:
-//                    System.out.println("in fmanager case");
-//                    return "/api/fmanagerdash.html";
-//                case EMPLOYEE:
-//                    System.out.println("in employee case");
-//                    return "/api/employeedash";
-//                default:
-//                    System.out.println("in default case");
-//                    return "/api/home.html";
-//            }
+            switch(userRole) {
+                case EMPLOYEE:
+                    System.out.println("In employee case");
+                    // TODO make the html document display the user
+                    return "/html/employeedash.html"; // TODO Forward here instead?
+                case FINANCE_MANAGER:
+                    System.out.println("In finance manager case");
+                    // TODO make the html document display the user
+                    return "/html/fmanagerdash.html";
+                case ADMIN:
+                    System.out.println("In admin case");
+                    // TODO make the html document display the user
+                    return "/html/admindash.html";
+                default:
+                    System.out.println("user does not seem to have a role...");
+                    // TODO make the html document display the user
+                    return "/html/badlogin.html";
+            }
 
         } catch (AuthenticationException e) {
             e.printStackTrace();
             return "/api/badlogin.html";
         }
 
-//        if(!(username.equals("cheese") && password.equals("louise"))) {
-//            // this logic will trigger when the username and password are incorrect
-//            return"/api/wrongcreds";
-//        } else {
-//            /**
-//             * In YOUR project, you'll probably be storing the entire user object in the
-//             * session (which will ALSO contain other user information like: role, likes, comments, etc)
-//             */
-//            req.getSession().setAttribute("loggedUsername", username);
-//            req.getSession().setAttribute("loggedPassword", password);
-//            return "/api/home";
-//        }
-
-//            return null;
     }
 
 }
