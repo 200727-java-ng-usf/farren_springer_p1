@@ -45,17 +45,19 @@ public class ReimbRepository implements CrudRepository<ErsReimbursement> {
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "INSERT INTO project1.ers_reimbursements (amount, submitted, description, reimb_status_id, reimb_type_id) " +
-                    "VALUES (?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO project1.ers_reimbursements (amount, submitted, description, author_id, reimb_status_id, reimb_type_id) " +
+                    "VALUES (?, ?, ?, ?, ?, ?)";
 
             // second parameter here is used to indicate column names that will have generated values
             PreparedStatement pstmt = conn.prepareStatement(sql, new String[] {"reimb_id"}); // Uses the Connection object
             pstmt.setDouble(1, reimbursement.getAmount()); // the first ? mark and what value it will be in the query
             pstmt.setTimestamp(2, reimbursement.getSubmitted());
             pstmt.setString(3, reimbursement.getDescription());
-//            pstmt.setInt(4, reimbursement.getAuthorId()); // TODO author id
-            pstmt.setInt(4, reimbursement.getReimbursementStatusId().ordinal() + 1);
-            pstmt.setInt(5, reimbursement.getReimbursementTypeId().ordinal() + 1);
+            System.out.println("got description...");
+            pstmt.setInt(4, app.getCurrentUser().getId()); // TODO author id
+            System.out.println("got authorId");
+            pstmt.setInt(5, reimbursement.getReimbursementStatusId().ordinal() + 1);
+            pstmt.setInt(6, reimbursement.getReimbursementTypeId().ordinal() + 1);
 //            pstmt.setInt(3, app.getCurrentUser().getId()); // for reference
 
             int rowsInserted = pstmt.executeUpdate(); // execute the prepared statement using Connection object that uses the db
