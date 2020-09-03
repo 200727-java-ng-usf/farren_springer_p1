@@ -31,7 +31,7 @@ public class RegisterController {
         String firstName = req.getParameter("firstName");
         String lastName = req.getParameter("lastName");
         String email = req.getParameter("email");
-        ErsUser employee = new ErsUser(username, password, firstName, lastName, email);
+        ErsUser employee = new ErsUser(username, password, firstName, lastName, email); // ?
         System.out.println(employee);
 
         try {

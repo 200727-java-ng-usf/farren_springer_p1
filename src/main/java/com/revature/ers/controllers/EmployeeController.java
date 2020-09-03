@@ -39,7 +39,7 @@ public class EmployeeController {
 
         // ensure that the method is a POST http method, else send them back to the login page
         if(!req.getMethod().equals("POST")) {
-            return "/html/login.html";
+            return "/html/employeedash.html";
         }
 
         req.getSession().setAttribute("loggedAuthorId", req.getSession().getAttribute("username"));
@@ -57,7 +57,8 @@ public class EmployeeController {
             System.out.println("logged the current reimbursement from the service layer");
 
             // Maybe use Fetch API instead in HTML
-            return "/employeeWelcome";
+//            return "/employeeWelcome";
+            return "/html/employeedash.html";
 
         } catch (Exception e) {
             e.printStackTrace();

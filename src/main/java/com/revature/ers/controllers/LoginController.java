@@ -57,7 +57,8 @@ public class LoginController {
                     System.out.println("In employee case");
                     // TODO make the html document display the user
 //                    return EmployeeController.displayDash(req, resp); // TODO Forward here instead?
-                return "/employeeWelcome";
+//                return "/html/employeedash.html";
+                return "/api/employee";
                 case FINANCE_MANAGER:
                     System.out.println("In finance manager case");
                     // TODO make the html document display the user

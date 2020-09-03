@@ -1,5 +1,12 @@
 -- project 1 db editor
 
+CREATE USER revatureers_app
+WITH PASSWORD 'revabank';
+
+grant all privileges
+on database postgres
+to revabank_app;
+
 CREATE USER project1_app
 WITH password 'revature';
 
@@ -116,6 +123,17 @@ values ('Pending'), ('Approved'), ('Denied');
 -- more dummy ers_users
 insert into ers_users (username, password, first_name, last_name, email, user_role_id)
 values ('bgriffin', 'password', 'Brian', 'Griffin', 'bgriffin@gmail.com', 2);
+
+-- convert to json notation
+SELECT ers_user_id
+	,json_agg(row_to_json((username, password, first_name, last_name, email, user_role_id))) AS JsonData
+FROM project1.ers_users
+GROUP BY ers_user_id;
+
+select reimb_id
+	,json_agg(row_to_json((amount, submitted, resolved, description, receipt, author_id, resolver_id, reimb_status_id, reimb_type_id))) as JsonData
+from project1.ers_reimbursements 
+group by reimb_id;
 
 
 

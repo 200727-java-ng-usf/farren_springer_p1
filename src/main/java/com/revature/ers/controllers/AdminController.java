@@ -14,6 +14,8 @@ import java.io.IOException;
 public class AdminController {
 
     public static ErsUser adminFinder(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+
+        // TODO what do I put in here...
         ErsUser admin = new ErsUser("adminUsername","password","firstname", "lastname", "adminEmail", Role.ADMIN);
 
         System.out.println("in admin finder");

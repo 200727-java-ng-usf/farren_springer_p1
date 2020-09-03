@@ -33,9 +33,6 @@ public class RequestHelper {
                 return LoginController.login(req, resp);
             case "/farren_springer_p1/api/home":
                 System.out.println("in home case");
-                // NOT modularized
-                // return "/html/home.html";
-                // modularized
                 return HomeController.home();
             case "/farren_springer_p1/api/submitform":
                 System.out.println("in submitform case");
@@ -52,6 +49,8 @@ public class RequestHelper {
             case "/farren_springer_p1/api/employee":
                 System.out.println("in employee case");
                 return EmployeeController.displayDash(req, resp);
+            case "/farren_springer_p1/api/submitreimb":
+                return SubmitController.submit(req);
             default:
                 System.out.println("in default");
                 return "/html/badlogin.html";
