@@ -1,0 +1,46 @@
+package com.revature.ers.controllers.employee;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.revature.ers.exceptions.AuthenticationException;
+import com.revature.ers.models.ErsReimbursement;
+import com.revature.ers.models.ErsUser;
+import com.revature.ers.models.Status;
+import com.revature.ers.models.Type;
+import com.revature.ers.repos.ReimbRepository;
+import com.revature.ers.repos.UserRepository;
+import com.revature.ers.services.ReimbService;
+import com.revature.ers.services.UserService;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
+import java.sql.Timestamp;
+
+public class ViewMyReimbsController {
+
+    private static ReimbRepository reimbRepo = new ReimbRepository();
+    private static ReimbService reimbService = new ReimbService(reimbRepo);
+    private static UserRepository userRepo = new UserRepository();
+    private static UserService userService = new UserService(userRepo);
+
+    public static String viewMyReimbs(HttpServletRequest req) throws JsonProcessingException {
+
+        System.out.println("In viewMyReimbs method");
+
+//        if(!req.getMethod().equals("POST")) {
+//            return "/html/employeedash.html";
+//        }
+//
+//        System.out.println("Still here");
+//
+//        // acquire the reimbursements
+//        String username = String.valueOf(req.getSession().getAttribute("loggedUsername"));
+//
+//        ObjectMapper mapper = new ObjectMapper();
+//        mapper.writer().writeValueAsString(userRepo.findUserByUsername(username));
+
+//        System.out.println("mapper created...");
+        return "/html/viewmyreimbs.html";
+
+    }
+}

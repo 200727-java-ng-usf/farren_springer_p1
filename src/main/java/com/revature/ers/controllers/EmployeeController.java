@@ -46,15 +46,15 @@ public class EmployeeController {
 
         try {
 
-            reimbService.findReimbursement(app.getCurrentUser().getId());
-
-            System.out.println("set the current reimbursement based on the user");
+//            reimbService.findReimbursement(app.getCurrentUser().getId());
+//
+//            System.out.println("set the current reimbursement based on the user");
 
 //            System.out.println(reimbRepo.findAllReimbsByAuthorId(app.getCurrentUser().getId()));
 
-            req.getSession().setAttribute("loggedReimbursement", app.getCurrentReimbursement());
-
-            System.out.println("logged the current reimbursement from the service layer");
+//            req.getSession().setAttribute("loggedReimbursement", app.getCurrentReimbursement());
+//
+//            System.out.println("logged the current reimbursement from the service layer");
 
             // Maybe use Fetch API instead in HTML
 //            return "/employeeWelcome";

@@ -25,4 +25,5 @@ com\revature\ers\controllers\AdminController.class
 com\revature\ers\controllers\EmployeeController.class
 com\revature\ers\util\AppState.class
 com\revature\ers\servlets\employee\SubmitServlet.class
+com\revature\ers\controllers\employee\ViewMyReimbsController.class
 com\revature\ers\controllers\HomeController.class

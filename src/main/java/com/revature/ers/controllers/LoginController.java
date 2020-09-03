@@ -19,6 +19,7 @@ public class LoginController {
         UserRepository userRepo = new UserRepository();
         UserService userService = new UserService(userRepo);
         Role userRole;
+        System.out.println("in login method in LoginController");
 
         /**
          * You may want to implement route guarding for your endpoints
@@ -43,10 +44,11 @@ public class LoginController {
         // try to authenticate the user before moving forward
         try {
 
+            System.out.println("about to try to authenticate...");
             userService.authenticate(username, password);
-
+            System.out.println("authentication successful...");
             userRole = app.getCurrentUser().getRole();
-
+            System.out.println("set the current user");
             req.getSession().setAttribute("loggedUsername", username);
             req.getSession().setAttribute("loggedPassword", password);
 //            return "/api/home";

@@ -1,5 +1,6 @@
 package com.revature.ers.controllers.admin;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.ers.exceptions.AuthenticationException;
 import com.revature.ers.models.ErsUser;
 import com.revature.ers.models.Role;
@@ -7,6 +8,7 @@ import com.revature.ers.repos.UserRepository;
 import com.revature.ers.services.UserService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
 import java.io.IOException;
 
 /**
@@ -43,6 +45,11 @@ public class RegisterController {
             req.getSession().setAttribute("loggedFirstName", firstName);
             req.getSession().setAttribute("loggedLastName", lastName);
             req.getSession().setAttribute("loggedEmail", email);
+
+            ObjectMapper objectMapper = new ObjectMapper();
+            ErsUser newUser = new ErsUser(username, password, firstName, lastName, email);
+            objectMapper.writeValue(new File("C:/Users/Farren/Desktop/WorkFolder/farren_springer_p1/src/main/resources/project1data.json"), newUser);
+
 
             return "/api/home";
 
