@@ -1,5 +1,6 @@
 package com.revature.ers.controllers.admin;
 
+import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.ers.exceptions.AuthenticationException;
 import com.revature.ers.models.ErsUser;
@@ -8,8 +9,7 @@ import com.revature.ers.repos.UserRepository;
 import com.revature.ers.services.UserService;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 
 /**
  * Will only be accessible to ErsUser object of role ADMIN
@@ -46,9 +46,31 @@ public class RegisterController {
             req.getSession().setAttribute("loggedLastName", lastName);
             req.getSession().setAttribute("loggedEmail", email);
 
-            ObjectMapper objectMapper = new ObjectMapper();
+
+            // OutputSteam not defined
+//            File jsonFile = new File("C:/Users/Farren/Desktop/WorkFolder/farren_springer_p1/src/main/resources/project1data.json");
+//            ObjectMapper objectMapper = new ObjectMapper();
+//            ErsUser newUser = new ErsUser(username, password, firstName, lastName, email);
+//            objectMapper.writeValue(jsonFile, newUser);
+//            JsonGenerator jsonGenerator = objectMapper.getFactory().createGenerator(OutputStream);
+//            objectMapper.writeValue(jsonGenerator, newUser);
+//            jsonGenerator.close();
+
             ErsUser newUser = new ErsUser(username, password, firstName, lastName, email);
-            objectMapper.writeValue(new File("C:/Users/Farren/Desktop/WorkFolder/farren_springer_p1/src/main/resources/project1data.json"), newUser);
+//            File jsonFile = new File("C:/Users/Farren/Desktop/WorkFolder/farren_springer_p1/src/main/resources/project1data.json");
+            ObjectMapper mapper = new ObjectMapper();
+            try {
+                JsonGenerator g = mapper.getFactory().createGenerator(new FileOutputStream("C:/Users/Farren/Desktop/WorkFolder/farren_springer_p1/src/main/resources/project1data.json"));
+
+                mapper.writeValue(g, newUser);
+                mapper.writeValue(g, newUser);
+
+                g.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
 
 
             return "/api/home";

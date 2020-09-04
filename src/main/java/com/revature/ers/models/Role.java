@@ -1,20 +1,20 @@
 package com.revature.ers.models;
 
 public enum Role {
-    ADMIN("Admin"), FINANCE_MANAGER("Finance Manager"), EMPLOYEE("Employee");
+    ADMIN(1), FINANCE_MANAGER(2), EMPLOYEE(3);
 
-    private String roleName;
+    private Integer roleId;
 
     // enum constructors are implicitly private
-    Role(String name) { this.roleName = name; }
+    Role(Integer num) { this.roleId = num; }
 
-    public static Role getByName(String role) {
+    public static Role getById(Integer role) {
         /**
-         * For each constant in roles, if it is the same as the
-         * parameter of getByRole, return it.
+         * For each constant in roles, if it's id equivalent is the same as the
+         * parameter, role, of getById, then return it.
          */
         for (Role theRole : Role.values()) {
-            if (theRole.roleName.equals(role)) {
+            if (theRole.roleId.equals(role)) {
                 return theRole;
             }
 
@@ -30,7 +30,7 @@ public enum Role {
     @Override
     public String toString() {
         return "Role{" +
-                "roleName='" + roleName + '\'' +
+                "roleId='" + roleId + '\'' +
                 '}';
     }
 }

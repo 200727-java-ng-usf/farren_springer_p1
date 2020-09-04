@@ -57,10 +57,8 @@ public class LoginController {
             switch(userRole) {
                 case EMPLOYEE:
                     System.out.println("In employee case");
-                    // TODO make the html document display the user
-//                    return EmployeeController.displayDash(req, resp); // TODO Forward here instead?
-//                return "/html/employeedash.html";
-                return "/api/employee";
+                    // TODO HTML doc to display username?
+                    return "/html/employeedash.html";
                 case FINANCE_MANAGER:
                     System.out.println("In finance manager case");
                     // TODO make the html document display the user

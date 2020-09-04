@@ -135,6 +135,13 @@ select reimb_id
 from project1.ers_reimbursements 
 group by reimb_id;
 
+-- more dummy ers_users
+insert into ers_users (username, password, first_name, last_name, email, user_role_id)
+values ('jjonas', 'password', 'Joe', 'Jonas', 'jjonas@gmail.com', 1);
+
+-- more dummy ers_users
+insert into ers_users (username, password, first_name, last_name, email, user_role_id)
+values ('kjonas', 'password', 'Kevin', 'Jonas', 'kjonas@gmail.com', 1);
 
 
 

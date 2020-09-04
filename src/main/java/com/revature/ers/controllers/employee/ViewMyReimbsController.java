@@ -33,8 +33,8 @@ public class ViewMyReimbsController {
 //
 //        System.out.println("Still here");
 //
-//        // acquire the reimbursements
-//        String username = String.valueOf(req.getSession().getAttribute("loggedUsername"));
+        // acquire the reimbursements
+
 //
 //        ObjectMapper mapper = new ObjectMapper();
 //        mapper.writer().writeValueAsString(userRepo.findUserByUsername(username));

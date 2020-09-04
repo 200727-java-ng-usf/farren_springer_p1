@@ -65,7 +65,7 @@ public class UserService {
             throw new RuntimeException("Provided username is already in use!");
         }
 
-        newUser.setRole(Role.EMPLOYEE);
+//        newUser.setRole(Role.EMPLOYEE);
         userRepo.save(newUser);
         System.out.println(newUser);
         /**
