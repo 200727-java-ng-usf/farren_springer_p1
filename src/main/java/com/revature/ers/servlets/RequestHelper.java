@@ -5,6 +5,7 @@ import com.revature.ers.controllers.LoginController;
 import com.revature.ers.controllers.admin.RegisterController;
 import com.revature.ers.controllers.EmployeeController;
 import com.revature.ers.controllers.employee.SubmitController;
+import com.revature.ers.controllers.employee.ViewAllReimbsController;
 import com.revature.ers.controllers.employee.ViewMyReimbsController;
 
 import javax.servlet.annotation.WebServlet;
@@ -41,19 +42,13 @@ public class RequestHelper {
             case "/farren_springer_p1/api/register":
                 System.out.println("in register case");
                 return RegisterController.registerNewUser(req);
-//            case "/farren_springer_p1/api/finduser":
-//                System.out.println("in finduser case");
-//                return FindUserController.findUser(req);
-//            case "/farren_springer_p1/api/updateuser":
-//                System.out.println("in updateuser case");
-//                return UpdateController.updateUser(req);
             case "/farren_springer_p1/api/employee":
                 System.out.println("in employee case");
                 return EmployeeController.displayDash(req, resp);
-            case "/farren_springer_p1/api/submitreimb":
-                return SubmitController.submit(req);
             case "/farren_springer_p1/api/viewMyReimbs":
                 return ViewMyReimbsController.viewMyReimbs(req);
+            case "/farren_springer_p1/api/viewallreimbs":
+                return ViewAllReimbsController.viewAllReimbs(req);
             default:
                 System.out.println("in default");
                 return "/html/badlogin.html";

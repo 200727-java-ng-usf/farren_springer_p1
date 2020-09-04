@@ -1,6 +1,7 @@
 com\revature\ers\servlets\RequestHelper.class
 com\revature\ers\controllers\admin\FindUserController.class
 com\revature\ers\controllers\admin\RegisterController.class
+com\revature\ers\controllers\employee\ViewAllReimbsController.class
 com\revature\ers\sessionservlet\ViewMyReimbsServlet.class
 com\revature\ers\sessionservlet\HelperSessionServlet.class
 com\revature\ers\servlets\ForwardingMasterServlet.class

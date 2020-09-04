@@ -62,11 +62,11 @@ public class LoginController {
                 case FINANCE_MANAGER:
                     System.out.println("In finance manager case");
                     // TODO make the html document display the user
-                    return "/api/financeManagerServlet";
+                    return "/html/fmanagerdash.html";
                 case ADMIN:
                     System.out.println("In admin case");
                     // TODO make the html document display the user
-                    return "/api/admin";
+                    return "/html.admindash.html";
                 default:
                     System.out.println("user does not seem to have a role...");
                     // TODO make the html document display the user
