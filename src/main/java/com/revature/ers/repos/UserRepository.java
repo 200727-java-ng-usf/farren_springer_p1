@@ -214,7 +214,7 @@ public class UserRepository implements CrudRepository<ErsUser>{
                     + "last_name = '" + ersUser.getLastName() + "' "
 //                    + "', " // TODO update role
 //                    + "role_id = " + appUser.getRole() + " " // role is a number
-                    + "WHERE id = " + ersUser.getId();
+                    + "WHERE ers_user_id = " + ersUser.getId();
 
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.executeUpdate(); //

@@ -58,15 +58,15 @@ public class LoginController {
                 case EMPLOYEE:
                     System.out.println("In employee case");
                     // TODO HTML doc to display username?
-                    return "/html/employeedash.html";
+                    return "/html/employee/employeedash.html";
                 case FINANCE_MANAGER:
                     System.out.println("In finance manager case");
                     // TODO make the html document display the user
-                    return "/html/fmanagerdash.html";
+                    return "/html/fmanager/fmanagerdash.html";
                 case ADMIN:
                     System.out.println("In admin case");
                     // TODO make the html document display the user
-                    return "/html/admindash.html";
+                    return "/html/admin/admindash.html";
                 default:
                     System.out.println("user does not seem to have a role...");
                     // TODO make the html document display the user

@@ -4,6 +4,7 @@ com\revature\ers\controllers\admin\FindUserController.class
 com\revature\ers\controllers\admin\RegisterController.class
 com\revature\ers\controllers\employee\ViewAllReimbsController.class
 com\revature\ers\controllers\admin\UpdateOrDeleteController.class
+com\revature\ers\controllers\admin\DeleteUserController.class
 com\revature\ers\controllers\fmanager\DirectFromFilterChoiceController.class
 com\revature\ers\servlets\ForwardingMasterServlet.class
 com\revature\ers\servlets\ViewAllReimbsServlet.class

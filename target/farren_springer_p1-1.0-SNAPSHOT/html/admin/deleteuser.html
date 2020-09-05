@@ -8,15 +8,14 @@
 <body>
 <div class="delete-container">
 
-    <h3>Delete Page</h3>
+    <h3>User Deleted!</h3>
 
-    <!-- each action corresponds to a url-pattern of a SERVLET -->
-    <form method="post" action="/farren_springer_p1/html/admindash.html">
-        <p>Delete a User (under construction)...</p>
-        <input placeholder="enter user id" name="user_id"/><br>
-        <input type="submit" value="Delete"/><br>
+    <form method="post" action="/farren_springer_p1/api/delete">
+        <p>Delete User page</p>
+        <input type="submit" value="Are you sure you want to delete? Click if you do..."/><br>
+        <!-- could enter the user information first and THEN change the information. The current situation might cause problems-->
+        <!-- one solution might be to find the user first and enter their ID to update them -->
     </form>
-
 </div>
 </body>
 <link rel="stylesheet" type="text/css" 

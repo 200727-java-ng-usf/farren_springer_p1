@@ -1,6 +1,7 @@
 package com.revature.ers.models;
 
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * POJO Model to represent users

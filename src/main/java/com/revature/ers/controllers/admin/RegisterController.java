@@ -22,7 +22,7 @@ public class RegisterController {
     public static String registerNewUser(HttpServletRequest req) throws IOException {
 
         if(!req.getMethod().equals("POST")) {
-            return "/html/register.html";
+            return "/html/admin/register.html";
         }
 
         // TODO authenticate that the user's role field is ADMIN

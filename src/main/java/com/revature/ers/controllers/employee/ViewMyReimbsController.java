@@ -26,21 +26,7 @@ public class ViewMyReimbsController {
     public static String viewMyReimbs(HttpServletRequest req) throws JsonProcessingException {
 
         System.out.println("In viewMyReimbs method");
-
-//        if(!req.getMethod().equals("POST")) {
-//            return "/html/employeedash.html";
-//        }
-//
-//        System.out.println("Still here");
-//
-        // acquire the reimbursements
-
-//
-//        ObjectMapper mapper = new ObjectMapper();
-//        mapper.writer().writeValueAsString(userRepo.findUserByUsername(username));
-
-//        System.out.println("mapper created...");
-        return "/html/viewmyreimbs.html";
+        return "/html/employee/viewmyreimbs.html";
 
     }
 }

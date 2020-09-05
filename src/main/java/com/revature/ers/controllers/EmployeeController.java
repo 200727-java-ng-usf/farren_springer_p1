@@ -29,14 +29,14 @@ public class EmployeeController {
 
         // ensure that the method is a POST http method, else send them back to the login page
         if(!req.getMethod().equals("POST")) {
-            return "/html/employeedash.html";
+            return "/html/employee/employeedash.html";
         }
 
 //        req.getSession().setAttribute("loggedAuthorId", req.getSession().getAttribute("loggedUsername"));
 
         try {
 
-            return "/html/employeedash.html";
+            return "/html/employee/employeedash.html";
 
         } catch (Exception e) {
             e.printStackTrace();

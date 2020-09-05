@@ -27,20 +27,7 @@ public class ViewAllReimbsController {
 
         System.out.println("In viewAllReimbs method");
 
-//        if(!req.getMethod().equals("POST")) {
-//            return "/html/employeedash.html";
-//        }
-//
-//        System.out.println("Still here");
-//
-        // acquire the reimbursements
-
-//
-//        ObjectMapper mapper = new ObjectMapper();
-//        mapper.writer().writeValueAsString(userRepo.findUserByUsername(username));
-
-//        System.out.println("mapper created...");
-        return "/html/viewallreimbs.html";
+        return "/html/fmanager/viewallreimbs.html";
 
     }
 }

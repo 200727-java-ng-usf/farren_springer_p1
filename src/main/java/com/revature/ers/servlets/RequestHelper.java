@@ -2,10 +2,7 @@ package com.revature.ers.servlets;
 
 import com.revature.ers.controllers.HomeController;
 import com.revature.ers.controllers.LoginController;
-import com.revature.ers.controllers.admin.UpdateUserController;
-import com.revature.ers.controllers.admin.UpdateOrDeleteController;
-import com.revature.ers.controllers.admin.FindUserController;
-import com.revature.ers.controllers.admin.RegisterController;
+import com.revature.ers.controllers.admin.*;
 import com.revature.ers.controllers.EmployeeController;
 import com.revature.ers.controllers.employee.SubmitController;
 import com.revature.ers.controllers.employee.ViewAllReimbsController;
@@ -51,8 +48,8 @@ public class RequestHelper {
                 return UpdateOrDeleteController.updateOrDelete(req);
             case "/farren_springer_p1/api/update":
                 return UpdateUserController.updateUser(req);
-//            case "/farren_springer_p1/api/delete":
-//                return DeleteUserController.deleteUser(req);
+            case "/farren_springer_p1/api/delete":
+                return DeleteUserController.deleteUser(req);
             /**
              * Finance Manager cases
              */
@@ -60,8 +57,8 @@ public class RequestHelper {
                 return ViewAllReimbsController.viewAllReimbs(req);
             case "/farren_springer_p1/api/directfromfilterchoice":
                 return DirectFromFilterChoiceController.directFromFilterChoice(req, resp);
-            case "/farren_springer_p1/viewReimbs":
-                return "/farren_springer_p1/viewReimbs";
+//            case "/farren_springer_p1/viewReimbs":
+//                return "/farren_springer_p1/viewReimbs";
             /**
              * Employee cases
              */

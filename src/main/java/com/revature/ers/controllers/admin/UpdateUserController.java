@@ -21,8 +21,10 @@ public class UpdateUserController {
 
     public static String updateUser(HttpServletRequest req) throws IOException {
 
+        System.out.println("in updateUser method in UpdateUserController...");
+
         if(!req.getMethod().equals("POST")) {
-            return "/html/updateuser.html";
+            return "/html/admin/updateuser.html";
         }
 
         // TODO authenticate that the user's role field is ADMIN
@@ -37,15 +39,25 @@ public class UpdateUserController {
 
         try {
 
-            userService.update(userRepo.findById((Integer) req.getAttribute("loggedIdOfUserToEdit")));
+            /**
+             * Find the user using the logged ID attribute from the form on the finduser page
+             */
+            System.out.println("userIdToEdit is: " + req.getSession().getAttribute("loggedIdOfUserToEdit"));
+            ErsUser ersUser = userRepo.findById((Integer) req.getSession().getAttribute("loggedIdOfUserToEdit"));
+            ersUser.setUsername(newUsername);
+            ersUser.setPassword(newPassword);
+            ersUser.setFirstName(newFirstName);
+            ersUser.setLastName(newLastName);
+            ersUser.setEmail(newEmail);
+
+
+            userService.update(ersUser);
 
 //            req.getSession().setAttribute("newUsername", username);
 //            req.getSession().setAttribute("newPassword", password);
 //            req.getSession().setAttribute("newFirstName", firstName);
 //            req.getSession().setAttribute("newLastName", lastName);
 //            req.getSession().setAttribute("newEmail", email);
-
-
 
 
             return "/api/home";

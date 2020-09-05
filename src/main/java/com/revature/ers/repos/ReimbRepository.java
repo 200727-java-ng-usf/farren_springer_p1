@@ -9,6 +9,7 @@ import java.sql.*;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static com.revature.ers.services.UserService.app;
 
@@ -72,6 +73,11 @@ public class ReimbRepository implements CrudRepository<ErsReimbursement> {
                 // assign it to the id of the account object
 
             }
+//            // every time we save a reimbursement, we need to add it to the author's set
+//            Set<ErsReimbursement> reimbSet = null;
+//            reimbSet = app.getCurrentUser().getReimbursementSet(); // get the author's reimbursement set and assign it to a temporary set
+//            reimbSet.add(reimbursement); // add the new reimbursement to that temporary set
+//            app.getCurrentUser().setReimbursementSet(reimbSet); // set the current user's reimbset to the updated set
 
         } catch (SQLException sqle) {
             sqle.printStackTrace();
@@ -98,6 +104,34 @@ public class ReimbRepository implements CrudRepository<ErsReimbursement> {
 
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
+            reimbs = mapResultSet(rs);
+
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
+
+        return reimbs;
+    }
+
+    /**
+     * READ operation (Persistence Layer)
+     * @param authorId
+     * @return
+     */
+    public Set<ErsReimbursement> findAllReimbsByAuthorId(Integer authorId) {
+
+        System.out.println("In findAllReimbsByAuthorId method in ReimbRepository");
+
+        Set<ErsReimbursement> reimbs = new HashSet<>();
+
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            String sql = baseQuery + "WHERE author_id = ?";
+
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, authorId);
+
+            ResultSet rs = pstmt.executeQuery(sql);
             reimbs = mapResultSet(rs);
 
         } catch (SQLException sqle) {
@@ -162,45 +196,7 @@ public class ReimbRepository implements CrudRepository<ErsReimbursement> {
         return _reimb;
     }
 
-    /**
-     * READ operation (Persistence Layer)
-     * @param authorId
-     * @return
-     */
-    public Set<ErsReimbursement> findAllReimbsByAuthorId(Integer authorId) {
 
-        System.out.println("In findAllReimbsByAuthorId method in ReimbRepository");
-
-        Optional<ErsReimbursement> _reimb = Optional.empty();
-        Set<Optional<ErsReimbursement>> _reimbs = new HashSet<>();
-        ErsReimbursement tempReimb = null;
-        Set<ErsReimbursement> reimbs = new HashSet<>();
-
-        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
-
-            String sql = baseQuery + "WHERE author_id = ?";
-            PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, authorId);
-
-            ResultSet rs = pstmt.executeQuery();
-
-            _reimb = mapResultSet(rs).stream().findFirst();
-            while (_reimb.isPresent()) {
-                _reimbs.add(_reimb);
-            }
-
-            for (Optional<ErsReimbursement> r: _reimbs) {
-                tempReimb = r.orElseThrow(AuthenticationException::new);
-                reimbs.add(tempReimb);
-            }
-
-
-        } catch (SQLException sqle) {
-            sqle.printStackTrace();
-        }
-
-        return reimbs;
-    }
 
     /**
      * UPDATE operation (Persistence Layer)

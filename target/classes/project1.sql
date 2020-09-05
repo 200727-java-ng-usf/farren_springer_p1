@@ -143,5 +143,10 @@ values ('jjonas', 'password', 'Joe', 'Jonas', 'jjonas@gmail.com', 1);
 insert into ers_users (username, password, first_name, last_name, email, user_role_id)
 values ('kjonas', 'password', 'Kevin', 'Jonas', 'kjonas@gmail.com', 1);
 
-
+SELECT * FROM project1.ers_reimbursements er 
+            JOIN project1.ers_reimbursement_types rt 
+            ON er.reimb_type_id = rt.reimb_type_id 
+            JOIN project1.ers_reimbursement_statuses rs
+            ON er.reimb_status_id = rs.reimb_status_id 
+where author_id = 7;
 

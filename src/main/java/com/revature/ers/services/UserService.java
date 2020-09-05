@@ -2,6 +2,7 @@ package com.revature.ers.services;
 
 import com.revature.ers.exceptions.AuthenticationException;
 import com.revature.ers.exceptions.InvalidRequestException;
+import com.revature.ers.models.ErsReimbursement;
 import com.revature.ers.models.ErsUser;
 import com.revature.ers.models.Role;
 import com.revature.ers.repos.UserRepository;
@@ -109,6 +110,8 @@ public class UserService {
     public Set<Optional<ErsUser>> findAllByRole(Role role) {
         return new HashSet<>();
     }
+
+
 
     /**
      * UPDATE operation (Service Layer)

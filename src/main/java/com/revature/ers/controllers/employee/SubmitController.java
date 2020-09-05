@@ -23,7 +23,7 @@ public class SubmitController {
         System.out.println("In submit method");
 
         if(!req.getMethod().equals("POST")) {
-            return "/html/submitform.html";
+            return "/html/employee/submitform.html";
         }
 
         System.out.println("Still here");

@@ -19,7 +19,7 @@ public class FindUserController {
     public static String findUser(HttpServletRequest req) throws IOException {
 
         if(!req.getMethod().equals("POST")) {
-            return "/html/finduser.html";
+            return "/html/admin/finduser.html";
         }
 
         // TODO authenticate that the user's role field is ADMIN
@@ -41,9 +41,9 @@ public class FindUserController {
 
                 req.getSession().setAttribute("loggedIdOfUserToEdit", userIdToEdit);
 
-                System.out.println("getSession.setAttribute successful");
+                System.out.println("getSession.setAttribute successful. The attribute is: " + userIdToEdit + ". and as a string: " + userIdToEditAsString);
 
-                return "/api/updateOrDelete";
+                return "/html/admin/updateordelete.html";
 
             } catch (NullPointerException npe) {
                 npe.printStackTrace();

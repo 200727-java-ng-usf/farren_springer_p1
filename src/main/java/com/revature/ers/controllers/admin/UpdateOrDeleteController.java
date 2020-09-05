@@ -18,19 +18,26 @@ public class UpdateOrDeleteController {
 
     public static String updateOrDelete(HttpServletRequest req) throws IOException {
 
+        System.out.println("In updateOrDelete method in UpdateOrDeleteController");
+
         if(!req.getMethod().equals("POST")) {
-            return "/html/updateordelete.html";
+            return "/html/admin/updateordelete.html";
         }
 
         // TODO authenticate that the user's role field is ADMIN
 
         // acquire the form data
+        System.out.println("about to acquire the form data...");
         String updateOrDeleteChoice = req.getParameter("updateOrDeleteChoice");
-
-        if(userRepo.findById(Integer.parseInt(updateOrDeleteChoice)) != null) {
+        System.out.println("acquired the form data...");
+        System.out.println("form data acquired is: " + updateOrDeleteChoice);
+        System.out.println("form data from a while ago is: " + req.getSession().getAttribute("loggedIdOfUserToEdit"));
 
             try {
+                System.out.println("about to set the attribute...");
                 req.getSession().setAttribute("loggedChoiceToUpdateOrDelete", updateOrDeleteChoice);
+                System.out.println("attribute set...");
+
             } catch (AuthenticationException e) {
                 e.printStackTrace();
                 return "/api/badlogin.html";
@@ -38,17 +45,16 @@ public class UpdateOrDeleteController {
 
             switch(updateOrDeleteChoice) {
                 case "update":
-                    return "/api/update";
+                    System.out.println("update case");
+                    return "/html/admin/updateuser.html";
                 case "delete":
-                    return "/api/delete";
+                    System.out.println("delete");
+                    return "/html/admin/deleteuser.html";
                 default:
                     System.out.println("in default case");
                     return "/html/badlogin.html";
             }
 
-        } else {
-            return "/api/finduser.html";
-        }
 
     }
 }
