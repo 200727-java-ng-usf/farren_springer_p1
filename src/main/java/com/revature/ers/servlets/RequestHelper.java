@@ -7,8 +7,8 @@ import com.revature.ers.controllers.EmployeeController;
 import com.revature.ers.controllers.employee.SubmitController;
 import com.revature.ers.controllers.employee.ViewAllReimbsController;
 import com.revature.ers.controllers.employee.ViewMyReimbsController;
+import com.revature.ers.controllers.fmanager.DirectFromFilterChoiceController;
 
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -49,6 +49,12 @@ public class RequestHelper {
                 return ViewMyReimbsController.viewMyReimbs(req);
             case "/farren_springer_p1/api/viewallreimbs":
                 return ViewAllReimbsController.viewAllReimbs(req);
+            case "/farren_springer_p1/api/directfromfilterchoice":
+                return DirectFromFilterChoiceController.directFromFilterChoice(req, resp);
+            case "/farren_springer_p1/viewReimbs":
+                return "/farren_springer_p1/viewReimbs";
+            case "/farren_springer_p1/viewYourReimbs":
+                return "/farren_springer_p1/viewYourReimbs";
             default:
                 System.out.println("in default");
                 return "/html/badlogin.html";

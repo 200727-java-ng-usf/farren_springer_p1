@@ -2,7 +2,6 @@
 <html>
 <head>
     <meta charset="ISO-8859-1"><title>Home Page</title>
-    <link rel="stylesheet" type="text/css" href="/farren_springer_p1/src/main/webapp/css/mystyles.css"/>
     <script src="jquery-3.5.1.min.js"></script>
 </head>
 <body>
@@ -16,37 +15,13 @@
                 <th>email</th>
             </tr>
 
-            <tbody id="myTable">
-
-            </tbody>
         </table>
 
-    <script>
-
-        buildTable(myArray)
-
-<!--        $ajax({-->
-<!--            method:"GET",-->
-<!--            url: -->
-<!--        })-->
-
-        function buildTable(data){
-            var table = document.getElementById('myTable')
-
-            for (var i = 0; i < data.length; i++) {
-                var row = `<tr>
-                                <td>${data[i].username}</td>
-                                <td>${data[i].firstName}</td>
-                                <td>${data[i].lastName}</td>
-                                <td>${data[i].email}</td>
-                            </tr>`
-                table.innerHTML += row
-
-            }
-        }
-    </script>
 
 </div>
 
 </body>
+<link rel="stylesheet" type="text/css" 
+href="C:\Users\Farren\Desktop\WorkFolder\
+farren_springer_p1\src\main\webapp\css\mystyles.css"/>
 </html>

@@ -4,9 +4,11 @@ import com.revature.ers.exceptions.AuthenticationException;
 import com.revature.ers.exceptions.InvalidRequestException;
 import com.revature.ers.exceptions.ResourceNotFoundException;
 import com.revature.ers.models.ErsReimbursement;
+import com.revature.ers.models.ErsUser;
 import com.revature.ers.repos.ReimbRepository;
 
 import java.io.IOException;
+import java.util.Optional;
 import java.util.Set;
 
 import static com.revature.ers.services.UserService.app;
@@ -75,7 +77,7 @@ public class ReimbService {
      * READ operation (Service Layer)
      * @param authorId
      */
-    public void findReimbursement(Integer authorId) {
+    public ErsReimbursement findReimbursement(Integer authorId) {
 
         // validate that the provided id is not a non-value
         if (authorId == null ) {
@@ -87,6 +89,35 @@ public class ReimbService {
 
         app.setCurrentReimbursement(authReimb); // redundant?
 
+        return authReimb;
+
+    }
+
+    /**
+     * READ operation (Service Layer)
+     * @param authorId
+     */
+    public Set<Optional<ErsReimbursement>> findReimbursements(Integer authorId) {
+
+        Set<Optional<ErsReimbursement>> yourReimbs = reimbRepo.findAllReimbsByAuthorId(authorId);
+
+        if (yourReimbs.isEmpty()) {
+            throw new RuntimeException("No reimbursements found");
+        }
+
+        return yourReimbs;
+
+    }
+
+    public Set<ErsReimbursement> getAllReimbs() {
+
+        Set<ErsReimbursement> reimbs = reimbRepo.findAll();
+
+        if (reimbs.isEmpty()) {
+            throw new RuntimeException("No reimbursements found...");
+        }
+
+        return reimbs;
     }
 
     /**

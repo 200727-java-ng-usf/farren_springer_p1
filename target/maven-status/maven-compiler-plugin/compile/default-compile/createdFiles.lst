@@ -2,9 +2,9 @@ com\revature\ers\servlets\RequestHelper.class
 com\revature\ers\controllers\admin\FindUserController.class
 com\revature\ers\controllers\admin\RegisterController.class
 com\revature\ers\controllers\employee\ViewAllReimbsController.class
-com\revature\ers\sessionservlet\ViewMyReimbsServlet.class
-com\revature\ers\sessionservlet\HelperSessionServlet.class
+com\revature\ers\controllers\fmanager\DirectFromFilterChoiceController.class
 com\revature\ers\servlets\ForwardingMasterServlet.class
+com\revature\ers\servlets\ViewAllReimbsServlet.class
 com\revature\ers\controllers\LoginController.class
 com\revature\ers\controllers\FinanceManagerController.class
 com\revature\ers\sessionservlet\SessionServlet.class
@@ -16,4 +16,5 @@ com\revature\ers\controllers\AdminController.class
 com\revature\ers\controllers\EmployeeController.class
 com\revature\ers\util\AppState.class
 com\revature\ers\controllers\employee\ViewMyReimbsController.class
+com\revature\ers\servlets\ViewYourReimbsServlet.class
 com\revature\ers\controllers\HomeController.class

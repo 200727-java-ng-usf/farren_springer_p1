@@ -2,27 +2,44 @@
 <html>
 <head>
     <meta charset="ISO-8859-1"><title>Home Page</title>
-    <link rel="stylesheet" type="text/css" href="/farren_springer_p1/src/main/webapp/css/mystyles.css"/>
+    
 </head>
 <body>
-<div class="financemanager-container">
-    <h4>Here are all reimbursements (under construction)...</h4>
+<div class ="any">
+    <h1>Here are all reimbursements (under construction)...</h1>
 
-    <form action="/badlogin.html"> <!-- take the user to a page that shows different data based on what they chose? Fetch API? -->
+    
+    <form>
+    <label for="reimbsbytypeorstatus">Choose a filter type:</label>
 
-    <label for="reimbs">Choose a filter type:</label>
-
-    <select name="reimbs" id="reimbs">
+    <select id="reimbsbytypeorstatus">
         <option value="type">View by Type</option>
         <option value="status">View by Status</option>
     </select>
-        <br><br>
-        <input type="submit" value="Submit">
-
+    <br>
+        <button type="button" onclick="returnAMessage()">Choose</button>
     </form>
 
 
 </div>
 
+<div id="financemanager-container" class="financemanager-container"></div>
+
 </body>
+<script>
+    function returnAMessage() {
+    var selection = document.querySelector("#reimbsbytypeorstatus").value;
+    var message;
+    if (selection == "type") {
+        message = "type";
+    } else if (selection == "status") {
+        message = "status";
+    }
+
+    document.querySelector("#financemanager-container").innerHTML = message;
+}
+</script>
+<link rel="stylesheet" type="text/css" 
+href="C:\Users\Farren\Desktop\WorkFolder\
+farren_springer_p1\src\main\webapp\css\mystyles.css"/>
 </html>

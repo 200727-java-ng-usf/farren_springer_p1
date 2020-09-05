@@ -23,21 +23,60 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="acd0345a-037a-4ae4-bb0f-bf52e2b6afbe" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/controllers/fmanager/ViewAllReimbsController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/controllers/fmanager/DirectFromFilterChoiceController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/servlets/ViewYourReimbsServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/html/allreimbsbystatus.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/html/allreimbsbytype.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/controllers/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/controllers/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/exceptions/AuthenticationException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/exceptions/AuthenticationException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/models/ErsReimbursement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/models/ErsReimbursement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/services/ReimbService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/services/ReimbService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/servlets/RequestHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/servlets/RequestHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/sessionservlet/HelperSessionServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/servlets/ViewAllReimbsServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/sessionservlet/ViewMyReimbsServlet.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/mystyles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/css/mystyles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/admindash.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/admindash.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/badlogin.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/badlogin.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/deleteuser.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/deleteuser.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/employeedash.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/employeedash.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/finduser.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/finduser.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/html/fmanagerdash.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/fmanagerdash.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/submitform.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/submitform.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/updateuser.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/updateuser.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/html/viewallreimbs.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/viewallreimbs.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/viewmyreimbs.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/viewmyreimbs.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/revature/ers/controllers/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/revature/ers/controllers/LoginController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/revature/ers/models/Role.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/revature/ers/models/Role.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/revature/ers/exceptions/AuthenticationException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/revature/ers/exceptions/AuthenticationException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/revature/ers/models/ErsReimbursement.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/revature/ers/models/ErsReimbursement.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/revature/ers/services/ReimbService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/revature/ers/services/ReimbService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/revature/ers/servlets/RequestHelper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/revature/ers/servlets/RequestHelper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/revature/ers/sessionservlet/HelperSessionServlet.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/revature/ers/sessionservlet/ViewMyReimbsServlet.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT.war" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT.war" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/WEB-INF/classes/com/revature/ers/controllers/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/WEB-INF/classes/com/revature/ers/controllers/LoginController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/WEB-INF/classes/com/revature/ers/models/Role.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/WEB-INF/classes/com/revature/ers/models/Role.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/WEB-INF/classes/com/revature/ers/exceptions/AuthenticationException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/WEB-INF/classes/com/revature/ers/exceptions/AuthenticationException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/WEB-INF/classes/com/revature/ers/models/ErsReimbursement.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/WEB-INF/classes/com/revature/ers/models/ErsReimbursement.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/WEB-INF/classes/com/revature/ers/services/ReimbService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/WEB-INF/classes/com/revature/ers/services/ReimbService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/WEB-INF/classes/com/revature/ers/servlets/RequestHelper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/WEB-INF/classes/com/revature/ers/servlets/RequestHelper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/WEB-INF/classes/com/revature/ers/sessionservlet/HelperSessionServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/WEB-INF/classes/com/revature/ers/sessionservlet/HelperSessionServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/css/mystyles.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/css/mystyles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/html/admindash.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/html/admindash.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/html/badlogin.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/html/badlogin.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/html/deleteuser.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/html/deleteuser.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/html/employeedash.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/html/employeedash.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/html/finduser.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/html/finduser.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/html/fmanagerdash.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/html/fmanagerdash.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/html/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/html/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/html/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/html/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/html/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/html/register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/html/submitform.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/html/submitform.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/html/updateuser.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/html/updateuser.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/html/viewallreimbs.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/html/viewallreimbs.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/html/viewmyreimbs.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/html/viewmyreimbs.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-com.revature.ers.util.ConnectionFactoryTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-com.revature.ers.util.ConnectionFactoryTest.xml" afterDir="false" />
@@ -76,7 +115,7 @@
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../farren_springer_p1_Hibernate" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -154,10 +193,10 @@
       <screen x="-1920" y="-209" width="1920" height="1040" />
     </state>
     <state x="-1211" y="113" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040/-1920.-209.1920.1040@-1920.-209.1920.1040" timestamp="1599101504702" />
-    <state x="-1635" y="30" key="#com.intellij.ide.util.MemberChooser" timestamp="1599080224389">
+    <state x="-1635" y="30" key="#com.intellij.ide.util.MemberChooser" timestamp="1599260506418">
       <screen x="-1920" y="-209" width="1920" height="1040" />
     </state>
-    <state x="-1635" y="30" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/-1920.-209.1920.1040@-1920.-209.1920.1040" timestamp="1599080224389" />
+    <state x="-1635" y="30" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/-1920.-209.1920.1040@-1920.-209.1920.1040" timestamp="1599260506418" />
     <state x="-1657" y="183" width="433" height="268" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1598803288705">
       <screen x="-1920" y="-209" width="1920" height="1040" />
     </state>
@@ -170,10 +209,10 @@
       <screen x="-1920" y="-209" width="1920" height="1040" />
     </state>
     <state x="-1230" y="58" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040/-1920.-209.1920.1040@-1920.-209.1920.1040" timestamp="1599078226158" />
-    <state x="-1660" y="69" key="FileChooserDialogImpl" timestamp="1599230032199">
+    <state x="-1660" y="69" key="FileChooserDialogImpl" timestamp="1599272226585">
       <screen x="-1920" y="-209" width="1920" height="1040" />
     </state>
-    <state x="-1660" y="69" key="FileChooserDialogImpl/0.0.1920.1040/-1920.-209.1920.1040@-1920.-209.1920.1040" timestamp="1599230032199" />
+    <state x="-1660" y="69" key="FileChooserDialogImpl/0.0.1920.1040/-1920.-209.1920.1040@-1920.-209.1920.1040" timestamp="1599272226585" />
     <state width="914" height="281" key="GridCell.Tab.0.bottom" timestamp="1598583245803">
       <screen x="-1920" y="-209" width="1920" height="1040" />
     </state>
@@ -194,6 +233,10 @@
       <screen x="-1920" y="-209" width="1920" height="1040" />
     </state>
     <state x="-1430" y="-34" key="Maven.ArtifactSearchDialog/0.0.1920.1040/-1920.-209.1920.1040@-1920.-209.1920.1040" timestamp="1599188383155" />
+    <state x="-967" y="-209" width="974" height="1047" key="dock-window-1" timestamp="1599275823069">
+      <screen x="-1920" y="-209" width="1920" height="1040" />
+    </state>
+    <state x="-967" y="-209" width="974" height="1047" key="dock-window-1/0.0.1920.1040/-1920.-209.1920.1040@-1920.-209.1920.1040" timestamp="1599275823069" />
     <state x="-1578" y="-28" key="new project wizard" timestamp="1599230033385">
       <screen x="-1920" y="-209" width="1920" height="1040" />
     </state>
