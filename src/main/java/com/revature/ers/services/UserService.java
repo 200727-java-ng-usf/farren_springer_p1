@@ -83,7 +83,7 @@ public class UserService {
      * @param id
      * @return
      */
-    public Optional<ErsUser> findById(Integer id) {
+    public ErsUser findById(Integer id) {
 
         return userRepo.findById(id);
     }

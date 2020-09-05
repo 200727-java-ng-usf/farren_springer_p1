@@ -97,9 +97,9 @@ public class ReimbService {
      * READ operation (Service Layer)
      * @param authorId
      */
-    public Set<Optional<ErsReimbursement>> findReimbursements(Integer authorId) {
+    public Set<ErsReimbursement> findReimbursements(Integer authorId) {
 
-        Set<Optional<ErsReimbursement>> yourReimbs = reimbRepo.findAllReimbsByAuthorId(authorId);
+        Set<ErsReimbursement> yourReimbs = reimbRepo.findAllReimbsByAuthorId(authorId);
 
         if (yourReimbs.isEmpty()) {
             throw new RuntimeException("No reimbursements found");

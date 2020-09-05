@@ -2,6 +2,9 @@ package com.revature.ers.servlets;
 
 import com.revature.ers.controllers.HomeController;
 import com.revature.ers.controllers.LoginController;
+import com.revature.ers.controllers.admin.UpdateUserController;
+import com.revature.ers.controllers.admin.UpdateOrDeleteController;
+import com.revature.ers.controllers.admin.FindUserController;
 import com.revature.ers.controllers.admin.RegisterController;
 import com.revature.ers.controllers.EmployeeController;
 import com.revature.ers.controllers.employee.SubmitController;
@@ -36,25 +39,41 @@ public class RequestHelper {
             case "/farren_springer_p1/api/home":
                 System.out.println("in home case");
                 return HomeController.home();
-            case "/farren_springer_p1/api/submitform":
-                System.out.println("in submitform case");
-                return SubmitController.submit(req);
+            /**
+             * Admin cases
+             */
             case "/farren_springer_p1/api/register":
                 System.out.println("in register case");
                 return RegisterController.registerNewUser(req);
-            case "/farren_springer_p1/api/employee":
-                System.out.println("in employee case");
-                return EmployeeController.displayDash(req, resp);
-            case "/farren_springer_p1/api/viewMyReimbs":
-                return ViewMyReimbsController.viewMyReimbs(req);
+            case "/farren_springer_p1/api/findUser":
+                return FindUserController.findUser(req);
+            case "/farren_springer_p1/api/updateOrDelete":
+                return UpdateOrDeleteController.updateOrDelete(req);
+            case "/farren_springer_p1/api/update":
+                return UpdateUserController.updateUser(req);
+//            case "/farren_springer_p1/api/delete":
+//                return DeleteUserController.deleteUser(req);
+            /**
+             * Finance Manager cases
+             */
             case "/farren_springer_p1/api/viewallreimbs":
                 return ViewAllReimbsController.viewAllReimbs(req);
             case "/farren_springer_p1/api/directfromfilterchoice":
                 return DirectFromFilterChoiceController.directFromFilterChoice(req, resp);
             case "/farren_springer_p1/viewReimbs":
                 return "/farren_springer_p1/viewReimbs";
-            case "/farren_springer_p1/viewYourReimbs":
-                return "/farren_springer_p1/viewYourReimbs";
+            /**
+             * Employee cases
+             */
+            case "/farren_springer_p1/api/submitform":
+                System.out.println("in submitform case");
+                return SubmitController.submit(req);
+            case "/farren_springer_p1/api/employee":
+                System.out.println("in employee case");
+                return EmployeeController.displayDash(req, resp);
+            case "/farren_springer_p1/api/viewMyReimbs":
+                return ViewMyReimbsController.viewMyReimbs(req);
+
             default:
                 System.out.println("in default");
                 return "/html/badlogin.html";

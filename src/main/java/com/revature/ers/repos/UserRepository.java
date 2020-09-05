@@ -1,5 +1,7 @@
 package com.revature.ers.repos;
 
+import com.revature.ers.exceptions.AuthenticationException;
+import com.revature.ers.models.ErsReimbursement;
 import com.revature.ers.models.ErsUser;
 import com.revature.ers.models.Role;
 import com.revature.ers.util.ConnectionFactory;
@@ -106,12 +108,13 @@ public class UserRepository implements CrudRepository<ErsUser>{
      * @param id
      * @return
      */
-    @Override
-    public Optional<ErsUser> findById(Integer id) {
+//    @Override
+    public ErsUser findById(Integer id) {
 
         System.out.println("In findById method in UserRepository");
 
         Optional<ErsUser> _user = Optional.empty();
+        ErsUser ersUser = null;
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
@@ -126,7 +129,11 @@ public class UserRepository implements CrudRepository<ErsUser>{
             sqle.printStackTrace();
         }
 
-        return _user;
+        if (_user.isPresent()) {
+            ersUser = _user.orElseThrow(AuthenticationException::new);
+        }
+
+        return ersUser;
     }
 
     /**

@@ -25,13 +25,13 @@ public class FindUserController {
         // TODO authenticate that the user's role field is ADMIN
 
         // acquire the form data
-        String username = req.getParameter("username");
-        String password = req.getParameter("password");
+        String userIdToEditAsString = req.getParameter("userIdToEdit");
+        Integer userIdToEdit = Integer.parseInt(userIdToEditAsString);
 
         // authenticate sets the current user. We don't want to do that...just update the information
         // if the user exists in the db
 //        userService.authenticate(username, password);
-        if(userRepo.findUserByCredentials(username, password).isPresent()) {
+        if(userRepo.findById(userIdToEdit) != null) {
 
             System.out.println("found user successful");
 
@@ -39,15 +39,14 @@ public class FindUserController {
 
                 System.out.println("in try in if in findUser method");
 
-                req.getSession().setAttribute("loggedUsername", username);
-                req.getSession().setAttribute("loggedPassword", password);
+                req.getSession().setAttribute("loggedIdOfUserToEdit", userIdToEdit);
 
                 System.out.println("getSession.setAttribute successful");
 
-                return "/api/updateuser";
+                return "/api/updateOrDelete";
 
-            } catch (AuthenticationException e) {
-                e.printStackTrace();
+            } catch (NullPointerException npe) {
+                npe.printStackTrace();
                 return "/api/badlogin.html";
             }
         } else {

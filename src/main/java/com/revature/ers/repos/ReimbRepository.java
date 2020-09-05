@@ -1,5 +1,6 @@
 package com.revature.ers.repos;
 
+import com.revature.ers.exceptions.AuthenticationException;
 import com.revature.ers.models.*;
 import com.revature.ers.util.ConnectionFactory;
 
@@ -111,7 +112,7 @@ public class ReimbRepository implements CrudRepository<ErsReimbursement> {
      * @param id
      * @return
      */
-    @Override
+//    @Override
     public Optional<ErsReimbursement> findById(Integer id) {
 
         System.out.println("In findById method in ReimbRepository");
@@ -166,12 +167,14 @@ public class ReimbRepository implements CrudRepository<ErsReimbursement> {
      * @param authorId
      * @return
      */
-    public Set<Optional<ErsReimbursement>> findAllReimbsByAuthorId(Integer authorId) {
+    public Set<ErsReimbursement> findAllReimbsByAuthorId(Integer authorId) {
 
         System.out.println("In findAllReimbsByAuthorId method in ReimbRepository");
 
         Optional<ErsReimbursement> _reimb = Optional.empty();
         Set<Optional<ErsReimbursement>> _reimbs = new HashSet<>();
+        ErsReimbursement tempReimb = null;
+        Set<ErsReimbursement> reimbs = new HashSet<>();
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
@@ -186,11 +189,17 @@ public class ReimbRepository implements CrudRepository<ErsReimbursement> {
                 _reimbs.add(_reimb);
             }
 
+            for (Optional<ErsReimbursement> r: _reimbs) {
+                tempReimb = r.orElseThrow(AuthenticationException::new);
+                reimbs.add(tempReimb);
+            }
+
+
         } catch (SQLException sqle) {
             sqle.printStackTrace();
         }
 
-        return _reimbs;
+        return reimbs;
     }
 
     /**
