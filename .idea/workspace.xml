@@ -23,29 +23,52 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="acd0345a-037a-4ae4-bb0f-bf52e2b6afbe" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/html/employee/reimbwasremoved.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/controllers/fmanager/ApproveOrDenyController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/controllers/fmanager/ApproveReimbController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/controllers/fmanager/DenyReimbController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/controllers/fmanager/FindReimbController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/controllers/fmanager/PickAStatusController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/controllers/fmanager/PickATypeController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/servlets/ViewAllByStatusServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/servlets/ViewAllByTypeServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/html/fmanager/approvereimb.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/html/fmanager/denyreimb.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/html/fmanager/status.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/html/fmanager/type.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/html/fmanager/typeorstatus.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/html/fmanager/viewtype.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/controllers/AdminController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/controllers/EmployeeController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/controllers/FinanceManagerController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/controllers/employee/ChooseToEditController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/controllers/employee/ChooseToEditController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/controllers/employee/RemoveReimbController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/controllers/employee/RemoveReimbController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/controllers/employee/UpdateReimbController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/controllers/employee/UpdateReimbController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/controllers/fmanager/DirectFromFilterChoiceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/controllers/fmanager/TypeOrStatusController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/controllers/fmanager/ViewAllReimbsController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/models/Type.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/models/Type.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/repos/ReimbRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/repos/ReimbRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/services/ReimbService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/services/ReimbService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/servlets/RequestHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/servlets/RequestHelper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/servlets/ViewAllReimbsServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/servlets/ViewAllReimbsServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/servlets/ViewYourReimbsServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/servlets/ViewYourReimbsServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/revature/ers/controllers/AdminController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/revature/ers/controllers/EmployeeController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/revature/ers/controllers/FinanceManagerController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/project1.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/project1.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/project1data.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/project1data.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/employee/updatereimb.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/employee/updatereimb.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/fmanager/allreimbsbystatus.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/fmanager/allreimbsbytype.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/revature/ers/controllers/employee/ViewAllReimbsController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/revature/ers/controllers/fmanager/DirectFromFilterChoiceController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/revature/ers/models/Type.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/revature/ers/models/Type.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/revature/ers/repos/ReimbRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/revature/ers/repos/ReimbRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/revature/ers/services/ReimbService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/revature/ers/services/ReimbService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/revature/ers/servlets/RequestHelper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/revature/ers/servlets/RequestHelper.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/revature/ers/servlets/ViewAllReimbsServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/revature/ers/servlets/ViewAllReimbsServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/revature/ers/servlets/ViewYourReimbsServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/revature/ers/servlets/ViewYourReimbsServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/project1data.json" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/project1data.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT.war" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT.war" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/WEB-INF/classes/com/revature/ers/models/Type.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/WEB-INF/classes/com/revature/ers/models/Type.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/WEB-INF/classes/com/revature/ers/repos/ReimbRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/WEB-INF/classes/com/revature/ers/repos/ReimbRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/WEB-INF/classes/com/revature/ers/services/ReimbService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/WEB-INF/classes/com/revature/ers/services/ReimbService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/WEB-INF/classes/com/revature/ers/servlets/RequestHelper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/WEB-INF/classes/com/revature/ers/servlets/RequestHelper.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/WEB-INF/classes/com/revature/ers/servlets/ViewAllReimbsServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/WEB-INF/classes/com/revature/ers/servlets/ViewAllReimbsServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/WEB-INF/classes/com/revature/ers/servlets/ViewYourReimbsServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/WEB-INF/classes/com/revature/ers/servlets/ViewYourReimbsServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/WEB-INF/classes/project1data.json" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/WEB-INF/classes/project1data.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/html/employee/updatereimb.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/html/employee/updatereimb.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-com.revature.ers.util.ConnectionFactoryTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-com.revature.ers.util.ConnectionFactoryTest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/surefire-reports/com.revature.ers.util.ConnectionFactoryTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/com.revature.ers.util.ConnectionFactoryTest.txt" afterDir="false" />
     </list>
@@ -59,8 +82,8 @@
       <list>
         <option value="Enum" />
         <option value="Interface" />
-        <option value="Class" />
         <option value="HTML File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -168,10 +191,10 @@
       <screen x="-1920" y="-209" width="1920" height="1040" />
     </state>
     <state x="-1211" y="113" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040/-1920.-209.1920.1040@-1920.-209.1920.1040" timestamp="1599101504702" />
-    <state x="-1635" y="30" key="#com.intellij.ide.util.MemberChooser" timestamp="1599333998775">
+    <state x="-1635" y="30" key="#com.intellij.ide.util.MemberChooser" timestamp="1599401861791">
       <screen x="-1920" y="-209" width="1920" height="1040" />
     </state>
-    <state x="-1635" y="30" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/-1920.-209.1920.1040@-1920.-209.1920.1040" timestamp="1599333998775" />
+    <state x="-1635" y="30" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/-1920.-209.1920.1040@-1920.-209.1920.1040" timestamp="1599401861791" />
     <state x="-1657" y="183" width="433" height="268" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1598803288705">
       <screen x="-1920" y="-209" width="1920" height="1040" />
     </state>
@@ -180,10 +203,10 @@
       <screen x="-1920" y="-209" width="1920" height="1040" />
     </state>
     <state x="-1752" y="-88" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1040/-1920.-209.1920.1040@-1920.-209.1920.1040" timestamp="1598572033549" />
-    <state x="-1230" y="58" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1599397888539">
+    <state x="-1230" y="58" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1599409523119">
       <screen x="-1920" y="-209" width="1920" height="1040" />
     </state>
-    <state x="-1230" y="58" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040/-1920.-209.1920.1040@-1920.-209.1920.1040" timestamp="1599397888539" />
+    <state x="-1230" y="58" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040/-1920.-209.1920.1040@-1920.-209.1920.1040" timestamp="1599409523119" />
     <state x="-1660" y="69" key="FileChooserDialogImpl" timestamp="1599359067847">
       <screen x="-1920" y="-209" width="1920" height="1040" />
     </state>

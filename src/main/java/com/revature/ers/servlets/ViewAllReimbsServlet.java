@@ -23,6 +23,8 @@ public class ViewAllReimbsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        System.out.println("In doGet of ViewAllReimbs Servlet!");
+
         UserRepository userRepo = new UserRepository();
         UserService userService = new UserService(userRepo);
         ReimbRepository reimbRepo = new ReimbRepository();
@@ -50,6 +52,15 @@ public class ViewAllReimbsServlet extends HttpServlet {
              * Receipt(?)
              */
 
+            out.println("<form method=\"post\" action=\"/farren_springer_p1/api/approveOrDeny\">\n" +
+                    "            <p>Enter the ID number of the reimbursement you would like to approve or deny</p>\n" +
+                    "            <input placeholder=\"enter the ID of the reimbursement to approve/deny\" name=\"reimbIdChosenByFManager\"/><br>\n" +
+                    "            <p>Enter either approve or deny to edit the reimbursement</p>\n" +
+                    "            <p>(If you wish to go back to your dashboard, type back)</p>\n" +
+                    "            <input placeholder=\"Enter text\" name=\"approveOrDenyChoice\"/><br>\n" +
+                    "            <input type=\"submit\" value=\"Choose\"/><br>\n" +
+                    "        </form>");
+
             out.println("<div class =\"any\">\n" +
                     "    <h1>Here are all reimbursements (under construction)...</h1>\n" +
                     "\n" +
@@ -73,6 +84,9 @@ public class ViewAllReimbsServlet extends HttpServlet {
             out.println("<h1>Name: " + ersUser.getFirstName() + " " + ersUser.getLastName() + "</h1><br>");
             out.println("<b>\tEmail: " + ersUser.getEmail() + "</b><br>");
             out.println("<i>\tRole: " + ersUser.getRole() + "</i><br>");
+            out.println("<form action=\"/farren_springer_p1/html/fmanager/typeorstatus.html\">\n" +
+                    "        <input type=\"submit\" value=\"Choose a Filter\">\n" +
+                    "    </form>");
             out.println("<b>\tAll Reimbursements: " + reimbService.getAllReimbs() + "</b><br>");
 
         } else {

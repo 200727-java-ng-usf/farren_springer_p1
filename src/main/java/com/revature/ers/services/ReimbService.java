@@ -120,6 +120,28 @@ public class ReimbService {
         return reimbs;
     }
 
+    public Set<ErsReimbursement> getAllReimbsByType(Integer typeChoice) {
+
+        Set<ErsReimbursement> reimbs = reimbRepo.findAllByType(typeChoice);
+
+        if (reimbs.isEmpty()) {
+            throw new RuntimeException("No reimbursements found...");
+        }
+
+        return reimbs;
+    }
+
+    public Set<ErsReimbursement> getAllReimbsByStatus(Integer statusChoice) {
+
+        Set<ErsReimbursement> reimbs = reimbRepo.findAllByStatus(statusChoice);
+
+        if (reimbs.isEmpty()) {
+            throw new RuntimeException("No reimbursements found...");
+        }
+
+        return reimbs;
+    }
+
     /**
      * UPDATE operation (Service Layer)
      * @param reimbursement

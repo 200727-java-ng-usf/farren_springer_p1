@@ -150,3 +150,10 @@ SELECT * FROM project1.ers_reimbursements er
             ON er.reimb_status_id = rs.reimb_status_id 
 where author_id = 7;
 
+UPDATE project1.ers_reimbursements 
+SET amount = '400', 
+submitted = '2020-09-01 13:53:41', 
+description = 'asdfjkl', 
+reimb_type_id = '3' 
+WHERE reimb_id = '7'; 
+

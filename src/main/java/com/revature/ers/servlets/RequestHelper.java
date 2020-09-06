@@ -3,9 +3,9 @@ package com.revature.ers.servlets;
 import com.revature.ers.controllers.HomeController;
 import com.revature.ers.controllers.LoginController;
 import com.revature.ers.controllers.admin.*;
+import com.revature.ers.controllers.fmanager.ApproveReimbController;
 import com.revature.ers.controllers.employee.*;
-import com.revature.ers.controllers.employee.ViewAllReimbsController;
-import com.revature.ers.controllers.fmanager.DirectFromFilterChoiceController;
+import com.revature.ers.controllers.fmanager.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -52,10 +52,24 @@ public class RequestHelper {
             /**
              * Finance Manager cases
              */
-            case "/farren_springer_p1/api/viewallreimbs":
-                return ViewAllReimbsController.viewAllReimbs(req);
-            case "/farren_springer_p1/api/directfromfilterchoice":
-                return DirectFromFilterChoiceController.directFromFilterChoice(req, resp);
+            case "/farren_springer_p1/api/typeOrStatus":
+                return TypeOrStatusController.directFromFilterChoice(req);
+            case "/farren_springer_p1/api/type":
+                // this case occurs because user clicked submit in type.html
+                return PickATypeController.viewByType(req);
+            case "/farren_springer_p1/api/status":
+                // this case occurs because user clicked submit in status.html
+                return PickAStatusController.viewByStatus(req);
+            case "/farren_springer_p1/api/viewbytype":
+                return "/viewallbytype"; // maps to servlet because we need to display session information
+            case "/farren_springer_p1/api/viewbystatus":
+                return "/viewallbystatus"; // maps to servlet because we need to display session information
+            case "/farren_springer_p1/api/approveOrDeny":
+                return ApproveOrDenyController.approveOrDeny(req);
+            case "/farren_springer_p1/api/approve":
+                return ApproveReimbController.approveReimb(req);
+            case "/farren_springer_p1/api/deny":
+                return DenyReimbController.denyReimb(req);
             /**
              * Employee cases
              */

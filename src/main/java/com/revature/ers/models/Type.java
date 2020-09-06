@@ -4,15 +4,15 @@ public enum Type {
 
     LODGING("Lodging"), TRAVEL("Travel"), FOOD("Food"), OTHER("Other");
 
-    private String reimbursementTypeName;
+    private String typeName;
 
-    Type(String type) { this.reimbursementTypeName = type; }
+    Type(String type) { this.typeName = type; }
 
     public static Type getByType(String type) {
 
-        for (Type reimbursementType : Type.values()) {
-            if (reimbursementType.reimbursementTypeName.equalsIgnoreCase(type)) {
-                return reimbursementType;
+        for (Type theType : Type.values()) {
+            if (theType.typeName.equals(type)) {
+                return theType;
             }
         }
 
@@ -22,6 +22,6 @@ public enum Type {
 
     @Override
     public String toString() {
-        return reimbursementTypeName;
+        return super.toString();
     }
 }

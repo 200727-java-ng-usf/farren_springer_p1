@@ -59,7 +59,7 @@ public class ReimbRepository implements CrudRepository<ErsReimbursement> {
             pstmt.setInt(4, app.getCurrentUser().getId()); // TODO author id
             System.out.println("got authorId");
             pstmt.setInt(5, reimbursement.getReimbursementStatusId().ordinal() + 1);
-            pstmt.setInt(6, reimbursement.getReimbursementTypeId().ordinal() + 1);
+            pstmt.setInt(6, reimbursement.getReimbursementTypeId().ordinal());
 //            pstmt.setInt(3, app.getCurrentUser().getId()); // for reference
 
             int rowsInserted = pstmt.executeUpdate(); // execute the prepared statement using Connection object that uses the db
@@ -104,6 +104,54 @@ public class ReimbRepository implements CrudRepository<ErsReimbursement> {
 
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
+            reimbs = mapResultSet(rs);
+
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
+
+        return reimbs;
+    }
+
+    public Set<ErsReimbursement> findAllByType(Integer typeChoice) {
+
+        Set<ErsReimbursement> reimbs = new HashSet<>();
+
+        /**
+         * Try with resources; the resource is the JDB
+         */
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            String sql = baseQuery + "WHERE reimb_type_id = ?";
+
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, typeChoice);
+
+            ResultSet rs = pstmt.executeQuery();
+            reimbs = mapResultSet(rs);
+
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
+
+        return reimbs;
+    }
+
+    public Set<ErsReimbursement> findAllByStatus(Integer statusChoice) {
+
+        Set<ErsReimbursement> reimbs = new HashSet<>();
+
+        /**
+         * Try with resources; the resource is the JDB
+         */
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            String sql = baseQuery + "WHERE reimb_status_id = ?";
+
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, statusChoice);
+
+            ResultSet rs = pstmt.executeQuery();
             reimbs = mapResultSet(rs);
 
         } catch (SQLException sqle) {
@@ -208,10 +256,50 @@ public class ReimbRepository implements CrudRepository<ErsReimbursement> {
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
+            System.out.println("This is the type ID: " + ersReimbursement.getReimbursementTypeId().ordinal());
             String sql = "UPDATE project1.ers_reimbursements "
                     + "SET amount = '" + ersReimbursement.getAmount() + "', "
+                    + "submitted = '" + ersReimbursement.getSubmitted() + "', "
+//                    + "resolved = '" + ersReimbursement.getResolved() + "', "
                     + "description = '" + ersReimbursement.getDescription() + "', "
-                    + "reimb_type_id = '" + ersReimbursement.getReimbursementTypeId().ordinal()+1 + "' "
+                    + "resolver_id = '" + ersReimbursement.getResolverId() + "', "
+                    + "reimb_status_id = '" + (ersReimbursement.getReimbursementStatusId().ordinal() + 1) + "', "
+                    + "reimb_type_id = '" + ersReimbursement.getReimbursementTypeId().ordinal() + "' "
+                    + "WHERE reimb_id = '" + ersReimbursement.getId() + "' ";
+
+            // second parameter here is used to indicate column names that will have generated values
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.executeUpdate();
+
+            ResultSet rs = pstmt.getGeneratedKeys();
+
+            rs.next();
+
+//            }
+
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
+
+        return true;
+    }
+
+    /**
+     * Custom UPDATE operation for Finance Managers
+     * @param ersReimbursement
+     * @return
+     */
+    public boolean updateByFManager(ErsReimbursement ersReimbursement) {
+
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            String sql = "UPDATE project1.ers_reimbursements "
+                    + "SET resolved = '" + ersReimbursement.getResolved() + "', "
+                    + "resolver_id = '" + ersReimbursement.getResolverId() + "', "
+                    + "reimb_status_id = '" + (ersReimbursement.getReimbursementStatusId().ordinal() + 1) + "' "
+                    /**
+                    * note that the last changed does not need a comma in the quotes
+                    */
                     + "WHERE reimb_id = '" + ersReimbursement.getId() + "' ";
 
             // second parameter here is used to indicate column names that will have generated values
