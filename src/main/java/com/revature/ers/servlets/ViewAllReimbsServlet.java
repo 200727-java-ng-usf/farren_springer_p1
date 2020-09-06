@@ -66,7 +66,7 @@ public class ViewAllReimbsServlet extends HttpServlet {
                     "\n" +
                     "    \n" +
                     "    <form>\n" +
-                    "    <label for=\"reimbsbytypeorstatus\">Choose a filter type:</label>\n" +
+                    "    <label for=\"reimbsbytypeorstatus\">Choose a filter type (uses some JS but not relevant rn):</label>\n" +
                     "\n" +
                     "    <select id=\"reimbsbytypeorstatus\">\n" +
                     "        <option value=\"type\">View by Type</option>\n" +

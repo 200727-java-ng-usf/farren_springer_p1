@@ -17,6 +17,10 @@ import java.util.Optional;
 
 import static com.revature.ers.services.UserService.app;
 
+/**
+ * UpdateReimbController performs the UPDATE operation on the project1 schema.
+ * This controller should only be accessible to users with role EMPLOYEE
+ */
 public class UpdateReimbController {
 
     private static UserRepository userRepo = new UserRepository();

@@ -4,7 +4,7 @@ import java.util.Objects;
 import java.util.Set;
 
 /**
- * POJO Model to represent users
+ * User POJOs
  */
 public class ErsUser {
 

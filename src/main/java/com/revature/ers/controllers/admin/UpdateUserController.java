@@ -14,6 +14,10 @@ import java.util.Optional;
 
 import static com.revature.ers.services.UserService.app;
 
+/**
+ * UpdateUserController performs the UPDATE operation on the project1 schema.
+ * This controller should only be accessible to users with role ADMIN
+ */
 public class UpdateUserController {
 
     private static UserRepository userRepo = new UserRepository();
@@ -52,13 +56,6 @@ public class UpdateUserController {
 
 
             userService.update(ersUser);
-
-//            req.getSession().setAttribute("newUsername", username);
-//            req.getSession().setAttribute("newPassword", password);
-//            req.getSession().setAttribute("newFirstName", firstName);
-//            req.getSession().setAttribute("newLastName", lastName);
-//            req.getSession().setAttribute("newEmail", email);
-
 
             return "/api/home";
 

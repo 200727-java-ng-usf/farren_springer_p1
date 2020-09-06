@@ -11,6 +11,11 @@ import java.util.Optional;
 
 import static com.revature.ers.services.UserService.app;
 
+/**
+ * UpdateOrDeleteController collects information from a form and leads the
+ * admin user to either the UPDATE or DELETE user controller.
+ * This controller should only be accessible to users with role ADMIN
+ */
 public class UpdateOrDeleteController {
 
     private static UserRepository userRepo = new UserRepository();

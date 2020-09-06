@@ -12,7 +12,9 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-// TODO understand how this works
+/**
+ * Not using this rn
+ */
 
 @WebServlet("/sesserv")
 public class SessionServlet extends HttpServlet {

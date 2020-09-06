@@ -19,6 +19,10 @@ import java.util.Optional;
 
 import static com.revature.ers.services.UserService.app;
 
+/**
+ * DenyReimbController performs the UPDATE operation on the project1 schema.
+ * This controller should only be accessible to users with role FINANCE_MANAGER
+ */
 public class DenyReimbController {
 
     private static UserRepository userRepo = new UserRepository();

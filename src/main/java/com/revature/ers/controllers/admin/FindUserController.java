@@ -11,6 +11,10 @@ import java.util.Optional;
 
 import static com.revature.ers.services.UserService.app;
 
+/**
+ * FindUserController performs a READ operation on the project1 schema.
+ * This controller should only be accessible to users with role ADMIN
+ */
 public class FindUserController {
 
     private static UserRepository userRepo = new UserRepository();
@@ -53,21 +57,5 @@ public class FindUserController {
             return "/api/finduser.html";
         }
 
-//        /**
-//         * Ensure not null values are submitted
-//         */
-//        if(!(username.equals(null) || password.equals(""))) {
-//            // this logic will trigger when the amount is null or the type is empty
-//            return"/api/invalidinput";
-//        } else {
-//            req.getSession().setAttribute("loggedUsername", username);
-//            req.getSession().setAttribute("loggedPassword", password);
-//            req.getSession().setAttribute("loggedFirstName", firstName);
-//            req.getSession().setAttribute("loggedLastName", lastName);
-//            req.getSession().setAttribute("loggedEmail", email);
-//            ErsUser employee = new ErsUser(username, password, firstName, lastName, email);
-//            userService.register(employee);
-//            return "/api/home";
-//        }
     }
 }

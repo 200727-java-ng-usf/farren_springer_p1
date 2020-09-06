@@ -12,7 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 
 /**
- * Will only be accessible to ErsUser object of role ADMIN
+ * RegisterController performs a CREATE operation on the project1 schema.
+ * This controller should only be accessible to users with role ADMIN
  */
 public class RegisterController {
 
@@ -47,17 +48,7 @@ public class RegisterController {
             req.getSession().setAttribute("loggedEmail", email);
 
 
-            // OutputSteam not defined
-//            File jsonFile = new File("C:/Users/Farren/Desktop/WorkFolder/farren_springer_p1/src/main/resources/project1data.json");
-//            ObjectMapper objectMapper = new ObjectMapper();
-//            ErsUser newUser = new ErsUser(username, password, firstName, lastName, email);
-//            objectMapper.writeValue(jsonFile, newUser);
-//            JsonGenerator jsonGenerator = objectMapper.getFactory().createGenerator(OutputStream);
-//            objectMapper.writeValue(jsonGenerator, newUser);
-//            jsonGenerator.close();
-
             ErsUser newUser = new ErsUser(username, password, firstName, lastName, email);
-//            File jsonFile = new File("C:/Users/Farren/Desktop/WorkFolder/farren_springer_p1/src/main/resources/project1data.json");
             ObjectMapper mapper = new ObjectMapper();
             try {
                 JsonGenerator g = mapper.getFactory().createGenerator(new FileOutputStream("C:/Users/Farren/Desktop/WorkFolder/farren_springer_p1/src/main/resources/project1data.json"));
@@ -80,21 +71,5 @@ public class RegisterController {
             return "/api/badlogin.html";
         }
 
-//        /**
-//         * Ensure not null values are submitted
-//         */
-//        if(!(username.equals(null) || password.equals(""))) {
-//            // this logic will trigger when the amount is null or the type is empty
-//            return"/api/invalidinput";
-//        } else {
-//            req.getSession().setAttribute("loggedUsername", username);
-//            req.getSession().setAttribute("loggedPassword", password);
-//            req.getSession().setAttribute("loggedFirstName", firstName);
-//            req.getSession().setAttribute("loggedLastName", lastName);
-//            req.getSession().setAttribute("loggedEmail", email);
-//            ErsUser employee = new ErsUser(username, password, firstName, lastName, email);
-//            userService.register(employee);
-//            return "/api/home";
-//        }
     }
 }

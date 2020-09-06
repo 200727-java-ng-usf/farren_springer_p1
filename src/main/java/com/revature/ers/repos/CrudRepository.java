@@ -21,7 +21,12 @@ public interface CrudRepository<T> {
      * @return
      */
     Set<T> findAll();
-//    <T> findById(Integer id);
+
+    /**
+     * Want to use an Optional<T> parameter for Reimbursements,
+     * and T parameter for Users.
+     */
+//    T findById(Integer id);
 
     /**
      * UPDATE

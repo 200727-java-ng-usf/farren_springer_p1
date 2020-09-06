@@ -11,6 +11,11 @@ import java.util.Optional;
 
 import static com.revature.ers.services.UserService.app;
 
+/**
+ * ApproveOrDenyController takes finance managers to either the Approve or Deny
+ * Controller based on attributes set from parameters of form data.
+ * This controller should only be accessible to users with role FINANCE_MANAGER
+ */
 public class ApproveOrDenyController {
 
     private static UserRepository userRepo = new UserRepository();

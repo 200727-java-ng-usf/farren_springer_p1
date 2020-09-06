@@ -1,17 +1,17 @@
 package com.revature.ers.controllers.employee;
 
-import com.revature.ers.exceptions.AuthenticationException;
-import com.revature.ers.models.ErsReimbursement;
-import com.revature.ers.models.Status;
-import com.revature.ers.models.Type;
 import com.revature.ers.repos.ReimbRepository;
 import com.revature.ers.repos.UserRepository;
 import com.revature.ers.services.ReimbService;
 
 import javax.servlet.http.HttpServletRequest;
-import java.sql.Timestamp;
-import java.util.Date;
 
+
+/**
+ * RemoveReimbController takes form data to direct employees to either
+ * the UpdateReimbController or the RemoveReimbController.
+ * This controller should only be accessible to users with role EMPLOYEE
+ */
 public class ChooseToEditController {
 
     private static ReimbRepository reimbRepo = new ReimbRepository();

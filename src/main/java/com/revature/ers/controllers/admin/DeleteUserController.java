@@ -14,6 +14,10 @@ import java.util.Optional;
 
 import static com.revature.ers.services.UserService.app;
 
+/**
+ * DeleteUserController performs the DELETE operation on the project1 schema.
+ * This controller should only be accessible to users with role ADMIN
+ */
 public class DeleteUserController {
 
     private static UserRepository userRepo = new UserRepository();
@@ -23,37 +27,45 @@ public class DeleteUserController {
 
         System.out.println("In deleteUser method in DeleteUserController...");
 
+
+
         if(!req.getMethod().equals("POST")) {
             return "/html/admin/deleteuser.html";
         }
 
-        // TODO authenticate that the user's role field is ADMIN
+        // TODO check for ADMIN role by req.getSession().getAttribute("loggedUsername)
 
         // Don't need to acquire any form data
-
 
         try {
 
             /**
-             * Find the user using the logged ID attribute from the form on the finduser page
+             * To delete the user, first access the user.
+             * Get the ID that the Admin entered on the form
              */
             System.out.println("attribute: " + req.getSession().getAttribute("loggedIdOfUserToEdit"));
+            /**
+             * Assign an ErsUser object to the fields that match that user's fields in the DB
+             */
             ErsUser tempUser = userRepo.findById((Integer) req.getSession().getAttribute("loggedIdOfUserToEdit"));
+            /**
+             * Get that user's ID.
+             */
+            // TODO redundant?
             Integer tempUserId = tempUser.getId();
             System.out.println("this is the attribute used to delete: " + tempUserId);
             ErsUser ersUser = userRepo.findById((Integer) req.getSession().getAttribute("loggedIdOfUserToEdit"));
             System.out.println("Got attribute successful");
 
+            /**
+             * Delete the user
+             */
             userService.deleteUser(ersUser);
             System.out.println("user deleted");
 
-//            req.getSession().setAttribute("newUsername", username);
-//            req.getSession().setAttribute("newPassword", password);
-//            req.getSession().setAttribute("newFirstName", firstName);
-//            req.getSession().setAttribute("newLastName", lastName);
-//            req.getSession().setAttribute("newEmail", email);
-
-
+            /**
+             * Return to the dashboard
+             */
             return "/html/admin/admindash.html";
 
         } catch (NullPointerException npe) {

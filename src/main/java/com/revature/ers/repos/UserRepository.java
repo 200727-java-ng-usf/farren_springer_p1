@@ -12,7 +12,7 @@ import java.util.Optional;
 import java.util.Set;
 
 /**
- * UserRepository connects to the Postgres DB
+ * UserRepository connects to the postgres DB
  */
 public class UserRepository implements CrudRepository<ErsUser>{
 

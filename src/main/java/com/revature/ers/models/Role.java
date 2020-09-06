@@ -1,5 +1,8 @@
 package com.revature.ers.models;
 
+/**
+ * Each Role constant corresponds to an entry in the schema's ers_user_roles table.
+ */
 public enum Role {
     ADMIN(1), FINANCE_MANAGER(2), EMPLOYEE(3);
 

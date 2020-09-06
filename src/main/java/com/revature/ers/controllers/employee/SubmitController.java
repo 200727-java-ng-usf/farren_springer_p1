@@ -12,6 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.sql.Timestamp;
 
+/**
+ * SubmitReimbController performs the CREATE operation on the project1 schema.
+ * This controller should only be accessible to users with role EMPLOYEE
+ */
 public class SubmitController {
 
     private static ReimbRepository reimbRepo = new ReimbRepository();

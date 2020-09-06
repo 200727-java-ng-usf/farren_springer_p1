@@ -12,6 +12,10 @@ import java.io.IOException;
 
 import static com.revature.ers.services.UserService.app;
 
+/**
+ * The LoginController takes users to a different HTML page based on their Role.
+ * LoginController is used for all User cases, so it is not in a more specific package.
+ */
 public class LoginController {
 
     public static String login(HttpServletRequest req, HttpServletResponse resp) throws IOException {

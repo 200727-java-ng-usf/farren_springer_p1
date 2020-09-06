@@ -1,18 +1,16 @@
 package com.revature.ers.controllers.employee;
 
 import com.revature.ers.exceptions.AuthenticationException;
-import com.revature.ers.models.ErsReimbursement;
-import com.revature.ers.models.Status;
-import com.revature.ers.models.Type;
+
 import com.revature.ers.repos.ReimbRepository;
-import com.revature.ers.repos.UserRepository;
-import com.revature.ers.services.ReimbService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.sql.Timestamp;
-import java.util.Date;
 
+/**
+ * RemoveReimbController performs the DELETE operation on the project1 schema.
+ * This controller should only be accessible to users with role EMPLOYEE
+ */
 public class RemoveReimbController {
 
     public static String removeReimb(HttpServletRequest req) throws IOException {

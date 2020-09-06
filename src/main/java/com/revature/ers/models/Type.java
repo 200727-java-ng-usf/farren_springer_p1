@@ -1,5 +1,8 @@
 package com.revature.ers.models;
 
+/**
+ * Reimbursement Type
+ */
 public enum Type {
 
     LODGING("Lodging"), TRAVEL("Travel"), FOOD("Food"), OTHER("Other");
