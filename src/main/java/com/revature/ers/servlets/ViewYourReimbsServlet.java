@@ -35,7 +35,7 @@ public class ViewYourReimbsServlet extends HttpServlet {
 //        ErsUser ersUser = (ErsUser) session.getAttribute("currentUser");
         String username = String.valueOf(session.getAttribute("loggedUsername"));
         ErsUser ersUser = userRepo.findUserByUsername(username)
-                .orElseThrow(AuthenticationException::new);;
+                .orElseThrow(AuthenticationException::new);
 
         // NON SESSION SYNTAX
         PrintWriter out = resp.getWriter();
@@ -47,6 +47,14 @@ public class ViewYourReimbsServlet extends HttpServlet {
             out.println("<h1>Name: " + ersUser.getFirstName() + " " + ersUser.getLastName() + "</h1><br>");
             out.println("<b>\tEmail: " + ersUser.getEmail() + "</b><br>");
             out.println("<i>\tRole: " + ersUser.getRole() + "</i><br>");
+            out.println("<form method=\"post\" action=\"/farren_springer_p1/api/chooseToEdit\">\n" +
+                    "            <p>Enter the ID number of the reimbursement you would like it edit</p>\n" +
+                    "            <input placeholder=\"enter the ID of the reimbursement to view/edit\" name=\"reimbIdChosenByEmployee\"/><br>\n" +
+                    "            <p>Enter either update or remove to edit your reimbursement</p>\n" +
+                    "            <p>(If you wish to go back to your dashboard, type back)</p>\n" +
+                    "            <input placeholder=\"Enter text\" name=\"choseToEditEmployee\"/><br>\n" +
+                    "            <input type=\"submit\" value=\"Choose\"/><br>\n" +
+                    "        </form>");
             out.println("<b>\tYour Reimbursements: " + reimbRepo.findAllReimbsByAuthorId(ersUser.getId()) + "</b><br>");
 
         } else {

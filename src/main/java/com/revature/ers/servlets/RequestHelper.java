@@ -4,9 +4,8 @@ import com.revature.ers.controllers.HomeController;
 import com.revature.ers.controllers.LoginController;
 import com.revature.ers.controllers.admin.*;
 import com.revature.ers.controllers.EmployeeController;
-import com.revature.ers.controllers.employee.SubmitController;
+import com.revature.ers.controllers.employee.*;
 import com.revature.ers.controllers.employee.ViewAllReimbsController;
-import com.revature.ers.controllers.employee.ViewMyReimbsController;
 import com.revature.ers.controllers.fmanager.DirectFromFilterChoiceController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -57,8 +56,6 @@ public class RequestHelper {
                 return ViewAllReimbsController.viewAllReimbs(req);
             case "/farren_springer_p1/api/directfromfilterchoice":
                 return DirectFromFilterChoiceController.directFromFilterChoice(req, resp);
-//            case "/farren_springer_p1/viewReimbs":
-//                return "/farren_springer_p1/viewReimbs";
             /**
              * Employee cases
              */
@@ -68,8 +65,12 @@ public class RequestHelper {
             case "/farren_springer_p1/api/employee":
                 System.out.println("in employee case");
                 return EmployeeController.displayDash(req, resp);
-            case "/farren_springer_p1/api/viewMyReimbs":
-                return ViewMyReimbsController.viewMyReimbs(req);
+            case "/farren_springer_p1/api/chooseToEdit":
+                return ChooseToEditController.chooseToEdit(req);
+            case "/farren_springer_p1/api/updateReimb":
+                return UpdateReimbController.updateReimb(req);
+//            case "/farren_springer/api/removeReimb:":
+//                return RemoveReimbController.removeReimb(req);
 
             default:
                 System.out.println("in default");

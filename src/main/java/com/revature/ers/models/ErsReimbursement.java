@@ -239,7 +239,7 @@ public class ErsReimbursement {
 
     @Override
     public String toString() {
-        return "\nErsReimbursement{" +
+        return "\nErsReimbursement: " +
                 "id=" + id +
                 ", amount=" + amount +
                 ", submitted=" + submitted +
@@ -250,6 +250,6 @@ public class ErsReimbursement {
                 ", resolverId=" + resolverId +
                 ", reimbursementStatusId=" + reimbursementStatusId +
                 ", reimbursementTypeId=" + reimbursementTypeId +
-                '}' + "\n";
+                ' ' + "\n";
     }
 }

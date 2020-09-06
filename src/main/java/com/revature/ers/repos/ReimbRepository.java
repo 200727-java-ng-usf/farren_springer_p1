@@ -131,7 +131,7 @@ public class ReimbRepository implements CrudRepository<ErsReimbursement> {
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, authorId);
 
-            ResultSet rs = pstmt.executeQuery(sql);
+            ResultSet rs = pstmt.executeQuery();
             reimbs = mapResultSet(rs);
 
         } catch (SQLException sqle) {
@@ -211,7 +211,8 @@ public class ReimbRepository implements CrudRepository<ErsReimbursement> {
             String sql = "UPDATE project1.ers_reimbursements "
                     + "SET amount = '" + ersReimbursement.getAmount() + "', "
                     + "description = '" + ersReimbursement.getDescription() + "', "
-                    + "reimb_type_id = '" + ersReimbursement.getReimbursementTypeId();
+                    + "reimb_type_id = '" + ersReimbursement.getReimbursementTypeId().ordinal()+1 + "' "
+                    + "WHERE reimb_id = '" + ersReimbursement.getId() + "' ";
 
             // second parameter here is used to indicate column names that will have generated values
             PreparedStatement pstmt = conn.prepareStatement(sql);

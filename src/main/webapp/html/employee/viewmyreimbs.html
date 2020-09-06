@@ -4,18 +4,21 @@
     <meta charset="ISO-8859-1"><title>Home Page</title>
     <script src="jquery-3.5.1.min.js"></script>
 </head>
+<!-- I don't actually link this anywhere, it is here to test out other things -->
+
 <body>
 <div class="employee-container">
-    <h4>Here are your reimbursements (under construction)...</h4>
-        <table class="employee-container">
-            <tr class="employee-container">
-                <th>username</th>
-                <th>firstName</th>
-                <th>lastName</th>
-                <th>email</th>
-            </tr>
+    <h4>Tester HTML doc</h4>
 
-        </table>
+        <form method="post" action="/farren_springer_p1/api/choseToEdit">
+            <p>Enter the ID number of the reimbursement you would like it edit</p>
+            <input placeholder="enter the ID of the reimbursement to view/edit" name="reimbIdChosenByEmployee"/><br>
+            <p>Enter either update or remove to edit your reimbursement</p>
+            <p>(If you wish to go back to your dashboard, type back)</p>
+            <input placeholder="Enter text" name="choseToEditEmployee"/><br>
+            <input type="submit" value="Choose"/><br>
+        </form>
+    
 
 
 </div>

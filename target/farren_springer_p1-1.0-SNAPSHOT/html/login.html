@@ -5,16 +5,26 @@
     <title>Login</title>
 </head>
 <body>
-<div class="login-container">
+<div class="login-box">
     <!-- FRONT CONTROLLER EXAMPLE -->
     <h3>Login Page</h3>
 
     <!-- action corresponds to getRequestURL in RequestHelper -->
-    <form method="post" action="/farren_springer_p1/api/login">
+    <form method="post" action="/farren_springer_p1/api/login" class="login-form">
         <p>Please Log in</p>
-        <input placeholder="enter username" name="username"/><br>
-        <input placeholder="enter password" name="password"/><br>
-        <input type="submit" value="Login"/><br>
+        <div class="form-input-material">
+            <input class="form-control-material" placeholder=" " 
+            name="username" required />
+            <label for="username">Username</label>
+            <br>
+        </div>
+        <div class="form-input-material">
+            <input class="form-control-material" placeholder=" " 
+            name="password" required />
+            <label for="password">Password</label>
+        </div>
+        <button type="submit" class="btn btn-primary btn-ghost">Login</button>
+        <!-- <input type="submit" value="Login"/><br> -->
     </form>
 
     <!-- JSON button example -->
