@@ -132,6 +132,10 @@ public class ViewAllByStatusServlet extends HttpServlet {
                     + reimbService.getAllReimbsByStatus(statusChoiceNum) + "</b><br>");
 
             System.out.println("Hmm");
+
+            out.println("<form method=\"post\" action=\"/farren_springer_p1/api/home\" class=\"any\">\n" +
+                    "        <input type = \"submit\" value=\"Go Back\" class=\"any\"><br>\n" +
+                    "    </form>");
         } else {
             out.println("Can't find you");
         }

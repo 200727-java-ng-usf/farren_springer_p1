@@ -64,6 +64,9 @@ public class ViewYourReimbsServlet extends HttpServlet {
                     "            <input placeholder=\"Enter text\" name=\"choseToEditEmployee\"/><br>\n" +
                     "            <input type=\"submit\" value=\"Choose\"/><br>\n" +
                     "        </form>");
+            out.println("<form method=\"post\" action=\"/farren_springer_p1/api/home\" class=\"any\">\n" +
+                    "        <input type = \"submit\" value=\"Go Back\" class=\"any\"><br>\n" +
+                    "    </form>");
             out.println("<b>\tYour Reimbursements: " + reimbRepo.findAllReimbsByAuthorId(ersUser.getId()) + "</b><br>");
 
         } else {

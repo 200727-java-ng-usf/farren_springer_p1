@@ -87,6 +87,9 @@ public class ViewAllReimbsServlet extends HttpServlet {
             out.println("<form action=\"/farren_springer_p1/html/fmanager/typeorstatus.html\">\n" +
                     "        <input type=\"submit\" value=\"Choose a Filter\">\n" +
                     "    </form>");
+            out.println("<form method=\"post\" action=\"/farren_springer_p1/api/home\" class=\"any\">\n" +
+                    "        <input type = \"submit\" value=\"Go Back\" class=\"any\"><br>\n" +
+                    "    </form>");
             out.println("<b>\tAll Reimbursements: " + reimbService.getAllReimbs() + "</b><br>");
 
         } else {
