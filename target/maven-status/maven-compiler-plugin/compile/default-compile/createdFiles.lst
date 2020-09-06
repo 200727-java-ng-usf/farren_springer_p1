@@ -12,12 +12,9 @@ com\revature\ers\servlets\ViewAllReimbsServlet.class
 com\revature\ers\controllers\LoginController.class
 com\revature\ers\controllers\employee\RemoveReimbController.class
 com\revature\ers\controllers\employee\UpdateReimbController.class
-com\revature\ers\controllers\FinanceManagerController.class
 com\revature\ers\sessionservlet\SessionServlet.class
 com\revature\ers\controllers\LoginController$1.class
 com\revature\ers\controllers\employee\SubmitController.class
-com\revature\ers\controllers\AdminController.class
-com\revature\ers\controllers\EmployeeController.class
 com\revature\ers\util\AppState.class
 com\revature\ers\servlets\ViewYourReimbsServlet.class
 com\revature\ers\controllers\HomeController.class

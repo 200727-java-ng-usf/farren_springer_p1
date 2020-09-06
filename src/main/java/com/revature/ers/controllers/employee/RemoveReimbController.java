@@ -9,66 +9,40 @@ import com.revature.ers.repos.UserRepository;
 import com.revature.ers.services.ReimbService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.Date;
 
 public class RemoveReimbController {
 
+    public static String removeReimb(HttpServletRequest req) throws IOException {
 
-//    private static ReimbRepository reimbRepo = new ReimbRepository();
-//    private static ReimbService reimbService = new ReimbService(reimbRepo);
-//
-//
-//    public static String removeReimb(HttpServletRequest req) {
-//
-//
-//        UserRepository userRepo = new UserRepository();
-//
-//        System.out.println("In removeReimb method in RemoveReimbController in employee package");
-//
-//        if(!req.getMethod().equals("POST")) {
-//            return "/html/employee/removereimb.html";
+        ReimbRepository reimbRepo = new ReimbRepository();
+
+        System.out.println("In removeReimb method in RemoveReimb Controller");
+
+
+//        if (!req.getMethod().equals("POST")) {
+//            System.out.println("requested get method");
+//            return "/html/employee/reimbwasremoved.html";
 //        }
-//
-//        System.out.println("Still here");
-//
-//        // acquire the form data
-//        String reimbIdChosenByEmployee = req.getParameter("reimbIdChosenByEmployee");
-//        System.out.println("Parameter was: " + reimbIdChosenByEmployee);
-//        String choseToEditEmployee = req.getParameter("choseToEditEmployee");
-//        System.out.println("Parameter was: " + choseToEditEmployee);
-//
-//        // Re-cast anything necessary
-//        // Integer reimbIdChosenByEmployeeAsInt = Integer.parseInt(reimbIdChosenByEmployee);
-//
-//        try {
-//
-//            req.getSession().setAttribute("loggedReimbIdChosenByEmployee", reimbIdChosenByEmployee);
-//            System.out.println("Attribute set!");
-//            req.getSession().setAttribute("loggedChoseToEditEmployee", choseToEditEmployee);
-//            System.out.println("Attribute set!");
-//
-//            // switch case here. Switch based on choice to update, remove, or go back
-//            switch(choseToEditEmployee) {
-//                case "update":
-//                    System.out.println("in update case");
-//                    return "/html/employee/updatereimb.html";
-//                case "remove":
-//                    System.out.println("in remove case");
-//                    return "/api/removeReimb";
-//                case "back":
-//                    System.out.println("in back case");
-//                    return "/html/employee/employeedash.html";
-//                default:
-//                    return "/html/badlogin.html";
-//            }
-//
-//        } catch (NullPointerException npe) {
-//            npe.printStackTrace();
-//            return "/api/badlogin.html";
-//        }
-//
-//
-//
-//    }
+
+        try {
+
+            System.out.println("In try in removeReimb method in RemoveReimbController");
+
+//            ErsReimbursement ersReimbursement = reimbRepo.findById()
+//                    .orElseThrow(NullPointerException::new);
+            reimbRepo.deleteById(Integer.parseInt(String.valueOf(req.getSession().getAttribute("loggedReimbIdChosenByEmployee"))));
+            System.out.println("reimb should be deleted");
+
+            return "/html/employee/reimbwasremoved.html";
+
+        } catch (AuthenticationException e) {
+            e.printStackTrace();
+            return "/html/badlogin.html";
+        }
+
+
+    }
 }

@@ -3,7 +3,6 @@ package com.revature.ers.servlets;
 import com.revature.ers.controllers.HomeController;
 import com.revature.ers.controllers.LoginController;
 import com.revature.ers.controllers.admin.*;
-import com.revature.ers.controllers.EmployeeController;
 import com.revature.ers.controllers.employee.*;
 import com.revature.ers.controllers.employee.ViewAllReimbsController;
 import com.revature.ers.controllers.fmanager.DirectFromFilterChoiceController;
@@ -21,6 +20,7 @@ public class RequestHelper {
     public static String process(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
         System.out.println("THIS is the current URI active: " + req.getRequestURI());
+        System.out.println("In process in RequestHelper");
 
         /**
          * Switch cases for possible wildcard "*" after api/ in url path
@@ -62,15 +62,13 @@ public class RequestHelper {
             case "/farren_springer_p1/api/submitform":
                 System.out.println("in submitform case");
                 return SubmitController.submit(req);
-            case "/farren_springer_p1/api/employee":
-                System.out.println("in employee case");
-                return EmployeeController.displayDash(req, resp);
             case "/farren_springer_p1/api/chooseToEdit":
                 return ChooseToEditController.chooseToEdit(req);
             case "/farren_springer_p1/api/updateReimb":
                 return UpdateReimbController.updateReimb(req);
-//            case "/farren_springer/api/removeReimb:":
-//                return RemoveReimbController.removeReimb(req);
+            case "/farren_springer_p1/api/removeReimb":
+                System.out.println("in remove reimb case");
+                return RemoveReimbController.removeReimb(req);
 
             default:
                 System.out.println("in default");

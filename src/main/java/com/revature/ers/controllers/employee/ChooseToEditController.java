@@ -59,6 +59,7 @@ public class ChooseToEditController {
                     System.out.println("in back case");
                     return "/html/employee/employeedash.html";
                 default:
+                    System.out.println("in default");
                     return "/html/badlogin.html";
             }
 

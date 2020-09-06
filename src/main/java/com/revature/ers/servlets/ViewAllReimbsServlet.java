@@ -42,10 +42,14 @@ public class ViewAllReimbsServlet extends HttpServlet {
         if(ersUser != null) {
             out.println("This is text!");
 
-            out.println("<h1>Name: " + ersUser.getFirstName() + " " + ersUser.getLastName() + "</h1><br>");
-            out.println("<b>\tEmail: " + ersUser.getEmail() + "</b><br>");
-            out.println("<i>\tRole: " + ersUser.getRole() + "</i><br>");
-            out.println("<b>\tAll Reimbursements: " + reimbService.getAllReimbs() + "</b><br>");
+            /**
+             * Use the same format from update reimbursement by employee
+             * here. Fmanagers are doing the same thing but updating the status,
+             * resolver_id and resolved timestamp of the reimbursement instead.
+             *
+             * Receipt(?)
+             */
+
             out.println("<div class =\"any\">\n" +
                     "    <h1>Here are all reimbursements (under construction)...</h1>\n" +
                     "\n" +
@@ -65,6 +69,12 @@ public class ViewAllReimbsServlet extends HttpServlet {
                     "</div>\n" +
                     "\n" +
                     "<div id=\"financemanager-container\" class=\"financemanager-container\"></div>");
+
+            out.println("<h1>Name: " + ersUser.getFirstName() + " " + ersUser.getLastName() + "</h1><br>");
+            out.println("<b>\tEmail: " + ersUser.getEmail() + "</b><br>");
+            out.println("<i>\tRole: " + ersUser.getRole() + "</i><br>");
+            out.println("<b>\tAll Reimbursements: " + reimbService.getAllReimbs() + "</b><br>");
+
         } else {
             out.println("Can't find you");
         }

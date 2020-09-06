@@ -85,7 +85,7 @@ public class UpdateReimbController {
 
         } catch (AuthenticationException e) {
             e.printStackTrace();
-            return "/api/badlogin.html";
+            return "/html/badlogin.html";
         }
 
     }

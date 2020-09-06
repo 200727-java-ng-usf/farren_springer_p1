@@ -22,6 +22,15 @@ import static com.revature.ers.services.UserService.app;
 @WebServlet("/viewYourReimbs")
 public class ViewYourReimbsServlet extends HttpServlet {
 
+    /**
+     * Check that the reimbursement is PENDING,
+     * Or only show pending reimbursements/have a different
+     * servlet to show reimbursements that are already
+     * approved/denied. Right now, an employee can update
+     * regardless.
+     *
+     */
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
