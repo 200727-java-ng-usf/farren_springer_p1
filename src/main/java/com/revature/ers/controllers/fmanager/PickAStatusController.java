@@ -35,7 +35,7 @@ public class PickAStatusController {
             req.getSession().setAttribute("loggedStatusChoice", statusChoice);
             System.out.println("attribute set...");
 
-            return "/viewallbystatus"; // TODO why this does not map to servlet
+            return "/html/fmanager/viewstatus.html";
 
         } catch (AuthenticationException e) {
             e.printStackTrace();

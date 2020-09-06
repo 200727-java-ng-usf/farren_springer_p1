@@ -62,7 +62,7 @@ public class ViewAllReimbsServlet extends HttpServlet {
                     "        </form>");
 
             out.println("<div class =\"any\">\n" +
-                    "    <h1>Here are all reimbursements (under construction)...</h1>\n" +
+                    "    <h1 class=\"any\">Here are all reimbursements</h1>\n" +
                     "\n" +
                     "    \n" +
                     "    <form>\n" +
@@ -81,7 +81,7 @@ public class ViewAllReimbsServlet extends HttpServlet {
                     "\n" +
                     "<div id=\"financemanager-container\" class=\"financemanager-container\"></div>");
 
-            out.println("<h1>Name: " + ersUser.getFirstName() + " " + ersUser.getLastName() + "</h1><br>");
+            out.println("<h1 class=\"any\">Name: " + ersUser.getFirstName() + " " + ersUser.getLastName() + "</h1><br>");
             out.println("<b>\tEmail: " + ersUser.getEmail() + "</b><br>");
             out.println("<i>\tRole: " + ersUser.getRole() + "</i><br>");
             out.println("<form action=\"/farren_springer_p1/html/fmanager/typeorstatus.html\">\n" +
@@ -110,6 +110,7 @@ public class ViewAllReimbsServlet extends HttpServlet {
                 "    document.querySelector(\"#financemanager-container\").innerHTML = message;\n" +
                 "}\n" +
                 "</script>");
+        out.println("<link rel=\"stylesheet\" href=\"../css/mystyles.css\">");
         out.println("</html>");
 //        out.println("</body></html>");
 

@@ -122,7 +122,7 @@ public class ReimbRepository implements CrudRepository<ErsReimbursement> {
          */
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = baseQuery + "WHERE reimb_type_id = ?";
+            String sql = "SELECT * FROM project1.ers_reimbursements er " + "WHERE reimb_type_id = ?";
 
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, typeChoice);
@@ -146,7 +146,7 @@ public class ReimbRepository implements CrudRepository<ErsReimbursement> {
          */
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = baseQuery + "WHERE reimb_status_id = ?";
+            String sql = "SELECT * FROM project1.ers_reimbursements er " + "WHERE reimb_status_id = ?";
 
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, statusChoice);

@@ -2,29 +2,36 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 3px solid blue;
+    border: 3px solid rgb(94, 7, 25);
+    border-width: 30px;
     text-align: center;
+    font-size: 60px;
 }
 .employee-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border: 3px solid rgb(233, 215, 111);
-    text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 3px solid rgb(57, 99, 104);
+  border-width: 30px;
+  text-align: center;
+  font-size: 60px;
 }
 .financemanager-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 3px solid rgb(141, 200, 207);
+    border: 3px solid rgb(161, 163, 28);
+    border-width: 30px;
     text-align: center;
     font-size: 60px;
 }
+
 .admin-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     border: 3px solid rgb(153, 17, 40);
+    border-width: 30px;
     text-align: center;
     font-size: 60px;
 }
@@ -53,9 +60,10 @@ input {
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 3px solid rgb(197, 38, 157);
+    border: 3px solid #381e08;
     text-align: center;
-    background-color: #b8267b;
+    background-color: #5f3310;
+    font-size: 40px;
 }
 .login-box {
     display: flex;

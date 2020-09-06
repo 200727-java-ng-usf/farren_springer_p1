@@ -7,17 +7,17 @@
 <body>
 <div class="admin-container">
     <!-- FRONT CONTROLLER EXAMPLE -->
-    <h3>Update Page</h3>
+    <h3 class="any">Update Page</h3>
 
     <!-- each action corresponds to a url-pattern of a SERVLET -->
-    <form method="post" action="/farren_springer_p1/api/update">
-        <p>Update a New User (under construction)...need to enter id first too...</p>
-        <input placeholder="enter username" name="username"/><br>
-        <input placeholder="enter password" name="password"/><br>
-        <input placeholder="enter first name" name="firstName"/><br>
-        <input placeholder="enter last name" name="lastName"/><br>
-        <input placeholder="enter email" name="email"/><br>
-        <input type="submit" value="Update"/><br>
+    <form method="post" action="/farren_springer_p1/api/update" class="any">
+        <p class="any">Update a New User (under construction)...need to enter id first too...</p>
+        <input placeholder="enter username" name="username" class="any"/><br>
+        <input placeholder="enter password" name="password" class="any"/><br>
+        <input placeholder="enter first name" name="firstName" class="any"/><br>
+        <input placeholder="enter last name" name="lastName" class="any"/><br>
+        <input placeholder="enter email" name="email" class="any"/><br>
+        <input type="submit" value="Update" class="any"/><br>
         <!-- could enter the user information first and THEN change the information. The current situation might cause problems-->
         <!-- one solution might be to find the user first and enter their ID to update them -->
     </form>

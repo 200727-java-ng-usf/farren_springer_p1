@@ -34,7 +34,7 @@ public class RequestHelper {
                 return LoginController.login(req, resp);
             case "/farren_springer_p1/api/home":
                 System.out.println("in home case");
-                return HomeController.home();
+                return HomeController.home(req, resp);
             /**
              * Admin cases
              */

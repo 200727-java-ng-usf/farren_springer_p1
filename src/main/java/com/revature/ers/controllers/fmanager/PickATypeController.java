@@ -35,7 +35,7 @@ public class PickATypeController {
             req.getSession().setAttribute("loggedTypeChoice", typeChoice);
             System.out.println("attribute set...in PickATypeController");
 
-            return "/viewallbytype"; // TODO why this does not map to servlet
+            return "/html/fmanager/viewtype.html";
 
         } catch (AuthenticationException e) {
             e.printStackTrace();

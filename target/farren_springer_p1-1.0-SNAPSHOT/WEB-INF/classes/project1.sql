@@ -7,21 +7,18 @@ grant all privileges
 on database postgres
 to revabank_app;
 
+drop table ers_reimbursements;
+drop table ers_reimbursement_statuses;
+drop table ers_reimbursement_types;
+drop table ers_users;
+drop table ers_user_roles;
+
 CREATE USER project1_app
 WITH password 'revature';
 
 GRANT ALL PRIVILEGES
 ON database postgres
 TO project1_app;
-
--- create table for roles
-CREATE TABLE ers_user_roles(
-	role_id 			serial,
-	role_name 			varchar(10) UNIQUE,
-	
-	CONSTRAINT ers_user_roles_pk
-	PRIMARY KEY (role_id)
-);
 
 -- create table for types
 CREATE TABLE ers_reimbursement_types(
@@ -30,6 +27,15 @@ CREATE TABLE ers_reimbursement_types(
 	
 	CONSTRAINT types_pk
 	PRIMARY KEY (reimb_type_id)
+);
+
+-- create table for roles
+CREATE TABLE ers_user_roles(
+	role_id 			serial,
+	role_name 			varchar(10) UNIQUE,
+	
+	CONSTRAINT ers_user_roles_pk
+	PRIMARY KEY (role_id)
 );
 
 -- create table for status
@@ -96,6 +102,26 @@ CREATE TABLE ers_reimbursements(
 insert into ers_user_roles (role_name)
 values ('Admin'), ('FinManager'), ('Employee');
 
+-- make sure user roles are 1, 2, and 3
+update ers_user_roles 
+set role_id = 1
+where role_name = 'Admin';
+
+update ers_user_roles 
+set role_id = 2
+where role_name = 'FinManager';
+
+update ers_user_roles 
+set role_id = 3
+where role_name = 'Employee';
+
+-- create ers_reimbursement_types values
+insert into ers_reimbursement_types (reimb_type)
+values ('Lodging'), ('Travel'), ('Food'), ('Other');
+
+-- create ers_reimbursement_statuses values
+insert into ers_reimbursement_statuses (reimb_status)
+values ('Pending'), ('Approved'), ('Denied');
 
 -- populate ers_users table with some dummy data
 insert into ers_users (username, password, first_name, last_name, email, user_role_id)
@@ -112,13 +138,6 @@ values
 	(50, 'Olive Garden', 'more receipt text here', 8, 6, 1, 3),
 	(350, 'SouthWest Airlines', 'even more receipt text here', 8, 6, 1, 2);
 
--- create ers_reimbursement_types values
-insert into ers_reimbursement_types (reimb_type)
-values ('Lodging'), ('Travel'), ('Food'), ('Other');
-
--- create ers_reimbursement_statuses values
-insert into ers_reimbursement_statuses (reimb_status)
-values ('Pending'), ('Approved'), ('Denied');
 
 -- more dummy ers_users
 insert into ers_users (username, password, first_name, last_name, email, user_role_id)
@@ -150,10 +169,10 @@ SELECT * FROM project1.ers_reimbursements er
             ON er.reimb_status_id = rs.reimb_status_id 
 where author_id = 7;
 
-UPDATE project1.ers_reimbursements 
-SET amount = '400', 
-submitted = '2020-09-01 13:53:41', 
-description = 'asdfjkl', 
-reimb_type_id = '3' 
-WHERE reimb_id = '7'; 
+--UPDATE project1.ers_reimbursements 
+--SET amount = '400', 
+--submitted = '2020-09-01 13:53:41', 
+--description = 'asdfjkl', 
+--reimb_type_id = '3' 
+--WHERE reimb_id = '7'; 
 
