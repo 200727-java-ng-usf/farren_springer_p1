@@ -1,38 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <div class ="admin">
-        <h1 class="any">Edit User Page</h1>
-    
-        
-        <form method="post" action="/farren_springer_p1/api/updateOrDelete" class="any">
-            <input placeholder="enter update or delete" name="updateOrDeleteChoice" class="any"/><br>
-            <input type="submit" value="Choose" class="any"/><br>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        <header>
+            <div>
+                <a href="/farren_springer_p1/html/login.html">Sign Out</a>
+            </div>
+        </header>
+        <div class="admin-container">
+            <h4 class="any">Edit User</h4>
+            
+            <nav>
+                <ul>
+                    <li><a href="#">Choose an Option</a>
+                        <ul>
+                            <li><a href="/farren_springer_p1/api/update">Update User</a></li>
+                            <li><a href="/farren_springer_p1/api/delete">Delete User</a></li>
+                            
+                            <!-- <li><a href="/farren_springer_p1/html/login.html">Sign Out</a></li> -->
+                        </ul>
+                    </li>
+                    
+                </ul>
+            </nav>
+            
+        </div>
+        <div>
+            <a href="/farren_springer_p1/api/home">Go Back</a>
+        </div>
+    </body>
+<link rel="stylesheet" href="../css/mystyles.css">
+</html>
+
+
+
+
+
+
+
+
+
+
+<!-- <div class ="admin-container">
+            <h1 class="any">Edit User Page</h1>
+            <form method="post" action="/farren_springer_p1/api/updateOrDelete" class="any">
+                <input placeholder="enter update or delete" name="updateOrDeleteChoice" class="any"/><br>
+                <input type="submit" value="Choose" class="any"/><br>
+            </form>
+            <br>
+            <form method="post" action="/farren_springer_p1/api/home" class="any">
+                <input type = "submit" value="Go Back" class="any"><br>
+            </form>
+        </div> -->
+
+
+
+
 <!--        <label for="updateordelete">Choose an Option:</label>-->
-<!--    -->
-<!--        <select id="updateordelete" name="updateOrDeleteChoice">-->
-<!--            <option value="update">Update</option>-->
-<!--            <option value="delete">Delete</option>-->
-<!--        </select>-->
-<!--        <br>-->
-<!--             <button type="button">Choose</button>-->
-        </form>
-        <form method="post" action="/farren_springer_p1/api/home" class="any">
-            <input type = "submit" value="Go Back" class="any"><br>
-        </form>
-    
-    
-    </div>
-    
-    <div id="financemanager-container" class="admin-container"></div>
-    
-</body>
-<!-- <script>
+    <!--    -->
+    <!--        <select id="updateordelete" name="updateOrDeleteChoice">-->
+    <!--            <option value="update">Update</option>-->
+    <!--            <option value="delete">Delete</option>-->
+    <!--        </select>-->
+    <!--        <br>-->
+    <!--             <button type="button">Choose</button>-->
+
+
+    <!-- <div id="financemanager-container" class="admin-container"></div> -->
+
+
+    <!-- <script>
     function returnAMessageAdmin() {
     var selection = document.querySelector("#updateordelete").value;
     var message;
@@ -45,5 +86,3 @@
     document.querySelector("#financemanager-container").innerHTML = message;
 }
 </script> -->
-<link rel="stylesheet" href="../css/mystyles.css">
-</html>

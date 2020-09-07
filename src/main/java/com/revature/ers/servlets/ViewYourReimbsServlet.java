@@ -60,7 +60,7 @@ public class ViewYourReimbsServlet extends HttpServlet {
                     "            <p>Enter the ID number of the reimbursement you would like it edit</p>\n" +
                     "            <input placeholder=\"enter the ID of the reimbursement to view/edit\" name=\"reimbIdChosenByEmployee\"/><br>\n" +
                     "            <p>Enter either update or remove to edit your reimbursement</p>\n" +
-                    "            <p>(If you wish to go back to your dashboard, type back)</p>\n" +
+//                    "            <p>(If you wish to go back to your dashboard, type back)</p>\n" + // button to go back. Don't need this.
                     "            <input placeholder=\"Enter text\" name=\"choseToEditEmployee\"/><br>\n" +
                     "            <input type=\"submit\" value=\"Choose\"/><br>\n" +
                     "        </form>");

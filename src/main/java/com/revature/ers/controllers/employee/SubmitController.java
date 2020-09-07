@@ -75,7 +75,7 @@ public class SubmitController {
             System.out.println("Attributes set...");
 
 
-            return "/html/employeedash.html";
+            return "/html/employee/employeedash.html";
 
         } catch (AuthenticationException e) {
             e.printStackTrace();

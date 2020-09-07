@@ -1,36 +1,43 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="ISO-8859-1">
-    <title>FindUser</title>
-    
-</head>
-<body>
-<div class="admin-container">
-    <!-- FRONT CONTROLLER EXAMPLE -->
-    <h3 class="any">Find Target User Page</h3>
+    <head>
+        <meta charset="ISO-8859-1">
+        <title>FindUser</title>
+        <link rel="stylesheet" href="../../css/mystyles.css">
+    </head>
+    <body>
+        <header>
+            <div>
+                <a href="/farren_springer_p1/html/login.html">Sign Out</a>
+            </div>
+        </header>
+        <div class="admin-container">
+            <h3 class="any">Find Target User Page</h3>
+            <form method="post" action="/farren_springer_p1/api/findUser" class="any">
+                <!-- <p class="findUser">Please Enter User Information</p> -->
+                <input placeholder="Enter Id of User" name="userIdToEdit" class="any"/><br>
+                <input type="submit" value="Find" class="any"/><br>
+            </form>
+            <br>
+        </div>
+        <div>
+            <a href="/farren_springer_p1/api/home">Go Back</a>
+        </div>
+    </body>
 
-    <form method="post" action="/farren_springer_p1/api/findUser" class="any">
-        <p class="any">Please Enter the User Information</p>
-        <input placeholder="Enter Id of User" name="userIdToEdit" class="any"/><br>
-        <input type="submit" value="Find" class="any"/><br>
-    </form>
-    <form method="post" action="/farren_springer_p1/api/home" class="any">
-        <input type = "submit" value="Go Back" class="any"><br>
-    </form>
-
-    <!-- JSON button example -->
-    <!--    <form method="post" action="/anotherexample/json/dannyboy">-->
-    <!--        <p>Json Servlet Button</p>-->
-    <!--        <input type="submit" value="Find Danny Boy"/>-->
-    <!--    </form>-->
-    <!--    <form method="post" action="/anotherexample/json/mars">-->
-    <!--        <p>Json Servlet Button</p>-->
-    <!--        <input type="submit" value="Find Mars"/>-->
-    <!--    </form>-->
-
-
-</div>
-</body>
-<link rel="stylesheet" href="../css/mystyles.css">
 </html>
+
+
+<!-- Experimenting -->
+<!-- <div class="wrapper">
+            <form method="post" action="/farren_springer_p1/api/findUser" class="find-form">
+                <div class="input-fields">
+                    <input type="text" class="input" placeholder="User ID">
+                    <input type="submit" value="Find" class="btnForFindUser"/><br>
+                 <div class="btnForFindUser">Find</div> 
+                </div>
+            </form>
+            <form method="post" action="/farren_springer_p1/api/home" class="find-form">
+                    <input type = "submit" value="Go Back" class="btnForFindUser"><br>
+            </form>
+        </div> --> 

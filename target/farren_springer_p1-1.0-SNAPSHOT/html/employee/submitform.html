@@ -1,39 +1,45 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="ISO-8859-1">
-    <title>Login</title>
-</head>
-<body>
-<div class="employee-container">
-    <!-- FRONT CONTROLLER EXAMPLE -->
-    <h3 class="any">Submit Form</h3>
-    <h3 class="any">Enter 1 for Lodging, 2 for Travel, 3 for Food, and 4 for Other</h3>
+    <head>
+        <meta charset="ISO-8859-1">
+        <title>Login</title>
+        
+    </head>
+    <body>
+        <header>
+            <div>
+                <a href="/farren_springer_p1/html/login.html">Sign Out</a>
+            </div>
+        </header>
 
-    <form method="post" action="/farren_springer_p1/api/submitform" class="any">
-        <p class="any">Submit Form</p>
-        <p class="any">Connected to DB</p>
-        <input placeholder="enter amount" name="amount" class="any"/><br>
-        <input placeholder="enter type" name="reimb_type_id" class="any"/><br>
-        <input placeholder="enter description" name="description" class="any"/><br>
-        <input type="submit" value="Submit" class="any"/><br>
-    </form>
-    <form method="post" action="/farren_springer_p1/api/home" class="any">
-        <input type = "submit" value="Go Back" class="any"><br>
-    </form>
+        <div class="employee-container">
+            <h3 class="any">Submit Form</h3>
+            <h3 class="any">Enter 1 for Lodging, 2 for Travel, 3 for Food, and 4 for Other</h3>
 
-<!--    &lt;!&ndash; JSON button example &ndash;&gt;-->
-<!--    <form method="post" action="/anotherexample/json/dannyboy">-->
-<!--        <p>Json Servlet Button</p>-->
-<!--        <input type="submit" value="Find Danny Boy"/>-->
-<!--    </form>-->
-<!--    <form method="post" action="/anotherexample/json/mars">-->
-<!--        <p>Json Servlet Button</p>-->
-<!--        <input type="submit" value="Find Mars"/>-->
-<!--    </form>-->
+            <form method="post" action="/farren_springer_p1/api/submitform" class="any">
+                <p class="any">Submit Form</p>
+                <p class="any">Connected to DB</p>
+                <input placeholder="enter amount" name="amount" class="any"/><br>
+                <input placeholder="enter type" name="reimb_type_id" class="any"/><br>
+                <input placeholder="enter description" name="description" class="any"/><br>
+                <input type="submit" value="Submit" class="any"/><br>
+            </form>
+        </div>
+        <div>
+            <a href="/farren_springer_p1/api/home">Go Back</a>
+        </div>
 
-
-</div>
-</body>
-<link rel="stylesheet" href="../css/mystyles.css">
+    </body>
+    <link rel="stylesheet" href="../css/mystyles.css">
 </html>
+
+<!-- For Reference: -->
+<!--    &lt;!&ndash; JSON button example &ndash;&gt;-->
+        <!--    <form method="post" action="/anotherexample/json/dannyboy">-->
+        <!--        <p>Json Servlet Button</p>-->
+        <!--        <input type="submit" value="Find Danny Boy"/>-->
+        <!--    </form>-->
+        <!--    <form method="post" action="/anotherexample/json/mars">-->
+        <!--        <p>Json Servlet Button</p>-->
+        <!--        <input type="submit" value="Find Mars"/>-->
+        <!--    </form>-->

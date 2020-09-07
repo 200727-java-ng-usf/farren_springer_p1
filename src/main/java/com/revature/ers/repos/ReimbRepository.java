@@ -189,6 +189,29 @@ public class ReimbRepository implements CrudRepository<ErsReimbursement> {
         return reimbs;
     }
 
+    public Set<ErsReimbursement> findAllPendingReimbsByAuthorId(Integer authorId) {
+
+        System.out.println("In findAllPendingReimbsByAuthorId method in ReimbRepository");
+
+        Set<ErsReimbursement> reimbs = new HashSet<>();
+
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            String sql = "SELECT * FROM project1.ers_reimbursements er " + "WHERE author_id = ? AND reimb_status_id = 1";
+
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, authorId);
+
+            ResultSet rs = pstmt.executeQuery();
+            reimbs = mapResultSet(rs);
+
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
+
+        return reimbs;
+    }
+
     /**
      * READ operation (Persistence Layer)
      * @param id

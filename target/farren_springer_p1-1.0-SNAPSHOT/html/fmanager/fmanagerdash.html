@@ -1,20 +1,45 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="ISO-8859-1"><title>Home Page</title>
-</head>
-<body>
-<div class="financemanager-container">
-    <h4>Welcome to the Financial Manager Dashboard...</h4>
-    <form action="/farren_springer_p1/viewReimbs" class="any">
-        <div class="any">
-            <input type="submit" value="View Reimbursements" class="any">
+    <head>
+        <meta charset="ISO-8859-1"><title>Home Page</title>
+    </head>
+    <body>
+
+        <header>
+            <div>
+                <a href="/farren_springer_p1/html/login.html">Sign Out</a>
+            </div>
+        </header>
+
+        <div class="financemanager-container">
+            <h4 class="any">Welcome to the Finance Manager Dashboard...</h4>
+            
+            <nav>
+                <ul>
+                    <li><a href="#">Reimbursements</a>
+                        <ul>
+                            <li><a href="/farren_springer_p1/viewPendingReimbs">View All Requests</a></li>
+                            <li><a href="/farren_springer_p1/viewReimbs">View All Reimbursements</a></li>
+                            <!-- TODO link all past history link to Dashboard -->
+                            <!-- <li><a href=" ">View All Past History</a></li> -->
+                            <!-- <li><a href="/farren_springer_p1/html/login.html">Sign Out</a></li> -->
+                        </ul>
+                    </li>
+                    
+                </ul>
+            </nav>
+            
         </div>
-        
-    </form>
 
-</div>
+        <!-- <div class="financemanager-container">
+            <h4>Welcome to the Financial Manager Dashboard...</h4>
+            <form action="/farren_springer_p1/viewReimbs" class="any">
+                <div class="any">
+                    <input type="submit" value="View Reimbursements" class="any">
+                </div>
+            </form>
+        </div> -->
 
-</body>
+    </body>
 <link rel="stylesheet" href="../css/mystyles.css">
 </html>

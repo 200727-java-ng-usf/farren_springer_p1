@@ -1,22 +1,37 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="ISO-8859-1"><title>Home Page</title>
+    <head>
+        <meta charset="ISO-8859-1"><title>Home Page</title>
 
-</head>
-<body>
-<div class="employee-container">
-    <h4 class="any">Welcome to the Employee Dashboard...</h4>
-<!--    <form action="employeeWelcome">-->
-    <form action="/farren_springer_p1/viewYourReimbs" class="any">
-        <input type="submit" value="View Reimbursements" class="any">
-    </form>
-    <form action="/farren_springer_p1/html/submitform.html" class="any">
-        <input type="submit" value="Submit a Reimbursement" class="any">
-    </form>
+    </head>
+    <body>
+        <header>
+            <div>
+                <a href="/farren_springer_p1/html/login.html">Sign Out</a>
+            </div>
+        </header>
 
-</div>
+        <div class="employee-container">
+            <h4 class="any">Welcome to the Employee Dashboard...</h4>
+            
+            <nav>
+                <ul>
+                    <li><a href="#">Reimbursements</a>
+                        <ul>
+                            <li><a href="/farren_springer_p1/html/employee/submitform.html">Submit</a></li>
+                            <!-- "View Past Tickets" actually shows ALL of their reimbursements -->
+                            <li><a href="/farren_springer_p1/viewYourReimbs">View Past Tickets</a></li>
+                            <li><a href="/farren_springer_p1/viewYourPendingReimbs">View Pending</a></li>
+                            
+                            <!-- <li><a href="/farren_springer_p1/html/login.html">Sign Out</a></li> -->
+                        </ul>
+                    </li>
+                    
+                </ul>
+            </nav>
+            
+        </div>
 
-</body>
-<link rel="stylesheet" href="../css/mystyles.css">
+    </body>
+    <link rel="stylesheet" href="../css/mystyles.css">
 </html>

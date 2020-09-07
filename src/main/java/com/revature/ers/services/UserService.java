@@ -126,12 +126,12 @@ public class UserService {
             throw new InvalidRequestException("User not found...");
         }
 
-        ersUser.setUsername(ersUser.getUsername());
-        ersUser.setPassword(ersUser.getPassword());
-        ersUser.setFirstName(ersUser.getFirstName());
-        ersUser.setLastName(ersUser.getLastName());
-        ersUser.setEmail(ersUser.getEmail());
-        ersUser.setRole(ersUser.getRole());
+//        ersUser.setUsername(ersUser.getUsername());
+//        ersUser.setPassword(ersUser.getPassword());
+//        ersUser.setFirstName(ersUser.getFirstName());
+//        ersUser.setLastName(ersUser.getLastName());
+//        ersUser.setEmail(ersUser.getEmail());
+//        ersUser.setRole(ersUser.getRole());
         userRepo.update(ersUser);
     }
 

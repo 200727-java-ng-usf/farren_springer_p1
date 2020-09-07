@@ -1,41 +1,48 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="ISO-8859-1">
-    <title>Login</title>
-</head>
-<body>
-<div class="admin-container">
-    <!-- FRONT CONTROLLER EXAMPLE -->
-    <h3 class="any">Login Page</h3>
+    <head>
+        <meta charset="ISO-8859-1">
+        <title>Login</title>
+        <link rel="stylesheet" href="../css/mystyles.css">
+    </head>
+    <body>
+        <div class="admin-container">
+            <!-- FRONT CONTROLLER EXAMPLE -->
+            <h3 class="any">Login Page</h3>
 
-    <!-- each action corresponds to a url-pattern of a SERVLET -->
-    <form method="post" action="/farren_springer_p1/api/register" class="any">
-        <p class="any">Register a New Employeeeeeee</p>
-        <p class="any">Connected to DB</p>
-        <input placeholder="enter username" name="username" class="any"/><br>
-        <input placeholder="enter password" name="password" class="any"/><br>
-        <input placeholder="enter first name" name="firstName" class="any"/><br>
-        <input placeholder="enter last name" name="lastName" class="any"/><br>
-        <input placeholder="enter email" name="email" class="any"/><br>
-        <input type="submit" value="Register" class="any"/><br>
-    </form>
-    <form method="post" action="/farren_springer_p1/api/home" class="any">
-        <input type = "submit" value="Go Back" class="any"><br>
-    </form>
-
-    <!-- JSON button example -->
-    <!--    <form method="post" action="/anotherexample/json/dannyboy">-->
-    <!--        <p>Json Servlet Button</p>-->
-    <!--        <input type="submit" value="Find Danny Boy"/>-->
-    <!--    </form>-->
-    <!--    <form method="post" action="/anotherexample/json/mars">-->
-    <!--        <p>Json Servlet Button</p>-->
-    <!--        <input type="submit" value="Find Mars"/>-->
-    <!--    </form>-->
-
-
-</div>
-</body>
-<link rel="stylesheet" href="../css/mystyles.css">
+            <!-- each action corresponds to a url-pattern of a SERVLET -->
+            <form method="post" action="/farren_springer_p1/api/register" class="any">
+                <p class="any">Register a New Employeeeeeee</p>
+                <p class="any">Connected to DB</p>
+                <input placeholder="enter username" name="username" class="any"/><br>
+                <input placeholder="enter password" name="password" class="any"/><br>
+                <input placeholder="enter first name" name="firstName" class="any"/><br>
+                <input placeholder="enter last name" name="lastName" class="any"/><br>
+                <input placeholder="enter email" name="email" class="any"/><br>
+                <input type="submit" value="Register" class="any"/><br>
+            </form>
+            <form method="post" action="/farren_springer_p1/api/home" class="any">
+                <input type = "submit" value="Go Back" class="any"><br>
+            </form>
+        </div>
+        <div>
+            <a href="/farren_springer_p1/api/home">Go Back</a>
+        </div>
+    </body>
 </html>
+
+
+
+
+
+
+
+<!-- JSON button example -->
+            <!--    <form method="post" action="/anotherexample/json/dannyboy">-->
+            <!--        <p>Json Servlet Button</p>-->
+            <!--        <input type="submit" value="Find Danny Boy"/>-->
+            <!--    </form>-->
+            <!--    <form method="post" action="/anotherexample/json/mars">-->
+            <!--        <p>Json Servlet Button</p>-->
+            <!--        <input type="submit" value="Find Mars"/>-->
+            <!--    </form>-->

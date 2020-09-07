@@ -23,54 +23,49 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="acd0345a-037a-4ae4-bb0f-bf52e2b6afbe" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/servlets/ViewAllPendingReimbsServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/servlets/ViewYourPendingReimbsServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/controllers/employee/ViewMyReimbsController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/servlets/ViewAllByStatusServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/servlets/ViewAllByStatusServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/servlets/ViewAllByTypeServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/servlets/ViewAllByTypeServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/controllers/admin/UpdateUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/controllers/admin/UpdateUserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/controllers/employee/SubmitController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/controllers/employee/SubmitController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/repos/ReimbRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/repos/ReimbRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/services/UserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/servlets/ViewAllReimbsServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/servlets/ViewAllReimbsServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/servlets/ViewYourReimbsServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/servlets/ViewYourReimbsServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/project1.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/project1.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/mystyles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/css/mystyles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/admin/admindash.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/admin/admindash.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/html/admin/finduser.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/admin/finduser.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/html/admin/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/admin/register.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/html/admin/updateordelete.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/admin/updateordelete.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/html/admin/updateuser.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/admin/updateuser.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/badlogin.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/badlogin.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/employee/employeedash.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/employee/employeedash.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/html/employee/submitform.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/employee/submitform.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/employee/updatereimb.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/employee/updatereimb.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/employee/viewDetails.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/employee/viewDetails.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/fmanager/approvereimb.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/fmanager/approvereimb.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/fmanager/denyreimb.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/fmanager/denyreimb.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/fmanager/status.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/fmanager/status.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/fmanager/type.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/fmanager/type.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/fmanager/typeorstatus.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/fmanager/typeorstatus.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/fmanager/viewallreimbs.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/fmanager/viewallreimbs.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/fmanager/viewstatus.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/fmanager/viewstatus.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/fmanager/viewtype.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/fmanager/viewtype.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/revature/ers/servlets/ViewAllByStatusServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/revature/ers/servlets/ViewAllByStatusServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/revature/ers/servlets/ViewAllByTypeServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/revature/ers/servlets/ViewAllByTypeServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/fmanager/fmanagerdash.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/fmanager/fmanagerdash.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/revature/ers/controllers/admin/UpdateUserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/revature/ers/controllers/admin/UpdateUserController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/revature/ers/controllers/employee/SubmitController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/revature/ers/controllers/employee/SubmitController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/revature/ers/repos/ReimbRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/revature/ers/repos/ReimbRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/revature/ers/services/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/revature/ers/services/UserService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/revature/ers/servlets/ViewAllReimbsServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/revature/ers/servlets/ViewAllReimbsServlet.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/revature/ers/servlets/ViewYourReimbsServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/revature/ers/servlets/ViewYourReimbsServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/project1.sql" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/project1.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT.war" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT.war" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/WEB-INF/classes/com/revature/ers/servlets/ViewAllByStatusServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/WEB-INF/classes/com/revature/ers/servlets/ViewAllByStatusServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/WEB-INF/classes/com/revature/ers/servlets/ViewAllByTypeServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/WEB-INF/classes/com/revature/ers/servlets/ViewAllByTypeServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/WEB-INF/classes/com/revature/ers/controllers/admin/UpdateUserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/WEB-INF/classes/com/revature/ers/controllers/admin/UpdateUserController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/WEB-INF/classes/com/revature/ers/controllers/employee/SubmitController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/WEB-INF/classes/com/revature/ers/controllers/employee/SubmitController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/WEB-INF/classes/com/revature/ers/repos/ReimbRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/WEB-INF/classes/com/revature/ers/repos/ReimbRepository.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/WEB-INF/classes/com/revature/ers/servlets/ViewAllReimbsServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/WEB-INF/classes/com/revature/ers/servlets/ViewAllReimbsServlet.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/WEB-INF/classes/com/revature/ers/servlets/ViewYourReimbsServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/WEB-INF/classes/com/revature/ers/servlets/ViewYourReimbsServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/WEB-INF/classes/project1.sql" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/WEB-INF/classes/project1.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/css/mystyles.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/css/mystyles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/html/admin/admindash.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/html/admin/admindash.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/html/admin/finduser.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/html/admin/finduser.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/html/admin/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/html/admin/register.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/html/admin/updateordelete.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/html/admin/updateordelete.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/html/admin/updateuser.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/html/admin/updateuser.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/html/badlogin.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/html/badlogin.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/html/employee/employeedash.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/html/employee/employeedash.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/html/employee/submitform.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/html/employee/submitform.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/html/employee/updatereimb.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/html/employee/updatereimb.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/html/employee/viewDetails.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/html/employee/viewDetails.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/html/fmanager/approvereimb.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/html/fmanager/approvereimb.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/html/fmanager/denyreimb.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/html/fmanager/denyreimb.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/html/fmanager/status.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/html/fmanager/status.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/html/fmanager/type.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/html/fmanager/type.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/html/fmanager/typeorstatus.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/html/fmanager/typeorstatus.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/html/fmanager/viewallreimbs.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/html/fmanager/viewallreimbs.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/html/fmanager/viewstatus.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/html/fmanager/viewstatus.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/html/fmanager/viewtype.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/html/fmanager/viewtype.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/html/fmanager/fmanagerdash.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/html/fmanager/fmanagerdash.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-com.revature.ers.util.ConnectionFactoryTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-com.revature.ers.util.ConnectionFactoryTest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/surefire-reports/com.revature.ers.util.ConnectionFactoryTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/com.revature.ers.util.ConnectionFactoryTest.txt" afterDir="false" />
     </list>
@@ -84,8 +79,8 @@
       <list>
         <option value="Enum" />
         <option value="Interface" />
-        <option value="Class" />
         <option value="HTML File" />
+        <option value="Class" />
       </list>
     </option>
   </component>

@@ -176,3 +176,6 @@ where author_id = 7;
 --reimb_type_id = '3' 
 --WHERE reimb_id = '7'; 
 
+select * from ers_reimbursements er 
+where author_id = 11 and reimb_status_id = 2;
+

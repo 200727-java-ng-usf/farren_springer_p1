@@ -113,7 +113,7 @@ public class ViewAllReimbsServlet extends HttpServlet {
                 "    document.querySelector(\"#financemanager-container\").innerHTML = message;\n" +
                 "}\n" +
                 "</script>");
-        out.println("<link rel=\"stylesheet\" href=\"../css/mystyles.css\">");
+        out.println("<link rel=\"stylesheet\" href=\"../../../../../webapp/css/mystyles.css\">");
         out.println("</html>");
 //        out.println("</body></html>");
 
