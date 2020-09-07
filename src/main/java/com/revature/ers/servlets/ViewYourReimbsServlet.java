@@ -1,8 +1,10 @@
 package com.revature.ers.servlets;
 
 import com.revature.ers.exceptions.AuthenticationException;
+import com.revature.ers.models.ErsReimbursement;
 import com.revature.ers.models.ErsUser;
 import com.revature.ers.models.Role;
+import com.revature.ers.models.Status;
 import com.revature.ers.repos.ReimbRepository;
 import com.revature.ers.repos.UserRepository;
 import com.revature.ers.services.ReimbService;
@@ -14,10 +16,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 
 import static com.revature.ers.services.UserService.app;
+
+/**
+ * This servlet will only display PAST reimbursements, so
+ * reimbursements whose status is NOT pending
+ */
 
 @WebServlet("/viewYourReimbs")
 public class ViewYourReimbsServlet extends HttpServlet {
@@ -51,32 +59,55 @@ public class ViewYourReimbsServlet extends HttpServlet {
         out.println("<html><body>");
 
         if(ersUser != null) {
-            out.println("This is text!");
+//            out.println("This is text!");
 
             out.println("<h1>Name: " + ersUser.getFirstName() + " " + ersUser.getLastName() + "</h1><br>");
             out.println("<b>\tEmail: " + ersUser.getEmail() + "</b><br>");
-            out.println("<i>\tRole: " + ersUser.getRole() + "</i><br>");
-            out.println("<form method=\"post\" action=\"/farren_springer_p1/api/chooseToEdit\">\n" +
-                    "            <p>Enter the ID number of the reimbursement you would like it edit</p>\n" +
-                    "            <input placeholder=\"enter the ID of the reimbursement to view/edit\" name=\"reimbIdChosenByEmployee\"/><br>\n" +
-                    "            <p>Enter either update or remove to edit your reimbursement</p>\n" +
-//                    "            <p>(If you wish to go back to your dashboard, type back)</p>\n" + // button to go back. Don't need this.
-                    "            <input placeholder=\"Enter text\" name=\"choseToEditEmployee\"/><br>\n" +
-                    "            <input type=\"submit\" value=\"Choose\"/><br>\n" +
-                    "        </form>");
-            out.println("<form method=\"post\" action=\"/farren_springer_p1/api/home\" class=\"any\">\n" +
-                    "        <input type = \"submit\" value=\"Go Back\" class=\"any\"><br>\n" +
-                    "    </form>");
-            out.println("<b>\tYour Reimbursements: " + reimbRepo.findAllReimbsByAuthorId(ersUser.getId()) + "</b><br>");
+            out.println("<i>\tRole: " + ersUser.getRole().toString() + "</i><br>");
 
         } else {
             out.println("Can't find you");
         }
 
+        /**
+         * This will print all the reimbursements that the employee has
+         * to the screen.
+         */
+        if(!reimbRepo.findAllReimbsByAuthorId(ersUser.getId()).isEmpty()) {
+            /**
+             * For each reimbursement with the author's ID...
+             */
+            for (ErsReimbursement r : reimbRepo.findAllReimbsByAuthorId(ersUser.getId())) {
+                /**
+                 * If the reimbursement is pending...
+                 */
+                if (r.getReimbursementStatusId() != Status.PENDING) {
+                    /**
+                     * Print the toString for employees.
+                     */
+                    out.println("<p>" + r.toString() + "</p>"); // TODO link here to Servlet with details?
+                }
+
+            }
+        } else {
+            out.println("<p>" + "No Reimbursements found" + "</p>"); // add button to submit a reimbursement here?
+        }
+
+        /**
+         * Print the go back link
+         */
+        out.println("<div>\n" +
+                "            <a href=\"/farren_springer_p1/api/home\">Go Back</a>\n" +
+                "        </div>");
+
         out.println("</body>");
+        out.println("<link rel=\"stylesheet\" href=\"/farren_springer_p1/css/mystyles.css\">");
+        File file = new File("/farren_springer_p1/css/mystyles.css");
+        System.out.println(file.getPath());
+        System.out.println(file.exists());
         out.println("</html>");
 
-        resp.getWriter().write("<h1>Helper Session Servlet! doGet</h1>");
+//        resp.getWriter().write("<h1>Helper Session Servlet! doGet</h1>");
     }
 
     @Override

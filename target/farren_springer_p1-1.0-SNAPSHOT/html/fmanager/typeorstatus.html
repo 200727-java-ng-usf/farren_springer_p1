@@ -1,19 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-<div class ="financemanager-container">
-    <h1 class="any">Edit User Page</h1>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Title</title>
+    </head>
+    <body>
+        <div class ="financemanager-container">
+            <h1 class="any">Choose a Filter Page</h1>
+            <form method="post" action="/farren_springer_p1/api/typeOrStatus" class="any">
+                <input placeholder="enter the word type or status" name="typeOrStatusChoice" class="any"/><br>
+                <input type="submit" value="Choose" class="any"/><br>
+            </form>
+        </div>
+        <div>
+            <a href="/farren_springer_p1/api/home">Go Back</a>
+        </div>
+    </body>
+<link rel="stylesheet" href="../css/mystyles.css">
+</html>
 
 
-    <form method="post" action="/farren_springer_p1/api/typeOrStatus" class="any">
-        <input placeholder="enter the word type or status" name="typeOrStatusChoice" class="any"/><br>
-        <input type="submit" value="Choose" class="any"/><br>
-        <!--        <label for="updateordelete">Choose an Option:</label>-->
+
+
+
+
+
+
+<!--        <label for="updateordelete">Choose an Option:</label>-->
         <!--    -->
         <!--        <select id="updateordelete" name="updateOrDeleteChoice">-->
         <!--            <option value="update">Update</option>-->
@@ -21,16 +35,10 @@
         <!--        </select>-->
         <!--        <br>-->
         <!--             <button type="button">Choose</button>-->
-    </form>
-</div>
-<div>
-    <a href="/farren_springer_p1/api/home">Go Back</a>
-</div>
 
-<div id="financemanager-container" class="admin-container"></div>
 
-</body>
-<!-- <script>
+
+        <!-- <script>
     function returnAMessageAdmin() {
     var selection = document.querySelector("#updateordelete").value;
     var message;
@@ -43,5 +51,6 @@
     document.querySelector("#financemanager-container").innerHTML = message;
 }
 </script> -->
-<link rel="stylesheet" href="../css/mystyles.css">
-</html>
+
+
+<!-- <div id="financemanager-container" class="admin-container"></div> -->

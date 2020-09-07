@@ -1,7 +1,11 @@
 package com.revature.ers.models;
 
+import com.revature.ers.repos.ReimbRepository;
+
 import java.sql.Blob;
 import java.sql.Timestamp;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 /**
@@ -19,6 +23,7 @@ public class ErsReimbursement {
     private Integer resolverId;
     private Status reimbursementStatusId;
     private Type reimbursementTypeId;
+
 
     public ErsReimbursement() {
         super();
@@ -239,17 +244,48 @@ public class ErsReimbursement {
 
     @Override
     public String toString() {
-        return "\nErsReimbursement: " +
-                "id=" + id +
-                ", amount=" + amount +
-                ", submitted=" + submitted +
-                ", resolved=" + resolved +
-                ", description='" + description + '\'' +
-                ", receipt=" + receipt +
-                ", authorId=" + authorId +
-                ", resolverId=" + resolverId +
-                ", reimbursementStatusId=" + reimbursementStatusId +
-                ", reimbursementTypeId=" + reimbursementTypeId +
+        return "ID: " + id +
+                ",\n Amount: " + amount +
+                /**
+                 * If a reimbursement is created, it will automatically have a not-null submitted time.
+                 * Resolved will not until it is approved or denied. The formatting will mess up if it
+                 * is applied while resolved is null.
+                 */
+                ",\n Submitted: " + submitted.toInstant().atZone(ZoneId.of("GMT")).format(DateTimeFormatter.RFC_1123_DATE_TIME) +
+                ",\n Resolved: " + resolved +
+                ",\n Description: '" + description + '\'' +
+                ",\n Receipt: " + receipt +
+                ",\n Author ID: " + authorId +
+                ",\n Resolver ID: " + resolverId +
+                ",\n Status: " + reimbursementStatusId +
+                ",\n Type: " + reimbursementTypeId +
+                ' ' + "\n";
+    }
+
+    public String toStringWithFormattingForResolved() {
+        return "ID: " + id +
+                ",\n Amount: " + amount +
+                ",\n Submitted: " + submitted.toInstant().atZone(ZoneId.of("GMT")).format(DateTimeFormatter.RFC_1123_DATE_TIME) +
+                ",\n Resolved: " + resolved.toInstant().atZone(ZoneId.of("GMT")).format(DateTimeFormatter.RFC_1123_DATE_TIME) +
+                ",\n Description: '" + description + '\'' +
+                ",\n Receipt: " + receipt +
+                ",\n Author ID: " + authorId +
+                ",\n Resolver ID: " + resolverId +
+                ",\n Status: " + reimbursementStatusId +
+                ",\n Type: " + reimbursementTypeId +
+                ' ' + "\n";
+    }
+
+    public String toStringOnlyUseThisForPending() {
+        return "ID: " + id +
+                ",\n Amount: " + amount +
+                ",\n Submitted: " + submitted.toInstant().atZone(ZoneId.of("GMT")).format(DateTimeFormatter.RFC_1123_DATE_TIME) +
+
+                ",\n Description: '" + description + '\'' +
+                ",\n Receipt: " + receipt +
+                ",\n AuthorId: " + authorId +
+
+                ",\n Type: " + reimbursementTypeId +
                 ' ' + "\n";
     }
 }

@@ -1,7 +1,9 @@
 package com.revature.ers.servlets;
 
 import com.revature.ers.exceptions.AuthenticationException;
+import com.revature.ers.models.ErsReimbursement;
 import com.revature.ers.models.ErsUser;
+import com.revature.ers.models.Status;
 import com.revature.ers.repos.ReimbRepository;
 import com.revature.ers.repos.UserRepository;
 import com.revature.ers.services.ReimbService;
@@ -24,60 +26,6 @@ public class ViewAllByStatusServlet extends HttpServlet {
 
         System.out.println("in doGet of ViewAllByStatysServlet!");
 
-//        UserRepository userRepo = new UserRepository();
-//        UserService userService = new UserService(userRepo);
-//        ReimbRepository reimbRepo = new ReimbRepository();
-//        ReimbService reimbService = new ReimbService(reimbRepo);
-//
-//        // SESSION SYNTAX
-//        HttpSession session = req.getSession();
-////        ErsUser ersUser = (ErsUser) session.getAttribute("currentUser");
-//        String username = String.valueOf(session.getAttribute("loggedUsername"));
-//        ErsUser ersUser = userRepo.findUserByUsername(username)
-//                .orElseThrow(AuthenticationException::new);
-//
-//
-//        // NON SESSION SYNTAX
-//        PrintWriter out = resp.getWriter();
-//        out.println("<html><body>");
-//
-//        if(ersUser != null) {
-//            out.println("This is text!");
-//
-//            /**
-//             * Use the same format from update reimbursement by employee
-//             * here. Fmanagers are doing the same thing but updating the status,
-//             * resolver_id and resolved timestamp of the reimbursement instead.
-//             *
-//             * Receipt(?)
-//             */
-//
-//            out.println("<h1>Name: " + ersUser.getFirstName() + " " + ersUser.getLastName() + "</h1><br>");
-//            out.println("<b>\tEmail: " + ersUser.getEmail() + "</b><br>");
-//            out.println("<i>\tRole: " + ersUser.getRole() + "</i><br>");
-//            /**
-//             * Put a form here with an option to chose one reimbursement to approve/deny
-//             */
-////            out.println("<form action=\"/farren_springer_p1/html/fmanager/typeorstatus.html\">\n" +
-////                    "        <input type=\"submit\" value=\"Choose a Filter\">\n" +
-////                    "    </form>");
-//            Integer typeChoiceNum = Integer.parseInt(String.valueOf(req.getSession().getAttribute("typeChoice")));
-//
-//            out.println("<b>\tAll Reimbursements by the type you chose: "
-//                    + reimbService.getAllReimbsByType(typeChoiceNum) + "</b><br>");
-//
-//        } else {
-//            out.println("Can't find you");
-//        }
-//
-//        /**
-//         * Copy-pasted from webapp/html/viewallreimbs.html
-//         */
-//        out.println("</body>");
-//        out.println("</html>");
-////        out.println("</body></html>");
-//
-//        resp.getWriter().write("<h1>Helper Session Servlet! doGet</h1>");
 
     }
 
@@ -104,8 +52,16 @@ public class ViewAllByStatusServlet extends HttpServlet {
         PrintWriter out = resp.getWriter();
         out.println("<html><body>");
 
+        /**
+         * In the body, print the sign out option
+         */
+        out.println("<header>\n" +
+                "            <div>\n" +
+                "                <a href=\"/farren_springer_p1/html/login.html\">Sign Out</a>\n" +
+                "            </div>\n" +
+                "        </header>");
+
         if(ersUser != null) {
-            out.println("This is text!");
 
             /**
              * Use the same format from update reimbursement by employee
@@ -117,7 +73,7 @@ public class ViewAllByStatusServlet extends HttpServlet {
 
             out.println("<h1>Name: " + ersUser.getFirstName() + " " + ersUser.getLastName() + "</h1><br>");
             out.println("<b>\tEmail: " + ersUser.getEmail() + "</b><br>");
-            out.println("<i>\tRole: " + ersUser.getRole() + "</i><br>");
+            out.println("<i>\tRole: " + ersUser.getRole().toString() + "</i><br>");
             /**
              * Put a form here with an option to chose one reimbursement to approve/deny
              */
@@ -128,22 +84,63 @@ public class ViewAllByStatusServlet extends HttpServlet {
             Integer statusChoiceNum = Integer.parseInt(String.valueOf(req.getSession().getAttribute("loggedStatusChoice")));
 
             System.out.println("Here");
-            out.println("<b>\tAll Reimbursements by the status you chose: "
-                    + reimbService.getAllReimbsByStatus(statusChoiceNum) + "</b><br>");
+//            out.println("<b>\tAll Reimbursements by the status you chose: "
+//                    + reimbService.getAllReimbsByStatus(statusChoiceNum) + "</b><br>");
+
+            /**
+             * if the list of reimbursements where the status the user chose it NOT empty...
+             */
+            if(!reimbService.getAllReimbsByStatus(statusChoiceNum).isEmpty()) {
+                /**
+                 * Switch case to display different message based on status choice
+                 */
+                System.out.println(req.getSession().getAttribute("loggedStatusChoice").toString());
+                switch(Integer.parseInt(req.getSession().getAttribute("loggedStatusChoice").toString())) {
+                    case 1:
+                        out.println("<p> All Pending Reimbursements </p>");
+                        break;
+                    case 2:
+                        out.println("<p> All Approved Reimbursements </p>");
+                        break;
+                    case 3:
+                        out.println("<p> All Denied Reimbursements </p>");
+                        break;
+                    default:
+                        out.println("<p> Something went wrong... </p>");
+                }
+//                out.println("<p>\t All " + req.getSession().getAttribute("loggedStatusChoice") + " Reimbursements:</p>");
+                /**
+                 * For each reimbursement in all the reimbursements with that status...
+                 */
+                for (ErsReimbursement r : reimbService.getAllReimbsByStatus(statusChoiceNum)) {
+                    /**
+                     * Use the toString
+                     */
+                    out.println("<p>" + r.toString() + "</p>");
+
+                }
+            } else {
+                out.println("<p>" + "No Reimbursements found" + "</p>");
+            }
 
             System.out.println("Hmm");
 
-            out.println("<form method=\"post\" action=\"/farren_springer_p1/api/home\" class=\"any\">\n" +
-                    "        <input type = \"submit\" value=\"Go Back\" class=\"any\"><br>\n" +
-                    "    </form>");
+            /**
+             * Print the go back option
+             */
+            out.println("<div>\n" +
+                    "            <a href=\"/farren_springer_p1/api/home\">Go Back</a>\n" +
+                    "        </div>");
+
         } else {
             out.println("Can't find you");
         }
 
         /**
-         * Copy-pasted from webapp/html/viewallreimbs.html
+         * End the body and html tag and include a link to the style sheet
          */
         out.println("</body>");
+        out.println("<link rel=\"stylesheet\" href=\"/farren_springer_p1/css/mystyles.css\">");
         out.println("</html>");
 //        out.println("</body></html>");
 

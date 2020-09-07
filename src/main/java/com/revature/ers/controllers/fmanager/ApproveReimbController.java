@@ -63,7 +63,10 @@ public class ApproveReimbController {
              * Update the reimbursement in the database
              * First, set the status to approved
              */
+            System.out.println("about to set the status to approved");
             ersReimbursement.setReimbursementStatusId(Status.APPROVED); // TODO says Id in field name but is an enum constant
+            System.out.println("set the status to approved");
+            System.out.println("This should say approved: " + ersReimbursement.getReimbursementStatusId());
             /**
              * Then, set the resolved field in the service layer to the current time
              */

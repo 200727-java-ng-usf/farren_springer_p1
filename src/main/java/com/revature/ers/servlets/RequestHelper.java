@@ -61,9 +61,9 @@ public class RequestHelper {
                 // this case occurs because user clicked submit in status.html
                 return PickAStatusController.viewByStatus(req);
             case "/farren_springer_p1/api/viewbytype":
-                return "/viewallbytype"; // maps to servlet because we need to display session information
+                return "/viewallbytype"; // maps to servlet
             case "/farren_springer_p1/api/viewbystatus":
-                return "/viewallbystatus"; // maps to servlet because we need to display session information
+                return "/viewallbystatus"; // maps to servlet
             case "/farren_springer_p1/api/approveOrDeny":
                 return ApproveOrDenyController.approveOrDeny(req);
             case "/farren_springer_p1/api/approve":

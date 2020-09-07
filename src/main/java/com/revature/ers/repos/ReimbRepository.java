@@ -395,8 +395,8 @@ public class ReimbRepository implements CrudRepository<ErsReimbursement> {
             temp.setReceipt(rs.getString("receipt"));
             temp.setAuthorId(rs.getInt("author_id"));
             temp.setResolverId(rs.getInt("resolver_id"));
-            temp.setReimbursementStatusId(Status.getByStatus(rs.getString("reimb_status_id"))); // TODO may have complications bc ordinal in table
-            temp.setReimbursementTypeId(Type.getByType(rs.getString("reimb_type_id"))); // TODO may have complications bc ordinal in table
+            temp.setReimbursementStatusId(Status.getById(rs.getInt("reimb_status_id")));
+            temp.setReimbursementTypeId(Type.getById(rs.getInt("reimb_type_id")));
             System.out.println(temp);
             reimbs.add(temp);
         }

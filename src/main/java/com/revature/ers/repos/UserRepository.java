@@ -279,7 +279,7 @@ public class UserRepository implements CrudRepository<ErsUser>{
             temp.setFirstName(rs.getString("first_name"));
             temp.setLastName(rs.getString("last_name"));
             temp.setEmail(rs.getString("email"));
-            temp.setRole(Role.getById(rs.getInt("user_role_id"))); // TODO fix bug where Service layer shows employee always
+            temp.setRole(Role.getById(rs.getInt("user_role_id")));
             System.out.println(temp);
             users.add(temp);
         }

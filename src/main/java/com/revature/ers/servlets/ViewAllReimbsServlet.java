@@ -1,8 +1,10 @@
 package com.revature.ers.servlets;
 
 import com.revature.ers.exceptions.AuthenticationException;
+import com.revature.ers.models.ErsReimbursement;
 import com.revature.ers.models.ErsUser;
 import com.revature.ers.models.Role;
+import com.revature.ers.models.Status;
 import com.revature.ers.repos.ReimbRepository;
 import com.revature.ers.repos.UserRepository;
 import com.revature.ers.services.ReimbService;
@@ -17,6 +19,10 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+/**
+ * This page only shows PAST reimbursements. // TODO can view for each employee?
+ */
+// TODO View all employee's servlet for admins and use the findUser html on that servlet
 @WebServlet("/viewReimbs")
 public class ViewAllReimbsServlet extends HttpServlet {
 
@@ -42,62 +48,95 @@ public class ViewAllReimbsServlet extends HttpServlet {
         out.println("<html><body>");
 
         if(ersUser != null) {
-            out.println("This is text!");
+//            out.println("This is text!");
 
             /**
-             * Use the same format from update reimbursement by employee
-             * here. Fmanagers are doing the same thing but updating the status,
-             * resolver_id and resolved timestamp of the reimbursement instead.
-             *
-             * Receipt(?)
+             * This <div> just displays the user-in-session's information.
+             */
+            out.println("<div>");
+            out.println("<h1 >Name: " + ersUser.getFirstName() + " " + ersUser.getLastName() + "</h1><br>");
+            out.println("<b>\tEmail: " + ersUser.getEmail() + "</b><br>");
+            out.println("<i>\tRole: " + ersUser.getRole().toString() + "</i><br>");
+            out.println("</div>");
+
+            /**
+             * Don't need the ID chose and approve/deny chose on this page. It is just to view history.
              */
 
-            out.println("<form method=\"post\" action=\"/farren_springer_p1/api/approveOrDeny\">\n" +
-                    "            <p>Enter the ID number of the reimbursement you would like to approve or deny</p>\n" +
-                    "            <input placeholder=\"enter the ID of the reimbursement to approve/deny\" name=\"reimbIdChosenByFManager\"/><br>\n" +
-                    "            <p>Enter either approve or deny to edit the reimbursement</p>\n" +
-                    "            <p>(If you wish to go back to your dashboard, type back)</p>\n" +
-                    "            <input placeholder=\"Enter text\" name=\"approveOrDenyChoice\"/><br>\n" +
-                    "            <input type=\"submit\" value=\"Choose\"/><br>\n" +
-                    "        </form>");
+            // TODO enter id of employee whose past reimbursements you want to view
 
-            out.println("<div class =\"any\">\n" +
-                    "    <h1 class=\"any\">Here are all reimbursements</h1>\n" +
-                    "\n" +
-                    "    \n" +
-                    "    <form>\n" +
-                    "    <label for=\"reimbsbytypeorstatus\">Choose a filter type (uses some JS but not relevant rn):</label>\n" +
-                    "\n" +
-                    "    <select id=\"reimbsbytypeorstatus\">\n" +
-                    "        <option value=\"type\">View by Type</option>\n" +
-                    "        <option value=\"status\">View by Status</option>\n" +
-                    "    </select>\n" +
-                    "    <br>\n" +
-                    "        <button type=\"button\" onclick=\"returnAMessage()\">Choose</button>\n" +
-                    "    </form>\n" +
-                    "\n" +
-                    "\n" +
-                    "</div>\n" +
-                    "\n" +
-                    "<div id=\"financemanager-container\" class=\"financemanager-container\"></div>");
-
-            out.println("<h1 class=\"any\">Name: " + ersUser.getFirstName() + " " + ersUser.getLastName() + "</h1><br>");
-            out.println("<b>\tEmail: " + ersUser.getEmail() + "</b><br>");
-            out.println("<i>\tRole: " + ersUser.getRole() + "</i><br>");
+//            /**
+//             * This div is only a demonstration of using JS. // TODO use JS to filter instead of directing to a different page.
+//             */
+//            out.println("<div>");
+//            out.println("<h1 class=\"any\">Here are all reimbursements</h1>\n" +
+//                    "\n" +
+//                    "    \n" +
+//                    "    <form>\n" +
+//                    "    <label for=\"reimbsbytypeorstatus\">Choose a filter type (uses some JS but not relevant rn):</label>\n" +
+//                    "\n" +
+//                    "    <select id=\"reimbsbytypeorstatus\">\n" +
+//                    "        <option value=\"type\">View by Type</option>\n" +
+//                    "        <option value=\"status\">View by Status</option>\n" +
+//                    "    </select>\n" +
+//                    "    <br>\n" +
+//                    "        <button type=\"button\" onclick=\"returnAMessage()\">Choose</button>\n" +
+//                    "    </form>\n");
+//            out.println("</div>");
+//
+//
+            // TODO make filter that doesn't include pending, because this page is only for reimbursements that are not pending
+            out.println("<div>");
             out.println("<form action=\"/farren_springer_p1/html/fmanager/typeorstatus.html\">\n" +
                     "        <input type=\"submit\" value=\"Choose a Filter\">\n" +
                     "    </form>");
-            out.println("<form method=\"post\" action=\"/farren_springer_p1/api/home\" class=\"any\">\n" +
-                    "        <input type = \"submit\" value=\"Go Back\" class=\"any\"><br>\n" +
-                    "    </form>");
-            out.println("<b>\tAll Reimbursements: " + reimbService.getAllReimbs() + "</b><br>");
+            out.println("</div>");
+
+//            out.println("<b>\tAll Reimbursements: " + reimbService.getAllReimbs() + "</b><br>");
+
+            /**
+             * This div displays all of the reimbursements that have already been approved or denied.
+             */
+            out.println("<div>");
+            out.println("<p> Past Reimbursements: </p>");
+            if(!reimbService.getAllReimbs().isEmpty()) {
+                System.out.println("In the if statement");
+                for (ErsReimbursement r : reimbService.getAllReimbs()) {
+                    System.out.println("in the for each loop");
+                    System.out.println(r.getId());
+                    System.out.println(r.getReimbursementStatusId().toString());
+                    System.out.println(r.getReimbursementStatusId());
+                    /**
+                     * If the reimbursement is NOT pending...
+                     */
+                    if (r.getReimbursementStatusId() != Status.PENDING) {
+                        System.out.println(r.getReimbursementStatusId().toString());
+                        System.out.println("found one that's not pending!");
+                        /**
+                         * Use the toString for employees that starts with "Pending"
+                         */
+                        out.println("<p>" + r.toStringWithFormattingForResolved() + "</p>");
+                    }
+
+                }
+            } else {
+                out.println("<p>" + "No Reimbursements found" + "</p>");
+            }
+            out.println("</div>");
 
         } else {
-            out.println("Can't find you");
+            out.println("<div>Can't find you</div>");
         }
 
         /**
-         * Copy-pasted from webapp/html/viewallreimbs.html
+         * Print the go back link
+         */
+        out.println("<div>\n" +
+                "            <a href=\"/farren_springer_p1/api/home\">Go Back</a>\n" +
+                "        </div>");
+
+        /**
+         * Don't know if I am required to use JS but here is a function that prints. Maybe adjust the message to display all reimbs by type
          */
         out.println("</body>");
         out.println("<script>\n" +
@@ -113,11 +152,11 @@ public class ViewAllReimbsServlet extends HttpServlet {
                 "    document.querySelector(\"#financemanager-container\").innerHTML = message;\n" +
                 "}\n" +
                 "</script>");
-        out.println("<link rel=\"stylesheet\" href=\"../../../../../webapp/css/mystyles.css\">");
+        out.println("<link rel=\"stylesheet\" href=\"/farren_springer_p1/css/mystyles.css\">");
         out.println("</html>");
 //        out.println("</body></html>");
 
-        resp.getWriter().write("<h1>Helper Session Servlet! doGet</h1>");
+//        resp.getWriter().write("<h1>Helper Session Servlet! doGet</h1>");
     }
 
     @Override
