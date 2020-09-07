@@ -25,16 +25,19 @@ public class HomeController {
                                 .orElseThrow(AuthenticationException::new);
         Role roleOfUser = currentUser.getRole();
 
+        System.out.println("still here");
         String roleOfCurrentUser = String.valueOf(req.getSession().getAttribute("loggedCurrentUserRole"));
+        System.out.println("got roleOfCurrentUser string");
+        System.out.println(roleOfCurrentUser);
 
-        switch(roleOfCurrentUser) {
-            case "Employee":
+        switch(roleOfUser) {
+            case EMPLOYEE:
                 System.out.println("in employee case");
                 return "/html/employee/employeedash.html";
-            case "Finance Manager":
+            case FINANCE_MANAGER:
                 System.out.println("in fmanager case");
                 return "/html/fmanager/fmanagerdash.html";
-            case "Admin":
+            case ADMIN:
                 System.out.println("in admin case");
                 return "/html/admin/admindash.html";
             default:
