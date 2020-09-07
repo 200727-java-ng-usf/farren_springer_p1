@@ -1,45 +1,46 @@
 <!DOCTYPE html>
+<!-- Not using this. Using a servlet -->
 <html>
-<head>
-    <meta charset="ISO-8859-1"><title>Home Page</title>
-    
-</head>
-<body>
-<div class ="financemanager-container">
-    <h1 class="any">Here are all reimbursements (under construction)...</h1>
+    <head>
+        <meta charset="ISO-8859-1"><title>Home Page</title>
+        
+    </head>
+    <body>
+        <div class ="financemanager-container">
+            <h1 class="any">Here are all reimbursements (under construction)...</h1>
 
-    
-    <form class="any">
-    <label for="reimbsbytypeorstatus" class="any">Choose a filter type:</label>
+            
+            <form class="any">
+            <label for="reimbsbytypeorstatus" class="any">Choose a filter type:</label>
 
-    <select id="reimbsbytypeorstatus" class="any">
-        <option value="type" class="any">View by Type</option>
-        <option value="status" class="any">View by Status</option>
-    </select>
-    <br>
-        <button type="button" onclick="returnAMessage()" class="any">Choose</button>
-    </form>
-</div>
-<div>
-    <a href="/farren_springer_p1/api/home">Go Back</a>
-</div>
-<b class="any">Email: </b>
+            <select id="reimbsbytypeorstatus" class="any">
+                <option value="type" class="any">View by Type</option>
+                <option value="status" class="any">View by Status</option>
+            </select>
+            <br>
+                <button type="button" onclick="returnAMessage()" class="any">Choose</button>
+            </form>
+        </div>
+        <div>
+            <a href="/farren_springer_p1/api/home">Go Back</a>
+        </div>
+        <b class="any">Email: </b>
 
-<div id="financemanager-container" class="financemanager-container"></div>
+        <div id="financemanager-container" class="financemanager-container"></div>
 
-</body>
-<!-- <script>
+    </body>
+<script>
     function returnAMessage() {
     var selection = document.querySelector("#reimbsbytypeorstatus").value;
     var message;
     if (selection == "type") {
-        message = "type";
+        message = "you chose type!";
     } else if (selection == "status") {
-        message = "status";
+        message = "you chose status!";
     }
 
     document.querySelector("#financemanager-container").innerHTML = message;
 }
-</script> -->
+</script>
 <link rel="stylesheet" href="../css/mystyles.css">
 </html>

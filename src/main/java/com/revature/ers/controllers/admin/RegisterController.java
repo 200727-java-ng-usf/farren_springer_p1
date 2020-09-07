@@ -41,11 +41,11 @@ public class RegisterController {
 
             userService.register(employee);
 
-            req.getSession().setAttribute("loggedUsername", username);
-            req.getSession().setAttribute("loggedPassword", password);
-            req.getSession().setAttribute("loggedFirstName", firstName);
-            req.getSession().setAttribute("loggedLastName", lastName);
-            req.getSession().setAttribute("loggedEmail", email);
+//            req.getSession().setAttribute("loggedUsername", username);
+//            req.getSession().setAttribute("loggedPassword", password);
+//            req.getSession().setAttribute("loggedFirstName", firstName);
+//            req.getSession().setAttribute("loggedLastName", lastName);
+//            req.getSession().setAttribute("loggedEmail", email);
 
 
             ErsUser newUser = new ErsUser(username, password, firstName, lastName, email);

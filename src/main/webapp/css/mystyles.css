@@ -12,7 +12,7 @@
   flex-direction: column;
   align-items: center;
   border: 3px solid rgb(57, 99, 104);
-  border-width: 30px;
+  border-width: 15px;
   text-align: center;
   font-size: 60px;
 }
@@ -21,7 +21,7 @@
     flex-direction: column;
     align-items: center;
     border: 3px solid rgb(161, 163, 28);
-    border-width: 30px;
+    border-width: 15px;
     text-align: center;
     font-size: 60px;
 }
@@ -31,7 +31,7 @@
     flex-direction: column;
     align-items: center;
     border: 3px solid rgb(153, 17, 40);
-    border-width: 30px;
+    border-width: 15px;
     text-align: center;
     font-size: 60px;
 }
@@ -86,12 +86,32 @@ input {
 .anyButEvenSmaller {
   float: center;
     width: 400px;
-    height: 40px;
+    height: 80px;
     background-color: black;
     opacity: .8;
     line-height: 30px;
     text-align: center;
     font-size: 20px;
+}
+.anyButAlmostTheSmallest {
+  float: center;
+    width: 300px;
+    height: 30px;
+    background-color: black;
+    opacity: .8;
+    line-height: 20px;
+    text-align: center;
+    font-size: 20px;
+}
+.anyButPrettySmall {
+  float: center;
+  width: 1600px;
+  height: 20px;
+  background-color: green;
+  opacity: 0.8;
+  line-height: 20px;
+  text-align: left;
+  font-size: 15px;
 }
 .findUser {
   /* float: left; */
@@ -211,11 +231,21 @@ input {
     display: block;
   }
   body {
-    background: url('../money.gif') no-repeat top center;
+    background: url('../background.gif') no-repeat top center;
     background-size: cover;
     font-family: Arial;
   }
-
+  .img-approve {
+    width: 800px;
+    height: 600px;
+    background: url('../check.gif');
+    /* background-color: red; */
+    background-size: cover;
+    background-position: right;
+  }
+  .img-approve:hover {
+    background-size: 150%;
+  }
   /* BELOW is experimenting on finduser.html*/
 findUserForm {
   margin: 0;
@@ -234,7 +264,7 @@ findUserForm {
   max-width: 550px;
   margin: 0 auto;
   background: rgba(0,0,0,0,0.8);
-  paddiing: 30px;
+  padding: 30px;
   border-radius: 5px;
   display: flex;
   flex-direction: row;

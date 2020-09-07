@@ -161,14 +161,12 @@ public class ErsUser {
 
     @Override
     public String toString() {
-        return "ErsUser{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", role=" + role +
-                '}';
+        return  "ID: " + id +
+                ", Username: '" + username + '\'' +
+                ", Password: '" + password + '\'' +
+                ", First Name: '" + firstName + '\'' +
+                ", Last Name: '" + lastName + '\'' +
+                ", Email: '" + email + '\'' +
+                ", Role: " + role;
     }
 }

@@ -61,24 +61,21 @@ public class ViewAllPendingReimbsServlet extends HttpServlet {
              * This <div> just displays the user-in-session's information
              */
             out.println("<div>");
-            out.println("<h1>\tName: " + ersUser.getFirstName() + " " + ersUser.getLastName() + "</h1><br>");
-            out.println("<b>\tEmail: " + ersUser.getEmail() + "</b><br>");
-            out.println("<i>\tRole: " + ersUser.getRole().toString() + "</i><br>");
-//            out.println("<form action=\"/farren_springer_p1/html/fmanager/typeorstatus.html\">\n" +
-//                    "        <input type=\"submit\" value=\"Choose a Filter\">\n" +
-//                    "    </form>");
+            out.println("<h1 class=\"anyButEvenSmaller\">Name: " + ersUser.getFirstName() + " " + ersUser.getLastName() + "</h1><br>");
+            out.println("<b class=\"anyButPrettySmall\">\tEmail: " + ersUser.getEmail() + "</b><br>");
+            out.println("<i class=\"anyButPrettySmall\">\tRole: " + ersUser.getRole().toString() + "</i><br>");
             out.println("</div>");
 
             /**
              * This <div> only contains a form that will let the finance manager approve or deny a reimbursement.
              */
-            out.println("<div>");
-            out.println("<form method=\"post\" action=\"/farren_springer_p1/api/approveOrDeny\">\n" +
-                    "            <p style=\"FONT-SIZE: 20PX;\">Enter the ID number of the reimbursement you would like to approve or deny</p>\n" +
-                    "            <input placeholder=\"enter the ID of the reimbursement to approve/deny\" name=\"reimbIdChosenByFManager\"/><br>\n" +
-                    "            <p style=\"FONT-SIZE: 20PX;\">Enter either approve or deny to edit the reimbursement</p>\n" +
-                    "            <input placeholder=\"Enter text\" name=\"approveOrDenyChoice\"/><br>\n" +
-                    "            <input type=\"submit\" value=\"Choose\"/><br>\n" +
+            out.println("<div style=\"text-align: center;\">");
+            out.println("<form method=\"post\" style=\"text-align: center;\" action=\"/farren_springer_p1/api/approveOrDeny\">\n" +
+                    "            <p class=\"anyButAlmostTheSmallest\">Enter Reimbursement ID</p>\n" +
+                    "            <input style=\"text-align: center;\" class=\"anyButAlmostTheSmallest\" placeholder=\"Ex: 27\" name=\"reimbIdChosenByFManager\"/><br>\n" +
+                    "            <p class=\"anyButAlmostTheSmallest\">Enter either approve or deny</p>\n" +
+                    "            <input style=\"text-align: center;\" class=\"anyButAlmostTheSmallest\" placeholder=\"Ex: approve\" name=\"approveOrDenyChoice\"/><br>\n" +
+                    "            <input style=\"text-align: center;\" class=\"anyButAlmostTheSmallest\" type=\"submit\" value=\"Choose\"/><br>\n" +
                     "        </form>");
             out.println("</div>");
 
@@ -86,8 +83,8 @@ public class ViewAllPendingReimbsServlet extends HttpServlet {
              * This <div> lets the finance manager chose a filter
              */
             out.println("<div>");
-            out.println("<form action=\"/farren_springer_p1/html/fmanager/typeorstatus.html\">\n" +
-                    "        <input type=\"submit\" value=\"Choose a Filter\">\n" +
+            out.println("<form class=\"anyButAlmostTheSmallest\" action=\"/farren_springer_p1/api/typeOrStatus\">\n" +
+                    "        <input class=\"anyButAlmostTheSmallest\" type=\"submit\" value=\"Choose a Filter\">\n" +
                     "    </form>");
             out.println("</div>");
 
@@ -107,7 +104,7 @@ public class ViewAllPendingReimbsServlet extends HttpServlet {
                         /**
                          * Use the toString for employees that starts with "Pending"
                          */
-                        out.println("<p>" + r.toStringOnlyUseThisForPending() + "</p>");
+                        out.println("<p class=\"anyButPrettySmall\">" + r.toStringOnlyUseThisForPending() + "</p>");
                     }
 
                 }
@@ -124,7 +121,7 @@ public class ViewAllPendingReimbsServlet extends HttpServlet {
          * Print the go back link
          */
         out.println("<div>\n" +
-                "            <a href=\"/farren_springer_p1/api/home\">Go Back</a>\n" +
+                "            <a class=\"anyButEvenSmaller\" href=\"/farren_springer_p1/api/home\">Go Back</a>\n" +
                 "        </div>");
 
         out.println("<div>\n" +
@@ -149,13 +146,15 @@ public class ViewAllPendingReimbsServlet extends HttpServlet {
         /**
          * Copy-pasted from webapp/html/viewallreimbs.html
          */
+        String theMessageIWantToDisplay = "whoop de whoop";
+        String theOtherMessage = "howdy hoop";
         out.println("</body>");
         out.println("<script>\n" +
                 "    function returnAMessage() {\n" +
                 "    var selection = document.querySelector(\"#reimbsbytypeorstatus\").value;\n" +
                 "    var message;\n" +
                 "    if (selection == \"type\") {\n" +
-                "        message = \"type\";\n" +
+                "        message = \"type\";\n" + //TODO display a string from this servlet instead(?)
                 "    } else if (selection == \"status\") {\n" +
                 "        message = \"status\";\n" +
                 "    }\n" +

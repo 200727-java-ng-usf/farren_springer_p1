@@ -61,9 +61,11 @@ public class ViewYourReimbsServlet extends HttpServlet {
         if(ersUser != null) {
 //            out.println("This is text!");
 
-            out.println("<h1>Name: " + ersUser.getFirstName() + " " + ersUser.getLastName() + "</h1><br>");
-            out.println("<b>\tEmail: " + ersUser.getEmail() + "</b><br>");
-            out.println("<i>\tRole: " + ersUser.getRole().toString() + "</i><br>");
+            out.println("<div>");
+            out.println("<h1 class=\"anyButEvenSmaller\">Name: " + ersUser.getFirstName() + " " + ersUser.getLastName() + "</h1><br>");
+            out.println("<b class=\"anyButPrettySmall\">\tEmail: " + ersUser.getEmail() + "</b><br>");
+            out.println("<i class=\"anyButPrettySmall\">\tRole: " + ersUser.getRole().toString() + "</i><br>");
+            out.println("</div>");
 
         } else {
             out.println("Can't find you");
@@ -85,7 +87,7 @@ public class ViewYourReimbsServlet extends HttpServlet {
                     /**
                      * Print the toString for employees.
                      */
-                    out.println("<p>" + r.toString() + "</p>"); // TODO link here to Servlet with details?
+                    out.println("<p class=\"anyButPrettySmall\">" + r.toString() + "</p>"); // TODO link here to Servlet with details?
                 }
 
             }

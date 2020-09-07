@@ -2,33 +2,56 @@
 <html>
     <head>
         <meta charset="ISO-8859-1">
-        <title>Login</title>
+        <title>Register</title>
         <link rel="stylesheet" href="../css/mystyles.css">
+        <script>
+            function roleChoice(myForm) {
+
+            }
+        </script>
     </head>
     <body>
-        <div class="admin-container">
+        <div class="admin-container" style="height: 800px;">
             <!-- FRONT CONTROLLER EXAMPLE -->
-            <h3 class="any">Login Page</h3>
+            <h3 class="any">Register a New Employee</h3>
 
             <!-- each action corresponds to a url-pattern of a SERVLET -->
-            <form method="post" action="/farren_springer_p1/api/register" class="any">
-                <p class="any">Register a New Employeeeeeee</p>
-                <p class="any">Connected to DB</p>
-                <input placeholder="enter username" name="username" class="any"/><br>
-                <input placeholder="enter password" name="password" class="any"/><br>
-                <input placeholder="enter first name" name="firstName" class="any"/><br>
-                <input placeholder="enter last name" name="lastName" class="any"/><br>
-                <input placeholder="enter email" name="email" class="any"/><br>
-                <input type="submit" value="Register" class="any"/><br>
-            </form>
-            <form method="post" action="/farren_springer_p1/api/home" class="any">
-                <input type = "submit" value="Go Back" class="any"><br>
+            <form method="post" action="/farren_springer_p1/api/register" class="anyButSmaller">
+                <div style="height: 100px;">
+                    <input placeholder="enter username" name="username" class="anyButSmaller"/>
+                </div>
+                <div style="height: 100px;">
+                    <input placeholder="enter password" name="password" class="anyButSmaller"/>
+                </div>
+                <div style="height: 100px;">
+                    <input placeholder="enter first name" name="firstName" class="anyButSmaller"/>
+                </div>
+                <div style="height: 100px;">
+                    <input placeholder="enter last name" name="lastName" class="anyButSmaller"/>
+                </div>
+                <div style="height: 100px;">
+                    <input placeholder="enter email" name="email" class="anyButSmaller"/>
+                </div>
+                <!-- <div style="height: 100px;">
+                    <form name="myform">
+                        <select onclick="roleChoice(this.form)">
+                            <option selected="selected" value="3">Employee</option>
+                            <option value="2">Finance Manager</option>
+                            <option value="1">Admin</option>
+                        </select>
+                    </form>          
+                </div> -->
+                <div style="height: 100px;">
+                    <input type="submit" value="Register" class="anyButSmaller"/><br>
+                </div>
             </form>
         </div>
         <div>
             <a href="/farren_springer_p1/api/home">Go Back</a>
         </div>
+        
     </body>
+    
 </html>
 
 

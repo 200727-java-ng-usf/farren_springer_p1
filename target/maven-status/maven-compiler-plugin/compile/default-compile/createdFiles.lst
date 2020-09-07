@@ -3,10 +3,10 @@ com\revature\ers\controllers\admin\UpdateUserController.class
 com\revature\ers\controllers\fmanager\PickAStatusController.class
 com\revature\ers\controllers\admin\FindUserController.class
 com\revature\ers\controllers\admin\RegisterController.class
+com\revature\ers\servlets\ViewAllUsersServlet.class
 com\revature\ers\servlets\ViewYourPendingReimbsServlet.class
 com\revature\ers\controllers\fmanager\PickATypeController.class
 com\revature\ers\controllers\employee\ChooseToEditController.class
-com\revature\ers\controllers\HomeController$1.class
 com\revature\ers\controllers\admin\UpdateOrDeleteController.class
 com\revature\ers\controllers\fmanager\ApproveReimbController.class
 com\revature\ers\controllers\admin\DeleteUserController.class

@@ -50,9 +50,13 @@ public class ViewYourPendingReimbsServlet extends HttpServlet {
         if(ersUser != null) {
 //            out.println("This is text!");
 
-            out.println("<h1>Name: " + ersUser.getFirstName() + " " + ersUser.getLastName() + "</h1><br>");
-            out.println("<b>\tEmail: " + ersUser.getEmail() + "</b><br>");
-            out.println("<i>\tRole: " + ersUser.getRole().toString() + "</i><br>");
+            out.println("<div>");
+            out.println("<h1 class=\"anyButEvenSmaller\">Name: " + ersUser.getFirstName() + " " + ersUser.getLastName() + "</h1><br>");
+            out.println("<b class=\"anyButPrettySmall\">\tEmail: " + ersUser.getEmail() + "</b><br>");
+            out.println("<i class=\"anyButPrettySmall\">\tRole: " + ersUser.getRole().toString() + "</i><br>");
+            out.println("</div>");
+
+            out.println("<div>");
             out.println("<form method=\"post\" action=\"/farren_springer_p1/api/chooseToEdit\">\n" +
                     "            <p style=\"FONT-SIZE: 20PX;\">Enter the ID number of the reimbursement you would like it edit</p>\n" +
                     "            <input placeholder=\"enter the ID of the reimbursement to view/edit\" name=\"reimbIdChosenByEmployee\"/><br>\n" +
@@ -61,6 +65,7 @@ public class ViewYourPendingReimbsServlet extends HttpServlet {
                     "            <input placeholder=\"Enter text\" name=\"choseToEditEmployee\"/><br>\n" +
                     "            <input type=\"submit\" value=\"Choose\"/><br>\n" +
                     "        </form>");
+            out.println("</div>");
 //            out.println("<form method=\"post\" action=\"/farren_springer_p1/api/home\" class=\"any\">\n" +
 //                    "        <input type = \"submit\" value=\"Go Back\" class=\"any\"><br>\n" +
 //                    "    </form>");
@@ -87,7 +92,7 @@ public class ViewYourPendingReimbsServlet extends HttpServlet {
                     /**
                      * Use the toString for employees that starts with "Pending."
                      */
-                    out.println("<p style=\"FONT-SIZE: 25PX;\">" + r.toStringOnlyUseThisForPending() + "</p>");
+                    out.println("<p class=\"anyButPrettySmall\" style=\"FONT-SIZE: 25PX;\">" + r.toStringOnlyUseThisForPending() + "</p>");
                 }
 
             }

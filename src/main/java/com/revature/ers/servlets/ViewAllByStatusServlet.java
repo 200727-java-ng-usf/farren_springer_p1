@@ -71,9 +71,11 @@ public class ViewAllByStatusServlet extends HttpServlet {
              * Receipt(?)
              */
 
-            out.println("<h1>Name: " + ersUser.getFirstName() + " " + ersUser.getLastName() + "</h1><br>");
-            out.println("<b>\tEmail: " + ersUser.getEmail() + "</b><br>");
-            out.println("<i>\tRole: " + ersUser.getRole().toString() + "</i><br>");
+            out.println("<div>");
+            out.println("<h1 class=\"anyButEvenSmaller\">Name: " + ersUser.getFirstName() + " " + ersUser.getLastName() + "</h1><br>");
+            out.println("<b class=\"anyButPrettySmall\">\tEmail: " + ersUser.getEmail() + "</b><br>");
+            out.println("<i class=\"anyButPrettySmall\">\tRole: " + ersUser.getRole().toString() + "</i><br>");
+            out.println("</div>");
             /**
              * Put a form here with an option to chose one reimbursement to approve/deny
              */
@@ -116,7 +118,7 @@ public class ViewAllByStatusServlet extends HttpServlet {
                     /**
                      * Use the toString
                      */
-                    out.println("<p>" + r.toString() + "</p>");
+                    out.println("<p class=\"anyButPrettySmall\">" + r.toString() + "</p>");
 
                 }
             } else {

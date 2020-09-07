@@ -117,9 +117,11 @@ public class ViewAllByTypeServlet extends HttpServlet {
              * Receipt(?)
              */
 
-            out.println("<h1>Name: " + ersUser.getFirstName() + " " + ersUser.getLastName() + "</h1><br>");
-            out.println("<b>\tEmail: " + ersUser.getEmail() + "</b><br>");
-            out.println("<i>\tRole: " + ersUser.getRole().toString() + "</i><br>");
+            out.println("<div>");
+            out.println("<h1 class=\"anyButEvenSmaller\">Name: " + ersUser.getFirstName() + " " + ersUser.getLastName() + "</h1><br>");
+            out.println("<b class=\"anyButPrettySmall\">\tEmail: " + ersUser.getEmail() + "</b><br>");
+            out.println("<i class=\"anyButPrettySmall\">\tRole: " + ersUser.getRole().toString() + "</i><br>");
+            out.println("</div>");
 
             /**
              * This <div> only contains a form that will let the finance manager approve or deny a reimbursement.
@@ -178,7 +180,7 @@ public class ViewAllByTypeServlet extends HttpServlet {
                     /**
                      * Use the toString
                      */
-                    out.println("<p>" + r.toString() + "</p>");
+                    out.println("<p class=\"anyButPrettySmall\">" + r.toString() + "</p>");
                 }
 
             } else {

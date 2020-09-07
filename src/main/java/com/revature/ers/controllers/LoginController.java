@@ -25,6 +25,7 @@ public class LoginController {
         Role userRole;
         System.out.println("in login method in LoginController");
 
+
         /**
          * You may want to implement route guarding for your endpoints
          *
@@ -54,6 +55,9 @@ public class LoginController {
             userRole = app.getCurrentUser().getRole();
             System.out.println("set the current user");
             req.getSession().setAttribute("loggedUsername", username);
+            String currentUserRole = String.valueOf(userRepo.findUserByUsername(String.valueOf(req.
+                                        getSession().getAttribute("loggedUsername"))));
+            req.getSession().setAttribute("loggedCurrentUserRole", currentUserRole);
             req.getSession().setAttribute("loggedPassword", password);
 //            return "/api/home";
 
@@ -61,15 +65,15 @@ public class LoginController {
             switch(userRole) {
                 case EMPLOYEE:
                     System.out.println("In employee case");
-                    // TODO HTML doc to display username?
+
                     return "/html/employee/employeedash.html";
                 case FINANCE_MANAGER:
                     System.out.println("In finance manager case");
-                    // TODO make the html document display the user
+
                     return "/html/fmanager/fmanagerdash.html";
                 case ADMIN:
                     System.out.println("In admin case");
-                    // TODO make the html document display the user
+
                     return "/html/admin/admindash.html";
                 default:
                     System.out.println("user does not seem to have a role...");

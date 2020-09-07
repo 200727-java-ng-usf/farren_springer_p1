@@ -38,7 +38,6 @@ public class ViewAllReimbsServlet extends HttpServlet {
 
         // SESSION SYNTAX
         HttpSession session = req.getSession();
-//        ErsUser ersUser = (ErsUser) session.getAttribute("currentUser");
         String username = String.valueOf(session.getAttribute("loggedUsername"));
         ErsUser ersUser = userRepo.findUserByUsername(username)
                 .orElseThrow(AuthenticationException::new);
@@ -48,57 +47,30 @@ public class ViewAllReimbsServlet extends HttpServlet {
         out.println("<html><body>");
 
         if(ersUser != null) {
-//            out.println("This is text!");
 
             /**
              * This <div> just displays the user-in-session's information.
              */
             out.println("<div>");
-            out.println("<h1 >Name: " + ersUser.getFirstName() + " " + ersUser.getLastName() + "</h1><br>");
-            out.println("<b>\tEmail: " + ersUser.getEmail() + "</b><br>");
-            out.println("<i>\tRole: " + ersUser.getRole().toString() + "</i><br>");
+            out.println("<h1 class=\"anyButEvenSmaller\">Name: " + ersUser.getFirstName() + " " + ersUser.getLastName() + "</h1><br>");
+            out.println("<b class=\"anyButPrettySmall\">\tEmail: " + ersUser.getEmail() + "</b><br>");
+            out.println("<i class=\"anyButPrettySmall\">\tRole: " + ersUser.getRole().toString() + "</i><br>");
             out.println("</div>");
 
-            /**
-             * Don't need the ID chose and approve/deny chose on this page. It is just to view history.
-             */
 
-            // TODO enter id of employee whose past reimbursements you want to view
-
-//            /**
-//             * This div is only a demonstration of using JS. // TODO use JS to filter instead of directing to a different page.
-//             */
-//            out.println("<div>");
-//            out.println("<h1 class=\"any\">Here are all reimbursements</h1>\n" +
-//                    "\n" +
-//                    "    \n" +
-//                    "    <form>\n" +
-//                    "    <label for=\"reimbsbytypeorstatus\">Choose a filter type (uses some JS but not relevant rn):</label>\n" +
-//                    "\n" +
-//                    "    <select id=\"reimbsbytypeorstatus\">\n" +
-//                    "        <option value=\"type\">View by Type</option>\n" +
-//                    "        <option value=\"status\">View by Status</option>\n" +
-//                    "    </select>\n" +
-//                    "    <br>\n" +
-//                    "        <button type=\"button\" onclick=\"returnAMessage()\">Choose</button>\n" +
-//                    "    </form>\n");
-//            out.println("</div>");
-//
-//
             // TODO make filter that doesn't include pending, because this page is only for reimbursements that are not pending
             out.println("<div>");
-            out.println("<form action=\"/farren_springer_p1/html/fmanager/typeorstatus.html\">\n" +
-                    "        <input type=\"submit\" value=\"Choose a Filter\">\n" +
+            out.println("<p class=\"anyButSmaller\"> Past Reimbursements: </p>");
+            out.println("<form action=\"/farren_springer_p1/api/typeOrStatus\">\n" +
+                    "        <input class = \"anyButSmaller\" style=\"height: 100px;\" type=\"submit\" value=\"Choose a Filter\">\n" +
                     "    </form>");
             out.println("</div>");
 
-//            out.println("<b>\tAll Reimbursements: " + reimbService.getAllReimbs() + "</b><br>");
 
             /**
              * This div displays all of the reimbursements that have already been approved or denied.
              */
             out.println("<div>");
-            out.println("<p> Past Reimbursements: </p>");
             if(!reimbService.getAllReimbs().isEmpty()) {
                 System.out.println("In the if statement");
                 for (ErsReimbursement r : reimbService.getAllReimbs()) {
@@ -115,14 +87,33 @@ public class ViewAllReimbsServlet extends HttpServlet {
                         /**
                          * Use the toString for employees that starts with "Pending"
                          */
-                        out.println("<p>" + r.toStringWithFormattingForResolved() + "</p>");
+                        out.println("<p class=\"anyButPrettySmall\">" + r.toStringWithFormattingForResolved() + "</p>");
                     }
+                    // call function in HTML and PASS IN dao variable.
 
                 }
             } else {
                 out.println("<p>" + "No Reimbursements found" + "</p>");
             }
             out.println("</div>");
+
+//            /**
+//             * This div prints all the reimbursements in a table with links
+//             */
+//            out.println("<div>");
+//            out.println("<table>");
+//            out.println("<tr>");
+//            out.println("<td>");
+//            out.println("<a href=\"/farren_springer_p1/api/viewReimbDetails\">");
+//            out.println(reimbRepo.findAllReimbsByAuthorId(17));
+//            out.println("</a>");
+//            out.println("</td>");
+//            out.println("</tr>");
+//            out.println("</table>");
+//            out.println("</div>");
+
+
+
 
         } else {
             out.println("<div>Can't find you</div>");
@@ -154,9 +145,6 @@ public class ViewAllReimbsServlet extends HttpServlet {
                 "</script>");
         out.println("<link rel=\"stylesheet\" href=\"/farren_springer_p1/css/mystyles.css\">");
         out.println("</html>");
-//        out.println("</body></html>");
-
-//        resp.getWriter().write("<h1>Helper Session Servlet! doGet</h1>");
     }
 
     @Override
@@ -164,3 +152,39 @@ public class ViewAllReimbsServlet extends HttpServlet {
         req.getSession().invalidate();
     }
 }
+
+
+
+
+
+
+
+
+
+
+/**
+ * Don't need the ID chose and approve/deny chose on this page. It is just to view history.
+ */
+
+// TODO enter id of employee whose past reimbursements you want to view
+
+//            /**
+//             * This div is only a demonstration of using JS. // TODO use JS to filter instead of directing to a different page.
+//             */
+//            out.println("<div>");
+//            out.println("<h1 class=\"any\">Here are all reimbursements</h1>\n" +
+//                    "\n" +
+//                    "    \n" +
+//                    "    <form>\n" +
+//                    "    <label for=\"reimbsbytypeorstatus\">Choose a filter type (uses some JS but not relevant rn):</label>\n" +
+//                    "\n" +
+//                    "    <select id=\"reimbsbytypeorstatus\">\n" +
+//                    "        <option value=\"type\">View by Type</option>\n" +
+//                    "        <option value=\"status\">View by Status</option>\n" +
+//                    "    </select>\n" +
+//                    "    <br>\n" +
+//                    "        <button type=\"button\" onclick=\"returnAMessage()\">Choose</button>\n" +
+//                    "    </form>\n");
+//            out.println("</div>");
+//
+//
