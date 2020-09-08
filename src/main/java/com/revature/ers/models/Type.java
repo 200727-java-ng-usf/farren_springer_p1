@@ -1,51 +1,41 @@
 package com.revature.ers.models;
 
-/**
- * Reimbursement Type
- */
 public enum Type {
 
-    LODGING(1), TRAVEL(2), FOOD(3), OTHER(4);
+    // values declared within enums are constants and are comma separated
+    LODGING("Lodging"),
+    TRAVEL("Travel"),
+    FOOD("Food"),
+    OTHER("Other");
 
-    private Integer typeId;
+    private String typeName;
 
     // enum constructors are implicitly private
-    Type(Integer num) { this.typeId = num; }
+    Type(String name) {
+        this.typeName = name;
+    }
 
-    public static Type getById(Integer type) {
-        /**
-         * For each constant in roles, if it's id equivalent is the same as the
-         * parameter, role, of getById, then return it.
-         */
-        for (Type theType : Type.values()) {
-            if (theType.typeId.equals(type)) {
-                return theType;
+    public static Type getByName(String name) {
+
+        for (Type type : Type.values()) {
+            if (type.typeName.equals(name)) {
+                return type;
             }
-
-
         }
 
-        /**
-         * By default, return OTHER
-         */
         return OTHER;
+
+        // functional implementation of the above code
+//        return Arrays.stream(Type.values())
+//                .filter(type -> type.typeName.equals(name))
+//                .findFirst()
+//                .orElse(LOCKED);
+
     }
 
     @Override
     public String toString() {
-        /**
-         * Use a switch case for the different types.
-         */
-        switch (typeId) {
-            case 1:
-                return "Lodging";
-            case 2:
-                return "Travel";
-            case 3:
-                return "Food";
-            case 4:
-                return "Other";
-        }
-        return "no type found";
+        return typeName;
     }
+
 }

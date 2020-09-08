@@ -21,9 +21,9 @@ import java.util.Set;
 public class UserRepository {
 
     // extract common query clauses into a easily referenced member for reusability.
-    private String baseQuery = "SELECT * FROM project1.ers_users au " +
+    private String baseQuery = "SELECT * FROM project1.ers_users eu " +
                                "JOIN project1.ers_user_roles ur " +
-                               "ON au.role_id = ur.id ";
+                               "ON eu.role_id = ur.id ";
 
     public UserRepository() {
         System.out.println("[LOG] - Instantiating " + this.getClass().getName());
@@ -35,7 +35,7 @@ public class UserRepository {
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()){
 
-            String sql = baseQuery + "WHERE au.id = ?";
+            String sql = baseQuery + "WHERE eu.id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, id);
 
@@ -61,9 +61,9 @@ public class UserRepository {
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "SELECT * FROM project1.ers_users au " +
+            String sql = "SELECT * FROM project1.ers_users eu " +
                          "JOIN project1.ers_user_roles ur " +
-                         "ON au.role_id = ur.id";
+                         "ON eu.role_id = ur.id";
 
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
@@ -134,7 +134,7 @@ public class UserRepository {
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = "INSERT INTO revabooks.ers_users (username, password, first_name, last_name, email, role_id) " +
+            String sql = "INSERT INTO project1.ers_users (username, password, first_name, last_name, email, role_id) " +
                          "VALUES (?, ?, ?, ?, ?, ?)";
 
             // second parameter here is used to indicate column names that will have generated values
@@ -174,7 +174,7 @@ public class UserRepository {
             temp.setLastName(rs.getString("last_name"));
             temp.setUsername(rs.getString("username"));
             temp.setPassword(rs.getString("password"));
-            temp.setRole(Role.getById(rs.getInt("role_id")));
+            temp.setRole(Role.getByName(rs.getString("name")));
             temp.setEmail(rs.getString("email"));
 //            System.out.println(temp);
             users.add(temp);

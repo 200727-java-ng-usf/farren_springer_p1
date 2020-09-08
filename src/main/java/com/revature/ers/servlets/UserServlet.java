@@ -29,11 +29,11 @@ public class UserServlet extends HttpServlet {
         PrintWriter respWriter = resp.getWriter();
         resp.setContentType("application/json");
 
-        System.out.println(req.getParameter("id"));
+        System.out.println(req.getParameter("ers_user_id"));
 
         try {
 
-            String idParam = req.getParameter("id");
+            String idParam = req.getParameter("ers_user_id");
 
             if (idParam != null) {
 

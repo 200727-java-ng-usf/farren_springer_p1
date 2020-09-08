@@ -1,52 +1,40 @@
 package com.revature.ers.models;
 
-/**
- * Each Role constant corresponds to an entry in the schema's ers_user_roles table.
- */
 public enum Role {
 
-    ADMIN(1), FINANCE_MANAGER(2), EMPLOYEE(3);
+    // values declared within enums are constants and are comma separated
+    ADMIN("Admin"),
+    FINANCE_MANAGER("Finance Manager"),
+    EMPLOYEE("Employee");
 
-    private Integer roleId;
+    private String roleName;
 
     // enum constructors are implicitly private
-    Role(Integer num) { this.roleId = num; }
+    Role(String name) {
+        this.roleName = name;
+    }
 
-    public static Role getById(Integer role) {
-        /**
-         * For each constant in roles, if it's id equivalent is the same as the
-         * parameter, role, of getById, then return it.
-         */
-        for (Role theRole : Role.values()) {
-            if (theRole.roleId.equals(role)) {
-                return theRole;
+    public static Role getByName(String name) {
+
+        for (Role role : Role.values()) {
+            if (role.roleName.equals(name)) {
+                return role;
             }
-
-
         }
 
-        /**
-         * Return the most restricted role by default.
-         */
         return EMPLOYEE;
+
+        // functional implementation of the above code
+//        return Arrays.stream(Role.values())
+//                .filter(role -> role.roleName.equals(name))
+//                .findFirst()
+//                .orElse(LOCKED);
+
     }
 
     @Override
     public String toString() {
-        /**
-         * Use a switch case for the different roles.
-         */
-        switch (roleId) {
-            case 1:
-                return "Admin";
-            case 2:
-                return "Finance Manager";
-            case 3:
-                return "Employee";
-        }
-//        return "Role{" +
-//                "roleId='" + roleId + '\'' +
-//                '}';
-        return "no role found";
+        return roleName;
     }
+
 }

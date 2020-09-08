@@ -1,48 +1,49 @@
 package com.revature.ers.util;
 
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
 
 public class ConnectionFactory {
 
     private static ConnectionFactory connFactory = new ConnectionFactory();
 
-    private ConnectionFactory() { super(); }
+    private Properties props = new Properties();
 
-    /**
-     * Since connFactory is a private field, we need a getter method to access it
-     * @return
-     */
+    private ConnectionFactory() {
+
+        try {
+            ClassLoader loader = Thread.currentThread().getContextClassLoader();
+            InputStream propsInput = loader.getResourceAsStream("application.properties");
+            props.load(propsInput);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
     public static ConnectionFactory getInstance() {
         return connFactory;
     }
 
-    /**
-     * the getConnection method loads the JDB and connects to the remote db.
-     * @return
-     */
     public Connection getConnection() {
 
         Connection conn = null;
 
         try {
 
-            /**
-             * Load and Register the Driver.
-             * Force the JVM to load the PostGreSQL JDBC driver
-             */
-            Class.forName("org.postgresql.Driver"); // returns the Class object associated
-            // with the class or interface with the
-            // given string name, using the given class loader.
+            // Force the JVM to load the PostGreSQL JDBC driver
+            Class.forName("org.postgresql.Driver");
 
-            /**
-             * Create a Connection
-             */
             conn = DriverManager.getConnection(
-                    "jdbc:postgresql://java-ng-usf-200727.czcb2bh9usg6.us-east-2.rds.amazonaws.com:5432/postgres",
-                    "postgres",
-                    "Yellow507!");
+                    props.getProperty("url"),
+                    props.getProperty("username"),
+                    props.getProperty("password")
+            );
 
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
@@ -56,11 +57,6 @@ public class ConnectionFactory {
 
     }
 
-    /**
-     * We do not want to clone any instances.
-     * @return
-     * @throws CloneNotSupportedException
-     */
     @Override
     protected Object clone() throws CloneNotSupportedException {
         throw new CloneNotSupportedException();

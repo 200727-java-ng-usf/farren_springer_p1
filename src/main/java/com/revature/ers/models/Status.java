@@ -1,48 +1,39 @@
 package com.revature.ers.models;
 
-/**
- * Reimbursement Status
- */
 public enum Status {
-    PENDING(1), APPROVED(2), DENIED(3);
 
-    private Integer statusId;
+    // values declared within enums are constants and are comma separated
+    PENDING("Pending"),
+    APPROVED("Approved"),
+    DENIED("Denied");
+
+    private String statusName;
 
     // enum constructors are implicitly private
-    Status(Integer num) { this.statusId = num; }
+    Status(String name) {
+        this.statusName = name;
+    }
 
-    public static Status getById(Integer status) {
-        /**
-         * For each constant in roles, if it's id equivalent is the same as the
-         * parameter, role, of getById, then return it.
-         */
-        for (Status theStatus : Status.values()) {
-            if (theStatus.statusId.equals(status)) {
-                return theStatus;
+    public static Status getByName(String name) {
+
+        for (Status status : Status.values()) {
+            if (status.statusName.equals(name)) {
+                return status;
             }
-
-
         }
 
-        /**
-         * By default, return PENDING
-         */
         return PENDING;
+
+        // functional implementation of the above code
+//        return Arrays.stream(Status.values())
+//                .filter(status -> status.statusName.equals(name))
+//                .findFirst()
+//                .orElse(LOCKED);
+
     }
 
     @Override
     public String toString() {
-        /**
-         * Use a switch case for the different statuses.
-         */
-        switch (statusId) {
-            case 1:
-                return "Pending";
-            case 2:
-                return "Approved";
-            case 3:
-                return "Denied";
-        }
-        return "no status found";
+        return statusName;
     }
 }

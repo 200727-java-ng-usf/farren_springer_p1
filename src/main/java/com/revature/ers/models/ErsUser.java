@@ -8,6 +8,7 @@ import java.util.Set;
  */
 public class ErsUser {
 
+    // fields/attributes
     private Integer id;
     private String username;
     private String password;
@@ -16,18 +17,12 @@ public class ErsUser {
     private String email;
     private Role role;
 
+    // constructors
+    // no args constructors are required for Jackson to map properly!
     public ErsUser() {
         super();
     }
 
-    /**
-     * Constructor without role and id
-     * @param username
-     * @param password
-     * @param firstName
-     * @param lastName
-     * @param email
-     */
     public ErsUser (String username, String password, String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -37,39 +32,17 @@ public class ErsUser {
         this.role = Role.EMPLOYEE;  // role not specified? Employee
     }
 
-    /**
-     * Constructor with role parameter
-     * @param username
-     * @param password
-     * @param firstName
-     * @param lastName
-     * @param email
-     * @param role
-     */
     public ErsUser (String username, String password, String firstName, String lastName, String email, Role role) {
         this(username, password, firstName, lastName, email); // constructor chaining
         this.role = role; // role can be specified with this constructor
     }
 
-    /**
-     * Full constructor
-     * @param id
-     * @param username
-     * @param password
-     * @param firstName
-     * @param lastName
-     * @param email
-     * @param role
-     */
     public ErsUser (Integer id, String username, String password, String firstName, String lastName, String email, Role role) {
         this(username, password, firstName, lastName, email, role); // constructor chaining
         this.id = id;
     }
 
-    /**
-     * Copy constructor (used for conveniently copying the values of one ErsUser to create a new instance with those values)
-     * @param copy
-     */
+    // copy constructor (used for conveniently copying the values of one AppUser to create a new instance with those values)
     public ErsUser(ErsUser copy) {
         this(copy.id, copy.username, copy.password, copy.firstName, copy.lastName, copy.email, copy.role);
     }
