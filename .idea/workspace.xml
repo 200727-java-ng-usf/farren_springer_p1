@@ -23,11 +23,80 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="acd0345a-037a-4ae4-bb0f-bf52e2b6afbe" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/dtos/Credentials.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/dtos/ErrorResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/servlets/AuthServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/servlets/UserServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/controllers/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/controllers/HomeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/employee/employeedash.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/employee/employeedash.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/employee/updatereimb.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/html/employee/updatereimb.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/controllers/HomeController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/controllers/LoginController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/controllers/admin/DeleteUserController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/controllers/admin/FindUserController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/controllers/admin/RegisterController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/controllers/admin/UpdateOrDeleteController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/controllers/admin/UpdateUserController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/controllers/employee/ChooseToEditController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/controllers/employee/RemoveReimbController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/controllers/employee/SubmitController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/controllers/employee/UpdateReimbController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/controllers/fmanager/ApproveOrDenyController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/controllers/fmanager/ApproveReimbController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/controllers/fmanager/DenyReimbController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/controllers/fmanager/FindReimbController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/controllers/fmanager/PickAStatusController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/controllers/fmanager/PickATypeController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/controllers/fmanager/TypeOrStatusController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/exceptions/ResourceNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/exceptions/ResourceNotFoundException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/models/ErsReimbursement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/models/ErsReimbursement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/repos/CrudRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/repos/ReimbRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/repos/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/repos/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/services/ReimbService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/services/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/servlets/ForwardingMasterServlet.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/servlets/RequestHelper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/servlets/ViewAllByStatusServlet.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/servlets/ViewAllByTypeServlet.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/servlets/ViewAllPendingReimbsServlet.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/servlets/ViewAllReimbsServlet.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/servlets/ViewAllUsersServlet.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/servlets/ViewYourPendingReimbsServlet.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/servlets/ViewYourReimbsServlet.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/sessionservlet/SessionServlet.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/util/AppState.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/mystyles.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/admin/admindash.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/admin/deleteuser.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/admin/finduser.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/admin/register.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/admin/updateordelete.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/admin/updateuser.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/badlogin.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/employee/employeedash.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/employee/reimbwasremoved.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/employee/removereimb.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/employee/submitform.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/employee/updatereimb.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/employee/viewDetails.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/employee/viewmyreimbs.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/fmanager/approvereimb.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/fmanager/denyreimb.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/fmanager/fmanagerdash.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/fmanager/status.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/fmanager/type.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/fmanager/typeorstatus.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/fmanager/viewallreimbs.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/fmanager/viewstatus.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/fmanager/viewtype.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/home.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/html/login.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/main.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/project1data.json" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/project1data.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT.war" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT.war" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/WEB-INF/classes/project1data.json" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/WEB-INF/classes/project1data.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-com.revature.ers.util.ConnectionFactoryTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-com.revature.ers.util.ConnectionFactoryTest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/com.revature.ers.util.ConnectionFactoryTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/com.revature.ers.util.ConnectionFactoryTest.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,24 +131,28 @@
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../revabooks" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
   </component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.revature.ers.controllers" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Farren\Desktop\WorkFolder\farren_springer_p1\src\main\java\com\revature\ers\exceptions" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.revature.ers.repos" />
+      <recent name="com.revature.ers.services" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Farren\Desktop\WorkFolder\farren_springer_p1\src\main\webapp\css" />
       <recent name="C:\Users\Farren\Desktop\WorkFolder\farren_springer_p1\src\main\webapp\html" />
       <recent name="C:\Users\Farren\Desktop\WorkFolder\farren_springer_p1\src\main\webapp\html\employee" />
       <recent name="C:\Users\Farren\Desktop\WorkFolder\farren_springer_p1\src\main\webapp\html\fmanager" />
       <recent name="C:\Users\Farren\Desktop\WorkFolder\farren_springer_p1\src\main\webapp\html\admin" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Farren\Desktop\WorkFolder\farren_springer_p1\src\main\java\com\revature\ers\exceptions" />
-    </key>
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="com.revature.ers.controllers" />
     </key>
   </component>
   <component name="RunManager" selected="JUnit.ConnectionFactoryTest.ensureThatAConnectionIsObtained">
@@ -162,14 +235,14 @@
       <screen x="-1920" y="-209" width="1920" height="1040" />
     </state>
     <state x="-1752" y="-88" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1040/-1920.-209.1920.1040@-1920.-209.1920.1040" timestamp="1598572033549" />
-    <state x="-1230" y="58" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1599409523119">
+    <state x="-1230" y="58" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1599605859009">
       <screen x="-1920" y="-209" width="1920" height="1040" />
     </state>
-    <state x="-1230" y="58" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040/-1920.-209.1920.1040@-1920.-209.1920.1040" timestamp="1599409523119" />
-    <state x="-1660" y="69" key="FileChooserDialogImpl" timestamp="1599359067847">
+    <state x="-1230" y="58" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040/-1920.-209.1920.1040@-1920.-209.1920.1040" timestamp="1599605859009" />
+    <state x="-1660" y="69" key="FileChooserDialogImpl" timestamp="1599588980603">
       <screen x="-1920" y="-209" width="1920" height="1040" />
     </state>
-    <state x="-1660" y="69" key="FileChooserDialogImpl/0.0.1920.1040/-1920.-209.1920.1040@-1920.-209.1920.1040" timestamp="1599359067847" />
+    <state x="-1660" y="69" key="FileChooserDialogImpl/0.0.1920.1040/-1920.-209.1920.1040@-1920.-209.1920.1040" timestamp="1599588980603" />
     <state width="914" height="281" key="GridCell.Tab.0.bottom" timestamp="1598583245803">
       <screen x="-1920" y="-209" width="1920" height="1040" />
     </state>

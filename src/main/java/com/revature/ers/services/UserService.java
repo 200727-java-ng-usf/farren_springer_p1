@@ -2,58 +2,51 @@ package com.revature.ers.services;
 
 import com.revature.ers.exceptions.AuthenticationException;
 import com.revature.ers.exceptions.InvalidRequestException;
-import com.revature.ers.models.ErsReimbursement;
+import com.revature.ers.exceptions.ResourceNotFoundException;
 import com.revature.ers.models.ErsUser;
 import com.revature.ers.models.Role;
 import com.revature.ers.repos.UserRepository;
-import com.revature.ers.util.AppState;
-import com.revature.ers.util.ConnectionFactory;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
+
 public class UserService {
 
-    private UserRepository userRepo;
-    public static AppState app = new AppState();
+    private UserRepository userRepo = new UserRepository();
 
-    public UserService(UserRepository repo) {
-        userRepo = repo;
-//        userRepo = new UserRepository(); // tight coupling! ~hard~ impossible to unit test
+//    public UserService(UserRepository repo) {
+//        System.out.println("[LOG] - Instantiating " + this.getClass().getName());
+//        userRepo = repo;
+////        userRepo = new UserRepository(); // tight coupling! ~hard~ impossible to unit test
+//    }
+
+    public Set<ErsUser> getAllUsers() {
+
+        Set<ErsUser> users = userRepo.findAllUsers();
+
+        if (users.isEmpty()) {
+            throw new ResourceNotFoundException();
+        }
+
+        return users;
     }
 
-
-    /**
-     * Make sure user exists.
-     * @param username
-     * @param password
-     */
-    public void authenticate(String username, String password) {
+    public ErsUser authenticate(String username, String password) {
 
         // validate that the provided username and password are not non-values
         if (username == null || username.trim().equals("") || password == null || password.trim().equals("")) {
             throw new InvalidRequestException("Invalid credential values provided!");
         }
 
-        /**
-         * Uses a READ operation from UserRepository class
-         */
-        ErsUser authUser = userRepo.findUserByCredentials(username, password)
-                .orElseThrow(AuthenticationException::new);
+        return userRepo.findUserByCredentials(username, password)
+                                    .orElseThrow(AuthenticationException::new);
 
-        app.setCurrentUser(authUser);
+//        app.setCurrentUser(authUser);
 
     }
 
-    /**
-     * CREATE operation (Service Layer)
-     * @param newUser
-     */
     public void register(ErsUser newUser) {
 
         if (!isUserValid(newUser)) {
@@ -66,90 +59,55 @@ public class UserService {
             throw new RuntimeException("Provided username is already in use!");
         }
 
-//        newUser.setRole(Role.EMPLOYEE);
+        newUser.setRole(Role.EMPLOYEE);
         userRepo.save(newUser);
         System.out.println(newUser);
-        /**
-         * Will not be setting the current user to the registered
-         * user here, because admin's are the only users who will
-         * be registering new users, and we still want them to be
-         * the current user after they register someone
-         */
 //        app.setCurrentUser(newUser);
 
     }
 
-    /**
-     * READ operation (Service Layer)
-     * @param id
-     * @return
-     */
-    public ErsUser findById(Integer id) {
-
-        return userRepo.findById(id);
-    }
-
-    public Set<ErsUser> getAllUsers() {
-
-        Set<ErsUser> users = userRepo.findAll();
-
-        if (users.isEmpty()) {
-            throw new RuntimeException("No users found...");
-        }
-
-        return users;
-    }
-
-    /**
-     * READ operation
-     * filter
-     * not in use yet...may not use at all
-     * @param role
-     * @return
-     */
-    public Set<Optional<ErsUser>> findAllByRole(Role role) {
+    public Set<ErsUser> getUsersByRole() {
         return new HashSet<>();
     }
 
+    public ErsUser getUserById(int id) {
 
-
-    /**
-     * UPDATE operation (Service Layer)
-     * @param ersUser
-     */
-    public void update(ErsUser ersUser) {
-
-        /**
-         * Before updating, check that the user is valid.
-         */
-        if (!isUserValid(ersUser)) {
-            throw new InvalidRequestException("User not found...");
+        if(id <= 0) {
+            throw new InvalidRequestException("The provided id cannot be less than or equal to zero.");
         }
 
-//        ersUser.setUsername(ersUser.getUsername());
-//        ersUser.setPassword(ersUser.getPassword());
-//        ersUser.setFirstName(ersUser.getFirstName());
-//        ersUser.setLastName(ersUser.getLastName());
-//        ersUser.setEmail(ersUser.getEmail());
-//        ersUser.setRole(ersUser.getRole());
-        userRepo.update(ersUser);
+        return userRepo.findUserById(id)
+                        .orElseThrow(ResourceNotFoundException::new);
+
+    }
+
+    public ErsUser getUserByUsername(String username) {
+        return null;
+    }
+
+    public boolean deleteUserById(int id) {
+        return false;
+    }
+
+    public boolean update(ErsUser updatedUser) {
+        return false;
     }
 
     /**
-     * DELETE operation (Service Layer)
-     * @param ersUser
+     * Validates that the given user and its fields are valid (not null or empty strings). Does
+     * not perform validation on id or role fields.
+     *
+     * @param user
+     * @return true or false depending on if the user was valid or not
      */
-    public void deleteUser(ErsUser ersUser) {
-        userRepo.deleteById(ersUser.getId());
-    }
-
     public boolean isUserValid(ErsUser user) {
         if (user == null) return false;
         if (user.getFirstName() == null || user.getFirstName().trim().equals("")) return false;
         if (user.getLastName() == null || user.getLastName().trim().equals("")) return false;
         if (user.getUsername() == null || user.getUsername().trim().equals("")) return false;
         if (user.getPassword() == null || user.getPassword().trim().equals("")) return false;
-        if (user.getEmail() == null || user.getEmail().trim().equals("")) return false;
         return true;
     }
+
+
 }

@@ -1,8 +1,5 @@
 package com.revature.ers.models;
 
-import com.revature.ers.repos.ReimbRepository;
-
-import java.sql.Blob;
 import java.sql.Timestamp;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
