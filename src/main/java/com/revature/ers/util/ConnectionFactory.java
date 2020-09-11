@@ -1,6 +1,5 @@
 package com.revature.ers.util;
 
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -12,14 +11,23 @@ public class ConnectionFactory {
 
     private static ConnectionFactory connFactory = new ConnectionFactory();
 
-    private Properties props = new Properties();
+    private final Properties props = new Properties();
 
     private ConnectionFactory() {
 
         try {
+
             ClassLoader loader = Thread.currentThread().getContextClassLoader();
             InputStream propsInput = loader.getResourceAsStream("application.properties");
-            props.load(propsInput);
+
+            if (propsInput == null) {
+                props.setProperty("url", System.getProperty("url"));
+                props.setProperty("username", System.getProperty("username"));
+                props.setProperty("password", System.getProperty("password"));
+            } else {
+                props.load(propsInput);
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -50,8 +58,17 @@ public class ConnectionFactory {
         }
 
         if (conn == null) {
-            throw new RuntimeException("Failed to establish connection.");
+            try {
+                conn = DriverManager.getConnection(
+                        System.getenv("url"),
+                        System.getenv("username"),
+                        System.getenv("password")
+                );
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
+
 
         return conn;
 

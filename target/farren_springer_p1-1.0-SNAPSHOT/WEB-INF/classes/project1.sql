@@ -179,3 +179,15 @@ where author_id = 7;
 select * from ers_reimbursements er 
 where author_id = 11 and reimb_status_id = 2;
 
+SELECT * FROM project1.ers_users eu 
+JOIN project1.ers_user_roles ur 
+ON eu.user_role_id = ur.role_id
+where eu.ers_user_id = 17;
+
+SELECT * FROM project1.ers_reimbursements er 
+JOIN project1.ers_reimbursement_types ert 
+ON er.reimb_type_id = ert.reimb_type_id 
+JOIN project1.ers_reimbursement_statuses ers 
+ON er.reimb_status_id = ers.reimb_status_id
+WHERE er.reimb_id = 19;
+

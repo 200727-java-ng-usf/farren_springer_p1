@@ -15,43 +15,43 @@ public class ErsReimbursement {
     private Timestamp submitted;
     private Timestamp resolved;
     private String description;
-    private String receipt;
+//    private String receipt;
     private Integer authorId;
     private Integer resolverId;
-    private Status reimbursementStatusId;
-    private Type reimbursementTypeId;
+    private Status reimbursementStatus;
+    private Type reimbursementType;
 
 
     public ErsReimbursement() {
         super();
     }
 
-    public ErsReimbursement(Double amount, Type reimbursementTypeId) {
+    public ErsReimbursement(Double amount, Type reimbursementType) {
         this.amount = amount;
-        this.reimbursementTypeId = reimbursementTypeId;
+        this.reimbursementType = reimbursementType;
     }
 
     /**
      * Constructor
      * @param amount
-     * @param reimbursementTypeId
+     * @param reimbursementType
      * @param description
      */
-    public ErsReimbursement(Double amount, Type reimbursementTypeId, String description) {
-        this(amount, reimbursementTypeId);
+    public ErsReimbursement(Double amount, Type reimbursementType, String description) {
+        this(amount, reimbursementType);
         this.description = description;
         System.out.println("In constructor");
     }
 
-    public ErsReimbursement(Double amount, Type reimbursementTypeId, String description, Timestamp submitted) {
-        this(amount, reimbursementTypeId, description);
+    public ErsReimbursement(Double amount, Type reimbursementType, String description, Timestamp submitted) {
+        this(amount, reimbursementType, description);
         this.submitted = submitted;
         System.out.println("In constructor");
     }
 
-    public ErsReimbursement(Double amount, Type reimbursementTypeId, String description, Timestamp submitted, Status reimbursementStatusId) {
-        this(amount, reimbursementTypeId, description, submitted);
-        this.reimbursementStatusId = reimbursementStatusId;
+    public ErsReimbursement(Double amount, Type reimbursementType, String description, Timestamp submitted, Status reimbursementStatus) {
+        this(amount, reimbursementType, description, submitted);
+        this.reimbursementStatus = reimbursementStatus;
         System.out.println("In constructor");
     }
 
@@ -61,8 +61,8 @@ public class ErsReimbursement {
      * @param description
      * @param authorId
      */
-    public ErsReimbursement(Double amount, Type reimbursementTypeId, String description, Integer authorId) {
-        this(amount, reimbursementTypeId, description);
+    public ErsReimbursement(Double amount, Type reimbursementType, String description, Integer authorId) {
+        this(amount, reimbursementType, description);
         this.authorId = authorId;
     }
 
@@ -72,13 +72,13 @@ public class ErsReimbursement {
      * @param submitted
      * @param description
      * @param authorId
-     * @param reimbursementStatusId
-     * @param reimbursementTypeId
+     * @param reimbursementStatus
+     * @param reimbursementType
      */
-    public ErsReimbursement(Double amount, Timestamp submitted, String description, Integer authorId, Status reimbursementStatusId, Type reimbursementTypeId) {
-        this(amount, reimbursementTypeId, description, authorId);
+    public ErsReimbursement(Double amount, Timestamp submitted, String description, Integer authorId, Status reimbursementStatus, Type reimbursementType) {
+        this(amount, reimbursementType, description, authorId);
         this.submitted = submitted;
-        this.reimbursementStatusId = reimbursementStatusId;
+        this.reimbursementStatus = reimbursementStatus;
         this.authorId = authorId;
     }
 
@@ -88,16 +88,14 @@ public class ErsReimbursement {
      * @param submitted
      * @param resolved
      * @param description
-     * @param receipt
      * @param authorId
      * @param resolverId
-     * @param reimbursementStatusId
-     * @param reimbursementTypeId
+     * @param reimbursementStatus
+     * @param reimbursementType
      */
-    public ErsReimbursement(Double amount, Timestamp submitted, Timestamp resolved, String description, String receipt, Integer authorId, Integer resolverId, Status reimbursementStatusId, Type reimbursementTypeId) {
-        this(amount, submitted, description, authorId, reimbursementStatusId, reimbursementTypeId);
+    public ErsReimbursement(Double amount, Timestamp submitted, Timestamp resolved, String description, Integer authorId, Integer resolverId, Status reimbursementStatus, Type reimbursementType) {
+        this(amount, submitted, description, authorId, reimbursementStatus, reimbursementType);
         this.resolved = resolved;
-        this.receipt = receipt;
         this.resolverId = resolverId;
     }
 
@@ -108,14 +106,13 @@ public class ErsReimbursement {
      * @param submitted
      * @param resolved
      * @param description
-     * @param receipt
      * @param authorId
      * @param resolverId
-     * @param reimbursementStatusId
-     * @param reimbursementTypeId
+     * @param reimbursementStatus
+     * @param reimbursementType
      */
-    public ErsReimbursement(Integer id, Double amount, Timestamp submitted, Timestamp resolved, String description, String receipt, Integer authorId, Integer resolverId, Status reimbursementStatusId, Type reimbursementTypeId) {
-        this(amount, submitted, resolved, description, receipt, authorId, resolverId, reimbursementStatusId, reimbursementTypeId);
+    public ErsReimbursement(Integer id, Double amount, Timestamp submitted, Timestamp resolved, String description, Integer authorId, Integer resolverId, Status reimbursementStatus, Type reimbursementType) {
+        this(amount, submitted, resolved, description, authorId, resolverId, reimbursementStatus, reimbursementType);
         this.id = id;
 
     }
@@ -125,7 +122,7 @@ public class ErsReimbursement {
      * @param copy
      */
     public ErsReimbursement(ErsReimbursement copy) {
-        this(copy.id, copy.amount, copy.submitted, copy.resolved, copy.description, copy.receipt, copy.authorId, copy.resolverId, copy.reimbursementStatusId, copy.reimbursementTypeId);
+        this(copy.id, copy.amount, copy.submitted, copy.resolved, copy.description, copy.authorId, copy.resolverId, copy.reimbursementStatus, copy.reimbursementType);
     }
 
 
@@ -173,13 +170,13 @@ public class ErsReimbursement {
         this.description = description;
     }
 
-    public String getReceipt() {
-        return receipt;
-    }
-
-    public void setReceipt(String receipt) {
-        this.receipt = receipt;
-    }
+//    public String getReceipt() {
+//        return receipt;
+//    }
+//
+//    public void setReceipt(String receipt) {
+//        this.receipt = receipt;
+//    }
 
     public Integer getAuthorId() {
         return authorId;
@@ -197,20 +194,20 @@ public class ErsReimbursement {
         this.resolverId = resolverId;
     }
 
-    public Status getReimbursementStatusId() {
-        return reimbursementStatusId;
+    public Status getReimbursementStatus() {
+        return reimbursementStatus;
     }
 
-    public void setReimbursementStatusId(Status reimbursementStatusId) {
-        this.reimbursementStatusId = reimbursementStatusId;
+    public void setReimbursementStatus(Status reimbursementStatus) {
+        this.reimbursementStatus = reimbursementStatus;
     }
 
-    public Type getReimbursementTypeId() {
-        return reimbursementTypeId;
+    public Type getReimbursementType() {
+        return reimbursementType;
     }
 
-    public void setReimbursementTypeId(Type reimbursementTypeId) {
-        this.reimbursementTypeId = reimbursementTypeId;
+    public void setReimbursementType(Type reimbursementType) {
+        this.reimbursementType = reimbursementType;
     }
 
     /**
@@ -227,16 +224,16 @@ public class ErsReimbursement {
                 Objects.equals(submitted, that.submitted) &&
                 Objects.equals(resolved, that.resolved) &&
                 Objects.equals(description, that.description) &&
-                Objects.equals(receipt, that.receipt) &&
+//                Objects.equals(receipt, that.receipt) &&
                 Objects.equals(authorId, that.authorId) &&
                 Objects.equals(resolverId, that.resolverId) &&
-                Objects.equals(reimbursementStatusId, that.reimbursementStatusId) &&
-                Objects.equals(reimbursementTypeId, that.reimbursementTypeId);
+                Objects.equals(reimbursementStatus, that.reimbursementStatus) &&
+                Objects.equals(reimbursementType, that.reimbursementType);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, amount, submitted, resolved, description, receipt, authorId, resolverId, reimbursementStatusId, reimbursementTypeId);
+        return Objects.hash(id, amount, submitted, resolved, description, authorId, resolverId, reimbursementStatus, reimbursementType);
     }
 
     @Override
@@ -251,11 +248,11 @@ public class ErsReimbursement {
                 ",\n Submitted: " + submitted.toInstant().atZone(ZoneId.of("GMT")).format(DateTimeFormatter.RFC_1123_DATE_TIME) +
                 ",\n Resolved: " + resolved +
                 ",\n Description: '" + description + '\'' +
-                ",\n Receipt: " + receipt +
+//                ",\n Receipt: " + receipt +
                 ",\n Author ID: " + authorId +
                 ",\n Resolver ID: " + resolverId +
-                ",\n Status: " + reimbursementStatusId +
-                ",\n Type: " + reimbursementTypeId +
+                ",\n Status: " + reimbursementStatus +
+                ",\n Type: " + reimbursementType +
                 ' ' + "\n";
     }
 
@@ -265,11 +262,11 @@ public class ErsReimbursement {
                 ",\n Submitted: " + submitted.toInstant().atZone(ZoneId.of("GMT")).format(DateTimeFormatter.RFC_1123_DATE_TIME) +
                 ",\n Resolved: " + resolved.toInstant().atZone(ZoneId.of("GMT")).format(DateTimeFormatter.RFC_1123_DATE_TIME) +
                 ",\n Description: '" + description + '\'' +
-                ",\n Receipt: " + receipt +
+//                ",\n Receipt: " + receipt +
                 ",\n Author ID: " + authorId +
                 ",\n Resolver ID: " + resolverId +
-                ",\n Status: " + reimbursementStatusId +
-                ",\n Type: " + reimbursementTypeId +
+                ",\n Status: " + reimbursementStatus +
+                ",\n Type: " + reimbursementType +
                 ' ' + "\n";
     }
 
@@ -279,10 +276,10 @@ public class ErsReimbursement {
                 ",\n Submitted: " + submitted.toInstant().atZone(ZoneId.of("GMT")).format(DateTimeFormatter.RFC_1123_DATE_TIME) +
 
                 ",\n Description: '" + description + '\'' +
-                ",\n Receipt: " + receipt +
+//                ",\n Receipt: " + receipt +
                 ",\n AuthorId: " + authorId +
 
-                ",\n Type: " + reimbursementTypeId +
+                ",\n Type: " + reimbursementType +
                 ' ' + "\n";
     }
 }

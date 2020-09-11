@@ -81,6 +81,16 @@ public class UserService {
 
     }
 
+    public boolean isUsernameAvailable(String username) {
+        ErsUser user = userRepo.findUserByUsername(username).orElse(null);
+        return user == null;
+    }
+
+    public boolean isEmailAvailable(String email) {
+        ErsUser user = userRepo.findUserByEmail(email).orElse(null);
+        return user == null;
+    }
+
     public ErsUser getUserByUsername(String username) {
         return null;
     }

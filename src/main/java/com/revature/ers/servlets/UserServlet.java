@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Set;
@@ -24,6 +25,9 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        // TODO validate that a user is the same user that is trying to view itself
+        // TODO validate that a user is an admin before viewing all users
 
         ObjectMapper mapper = new ObjectMapper();
         PrintWriter respWriter = resp.getWriter();
@@ -43,9 +47,18 @@ public class UserServlet extends HttpServlet {
                 respWriter.write(userJSON);
 
             } else {
+
                 Set<ErsUser> users = userService.getAllUsers();
+
+                HttpSession session = req.getSession();
+                session.setAttribute("allUsers", users);
+
                 String usersJSON = mapper.writeValueAsString(users);
                 respWriter.write(usersJSON);
+
+                resp.setStatus(200); // 200 = OK
+                System.out.println(resp.getStatus());
+
             }
 
 
@@ -84,16 +97,22 @@ public class UserServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         resp.setContentType("application/json");
+
         ObjectMapper mapper = new ObjectMapper();
         PrintWriter respWriter = resp.getWriter();
+
         try {
+
             ErsUser newUser = mapper.readValue(req.getInputStream(), ErsUser.class);
             userService.register(newUser);
             System.out.println(newUser);
             String newUserJSON = mapper.writeValueAsString(newUser);
             respWriter.write(newUserJSON);
             resp.setStatus(201); // 201 = CREATED
+            System.out.println(resp.getStatus());
+
         } catch(MismatchedInputException mie) {
 
             resp.setStatus(400); // 400 = BAD REQUEST
