@@ -182,7 +182,7 @@ where author_id = 11 and reimb_status_id = 2;
 SELECT * FROM project1.ers_users eu 
 JOIN project1.ers_user_roles ur 
 ON eu.user_role_id = ur.role_id
-where eu.ers_user_id = 17;
+where eu.user_role_id = 1;
 
 SELECT * FROM project1.ers_reimbursements er 
 JOIN project1.ers_reimbursement_types ert 
@@ -190,4 +190,10 @@ ON er.reimb_type_id = ert.reimb_type_id
 JOIN project1.ers_reimbursement_statuses ers 
 ON er.reimb_status_id = ers.reimb_status_id
 WHERE er.reimb_id = 19;
+
+-- create user role values
+insert into project1.ers_user_roles (role_name)
+values ('Inactive');
+
+commit;
 

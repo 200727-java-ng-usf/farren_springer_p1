@@ -5,7 +5,8 @@ public enum Role {
     // values declared within enums are constants and are comma separated
     ADMIN("Admin"),
     FINANCE_MANAGER("Finance Manager"),
-    EMPLOYEE("Employee");
+    EMPLOYEE("Employee"),
+    INACTIVE("Inactive");
 
     private String roleName;
 
@@ -22,7 +23,7 @@ public enum Role {
             }
         }
 
-        return EMPLOYEE;
+        return INACTIVE; // default is inactive
 
         // functional implementation of the above code
 //        return Arrays.stream(Role.values())

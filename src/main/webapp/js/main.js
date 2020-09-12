@@ -7,6 +7,9 @@ window.onload = function() {
     document.getElementById('toHome').addEventListener('click', loadHome);
     document.getElementById('toLogout').addEventListener('click', logout);
     document.getElementById('toAllUsers').addEventListener('click', loadAllUsers);
+    document.getElementById('toAllReimbs').addEventListener('click', loadAllReimbs);
+    // document.getElementById('toAllPending').addEventListener('click', loadAllPending);
+    // document.getElementById('toSubmit').addEventListener('click', loadSubmit);
 }
 
 //----------------------LOAD VIEWS-------------------------
@@ -96,6 +99,78 @@ function loadAllUsers() {
 
 }
 
+function loadAllReimbs() {
+    
+    console.log('in loadAllReimbs()');
+
+    if (!localStorage.getItem('authUser')) { // make sure user is logged in. TODO make sure user is admin
+        console.log('No user logged in, navigating to login screen');
+        loadLogin();
+        return;
+    }
+
+    let xhr = new XMLHttpRequest();
+
+    xhr.open('GET', 'reimbs.view');
+    xhr.send();
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) { // && xhr.status == something (set in UserServlet?)
+            APP_VIEW.innerHTML = xhr.responseText;
+            configureAllReimbsView();
+        } 
+    }
+
+}
+
+// function loadAllPending() {
+
+//     console.log('in loadAllPending()');
+
+//     if (!localStorage.getItem('authUser')) { // make sure user is logged in. TODO make sure user is admin
+//         console.log('No user logged in, navigating to login screen');
+//         loadLogin();
+//         return;
+//     }
+
+//     let xhr = new XMLHttpRequest();
+
+//     xhr.open('GET', 'pending.view');
+//     xhr.send();
+
+//     xhr.onreadystatechange = function() {
+//         if (xhr.readyState == 4 && xhr.status == 200) { // && xhr.status == something (set in UserServlet?)
+//             APP_VIEW.innerHTML = xhr.responseText;
+//             configureAllPendingView();
+//         } 
+//     }
+
+// }
+
+// function loadSubmit() {
+
+//     console.log('in loadSubmit()');
+
+//     if (!localStorage.getItem('authUser')) { // make sure user is logged in. TODO make sure user is admin
+//         console.log('No user logged in, navigating to login screen');
+//         loadLogin();
+//         return;
+//     }
+
+//     let xhr = new XMLHttpRequest();
+
+//     xhr.open('GET', 'submit.view'); // third parameter of this method is optional (defaults to true)
+//     xhr.send();
+
+//     xhr.onreadystatechange = function() {
+//         if (xhr.readyState == 4 && xhr.status == 200) {
+//             APP_VIEW.innerHTML = xhr.responseText;
+//             configureSubmitView(); // TODO
+//         }
+//     }
+
+// }
+
 //----------------CONFIGURE VIEWS--------------------
 
 function configureLoginView() {
@@ -135,10 +210,70 @@ function configureAllUsersView() {
     console.log('in configureAllUsersView');
     let authUser = JSON.parse(localStorage.getItem('authUser'));
     document.getElementById('loggedInUsername').innerText = authUser.username;
-    let allUsers = JSON.parse(sessionStorage.getItem('allUsers')); // need to access DB layer here...?
-    document.getElementById('allUsers').innerText = allUsers.username;// Set from get method of UserServlet
+
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', 'users');
+    xhr.send();
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState = 4 && xhr.status == 200) {
+            document.getElementById('allUsers').innerText = xhr.responseText; // TODO dynamic rendering of table elements here
+        
+        }
+    }
 
 }
+
+function configureAllReimbsView() {
+
+    console.log('in configureAllReimbsView');
+    let authUser = JSON.parse(localStorage.getItem('authUser'));
+    document.getElementById('loggedInUsername').innerText = authUser.username;
+
+    let xhr = new XMLHttpRequest();
+    xhr.open("GET", "reimbs");
+    xhr.send();
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState = 4 && xhr.status == 200) {
+            document.getElementById('allReimbs').innerText = xhr.responseText; // TODO dynamic rendering of table elements here
+        
+        }
+    }
+}
+
+// function configureAllPendingView() {
+
+//     console.log('in configureAllPendingView');
+//     let authUser = JSON.parse(localStorage.getItem('authUser'));
+//     document.getElementById('loggedInUsername').innerText = authUser.username; 
+
+//     let xhr = new XMLHttpRequest();
+//     xhr.open('GET', 'pending');
+//     xhr.send();
+
+//     xhr.onreadystatechange = function() {
+//         if (xhr.readyState = 4 && xhr.status == 200) {
+//             document.getElementById('allPending').innerText = xhr.responseText; // TODO dynamic rendering of table elements here
+//         }
+//     }
+
+// }
+
+// function configureSubmitView() {
+
+//     console.log('in configureSubmitView()');
+
+//     document.getElementById('reg-message').setAttribute('hidden', true);
+
+//     document.getElementById('reg-username').addEventListener('blur', isUsernameAvailable);
+//     document.getElementById('email').addEventListener('blur', isEmailAvailable);
+
+//     document.getElementById('submit').setAttribute('disabled', true);
+//     document.getElementById('reg-button-container').addEventListener('mouseover', validateSubmitForm);
+//     document.getElementById('submit').addEventListener('click', submit);
+
+// }
 
 //------------------OPERATIONS-----------------------
 
@@ -295,23 +430,23 @@ function isEmailAvailable() {
     }
 }
 
-function findAllUsers() {
+// function findAllUsers() { // Don't need this
 
-    console.log('in findAllUsers()');
+//     console.log('in findAllUsers()');
 
-    let xhr = new XMLHttpRequest();
+//     let xhr = new XMLHttpRequest();
 
-    xhr.open('GET', 'users.view');
-    xhr.setRequestHeader('Content-type', 'application/json');
-    xhr.send();
+//     xhr.open('GET', 'users.view');
+//     xhr.setRequestHeader('Content-type', 'application/json');
+//     xhr.send();
 
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState == 4 ) { // && xhr.status == something to be set in UserServlet?
-            console.log('Displaying all users?');
-        } 
-    }
+//     xhr.onreadystatechange = function() {
+//         if (xhr.readyState == 4 ) { // && xhr.status == something to be set in UserServlet?
+//             console.log('Displaying all users?');
+//         } 
+//     }
 
-}
+// }
 
 //---------------------FORM VALIDATION-------------------------
 

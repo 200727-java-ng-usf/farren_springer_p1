@@ -29,6 +29,18 @@ public class RequestViewHelper {
             case "/farren_springer_p1/users.view":
                 return "partials/users.html";
 
+            case "/reimbs.view":
+            case "/farren_springer_p1/reimbs.view":
+                return "partials/reimbs.html";
+
+            case "/pending.view":
+            case "/farren_springer_p1/pending.view":
+                return "partials/pending.html";
+
+//            case "/submit.view":
+//            case "farren_springer_p1/submit.view":
+//                return "partials/submit.html";
+
             default:
                 return null;
 

@@ -4,6 +4,8 @@ import com.revature.ers.exceptions.InvalidRequestException;
 import com.revature.ers.exceptions.ResourceNotFoundException;
 import com.revature.ers.models.ErsReimbursement;
 import com.revature.ers.models.ErsUser;
+import com.revature.ers.models.Status;
+import com.revature.ers.models.Type;
 import com.revature.ers.repos.ReimbRepository;
 
 import java.util.Optional;
@@ -22,6 +24,42 @@ public class ReimbService {
         }
 
         return reimbs;
+    }
+
+    public Set<ErsReimbursement> getAllByStatus(Status status) {
+
+        Set<ErsReimbursement> reimbs = reimbRepo.findAllReimbsByStatus(status);
+
+        if (reimbs.isEmpty()) {
+            throw new ResourceNotFoundException();
+        }
+
+        return reimbs;
+
+    }
+
+    public Set<ErsReimbursement> getAllByType(Type type) {
+
+        Set<ErsReimbursement> reimbs = reimbRepo.findAllReimbsByType(type);
+
+        if (reimbs.isEmpty()) {
+            throw new ResourceNotFoundException();
+        }
+
+        return reimbs;
+
+    }
+
+    public Set<ErsReimbursement> getAllByAuthorId(Integer authorId) {
+
+        Set<ErsReimbursement> reimbs = reimbRepo.findAllReimbsByAuthorId(authorId);
+
+        if (reimbs.isEmpty()) {
+            throw new ResourceNotFoundException();
+        }
+
+        return reimbs;
+
     }
 
     public void register(ErsReimbursement newReimbursement) {

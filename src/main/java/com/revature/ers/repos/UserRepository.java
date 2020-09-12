@@ -76,6 +76,8 @@ public class UserRepository {
 
     }
 
+    // TODO find all users by role? Same as filter by enum in ReimbRepository
+
     public Optional<ErsUser> findUserByCredentials(String username, String password) {
 
         Optional<ErsUser> _user = Optional.empty();
@@ -178,6 +180,48 @@ public class UserRepository {
                 newUser.setId(rs.getInt(1));
 
             }
+
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
+
+    }
+
+    public boolean update(ErsUser ersUser) {
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            String sql = "UPDATE project1.ers_users "
+                    + "SET email = '" + ersUser.getEmail() + "', "
+                    + "username = '" + ersUser.getUsername() + "', "
+                    + "password = '" + ersUser.getPassword() + "', "
+                    + "first_name = '" + ersUser.getFirstName() + "', "
+                    + "last_name = '" + ersUser.getLastName() + "', "
+                    + "'user_role_id '" + ersUser.getRole().ordinal() + 1 + "' "
+                    + "WHERE ers_user_id = " + ersUser.getId();
+
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.executeUpdate(); //
+            pstmt.close();
+
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
+
+        return true;
+
+    }
+
+    public void makeInactive(ErsUser newUser) {
+
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            String sql = "UPDATE project1.ers_users "
+                    + "SET role_id = 4";
+
+            Statement stmt = conn.createStatement();
+            stmt.executeQuery(sql);
+
+//            }
 
         } catch (SQLException sqle) {
             sqle.printStackTrace();

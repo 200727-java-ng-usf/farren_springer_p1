@@ -50,9 +50,6 @@ public class UserServlet extends HttpServlet {
 
                 Set<ErsUser> users = userService.getAllUsers();
 
-                HttpSession session = req.getSession();
-                session.setAttribute("allUsers", users);
-
                 String usersJSON = mapper.writeValueAsString(users);
                 respWriter.write(usersJSON);
 

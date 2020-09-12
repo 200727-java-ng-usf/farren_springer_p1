@@ -70,6 +70,52 @@ public class ReimbRepository {
 
     }
 
+    public Set<ErsReimbursement> findAllReimbsByStatus(Status status) {
+
+        Set<ErsReimbursement> reimbs = new HashSet<>();
+        Integer statusInt = status.ordinal() + 1; // convert the enum constant to an ordinal to find in the DB
+
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            String sql = baseQuery + "WHERE reimb_status_id = ?";
+
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, statusInt);
+
+            ResultSet rs = pstmt.executeQuery();
+            reimbs = mapResultSet(rs);
+
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
+
+        return reimbs;
+
+    }
+
+    public Set<ErsReimbursement> findAllReimbsByType(Type type) {
+
+        Set<ErsReimbursement> reimbs = new HashSet<>();
+        Integer typeInt = type.ordinal() + 1; // convert the enum constant to an ordinal to find in the DB
+
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            String sql = baseQuery + "WHERE reimb_type_id = ?";
+
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, typeInt);
+
+            ResultSet rs = pstmt.executeQuery();
+            reimbs = mapResultSet(rs);
+
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
+
+        return reimbs;
+
+    }
+
 
     public void save(ErsReimbursement newReimbursement) {
 
@@ -103,6 +149,29 @@ public class ReimbRepository {
         }
 
     }
+
+    public Set<ErsReimbursement> findAllReimbsByAuthorId(Integer authorId) {
+
+        Set<ErsReimbursement> reimbs = new HashSet<>();
+
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            String sql = baseQuery + "WHERE author_id = ?";
+
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, authorId);
+
+            ResultSet rs = pstmt.executeQuery();
+            reimbs = mapResultSet(rs);
+
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
+
+        return reimbs;
+
+    }
+
 
     private Set<ErsReimbursement> mapResultSet(ResultSet rs) throws SQLException {
 
