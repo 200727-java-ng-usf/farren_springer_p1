@@ -231,15 +231,43 @@ function configureAllReimbsView() {
     document.getElementById('loggedInUsername').innerText = authUser.username;
 
     let xhr = new XMLHttpRequest();
-    xhr.open("GET", "reimbs");
+    xhr.open('GET', 'reimbs');
     xhr.send();
+
+    // xhr.onreadystatechange = function() {
+    //     if (xhr.readyState = 4 && xhr.status == 200) {
+    //         document.getElementById('allReimbs').innerText = xhr.responseText; // TODO dynamic rendering of table elements here
+        
+    //     }
+    // }
 
     xhr.onreadystatechange = function() {
         if (xhr.readyState = 4 && xhr.status == 200) {
-            document.getElementById('allReimbs').innerText = xhr.responseText; // TODO dynamic rendering of table elements here
+
+            let array = JSON.parse(xhr.responseText); // the response from a GET request to reimbs
+            let table = document.getElementById("allReimbsTable"); // accessing the HTML tag with this ID
+            let body = document.createElement("tbody"); // creating a tbody element
+
+            table.appendChild(body); // attaching the newly created element to the table that is already in the document
+
+            for (let i=0; i < array.length; i++) { // for every object in the response text...
+
+                let row = document.createElement("tr"); // create a row for that object
+
+                // each row has multiple data cells with information corresponsing the key value pairs in the response text
+                row.innerHTML = "<td>" + array[i].description + "</td>" 
+                                    + "<td>" + array[i].amount + "</td>"
+                                    + "<td>" + array[i].submitted + "</td>";
+                
+                body.appendChild(row); // appoend each row to the body after finding the information about the object
+                                
+            }
+
+            // document.getElementById('allReimbsTable').innerText = xhr.responseText; // TODO dynamic rendering of table elements here
         
         }
     }
+
 }
 
 // function configureAllPendingView() {
