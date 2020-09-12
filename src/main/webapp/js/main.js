@@ -10,6 +10,7 @@ window.onload = function() {
     document.getElementById('toAllReimbs').addEventListener('click', loadAllReimbs);
     // document.getElementById('toAllPending').addEventListener('click', loadAllPending);
     // document.getElementById('toSubmit').addEventListener('click', loadSubmit);
+    document.getElementById('pending').addEventListener('click', showPending);
 }
 
 //----------------------LOAD VIEWS-------------------------
@@ -217,7 +218,42 @@ function configureAllUsersView() {
 
     xhr.onreadystatechange = function() {
         if (xhr.readyState = 4 && xhr.status == 200) {
-            document.getElementById('allUsers').innerText = xhr.responseText; // TODO dynamic rendering of table elements here
+            
+            let array = JSON.parse(xhr.responseText); // the response from a GET request to reimbs
+            console.log(array);
+            let table = document.getElementById("allUsersTable"); // accessing the HTML tag with this ID
+            let head = document.createElement("thead"); // create the table head
+            let body = document.createElement("tbody"); // creating a tbody element
+
+            table.appendChild(head); // append the head
+            head.innerHTML = "<tr>" 
+                            + "<th>ID</th>"
+                            + "<th>Username</th>"
+                            + "<th>Password</th>"
+                            + "<th>First Name</th>"
+                            + "<th>Last Name</th>"
+                            + "<th>Email</th>"
+                            + "<th>Role</th>";
+                            console.log('test');
+            
+            table.appendChild(body); // attaching the newly created element to the table that is already in the document
+
+            for (let i=0; i < array.length; i++) { // for every object in the response text...
+
+                let row = document.createElement("tr"); // create a row for that object
+
+                // each row has multiple data cells with information corresponsing the key value pairs in the response text
+                row.innerHTML = "<td>" + array[i].id + "</td>" 
+                                    + "<td>" + array[i].username + "</td>"
+                                    + "<td>" + array[i].password + "</td>"
+                                    + "<td>" + array[i].firstName + "</td>"
+                                    + "<td>" + array[i].lastName + "</td>"
+                                    + "<td>" + array[i].email + "</td>"
+                                    + "<td>" + array[i].role + "</td>";
+                
+                body.appendChild(row); // appoend each row to the body after finding the information about the object
+                                
+            }
         
         }
     }
@@ -237,10 +273,23 @@ function configureAllReimbsView() {
     xhr.onreadystatechange = function() {
         if (xhr.readyState = 4 && xhr.status == 200) {
 
-            let array = JSON.parse(xhr.responseText); // the response from a GET request to reimbs
+            var array = JSON.parse(xhr.responseText); // the response from a GET request to reimbs
             let table = document.getElementById("allReimbsTable"); // accessing the HTML tag with this ID
+            let head = document.createElement("thead"); // create the table head
             let body = document.createElement("tbody"); // creating a tbody element
 
+            table.appendChild(head); // append the head
+            head.innerHTML = "<tr>" 
+                            + "<th>ID</th>"
+                            + "<th>Author</th>"
+                            + "<th>Description</th>"
+                            + "<th>Amount</th>"
+                            + "<th>Submitted</th>"
+                            + "<th>Type</th>"
+                            + "<th>Status</th>"
+                            + "<th>Resolved</th>"
+                            + "<th>Resolver</th>";
+            
             table.appendChild(body); // attaching the newly created element to the table that is already in the document
 
             for (let i=0; i < array.length; i++) { // for every object in the response text...
@@ -248,15 +297,15 @@ function configureAllReimbsView() {
                 let row = document.createElement("tr"); // create a row for that object
 
                 // each row has multiple data cells with information corresponsing the key value pairs in the response text
-                row.innerHTML = "<td>" + array[i].description + "</td>" 
+                row.innerHTML = "<td>" + array[i].id + "</td>" 
+                                    + "<td>" + array[i].authorId + "</td>"
+                                    + "<td>" + array[i].description + "</td>"
                                     + "<td>" + array[i].amount + "</td>"
                                     + "<td>" + array[i].submitted + "</td>"
-                                    + "<td>" + array[i].id + "</td>"
-                                    + "<td>" + array[i].resolved + "</td>"
-                                    + "<td>" + array[i].authorId + "</td>"
-                                    + "<td>" + array[i].resolverId + "</td>"
+                                    + "<td>" + array[i].reimbursementType + "</td>"
                                     + "<td>" + array[i].reimbursementStatus + "</td>"
-                                    + "<td>" + array[i].reimbursementType + "</td>";
+                                    + "<td>" + array[i].resolved + "</td>"
+                                    + "<td>" + array[i].resolverId + "</td>";
                 
                 body.appendChild(row); // appoend each row to the body after finding the information about the object
                                 
@@ -517,4 +566,6 @@ function validateRegisterForm() {
         document.getElementById('register').removeAttribute('disabled');
         document.getElementById('reg-message').setAttribute('hidden', true);
     }
+
+
 }

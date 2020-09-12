@@ -11,7 +11,7 @@ drop table ers_reimbursements;
 drop table ers_reimbursement_statuses;
 drop table ers_reimbursement_types;
 drop table ers_users;
-drop table ers_user_roles;
+drop table project1.ers_user_roles;
 
 CREATE USER project1_app
 WITH password 'revature';

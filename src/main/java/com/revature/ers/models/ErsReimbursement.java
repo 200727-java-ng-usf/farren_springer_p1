@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 /**
- * Reimbursement POJOs
+ * Reimbursement POJO
  */
 public class ErsReimbursement {
 

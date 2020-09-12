@@ -1,11 +1,15 @@
 <div id="reimbs-container">
     <h1>Hello, <span id="loggedInUsername"></span></h1>
     <div>
-        Reimbs Page works! TODO: put all reimbs dynamically in table using JS
+        Reimbs Page workssssyeah!
     </div>
-    <!-- <h5>All Reimbs: <span id="allReimbs"></span></h5> -->
+    <div id="myBtnContainer">
+        <button class="btn active" onclick="filterSelection('all')"> Show all</button>
+        <button class="btn" onclick="filterSelection('pending')"> Pending</button>
+        <button class="btn" onclick="filterSelection('approved')"> Approved</button>
+        <button class="btn" onclick="filterSelection('denied')"> Denied</button>
+      </div>
     <table id="allReimbsTable">
-        <!-- table that is populated dynamically in configureAllReimbsView()-->
         
     </table>
 </div>

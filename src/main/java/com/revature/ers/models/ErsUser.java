@@ -4,7 +4,7 @@ import java.util.Objects;
 import java.util.Set;
 
 /**
- * User POJOs
+ * User POJO
  */
 public class ErsUser {
 
