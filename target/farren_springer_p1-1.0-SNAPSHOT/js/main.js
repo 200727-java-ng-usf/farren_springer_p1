@@ -234,13 +234,6 @@ function configureAllReimbsView() {
     xhr.open('GET', 'reimbs');
     xhr.send();
 
-    // xhr.onreadystatechange = function() {
-    //     if (xhr.readyState = 4 && xhr.status == 200) {
-    //         document.getElementById('allReimbs').innerText = xhr.responseText; // TODO dynamic rendering of table elements here
-        
-    //     }
-    // }
-
     xhr.onreadystatechange = function() {
         if (xhr.readyState = 4 && xhr.status == 200) {
 
@@ -257,13 +250,17 @@ function configureAllReimbsView() {
                 // each row has multiple data cells with information corresponsing the key value pairs in the response text
                 row.innerHTML = "<td>" + array[i].description + "</td>" 
                                     + "<td>" + array[i].amount + "</td>"
-                                    + "<td>" + array[i].submitted + "</td>";
+                                    + "<td>" + array[i].submitted + "</td>"
+                                    + "<td>" + array[i].id + "</td>"
+                                    + "<td>" + array[i].resolved + "</td>"
+                                    + "<td>" + array[i].authorId + "</td>"
+                                    + "<td>" + array[i].resolverId + "</td>"
+                                    + "<td>" + array[i].reimbursementStatus + "</td>"
+                                    + "<td>" + array[i].reimbursementType + "</td>";
                 
                 body.appendChild(row); // appoend each row to the body after finding the information about the object
                                 
             }
-
-            // document.getElementById('allReimbsTable').innerText = xhr.responseText; // TODO dynamic rendering of table elements here
         
         }
     }
