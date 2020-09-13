@@ -13,18 +13,18 @@ window.onload = function() {
     document.getElementById('toAuthorReimbs').addEventListener('click', loadAuthorReimbs);
 }
 
-//JQUERY
-$(document).ready( function () {
-    $('#reimbsTable').DataTable();
-    } );(jQuery);
+// //JQUERY
+// $(document).ready( function () {
+//     $('#reimbsTable').DataTable();
+//     } );(jQuery);
 
-$(document).ready( function () {
-    $('#AllUsersTable').DataTable();
-    } );(jQuery);
+// $(document).ready( function () {
+//     $('#AllUsersTable').DataTable();
+//     } );(jQuery);
 
-    $(document).ready( function () {
-        $('#test-table').DataTable();
-     } );(jQuery);
+//     $(document).ready( function () {
+//         $('#test-table').DataTable();
+//      } );(jQuery);
 
 
 
@@ -135,6 +135,7 @@ function loadAllReimbs() {
     xhr.onreadystatechange = function() {
         if (xhr.readyState == 4 && xhr.status == 200) { // && xhr.status == something (set in UserServlet?)
             APP_VIEW.innerHTML = xhr.responseText;
+            document.getElementById('viewReimbDetails').addEventListener('click', findReimbDetails);
             configureAllReimbsView();
         } 
     }
@@ -190,6 +191,45 @@ function loadAuthorReimbs() {
 
 
 }
+
+function loadReimbDetails() {
+
+    console.log('in loadReimbDetails()');
+
+    if (!localStorage.getItem('authUser')) {
+        console.log('No user logged in, navigating to login screen');
+        loadLogin();
+        return;
+    }
+
+    let xhr = new XMLHttpRequest();
+
+    xhr.open('GET', 'reimbs');
+    xhr.send();
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            
+            let array = JSON.parse(xhr.responseText);
+            console.log(array);
+
+            APP_VIEW.innerHTML = "<h1>Reimb Details:</h1>"
+                                + "<h3> ID:" + array.id + "</h3>"
+                                + "<h3> Amount:" + array.amount + "</h3>"
+                                + "<h3> Submitted:" + array.submitted + "</h3>"
+                                + "<h3> Resolved:" + array.resolved + "</h3>"
+                                + "<h3> Description:" + array.description + "</h3>"
+                                + "<h3> Author:" + array.authorId + "</h3>"
+                                + "<h3> Resolver:" + array.resolverId + "</h3>"
+                                + "<h3> Status:" + array.reimbursementStatus + "</h3>"
+                                + "<h3> Type:" + array.reimbursementType + "</h3>";
+
+
+        }
+    }
+
+}
+
 
 //----------------CONFIGURE VIEWS--------------------
 
@@ -316,6 +356,7 @@ function configureAllReimbsView() {
     console.log('in configureAllReimbsView');
     let authUser = JSON.parse(localStorage.getItem('authUser'));
     document.getElementById('loggedInUsername').innerText = authUser.username;
+    document.getElementById('viewReimbDetails').addEventListener('click', findReimbDetails);
 
     let xhr = new XMLHttpRequest();
     xhr.open('GET', 'reimbs');
@@ -388,13 +429,13 @@ function configureAuthorReimbsView() {
 
     let authUser = JSON.parse(localStorage.getItem('authUser'));
     document.getElementById('loggedInUsername').innerText = authUser.username;
+    document.getElementById('viewReimbDetails').addEventListener('click', findReimbDetails);
 
-    let submitterId = authUser.id;
-    console.log(submitterId);
+    console.log(authUser.id);
 
     let xhr = new XMLHttpRequest();
     xhr.open('GET', 'reimbs');
-    xhr.send(submitterId);
+    xhr.send();
 
     xhr.onreadystatechange = function() {
         if (xhr.readyState = 4 && xhr.status == 200) {
@@ -443,6 +484,8 @@ function configureAuthorReimbsView() {
     }
 
 }
+
+
 
 
 
@@ -522,6 +565,37 @@ function register() {
             document.getElementById('reg-message').innerText = err.message;
         }
     }
+}
+
+function findReimbDetails() {
+
+    console.log('in findReimbDetails()');
+
+    let id = document.getElementById('reimbId').value;
+
+    let reimb = {
+        id: id
+    }
+
+    let reimbJSON = JSON.stringify(reimb);
+    console.log(reimbJSON);
+    console.log(reimbJSON.id);
+
+    let xhr = new XMLHttpRequest();
+
+    xhr.open('POST', 'auth'); // needs to be a post so that the body of send method will not be ignored
+    xhr.send(reimbJSON);
+
+    xhr.onreadystatechange = function () {
+        
+        if (xhr.readyState == 4 && xhr.status == 200) { // 201 created bc a new object will be created from the reimbId sent even though the reimb already exists.
+            localStorage.setItem('authReimb', reimb);
+            console.log(reimb);
+            loadReimbDetails(); // this function sent the ID. In the servlet, this should create an object to be used in the Reimb servlet(?) 
+        }
+
+    }
+
 }
 
 function submit() {

@@ -41,7 +41,10 @@ public class ReimbServlet extends HttpServlet {
         System.out.println(req.getRequestURI());
 
         System.out.println("below should be the authUser ID");
-        System.out.println(req.getSession().getAttribute("idToFindReimbs"));
+        System.out.println(req.getSession().getAttribute("authorIdToFindReimbs"));
+
+        System.out.println("below should be the reimbursement if one was assigned");
+        System.out.println(req.getSession().getAttribute("reimbursement"));
 
         try {
 
@@ -50,10 +53,10 @@ public class ReimbServlet extends HttpServlet {
             /**
              * Find the ID to see what role the user is
              */
-            Object authorIdParam = req.getSession().getAttribute("idToFindReimbs");
+            Object authorIdParam = req.getSession().getAttribute("authorIdToFindReimbs");
             System.out.println(authorIdParam.toString());
 
-
+            Object reimbursement = req.getSession().getAttribute("reimbursement");
 
 
             if (idParam != null) {
@@ -66,6 +69,17 @@ public class ReimbServlet extends HttpServlet {
                 // TODO get Reimbs by Author ID
 
             }
+            else if (reimbursement != null) {
+
+                ErsReimbursement ersReimbursement = (ErsReimbursement) reimbursement;
+
+                String ersReimbursementJSON = mapper.writeValueAsString(ersReimbursement);
+
+                respWriter.write(ersReimbursementJSON);
+
+                resp.setStatus(200); // 200 OK
+            }
+
             else if (authorIdParam != null) { // if the authorIdParam is not null...
 
                 int authorId = Integer.parseInt(String.valueOf(authorIdParam)); // turn the parameter to an int

@@ -4,11 +4,13 @@
         Reimbs Page worksssssdfgfdsh!
     </div>
     
-    <form> <!--add action attribute to this form-->
-        <label for="reimbId">Enter the Reimbursement ID to View Details:</label>
-        <input type="text" id="reimbId" name="reimbId"><br><br>
-        <input type="submit" value="View Details">
-    </form>
+    <div class="form-group">
+        <label for="reimbId">Enter Reimbursement ID to View Details</label> 
+        <input type="text" class="form-control" id="reimbId" placeholder="Ex: 27">
+    </div>
+    <div id="reg-button-container">
+        <button type="submit" class="btn btn-primary" id="viewReimbDetails">View Details</button>
+    </div>
 
     <table id="reimbsTable">
         
