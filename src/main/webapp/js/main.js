@@ -8,9 +8,7 @@ window.onload = function() {
     document.getElementById('toLogout').addEventListener('click', logout);
     document.getElementById('toAllUsers').addEventListener('click', loadAllUsers);
     document.getElementById('toAllReimbs').addEventListener('click', loadAllReimbs);
-    // document.getElementById('toAllPending').addEventListener('click', loadAllPending);
-    // document.getElementById('toSubmit').addEventListener('click', loadSubmit);
-    document.getElementById('pending').addEventListener('click', showPending);
+    document.getElementById('toSubmit').addEventListener('click', loadSubmit);
 }
 
 //----------------------LOAD VIEWS-------------------------
@@ -124,53 +122,30 @@ function loadAllReimbs() {
 
 }
 
-// function loadAllPending() {
 
-//     console.log('in loadAllPending()');
+function loadSubmit() {
 
-//     if (!localStorage.getItem('authUser')) { // make sure user is logged in. TODO make sure user is admin
-//         console.log('No user logged in, navigating to login screen');
-//         loadLogin();
-//         return;
-//     }
+    console.log('in loadSubmit()');
 
-//     let xhr = new XMLHttpRequest();
+    if (!localStorage.getItem('authUser')) { // make sure user is logged in. TODO make sure user is admin
+        console.log('No user logged in, navigating to login screen');
+        loadLogin();
+        return;
+    }
 
-//     xhr.open('GET', 'pending.view');
-//     xhr.send();
+    let xhr = new XMLHttpRequest();
 
-//     xhr.onreadystatechange = function() {
-//         if (xhr.readyState == 4 && xhr.status == 200) { // && xhr.status == something (set in UserServlet?)
-//             APP_VIEW.innerHTML = xhr.responseText;
-//             configureAllPendingView();
-//         } 
-//     }
+    xhr.open('GET', 'submit.view'); // third parameter of this method is optional (defaults to true)
+    xhr.send();
 
-// }
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            APP_VIEW.innerHTML = xhr.responseText;
+            configureSubmitView(); 
+        }
+    }
 
-// function loadSubmit() {
-
-//     console.log('in loadSubmit()');
-
-//     if (!localStorage.getItem('authUser')) { // make sure user is logged in. TODO make sure user is admin
-//         console.log('No user logged in, navigating to login screen');
-//         loadLogin();
-//         return;
-//     }
-
-//     let xhr = new XMLHttpRequest();
-
-//     xhr.open('GET', 'submit.view'); // third parameter of this method is optional (defaults to true)
-//     xhr.send();
-
-//     xhr.onreadystatechange = function() {
-//         if (xhr.readyState == 4 && xhr.status == 200) {
-//             APP_VIEW.innerHTML = xhr.responseText;
-//             configureSubmitView(); // TODO
-//         }
-//     }
-
-// }
+}
 
 //----------------CONFIGURE VIEWS--------------------
 
@@ -307,47 +282,32 @@ function configureAllReimbsView() {
                                     + "<td>" + array[i].resolved + "</td>"
                                     + "<td>" + array[i].resolverId + "</td>";
                 
-                body.appendChild(row); // appoend each row to the body after finding the information about the object
+                body.appendChild(row); // append each row to the body after finding the information about the object
                                 
             }
-        
+
+            
+            //JQUERY
+            $(document).ready( function () {
+                $('#AllReimbsTable').DataTable();
+                } );(jQuery);
         }
     }
 
 }
 
-// function configureAllPendingView() {
 
-//     console.log('in configureAllPendingView');
-//     let authUser = JSON.parse(localStorage.getItem('authUser'));
-//     document.getElementById('loggedInUsername').innerText = authUser.username; 
+function configureSubmitView() {
 
-//     let xhr = new XMLHttpRequest();
-//     xhr.open('GET', 'pending');
-//     xhr.send();
+    console.log('in configureSubmitView()');
 
-//     xhr.onreadystatechange = function() {
-//         if (xhr.readyState = 4 && xhr.status == 200) {
-//             document.getElementById('allPending').innerText = xhr.responseText; // TODO dynamic rendering of table elements here
-//         }
-//     }
+    document.getElementById('submit-message').setAttribute('hidden', true);
 
-// }
+    document.getElementById('submit').setAttribute('disabled', true);
+    document.getElementById('submit-button-container').addEventListener('mouseover', validateSubmitForm);
+    document.getElementById('submit').addEventListener('click', submit);
 
-// function configureSubmitView() {
-
-//     console.log('in configureSubmitView()');
-
-//     document.getElementById('reg-message').setAttribute('hidden', true);
-
-//     document.getElementById('reg-username').addEventListener('blur', isUsernameAvailable);
-//     document.getElementById('email').addEventListener('blur', isEmailAvailable);
-
-//     document.getElementById('submit').setAttribute('disabled', true);
-//     document.getElementById('reg-button-container').addEventListener('mouseover', validateSubmitForm);
-//     document.getElementById('submit').addEventListener('click', submit);
-
-// }
+}
 
 //------------------OPERATIONS-----------------------
 
@@ -423,6 +383,41 @@ function register() {
             document.getElementById('reg-message').removeAttribute('hidden');
             let err = JSON.parse(xhr.responseText);
             document.getElementById('reg-message').innerText = err.message;
+        }
+    }
+}
+
+function submit() {
+
+    console.log('in submit()');
+
+    let amount = document.getElementById('amount').value;
+    let type = document.getElementById('type').value;
+    let description = document.getElementById('description').value;
+    let authUser = JSON.parse(localStorage.getItem('authUser')); // authUser is the currentUser logged in. Use this to find authorId field of reimbursement object
+
+    let newReimb = {
+        amount: amount,
+        reimbursementType: type,
+        description: description,
+        submitted: new Date(),
+        authorId: authUser.id
+    }
+
+    let newReimbJSON = JSON.stringify(newReimb);
+
+    let xhr = new XMLHttpRequest();
+
+    xhr.open('POST', 'reimbs');
+    xhr.send(newReimbJSON);
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 201) {
+            loadHome();
+        } else if (xhr.readyState == 4 && xhr.status != 201) {
+            document.getElementById('submit-message').removeAttribute('hidden');
+            let err = JSON.parse(xhr.responseText);
+            document.getElementById('submit-message').innerText = err.message;
         }
     }
 
@@ -504,23 +499,6 @@ function isEmailAvailable() {
     }
 }
 
-// function findAllUsers() { // Don't need this
-
-//     console.log('in findAllUsers()');
-
-//     let xhr = new XMLHttpRequest();
-
-//     xhr.open('GET', 'users.view');
-//     xhr.setRequestHeader('Content-type', 'application/json');
-//     xhr.send();
-
-//     xhr.onreadystatechange = function() {
-//         if (xhr.readyState == 4 ) { // && xhr.status == something to be set in UserServlet?
-//             console.log('Displaying all users?');
-//         } 
-//     }
-
-// }
 
 //---------------------FORM VALIDATION-------------------------
 
@@ -565,6 +543,26 @@ function validateRegisterForm() {
     } else {
         document.getElementById('register').removeAttribute('disabled');
         document.getElementById('reg-message').setAttribute('hidden', true);
+    }
+
+
+}
+
+function validateSubmitForm() {
+
+    console.log('in validateSubmitForm()');
+
+    let amount = document.getElementById('amount').value;
+    let type = document.getElementById('type').value;
+    let description = document.getElementById('description').value;
+
+    if (!amount || !type || !description) {
+        document.getElementById('submit-message').removeAttribute('hidden');
+        document.getElementById('submit-message').innerText = 'You must provided values for all fields in the form!'
+        document.getElementById('submit').setAttribute('disabled', true);
+    } else {
+        document.getElementById('submit').removeAttribute('disabled');
+        document.getElementById('submit-message').setAttribute('hidden', true);
     }
 
 

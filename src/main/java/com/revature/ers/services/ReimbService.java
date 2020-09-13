@@ -68,7 +68,7 @@ public class ReimbService {
             throw new InvalidRequestException("Invalid reimbursement field values provided during registration!");
         }
 //
-        Optional<ErsReimbursement> existingReimb = reimbRepo.findReimbById(newReimbursement.getId());
+//        Optional<ErsReimbursement> existingReimb = reimbRepo.findReimbById(newReimbursement.getId());
 
         // repeats of reimbs okay? No required unique values
 //        if(existingReimb.isPresent()) {

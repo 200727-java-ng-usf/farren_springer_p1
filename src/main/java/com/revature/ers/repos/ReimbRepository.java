@@ -130,8 +130,8 @@ public class ReimbRepository {
             pstmt.setTimestamp(2, newReimbursement.getSubmitted());
             pstmt.setString(3, newReimbursement.getDescription());
             pstmt.setInt(4, newReimbursement.getAuthorId());
-            pstmt.setInt(6, newReimbursement.getReimbursementStatus().ordinal() + 1);
-            pstmt.setInt(6, newReimbursement.getReimbursementType().ordinal() + 1);
+            pstmt.setInt(5, 1); // all new reimbursements will be set to pending
+            pstmt.setInt(6, newReimbursement.getReimbursementType().ordinal());
 
             int rowsInserted = pstmt.executeUpdate();
 

@@ -156,16 +156,20 @@ public class ReimbServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         resp.setContentType("application/json");
         ObjectMapper mapper = new ObjectMapper();
         PrintWriter respWriter = resp.getWriter();
+
         try {
+
             ErsReimbursement newReimbursement = mapper.readValue(req.getInputStream(), ErsReimbursement.class);
             reimbService.register(newReimbursement);
             System.out.println(newReimbursement);
             String newReimbursementJSON = mapper.writeValueAsString(newReimbursement);
             respWriter.write(newReimbursementJSON);
             resp.setStatus(201); // 201 = CREATED
+
         } catch(MismatchedInputException mie) {
 
             resp.setStatus(400); // 400 = BAD REQUEST
