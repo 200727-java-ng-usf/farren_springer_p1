@@ -29,12 +29,14 @@ public class ReimbServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        System.out.println("in ReimbServlet doGet");
+
         ObjectMapper mapper = new ObjectMapper();
         PrintWriter respWriter = resp.getWriter();
         resp.setContentType("application/json");
 
 
-        System.out.println("below should be the reimb_id");
+        System.out.println("below should be the reimb_id (may be null)");
         System.out.println(req.getParameter("reimb_id"));
 
         System.out.println("below is the requestURI");
@@ -205,6 +207,8 @@ public class ReimbServlet extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        System.out.println("in ReimbServlet doPost");
 
         resp.setContentType("application/json");
         ObjectMapper mapper = new ObjectMapper();

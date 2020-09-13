@@ -26,6 +26,8 @@ public class UserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        System.out.println("in UserServlet doGet");
+
         // TODO validate that a user is the same user that is trying to view itself
         // TODO validate that a user is an admin before viewing all users
 
@@ -95,6 +97,8 @@ public class UserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        System.out.println("in UserServlet doPost");
+
         resp.setContentType("application/json");
 
         ObjectMapper mapper = new ObjectMapper();
@@ -102,13 +106,66 @@ public class UserServlet extends HttpServlet {
 
         try {
 
-            ErsUser newUser = mapper.readValue(req.getInputStream(), ErsUser.class);
-            userService.register(newUser);
-            System.out.println(newUser);
-            String newUserJSON = mapper.writeValueAsString(newUser);
-            respWriter.write(newUserJSON);
-            resp.setStatus(201); // 201 = CREATED
-            System.out.println(resp.getStatus());
+
+            // first, see if the userToUpdate attribute exists
+            // find the original user in the database
+
+            if (req.getSession().getAttribute("userIdToUpdate") != null) { // if this attribute is NOT null, then it is an update
+
+                System.out.println("User to update exists!");
+
+                // find the original user to update
+                Object userId = req.getSession().getAttribute("userIdToUpdate");
+                System.out.println("This is the user ID: " + userId);
+
+                String string = String.valueOf(userId); // turn the object to a string first
+                System.out.println("This is the string version of the request value: " + string);
+
+                String cleanString = string.replaceAll("\\D+", ""); // take the characters out of the string to leave just numbers
+                System.out.println("This is the string with only numbers: " + cleanString);
+
+                Integer integer = Integer.parseInt(cleanString); // parse the string for int
+                System.out.println("This is that same string as an integer: " + integer);
+
+                ErsUser userToUpdate = userService.getUserById(integer); // find the user
+                System.out.println("This is the user that was found based on the request: " + userToUpdate);
+
+                // find the updated information to set the original user to
+                ErsUser userWithUpdatedInfo = mapper.readValue(req.getInputStream(), ErsUser.class);
+
+                System.out.println("This contains the updated information:" + userWithUpdatedInfo.toString());
+                System.out.println("Note that the ID will be null...");
+
+                // reassign the fields to the new info in the service layer
+                userToUpdate.setFirstName(userWithUpdatedInfo.getFirstName());
+                userToUpdate.setLastName(userWithUpdatedInfo.getLastName());
+                userToUpdate.setEmail(userWithUpdatedInfo.getEmail());
+                userToUpdate.setUsername(userWithUpdatedInfo.getUsername());
+                userToUpdate.setPassword(userWithUpdatedInfo.getPassword());
+
+                // update the DB
+                userService.update(userToUpdate);
+
+                HttpSession session = req.getSession();
+                session.setAttribute("userUpdated", userToUpdate); // assign that user to the session. TODO unset this attribute once they are updated?
+
+                String userUpdatedJSON = mapper.writeValueAsString(userToUpdate);
+                respWriter.write(userUpdatedJSON); // return the user (if found) to the response
+
+                resp.setStatus(201); // 201 = CREATED because new information?
+
+            }
+            else { // if this block is executed, the admin has not chosen a user to update
+                // So, this is a new user to register
+                ErsUser newUser = mapper.readValue(req.getInputStream(), ErsUser.class);
+                userService.register(newUser);
+                System.out.println(newUser);
+                String newUserJSON = mapper.writeValueAsString(newUser);
+                respWriter.write(newUserJSON);
+                resp.setStatus(201); // 201 = CREATED
+                System.out.println(resp.getStatus());
+            }
+
 
         } catch(MismatchedInputException mie) {
 

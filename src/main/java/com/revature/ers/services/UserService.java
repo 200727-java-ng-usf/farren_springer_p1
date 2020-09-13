@@ -6,7 +6,11 @@ import com.revature.ers.exceptions.ResourceNotFoundException;
 import com.revature.ers.models.ErsUser;
 import com.revature.ers.models.Role;
 import com.revature.ers.repos.UserRepository;
+import com.revature.ers.util.ConnectionFactory;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -100,7 +104,29 @@ public class UserService {
     }
 
     public boolean update(ErsUser updatedUser) {
-        return false;
+
+        // updated user will either have field values that are new or that are assigned
+        // to the original values, so it is okay to reassign all of them.
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            String sql = "UPDATE project1.ers_users "
+                    + "SET email = '" + updatedUser.getEmail() + "', "
+                    + "username = '" + updatedUser.getUsername() + "', "
+                    + "password = '" + updatedUser.getPassword() + "', "
+                    + "first_name = '" + updatedUser.getFirstName() + "', "
+                    + "last_name = '" + updatedUser.getLastName() + "' "
+//                    + "', " // TODO update role
+                    + "WHERE ers_user_id = " + updatedUser.getId();
+
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.executeUpdate(); //
+            pstmt.close();
+
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
+
+        return true;
     }
 
     /**

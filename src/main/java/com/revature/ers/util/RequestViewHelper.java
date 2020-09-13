@@ -6,6 +6,9 @@ public class RequestViewHelper {
 
     public String process(HttpServletRequest req) {
 
+        System.out.println("In RequestViewHelper process()");
+        System.out.println(req.getRequestURI());
+
         switch (req.getRequestURI()) {
 
             case "/login.view": // for AWS deployment
@@ -36,6 +39,10 @@ public class RequestViewHelper {
             case "/submit.view":
             case "/farren_springer_p1/submit.view":
                 return "partials/submit.html";
+
+            case "/updateuser.view":
+            case "/farren_springer_p1/updateuser.view":
+                return "partials/updateuser.html";
 
             default:
                 return null;

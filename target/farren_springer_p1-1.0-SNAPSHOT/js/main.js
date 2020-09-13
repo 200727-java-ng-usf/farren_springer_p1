@@ -111,6 +111,7 @@ function loadAllUsers() {
     xhr.onreadystatechange = function() {
         if (xhr.readyState == 4 && xhr.status == 200) { // && xhr.status == something (set in UserServlet?)
             APP_VIEW.innerHTML = xhr.responseText;
+            // document.getElementById('findUserToEdit').addEventListener('click', findUserToEdit);
             configureAllUsersView();
         } 
     }
@@ -135,7 +136,6 @@ function loadAllReimbs() {
     xhr.onreadystatechange = function() {
         if (xhr.readyState == 4 && xhr.status == 200) { // && xhr.status == something (set in UserServlet?)
             APP_VIEW.innerHTML = xhr.responseText;
-            document.getElementById('viewReimbDetails').addEventListener('click', findReimbDetails);
             configureAllReimbsView();
         } 
     }
@@ -230,6 +230,24 @@ function loadReimbDetails() {
 
 }
 
+function loadUpdateUser() {
+
+    console.log('in loadUpdateUser()');
+
+    let xhr = new XMLHttpRequest();
+
+    xhr.open('GET', 'updateuser.view'); // third parameter of this method is optional (defaults to true)
+    xhr.send();
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            APP_VIEW.innerHTML = xhr.responseText;
+            configureUpdateUserView();
+        }
+    }
+
+}
+
 
 //----------------CONFIGURE VIEWS--------------------
 
@@ -302,6 +320,7 @@ function configureAllUsersView() {
     console.log('in configureAllUsersView');
     let authUser = JSON.parse(localStorage.getItem('authUser'));
     document.getElementById('loggedInUsername').innerText = authUser.username;
+    document.getElementById('findUserToEdit').addEventListener('click', findUserToEdit);
 
     let xhr = new XMLHttpRequest();
     xhr.open('GET', 'users');
@@ -485,6 +504,21 @@ function configureAuthorReimbsView() {
 
 }
 
+function configureUpdateUserView() {
+
+    console.log('in configureUpdateUserView()');
+
+    document.getElementById('update-message').setAttribute('hidden', true);
+
+    document.getElementById('username-update').addEventListener('blur', isUsernameAvailable);
+    document.getElementById('email-update').addEventListener('blur', isEmailAvailable);
+
+    // document.getElementById('update').setAttribute('disabled', true);
+    // document.getElementById('update-button-container').addEventListener('mouseover', validateUpdateForm);
+    document.getElementById('update').addEventListener('click', updateUser);
+
+}
+
 
 
 
@@ -558,13 +592,71 @@ function register() {
 
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 4 && xhr.status == 201) {
-            loadLogin();
+            loadHome(); // user should be logged in as admin to make a new user. So, return to home after done registering new user
         } else if (xhr.readyState == 4 && xhr.status != 201) {
             document.getElementById('reg-message').removeAttribute('hidden');
             let err = JSON.parse(xhr.responseText);
             document.getElementById('reg-message').innerText = err.message;
         }
     }
+}
+
+function updateUser() {
+
+    console.log('in updateUser()');
+
+    let newfn = document.getElementById('fn-update').value;
+    let newln = document.getElementById('ln-update').value;
+    let newEmail = document.getElementById('email-update').value;
+    let newun = document.getElementById('username-update').value;
+    let newpw = document.getElementById('password-update').value;
+
+    let oldUser = localStorage.getItem('userToUpdate'); // the userToUpdate was set in findUserToUpdate()
+
+    // if any of the fields in the update form are null, assign the original user fields to that field.
+    if (newfn == null) {
+        newfn = oldUser.firstName;
+    }
+    if (newln == null) {
+        newln = oldUser.lastName;
+    }
+    if (newEmail == null) {
+        newEmail = oldUser.email;
+    }
+    if (newun == null) {
+        newun = oldUser.username;
+    }
+    if (newpw == null) {
+        newpw = oldUser.password;
+    }
+
+    // this will have either the values entered in the form or the old information if nothing was entered
+    let updatedUser = {
+        firstName: newfn,
+        lastName: newln,
+        email: newEmail,
+        username: newun,
+        password: newpw
+    }
+
+    let updatedUserJSON = JSON.stringify(updatedUser);
+
+    let xhr = new XMLHttpRequest();
+
+    xhr.open('POST', 'users');
+    xhr.send(updatedUserJSON);
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 201) { // 201 CREATED bc new data? 
+            loadHome(); // loadHome after updating a user? Could also load the allUsers again
+        } else if (xhr.readyState == 4 && xhr.status != 201) {
+            document.getElementById('update-message').removeAttribute('hidden'); // to make an attribute not hidden. TODO could use this for navbar depending on user role?
+            let err = JSON.parse(xhr.responseText);
+            document.getElementById('update-message').innerText = err.message;
+        }
+    }
+
+
 }
 
 function findReimbDetails() {
@@ -596,6 +688,36 @@ function findReimbDetails() {
 
     }
 
+}
+
+function findUserToEdit() {
+
+    console.log('in findUserToEdit()');
+
+    let id = document.getElementById('userId').value;
+    console.log(id);
+
+    let user = {
+        id: id
+    }
+
+    let userJSON = JSON.stringify(user);
+    console.log(userJSON);
+    console.log(userJSON.id);
+
+    let xhr = new XMLHttpRequest();
+
+    xhr.open('POST', 'auth');
+    xhr.send(userJSON);
+
+    xhr.onreadystatechange = function() {
+
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            localStorage.setItem('userToUpdate', user);
+            console.log(user);
+            loadUpdateUser();
+        }
+    }
 }
 
 function submit() {

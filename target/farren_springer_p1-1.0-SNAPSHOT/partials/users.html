@@ -1,13 +1,15 @@
 <div id="users-container">
     <h1>Hello, <span id="loggedInUsername"></span></h1>
     <div>
-        Users Pageeeiiiioooasdfsdf!
+        Users Page!
     </div>
-    <form action="viewdetails.html"> <!--add action attribute to this form-->
-        <label for="userId">Enter the User ID to View Details:</label>
-        <input type="text" id="userId" name="userId"><br><br>
-        <input type="submit" value="View Details">
-    </form>
+    <div class="form-group">
+        <label for="userId">Enter User ID to Edit</label> 
+        <input type="text" class="form-control" id="userId" placeholder="Ex: 14">
+    </div>
+    <div id="update-button-container">
+        <button type="submit" class="btn btn-primary" id="findUserToEdit">Edit</button>
+    </div>
     <table id="allUsersTable">
         <!-- table that is populated dynamically in configureAllUsersView()-->
     </table>
