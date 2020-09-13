@@ -10,6 +10,7 @@ import com.revature.ers.models.ErsUser;
 import com.revature.ers.models.Status;
 import com.revature.ers.models.Type;
 import com.revature.ers.services.ReimbService;
+import com.revature.ers.services.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,6 +25,7 @@ import java.util.Set;
 public class ReimbServlet extends HttpServlet {
 
     private final ReimbService reimbService = new ReimbService();
+    private final UserService userService = new UserService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -40,6 +42,12 @@ public class ReimbServlet extends HttpServlet {
         try {
 
             String idParam = req.getParameter("reimb_id");
+//            String userIdParam = req.getParameter("ers_user_id");
+//
+//            Integer userIdParamAsInt = Integer.parseInt(userIdParam);
+//            System.out.println(userIdParamAsInt);
+//
+//            ErsUser currentUser = userService.getUserById(userIdParamAsInt);
 
             if (idParam != null) {
 
@@ -51,22 +59,25 @@ public class ReimbServlet extends HttpServlet {
                 // TODO get Reimbs by Author ID
 
             }
+//            else if (userIdParamAsInt != null) {
+//
+//                System.out.println("Finding reimbs by authorId");
+//
+//                Set<ErsReimbursement> reimbs = reimbService.getAllByAuthorId(currentUser.getId()); // userIdParamAsInt should be the same as authorId
+//
+//                String reimbsJSON = mapper.writeValueAsString(reimbs);
+//                respWriter.write(reimbsJSON);
+//
+//                resp.setStatus(200); // 200 = OK
+//                System.out.println(resp.getStatus());
+//                System.out.println(req.getRequestURI());
+//
+//            }
 
 
-//            else if (req.getRequestURI() == "reimbs/pending") {
-//                String JSON; // string to be written as response
-//                switch (req.getRequestURI()) {
-//                    case "/reimbs/pending":
-//                        Set<ErsReimbursement> pendingReimbs = reimbService.getAllByStatus(Status.PENDING);
-//                        JSON = mapper.writeValueAsString(pendingReimbs);
-//                        break;
-//            }
-//            }
-                //switch for status
-//            } else if (typeParam != null) {
-//                //switch for type(?)
-//            }
             else {
+
+                System.out.println("No authorID found. Finding all reimbs");
 
                 Set<ErsReimbursement> reimbs = reimbService.getAllReimbs();
 

@@ -2,6 +2,7 @@ const APP_VIEW = document.getElementById('app-view');
 
 window.onload = function() {
     loadLogin();
+    console.log('test beginning');
     document.getElementById('toLogin').addEventListener('click', loadLogin);
     document.getElementById('toRegister').addEventListener('click', loadRegister);
     document.getElementById('toHome').addEventListener('click', loadHome);
@@ -9,7 +10,23 @@ window.onload = function() {
     document.getElementById('toAllUsers').addEventListener('click', loadAllUsers);
     document.getElementById('toAllReimbs').addEventListener('click', loadAllReimbs);
     document.getElementById('toSubmit').addEventListener('click', loadSubmit);
+    document.getElementById('toAuthorReimbs').addEventListener('click', loadAuthorReimbs);
 }
+
+//JQUERY
+$(document).ready( function () {
+    $('#reimbsTable').DataTable();
+    } );(jQuery);
+
+$(document).ready( function () {
+    $('#AllUsersTable').DataTable();
+    } );(jQuery);
+
+    $(document).ready( function () {
+        $('#test-table').DataTable();
+     } );(jQuery);
+
+
 
 //----------------------LOAD VIEWS-------------------------
 
@@ -67,7 +84,9 @@ function loadHome() {
 
     xhr.onreadystatechange = function() {
         if (xhr.readyState == 4 && xhr.status == 200) {
+            console.log('after onreadystatechange');
             APP_VIEW.innerHTML = xhr.responseText;
+            console.log('after loading the username from the response text');
             configureHomeView();
         }
     }
@@ -147,6 +166,31 @@ function loadSubmit() {
 
 }
 
+function loadAuthorReimbs() {
+
+    console.log('in loadAuthorReimbs()');
+
+    if (!localStorage.getItem('authUser')) {
+        console.log('No user logged in, navigating to login screen');
+        loadLogin();
+        return;
+    }
+
+    let xhr = new XMLHttpRequest();
+
+    xhr.open('GET', 'reimbs.view');
+    xhr.send();
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            APP_VIEW.innerHTML = xhr.responseText;
+            configureAuthorReimbsView();
+        }
+    }
+
+
+}
+
 //----------------CONFIGURE VIEWS--------------------
 
 function configureLoginView() {
@@ -176,8 +220,40 @@ function configureRegisterView() {
 
 function configureHomeView() {
 
+    console.log('in configureHomeView');
+
     let authUser = JSON.parse(localStorage.getItem('authUser'));
+    let options = document.getElementById('role-specific-options');
+
     document.getElementById('loggedInUsername').innerText = authUser.username;
+
+    console.log(authUser.role);
+    console.log('User role should be logged above');
+
+    // if the authUser's role is admin, configure the admin page
+    if (authUser.role == 'Admin') {
+
+        console.log('user is an admin! Configuring admin view');
+
+        options.innerHTML = "<a class='nav-item nav-link' id='toRegister'>Register</a>"
+                            + "<a class='nav-item nav-link' id='toAllUsers'>All Users</a>"; // add these to the div
+
+    } else if (authUser.role == 'Finance Manager') {
+
+        console.log('user is a finance manager! Configuring manager view');
+
+        options.innerHTML = "<a class='nav-item nav-link' id='toAllReimbs'>All Reimbursements</a>";
+
+        document.getElementById('toAllReimbs').addEventListener('click', loadAllReimbs);
+
+    } else if (authUser.role == 'Employee') {
+
+        console.log ('user is an employee! Configuring employee view');
+
+        options.innerHTML = "<a class='nav-item nav-link' id='toSubmit'>Submit</a>"
+                            + "<a class='nav-item nav-link' id='toAuthorReimbs'>My Reimbursements</a>";
+
+    }
 
 }
 
@@ -249,7 +325,7 @@ function configureAllReimbsView() {
         if (xhr.readyState = 4 && xhr.status == 200) {
 
             var array = JSON.parse(xhr.responseText); // the response from a GET request to reimbs
-            let table = document.getElementById("allReimbsTable"); // accessing the HTML tag with this ID
+            let table = document.getElementById("reimbsTable"); // accessing the HTML tag with this ID
             let head = document.createElement("thead"); // create the table head
             let body = document.createElement("tbody"); // creating a tbody element
 
@@ -287,10 +363,7 @@ function configureAllReimbsView() {
             }
 
             
-            //JQUERY
-            $(document).ready( function () {
-                $('#AllReimbsTable').DataTable();
-                } );(jQuery);
+            
         }
     }
 
@@ -306,6 +379,65 @@ function configureSubmitView() {
     document.getElementById('submit').setAttribute('disabled', true);
     document.getElementById('submit-button-container').addEventListener('mouseover', validateSubmitForm);
     document.getElementById('submit').addEventListener('click', submit);
+
+}
+
+function configureAuthorReimbsView() {
+
+    console.log('in configureAuthorReimbsView()');
+
+    let authUser = JSON.parse(localStorage.getItem('authUser'));
+    document.getElementById('loggedInUsername').innerText = authUser.username;
+
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', 'reimbs');
+    xhr.send();
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState = 4 && xhr.status == 200) {
+
+            var array = JSON.parse(xhr.responseText); // the response from a GET request to reimbs
+            let table = document.getElementById("reimbsTable"); // accessing the HTML tag with this ID
+            let head = document.createElement("thead"); // create the table head
+            let body = document.createElement("tbody"); // creating a tbody element
+
+            table.appendChild(head); // append the head
+            head.innerHTML = "<tr>" 
+                            + "<th>ID</th>"
+                            + "<th>Author</th>"
+                            + "<th>Description</th>"
+                            + "<th>Amount</th>"
+                            + "<th>Submitted</th>"
+                            + "<th>Type</th>"
+                            + "<th>Status</th>"
+                            + "<th>Resolved</th>"
+                            + "<th>Resolver</th>";
+            
+            table.appendChild(body); // attaching the newly created element to the table that is already in the document
+
+            for (let i=0; i < array.length; i++) { // for every object in the response text...
+
+                let row = document.createElement("tr"); // create a row for that object
+
+                // each row has multiple data cells with information corresponsing the key value pairs in the response text
+                row.innerHTML = "<td>" + array[i].id + "</td>" 
+                                    + "<td>" + array[i].authorId + "</td>"
+                                    + "<td>" + array[i].description + "</td>"
+                                    + "<td>" + array[i].amount + "</td>"
+                                    + "<td>" + array[i].submitted + "</td>"
+                                    + "<td>" + array[i].reimbursementType + "</td>"
+                                    + "<td>" + array[i].reimbursementStatus + "</td>"
+                                    + "<td>" + array[i].resolved + "</td>"
+                                    + "<td>" + array[i].resolverId + "</td>";
+                
+                body.appendChild(row); // append each row to the body after finding the information about the object
+                                
+            }
+
+            
+            
+        }
+    }
 
 }
 
@@ -567,3 +699,4 @@ function validateSubmitForm() {
 
 
 }
+
