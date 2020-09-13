@@ -2,6 +2,7 @@ package com.revature.ers.servlets;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.exc.MismatchedInputException;
+import com.revature.ers.dtos.Credentials;
 import com.revature.ers.dtos.ErrorResponse;
 import com.revature.ers.exceptions.InvalidRequestException;
 import com.revature.ers.exceptions.ResourceNotFoundException;
@@ -17,6 +18,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Set;
@@ -35,19 +37,20 @@ public class ReimbServlet extends HttpServlet {
         resp.setContentType("application/json");
 
 
-
+        System.out.println("below should be the reimb_id");
         System.out.println(req.getParameter("reimb_id"));
+
+        System.out.println("below is the requestURI");
         System.out.println(req.getRequestURI());
+
+        System.out.println("below should be the authUser ID");
+        System.out.println(req.getSession().getAttribute("idToFindReimbs"));
 
         try {
 
             String idParam = req.getParameter("reimb_id");
-//            String userIdParam = req.getParameter("ers_user_id");
-//
-//            Integer userIdParamAsInt = Integer.parseInt(userIdParam);
-//            System.out.println(userIdParamAsInt);
-//
-//            ErsUser currentUser = userService.getUserById(userIdParamAsInt);
+
+            Object authorIdParam = req.getSession().getAttribute("idToFindReimbs");
 
             if (idParam != null) {
 
@@ -59,21 +62,17 @@ public class ReimbServlet extends HttpServlet {
                 // TODO get Reimbs by Author ID
 
             }
-//            else if (userIdParamAsInt != null) {
-//
-//                System.out.println("Finding reimbs by authorId");
-//
-//                Set<ErsReimbursement> reimbs = reimbService.getAllByAuthorId(currentUser.getId()); // userIdParamAsInt should be the same as authorId
-//
-//                String reimbsJSON = mapper.writeValueAsString(reimbs);
-//                respWriter.write(reimbsJSON);
-//
-//                resp.setStatus(200); // 200 = OK
-//                System.out.println(resp.getStatus());
-//                System.out.println(req.getRequestURI());
-//
-//            }
+            else if (authorIdParam != null) {
 
+                int authorId = Integer.parseInt(String.valueOf(authorIdParam));
+                Set<ErsReimbursement> reimbsByAuthor = reimbService.getAllByAuthorId(authorId);
+
+                String principalJSON = mapper.writeValueAsString(reimbsByAuthor);
+                respWriter.write(principalJSON);
+
+                resp.setStatus(200); // 200 OK
+
+            }
 
             else {
 

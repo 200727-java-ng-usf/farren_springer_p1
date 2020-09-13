@@ -389,9 +389,12 @@ function configureAuthorReimbsView() {
     let authUser = JSON.parse(localStorage.getItem('authUser'));
     document.getElementById('loggedInUsername').innerText = authUser.username;
 
+    let submitterId = authUser.id;
+    console.log(submitterId);
+
     let xhr = new XMLHttpRequest();
     xhr.open('GET', 'reimbs');
-    xhr.send();
+    xhr.send(submitterId);
 
     xhr.onreadystatechange = function() {
         if (xhr.readyState = 4 && xhr.status == 200) {
@@ -440,6 +443,8 @@ function configureAuthorReimbsView() {
     }
 
 }
+
+
 
 //------------------OPERATIONS-----------------------
 

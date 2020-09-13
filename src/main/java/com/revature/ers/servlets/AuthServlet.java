@@ -49,6 +49,7 @@ public class AuthServlet extends HttpServlet {
 
             HttpSession session = req.getSession();
             session.setAttribute("principal", principal);
+            session.setAttribute("idToFindReimbs", principal.getId());
 
             String principalJSON = mapper.writeValueAsString(principal);
             respWriter.write(principalJSON);
