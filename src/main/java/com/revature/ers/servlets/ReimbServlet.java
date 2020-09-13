@@ -6,10 +6,7 @@ import com.revature.ers.dtos.Credentials;
 import com.revature.ers.dtos.ErrorResponse;
 import com.revature.ers.exceptions.InvalidRequestException;
 import com.revature.ers.exceptions.ResourceNotFoundException;
-import com.revature.ers.models.ErsReimbursement;
-import com.revature.ers.models.ErsUser;
-import com.revature.ers.models.Status;
-import com.revature.ers.models.Type;
+import com.revature.ers.models.*;
 import com.revature.ers.services.ReimbService;
 import com.revature.ers.services.UserService;
 
@@ -50,7 +47,14 @@ public class ReimbServlet extends HttpServlet {
 
             String idParam = req.getParameter("reimb_id");
 
+            /**
+             * Find the ID to see what role the user is
+             */
             Object authorIdParam = req.getSession().getAttribute("idToFindReimbs");
+            System.out.println(authorIdParam.toString());
+
+
+
 
             if (idParam != null) {
 
@@ -62,32 +66,53 @@ public class ReimbServlet extends HttpServlet {
                 // TODO get Reimbs by Author ID
 
             }
-            else if (authorIdParam != null) {
+            else if (authorIdParam != null) { // if the authorIdParam is not null...
 
-                int authorId = Integer.parseInt(String.valueOf(authorIdParam));
-                Set<ErsReimbursement> reimbsByAuthor = reimbService.getAllByAuthorId(authorId);
+                int authorId = Integer.parseInt(String.valueOf(authorIdParam)); // turn the parameter to an int
+                Role role = userService.getUserById(authorId).getRole(); // find the role from the ID
+                System.out.println(role);
 
-                String principalJSON = mapper.writeValueAsString(reimbsByAuthor);
-                respWriter.write(principalJSON);
+                if (role == Role.EMPLOYEE) { // if the user is an employee...
 
-                resp.setStatus(200); // 200 OK
+                    // only get the reimbs by the author ID
+                    Set<ErsReimbursement> reimbsByAuthor = reimbService.getAllByAuthorId(authorId);
+
+                    String principalJSON = mapper.writeValueAsString(reimbsByAuthor);
+                    respWriter.write(principalJSON);
+
+                    resp.setStatus(200); // 200 OK
+                }
+
+                else {
+                    System.out.println("No authorID found. Finding all reimbs");
+
+                    Set<ErsReimbursement> reimbs = reimbService.getAllReimbs();
+
+                    String reimbsJSON = mapper.writeValueAsString(reimbs);
+                    respWriter.write(reimbsJSON);
+
+                    resp.setStatus(200); // 200 = OK
+                    System.out.println(resp.getStatus());
+                    System.out.println(req.getRequestURI());
+                }
+
 
             }
 
-            else {
-
-                System.out.println("No authorID found. Finding all reimbs");
-
-                Set<ErsReimbursement> reimbs = reimbService.getAllReimbs();
-
-                String reimbsJSON = mapper.writeValueAsString(reimbs);
-                respWriter.write(reimbsJSON);
-
-                resp.setStatus(200); // 200 = OK
-                System.out.println(resp.getStatus());
-                System.out.println(req.getRequestURI());
-
-            }
+//            else { // should get here if the
+//
+//                System.out.println("No authorID found. Finding all reimbs");
+//
+//                Set<ErsReimbursement> reimbs = reimbService.getAllReimbs();
+//
+//                String reimbsJSON = mapper.writeValueAsString(reimbs);
+//                respWriter.write(reimbsJSON);
+//
+//                resp.setStatus(200); // 200 = OK
+//                System.out.println(resp.getStatus());
+//                System.out.println(req.getRequestURI());
+//
+//            }
 
 //
 //            else {
