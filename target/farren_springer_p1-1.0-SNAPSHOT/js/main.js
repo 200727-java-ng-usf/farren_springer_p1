@@ -4,13 +4,16 @@ window.onload = function() {
     loadLogin();
     console.log('test beginning');
     document.getElementById('toLogin').addEventListener('click', loadLogin);
-    document.getElementById('toRegister').addEventListener('click', loadRegister);
     document.getElementById('toHome').addEventListener('click', loadHome);
     document.getElementById('toLogout').addEventListener('click', logout);
-    document.getElementById('toAllUsers').addEventListener('click', loadAllUsers);
-    document.getElementById('toAllReimbs').addEventListener('click', loadAllReimbs);
-    document.getElementById('toSubmit').addEventListener('click', loadSubmit);
-    document.getElementById('toAuthorReimbs').addEventListener('click', loadAuthorReimbs);
+
+    // all user-role-specific options are initially hidden until their specific home view is configured
+    document.getElementById('toRegister').setAttribute('hidden', true); // initially hidden
+    document.getElementById('toAllUsers').setAttribute('hidden', true); // initially hidden
+    document.getElementById('toAllReimbs').setAttribute('hidden', true); // initially hidden
+    document.getElementById('toSubmit').setAttribute('hidden', true); // initially hidden
+    document.getElementById('toAuthorReimbs').setAttribute('hidden', true); // initially hidden
+    
 }
 
 // //JQUERY
@@ -296,20 +299,37 @@ function configureHomeView() {
     console.log(authUser.role);
     console.log('User role should be logged above');
 
+    // after logging the user in, hide the login option
+    document.getElementById('toLogin').setAttribute('hidden', true);
+
     // if the authUser's role is admin, configure the admin page
     if (authUser.role == 'Admin') {
 
         console.log('user is an admin! Configuring admin view');
 
         options.innerHTML = "<a class='nav-item nav-link' id='toRegister'>Register</a>"
-                            + "<a class='nav-item nav-link' id='toAllUsers'>All Users</a>"; // add these to the div
+                            + "<a class='nav-item nav-link' id='toAllUsers'>All Users</a>"; // add these to the div. Might not use this
 
-    } else if (authUser.role == 'Finance Manager') {
+        // Show the options specific to admins (Register, See All Users to edit).
+        document.getElementById('toAllUsers').removeAttribute('hidden'); 
+        document.getElementById('toRegister').removeAttribute('hidden'); 
+    
+        // link the options to methods that load the partials
+        document.getElementById('toAllUsers').addEventListener('click', loadAllUsers); 
+        document.getElementById('toRegister').addEventListener('click', loadRegister); 
+
+        console.log('Event listeners added to admin home configuration');
+
+    } else if (authUser.role == 'FinManager') {
 
         console.log('user is a finance manager! Configuring manager view');
 
         options.innerHTML = "<a class='nav-item nav-link' id='toAllReimbs'>All Reimbursements</a>";
 
+        // show the options specific to finance managers (See All Reimbs to approve/deny).
+        document.getElementById('toAllReimbs').removeAttribute('hidden');
+
+        // link the option to a method that loads the partial
         document.getElementById('toAllReimbs').addEventListener('click', loadAllReimbs);
 
     } else if (authUser.role == 'Employee') {
@@ -318,6 +338,14 @@ function configureHomeView() {
 
         options.innerHTML = "<a class='nav-item nav-link' id='toSubmit'>Submit</a>"
                             + "<a class='nav-item nav-link' id='toAuthorReimbs'>My Reimbursements</a>";
+
+        // show the options specific to employees (Submit or See Your Reimbs to edit).
+        document.getElementById('toSubmit').removeAttribute('hidden');
+        document.getElementById('toAuthorReimbs').removeAttribute('hidden');
+
+        // link the options to methods that load the partials
+        document.getElementById('toSubmit').addEventListener('click', loadSubmit);
+        document.getElementById('toAuthorReimbs').addEventListener('clcik', loadAuthorReimbs);
 
     }
 
@@ -816,6 +844,12 @@ function logout() {
         if (xhr.readyState == 4 && xhr.status == 204) {
             console.log('logout successful!');
             localStorage.removeItem('authUser');
+            // need to re-hide the user-role-specific options
+            document.getElementById('toRegister').setAttribute('hidden', true); // initially hidden
+            document.getElementById('toAllUsers').setAttribute('hidden', true); // initially hidden
+            document.getElementById('toAllReimbs').setAttribute('hidden', true); // initially hidden
+            document.getElementById('toSubmit').setAttribute('hidden', true); // initially hidden
+            document.getElementById('toAuthorReimbs').setAttribute('hidden', true); // initially hidden
             loadLogin();
         }
     }
