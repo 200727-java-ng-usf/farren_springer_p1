@@ -216,12 +216,67 @@ public class ReimbServlet extends HttpServlet {
 
         try {
 
-            ErsReimbursement newReimbursement = mapper.readValue(req.getInputStream(), ErsReimbursement.class);
-            reimbService.register(newReimbursement);
-            System.out.println(newReimbursement);
-            String newReimbursementJSON = mapper.writeValueAsString(newReimbursement);
-            respWriter.write(newReimbursementJSON);
-            resp.setStatus(201); // 201 = CREATED
+            // if the attribute that the Manager chose for a reimbursement is not already present...
+            if (req.getSession().getAttribute("reimbursement") == null) {
+                //then register!
+                System.out.println("reimbursement attribute not present. Starting submit!");
+                ErsReimbursement newReimbursement = mapper.readValue(req.getInputStream(), ErsReimbursement.class);
+                reimbService.register(newReimbursement);
+                System.out.println(newReimbursement);
+                String newReimbursementJSON = mapper.writeValueAsString(newReimbursement);
+                respWriter.write(newReimbursementJSON);
+                resp.setStatus(201); // 201 = CREATED
+            }
+            // otherwise, update.
+            else { // if this block is executed, it means a manager has chosen a reimbursement to resolve and it needs to be updated in the DB
+
+                System.out.println("reimbursement to update exists!");
+
+                // find the original reimbursement ID
+                Object reimbId = req.getSession().getAttribute("reimbIdToUpdate");
+                System.out.println("This is the reimb ID: " + reimbId);
+
+                String string = String.valueOf(reimbId);
+                System.out.println(string);
+
+                String cleanString = string.replaceAll("\\D+", "");
+                System.out.println(cleanString);
+
+                Integer integer = Integer.parseInt(cleanString);
+                System.out.println(integer);
+
+                // find the reimbursement with that ID
+                ErsReimbursement reimbToUpdate = reimbService.getReimbById(integer);
+                System.out.println("This is the reimbursement to update: " + reimbToUpdate);
+
+                // all fields must be filled out for it to be resolved
+                // this might be where you put another if statement if you
+                // add feature where employees can update their reimbursement
+
+                // find the updated information to set the original reimb to
+                ErsReimbursement reimbursementWithResolvedInfo = mapper.readValue(req.getInputStream(), ErsReimbursement.class);
+
+                System.out.println("This contains the updated information: " + reimbursementWithResolvedInfo);
+                System.out.println("Note that ID may be null");
+
+                // assign fields to service layer object
+                reimbToUpdate.setResolverId(reimbursementWithResolvedInfo.getResolverId());
+                reimbToUpdate.setResolved(reimbursementWithResolvedInfo.getResolved());
+                reimbToUpdate.setReimbursementStatus(reimbursementWithResolvedInfo.getReimbursementStatus());
+
+                // update the DB
+                reimbService.resolve(reimbToUpdate);
+
+                HttpSession session = req.getSession();
+                session.setAttribute("reimbUpdated", reimbToUpdate); // assign that user to the session. TODO unset this attribute once they are updated?
+
+                String reimbUpdatedJSON = mapper.writeValueAsString(reimbToUpdate);
+                respWriter.write(reimbUpdatedJSON); // return the user (if found) to the response
+
+                resp.setStatus(201); // 201 = CREATED because new information?
+            }
+
+
 
         } catch(MismatchedInputException mie) {
 

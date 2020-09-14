@@ -214,6 +214,12 @@ function loadReimbDetails() {
             console.log(array);
 
             APP_VIEW.innerHTML = "<h1>Reimb Details:</h1>"
+                                + "<div class='form-group'>"
+                                + "<label for='approveOrDeny'> Enter approve or deny</label>"
+                                + "<input type='text' class='form-control' id='approveOrDeny' placeholder='Ex: approve'>"
+                                + "</div>"
+                                + "<div id='reimb-button-container'>"
+                                + "<button type='submit' class='btn btn-primary' id='approveItOrDenyIt'>Choose</button>"
                                 + "<h3> ID:" + array.id + "</h3>"
                                 + "<h3> Amount:" + array.amount + "</h3>"
                                 + "<h3> Submitted:" + array.submitted + "</h3>"
@@ -223,6 +229,8 @@ function loadReimbDetails() {
                                 + "<h3> Resolver:" + array.resolverId + "</h3>"
                                 + "<h3> Status:" + array.reimbursementStatus + "</h3>"
                                 + "<h3> Type:" + array.reimbursementType + "</h3>";
+                                // TODO add button here to approve or deny
+                document.getElementById('approveItOrDenyIt').addEventListener('click', approveItOrDenyIt);
 
 
         }
@@ -755,6 +763,44 @@ function submit() {
     }
 
 
+}
+
+function approveItOrDenyIt() {
+
+    console.log('in approveItOrDenyIt()');
+
+    let choice = document.getElementById('approveOrDeny').value;
+    let authUser = JSON.parse(localStorage.getItem('authUser'));
+    let statusId = 1; // initialize statusId to 1
+
+    // make the choice 2 or 3 depending on approve or deny
+    if (choice == 'approve') {
+        console.log('approve chosen!');
+        statusId = 2;
+    }
+    if (choice == 'deny') {
+        console.log('deny chosen!');
+        statusId = 3;
+    }
+
+    let reimbResolverUpdates = {
+        resolved: new Date(),
+        resolverId: authUser.id,
+        reimbursementStatus: statusId
+    }
+
+    let reimbResolverUpdatesJSON = JSON.stringify(reimbResolverUpdates);
+
+    let xhr = new XMLHttpRequest();
+
+    xhr.open('POST', 'reimbs');
+    xhr.send(reimbResolverUpdatesJSON);
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 201) {
+            loadHome();
+        }
+    }
 }
 
 function logout() {

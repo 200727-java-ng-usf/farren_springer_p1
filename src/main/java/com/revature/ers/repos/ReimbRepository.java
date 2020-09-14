@@ -116,6 +116,33 @@ public class ReimbRepository {
 
     }
 
+    public boolean resolve(ErsReimbursement updatedReimb) {
+
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            System.out.println("This is the type ID: " + updatedReimb.getReimbursementType().ordinal());
+            String sql = "UPDATE project1.ers_reimbursements "
+                    + "SET resolved = '" + updatedReimb.getResolved() + "', "
+                    + "resolver_id = '" + updatedReimb.getResolverId() + "', "
+                    + "reimb_status_id = '" + (updatedReimb.getReimbursementStatus().ordinal()) + "' "
+                    + "WHERE reimb_id = '" + updatedReimb.getId() + "' ";
+
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.executeUpdate();
+
+            ResultSet rs = pstmt.getGeneratedKeys();
+
+            rs.next();
+
+//            }
+
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
+
+        return true;
+    }
+
 
     public void save(ErsReimbursement newReimbursement) {
 

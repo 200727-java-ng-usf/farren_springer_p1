@@ -1,5 +1,6 @@
 package com.revature.ers.models;
 
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -65,6 +66,14 @@ public class ErsReimbursement {
         this(amount, reimbursementType, description);
         this.authorId = authorId;
     }
+
+    // constructor for when resolve information comes in
+    public ErsReimbursement(Integer resolverId, Timestamp resolved, Status reimbursementStatus) {
+        this.resolverId = resolverId;
+        this.resolved = resolved;
+        this.reimbursementStatus = reimbursementStatus;
+    }
+
 
     /**
      * Constructor
@@ -245,14 +254,14 @@ public class ErsReimbursement {
                  * Resolved will not until it is approved or denied. The formatting will mess up if it
                  * is applied while resolved is null.
                  */
-                ",\n Submitted: " + submitted.toInstant().atZone(ZoneId.of("GMT")).format(DateTimeFormatter.RFC_1123_DATE_TIME) +
-                ",\n Resolved: " + resolved +
-                ",\n Description: '" + description + '\'' +
-//                ",\n Receipt: " + receipt +
-                ",\n Author ID: " + authorId +
-                ",\n Resolver ID: " + resolverId +
-                ",\n Status: " + reimbursementStatus +
-                ",\n Type: " + reimbursementType +
+//                ",\n Submitted: " + submitted.toInstant().atZone(ZoneId.of("GMT")).format(DateTimeFormatter.RFC_1123_DATE_TIME) +
+//                ",\n Resolved: " + resolved +
+//                ",\n Description: '" + description + '\'' +
+////                ",\n Receipt: " + receipt +
+//                ",\n Author ID: " + authorId +
+//                ",\n Resolver ID: " + resolverId +
+//                ",\n Status: " + reimbursementStatus +
+//                ",\n Type: " + reimbursementType +
                 ' ' + "\n";
     }
 

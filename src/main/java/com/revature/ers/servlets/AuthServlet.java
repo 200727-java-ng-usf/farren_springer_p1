@@ -116,6 +116,8 @@ public class AuthServlet extends HttpServlet {
                     Integer integer = Integer.parseInt(cleanString);
                     System.out.println(integer);
 
+                    req.getSession().setAttribute("reimbIdToUpdate", integer);
+
                     ErsReimbursement ersReimbursement = reimbService.getReimbById(integer);
                     System.out.println(ersReimbursement);
 

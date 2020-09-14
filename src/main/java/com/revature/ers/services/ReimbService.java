@@ -92,6 +92,16 @@ public class ReimbService {
 
     }
 
+    public boolean resolve(ErsReimbursement updatedReimb) {
+
+        if (updatedReimb == null) {
+            throw new InvalidRequestException("reimbs not found...");
+        }
+
+        reimbRepo.resolve(updatedReimb);
+        return true;
+    }
+
     public boolean isReimbValid(ErsReimbursement reimb) {
         if (reimb == null) return false;
         if (reimb.getAmount() == null) return false;

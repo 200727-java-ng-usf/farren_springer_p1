@@ -4,7 +4,7 @@ public enum Role {
 
     // values declared within enums are constants and are comma separated
     ADMIN("Admin"),
-    FINANCE_MANAGER("Finance Manager"),
+    FINANCE_MANAGER("FinManager"),
     EMPLOYEE("Employee"),
     INACTIVE("Inactive");
 
@@ -23,7 +23,7 @@ public enum Role {
             }
         }
 
-        return INACTIVE; // default is inactive
+        return EMPLOYEE; // default is inactive
 
         // functional implementation of the above code
 //        return Arrays.stream(Role.values())
@@ -32,6 +32,22 @@ public enum Role {
 //                .orElse(LOCKED);
 
     }
+
+//    public static Role returnRoleBasedOnInt(Integer integer) {
+//
+//        switch(integer) {
+//            case 1:
+//                return Role.ADMIN;
+//            case 2:
+//                return Role.FINANCE_MANAGER;
+//            case 3:
+//                return Role.EMPLOYEE;
+//            case 4:
+//                return Role.INACTIVE;
+//            default:
+//                return Role.INACTIVE;
+//        }
+//    }
 
     @Override
     public String toString() {
