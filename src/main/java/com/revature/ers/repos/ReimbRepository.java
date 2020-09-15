@@ -124,7 +124,7 @@ public class ReimbRepository {
             String sql = "UPDATE project1.ers_reimbursements "
                     + "SET resolved = '" + updatedReimb.getResolved() + "', "
                     + "resolver_id = '" + updatedReimb.getResolverId() + "', "
-                    + "reimb_status_id = '" + (updatedReimb.getReimbursementStatus().ordinal()) + "' "
+                    + "reimb_status_id = '" + (updatedReimb.getReimbursementStatus().ordinal() + 1) + "' "
                     + "WHERE reimb_id = '" + updatedReimb.getId() + "' ";
 
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -145,6 +145,8 @@ public class ReimbRepository {
 
 
     public void save(ErsReimbursement newReimbursement) {
+
+        System.out.println("in reimbursement save method");
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 

@@ -360,12 +360,17 @@ function configureAllUsersView() {
     xhr.open('GET', 'users');
     xhr.send();
 
+    var doIt = true;
+
     xhr.onreadystatechange = function() {
-        if (xhr.readyState = 4 && xhr.status == 200) {
+
+
+        if (xhr.readyState = 4 && xhr.status == 200 && doIt == true) {
             
             let array = JSON.parse(xhr.responseText); // the response from a GET request to reimbs
             console.log(array);
-            let table = document.getElementById("allUsersTable"); // accessing the HTML tag with this ID
+            let table = document.createElement("table"); // create a table
+            document.getElementById('anotherTable').append(table); // attach the table
             let head = document.createElement("thead"); // create the table head
             let body = document.createElement("tbody"); // creating a tbody element
 
@@ -380,7 +385,7 @@ function configureAllUsersView() {
                             + "<th>Role</th>";
                             console.log('test');
             
-            table.appendChild(body); // attaching the newly created element to the table that is already in the document
+            table.appendChild(body); // attaching the newly created element to the table 
 
             for (let i=0; i < array.length; i++) { // for every object in the response text...
 
@@ -395,11 +400,14 @@ function configureAllUsersView() {
                                     + "<td>" + array[i].email + "</td>"
                                     + "<td>" + array[i].role + "</td>";
                 
-                body.appendChild(row); // appoend each row to the body after finding the information about the object
+                body.appendChild(row); // append each row to the body after finding the information about the object
+                
                                 
             }
-        
+
+            doIt = false;
         }
+    
     }
 
 }
@@ -415,11 +423,15 @@ function configureAllReimbsView() {
     xhr.open('GET', 'reimbs');
     xhr.send();
 
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState = 4 && xhr.status == 200) {
+    var doIt = true;
 
-            var array = JSON.parse(xhr.responseText); // the response from a GET request to reimbs
-            let table = document.getElementById("reimbsTable"); // accessing the HTML tag with this ID
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState = 4 && xhr.status == 200 && doIt == true) {
+
+            let array = JSON.parse(xhr.responseText); // the response from a GET request to reimbs
+            console.log(array);
+            let table = document.createElement("table"); // create a table
+            document.getElementById('anotherReimbTable').append(table); // attach the table
             let head = document.createElement("thead"); // create the table head
             let body = document.createElement("tbody"); // creating a tbody element
 
@@ -456,8 +468,8 @@ function configureAllReimbsView() {
                                 
             }
 
-            
-            
+            doIt = false; // So that the table won't print twice
+        
         }
     }
 
@@ -490,8 +502,10 @@ function configureAuthorReimbsView() {
     xhr.open('GET', 'reimbs');
     xhr.send();
 
+    var doIt = true;
+
     xhr.onreadystatechange = function() {
-        if (xhr.readyState = 4 && xhr.status == 200) {
+        if (xhr.readyState = 4 && xhr.status == 200 && doIt == true) {
 
             var array = JSON.parse(xhr.responseText); // the response from a GET request to reimbs
             let table = document.getElementById("reimbsTable"); // accessing the HTML tag with this ID
@@ -531,6 +545,7 @@ function configureAuthorReimbsView() {
                                 
             }
 
+            doIt = false;
             
             
         }
@@ -823,11 +838,11 @@ function approveItOrDenyIt() {
     // make the choice 2 or 3 depending on approve or deny
     if (choice == 'approve') {
         console.log('approve chosen!');
-        statusId = 2;
+        statusId = 'APPROVED';
     }
     if (choice == 'deny') {
         console.log('deny chosen!');
-        statusId = 3;
+        statusId = 'DENIED';
     }
 
     let reimbResolverUpdates = {
@@ -836,7 +851,9 @@ function approveItOrDenyIt() {
         reimbursementStatus: statusId
     }
 
+    console.log(reimbResolverUpdates);
     let reimbResolverUpdatesJSON = JSON.stringify(reimbResolverUpdates);
+    console.log(reimbResolverUpdatesJSON)
 
     let xhr = new XMLHttpRequest();
 
@@ -845,6 +862,7 @@ function approveItOrDenyIt() {
 
     xhr.onreadystatechange = function() {
         if (xhr.readyState == 4 && xhr.status == 201) {
+            localStorage.removeItem('authReimb'); // remove the authReimb so that all reimbs will show up with a get request to reimb servlet
             loadHome();
         }
     }

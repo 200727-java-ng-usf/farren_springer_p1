@@ -79,6 +79,9 @@ public class ReimbServlet extends HttpServlet {
 
                 respWriter.write(ersReimbursementJSON);
 
+                reimbursement = null; // assign the reimbursement to null so that all will show the next time a user calls the doGet
+                System.out.println("This should say null if the reimbursement was assigned to null after the TX: " + reimbursement);
+
                 resp.setStatus(200); // 200 OK
             }
 
@@ -255,6 +258,7 @@ public class ReimbServlet extends HttpServlet {
                 // add feature where employees can update their reimbursement
 
                 // find the updated information to set the original reimb to
+                System.out.println("about to read the information from the request...");
                 ErsReimbursement reimbursementWithResolvedInfo = mapper.readValue(req.getInputStream(), ErsReimbursement.class);
 
                 System.out.println("This contains the updated information: " + reimbursementWithResolvedInfo);
@@ -270,6 +274,8 @@ public class ReimbServlet extends HttpServlet {
 
                 HttpSession session = req.getSession();
                 session.setAttribute("reimbUpdated", reimbToUpdate); // assign that user to the session. TODO unset this attribute once they are updated?
+
+                req.getSession().removeAttribute("reimbursement"); // resets so that managers can see all users again when this method is requested
 
                 String reimbUpdatedJSON = mapper.writeValueAsString(reimbToUpdate);
                 respWriter.write(reimbUpdatedJSON); // return the user (if found) to the response
