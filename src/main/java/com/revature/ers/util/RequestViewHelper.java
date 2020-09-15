@@ -44,6 +44,10 @@ public class RequestViewHelper {
             case "/farren_springer_p1/updateuser.view":
                 return "partials/updateuser.html";
 
+            case "/updatereimb.view":
+            case "/farren_springer_p1/updatereimb.view":
+                return "partials/updatereimb.html";
+
             default:
                 return null;
 

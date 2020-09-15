@@ -214,13 +214,37 @@ function loadReimbDetails() {
             let array = JSON.parse(xhr.responseText);
             console.log(array);
 
+            // todo if statement here that assigns option button based on authUser role
+            let roleSpecificOption = "";
+
+            let authUser = JSON.parse(localStorage.getItem('authUser'));
+
+            if (authUser.role == 'FinManager') {
+                // if the user is a manager, make the option approve or deny
+                console.log('loading FinManager option...');
+                roleSpecificOption = "<div class='form-group'>"
+                                        + "<label for='approveOrDeny'> Enter approve or deny</label>" 
+                                        + "<input type='text' class='form-control' id='approveOrDeny' placeholder='Ex: approve'>"
+                                        + "</div>"
+                                        + "<div id='reimb-button-container'>"
+                                        + "<button type='submit' class='btn btn-primary' id='approveItOrDenyIt'>Choose</button>";
+                                        // TODO select option instead of typing explicitly
+            } else {
+                // else the user must be an employee
+                console.log('loading Employee option');
+                roleSpecificOption = "<div class='form-group'>"
+                                        + "<div id='reimb-button-container'>"
+                                        + "<button type='submit' class='btn btn-primary' id='chooseToUpdateReimb'>Edit This Reimbursement</button>";
+            }
+
             APP_VIEW.innerHTML = "<h1>Reimb Details:</h1>"
-                                + "<div class='form-group'>"
-                                + "<label for='approveOrDeny'> Enter approve or deny</label>"
-                                + "<input type='text' class='form-control' id='approveOrDeny' placeholder='Ex: approve'>"
-                                + "</div>"
-                                + "<div id='reimb-button-container'>"
-                                + "<button type='submit' class='btn btn-primary' id='approveItOrDenyIt'>Choose</button>"
+                                + roleSpecificOption
+                                // + "<div class='form-group'>"
+                                // + "<label for='approveOrDeny'> Enter approve or deny</label>" // TODO make this button different for managers or employees
+                                // + "<input type='text' class='form-control' id='approveOrDeny' placeholder='Ex: approve'>"
+                                // + "</div>"
+                                // + "<div id='reimb-button-container'>"
+                                // + "<button type='submit' class='btn btn-primary' id='approveItOrDenyIt'>Choose</button>"
                                 + "<h3> ID:" + array.id + "</h3>"
                                 + "<h3> Amount:" + array.amount + "</h3>"
                                 + "<h3> Submitted:" + array.submitted + "</h3>"
@@ -230,8 +254,17 @@ function loadReimbDetails() {
                                 + "<h3> Resolver:" + array.resolverId + "</h3>"
                                 + "<h3> Status:" + array.reimbursementStatus + "</h3>"
                                 + "<h3> Type:" + array.reimbursementType + "</h3>";
-                                // TODO add button here to approve or deny
-                document.getElementById('approveItOrDenyIt').addEventListener('click', approveItOrDenyIt);
+                                
+                // add event listeners to both even though only one is there. TODO could make both and hide one depending on role.
+                if (authUser.role == 'FinManager') {
+                    console.log('adding event listener to approveItOrDenyIt button');
+                    document.getElementById('approveItOrDenyIt').addEventListener('click', approveItOrDenyIt);
+                } else {
+                    console.log('adding event listener to updateReimb button');
+                    document.getElementById('chooseToUpdateReimb').addEventListener('click', loadUpdateReimb);
+                }
+                
+                
 
 
         }
@@ -252,6 +285,24 @@ function loadUpdateUser() {
         if (xhr.readyState == 4 && xhr.status == 200) {
             APP_VIEW.innerHTML = xhr.responseText;
             configureUpdateUserView();
+        }
+    }
+
+}
+
+function loadUpdateReimb() {
+
+    console.log('in loadUpdateReimb()');
+
+    let xhr = new XMLHttpRequest();
+
+    xhr.open('GET', 'updatereimb.view'); // third parameter of this method is optional (defaults to true)
+    xhr.send();
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            APP_VIEW.innerHTML = xhr.responseText;
+            configureUpdateReimbView();
         }
     }
 
@@ -343,7 +394,7 @@ function configureHomeView() {
 
         // link the options to methods that load the partials
         document.getElementById('toSubmit').addEventListener('click', loadSubmit);
-        document.getElementById('toAuthorReimbs').addEventListener('clcik', loadAuthorReimbs);
+        document.getElementById('toAuthorReimbs').addEventListener('click', loadAuthorReimbs);
 
     }
 
@@ -568,9 +619,23 @@ function configureUpdateUserView() {
 
 }
 
+function configureUpdateReimbView() {
+
+    console.log('in configureUpdateReimbView()');
+
+    document.getElementById('update-reimb-message').setAttribute('hidden', true);
+
+    document.getElementById('deleteReimb').addEventListener('click', deleteReimb);
+
+    // document.getElementById('update').setAttribute('disabled', true);
+    // document.getElementById('update-button-container').addEventListener('mouseover', validateUpdateForm);
+    document.getElementById('updateReimb').addEventListener('click', updateReimb);
+
+}
 
 
 
+ 
 
 //------------------OPERATIONS-----------------------
 
@@ -721,6 +786,63 @@ function updateUser() {
 
 
 }
+function updateReimb() {
+
+    console.log('in updateReimb()');
+
+    let newAmount = document.getElementById('amount-update').value;
+    let newType = document.getElementById('type-update').value;
+    let newDescription = document.getElementById('description-update').value;
+
+    console.log(localStorage.getItem('userToUpdate'));
+    
+    let oldReimb = JSON.parse(localStorage.getItem('authReimb')); // the userToUpdate was set in findUserToUpdate()
+    console.log(oldReimb);
+    console.log(oldReimb.amount);
+
+    // if any of the fields in the update form are null, assign the original user fields to that field.
+    if (newAmount == null || newAmount == "") {
+        newAmount = oldReimb.amount;
+        console.log(newAmount);
+    }
+    if (newType == null || newType == "") {
+        newType = oldReimb.amount;
+        console.log(newType);
+    }
+    if (newDescription == null || newDescription == "") {
+        newDescription = oldReimb.amount;
+        console.log(newDescription);
+    }
+    
+
+    // this will have either the values entered in the form or the old information if nothing was entered
+    let updatedReimb = {
+        amount: newAmount,
+        reimbursementType: newType,
+        description: newDescription
+    }
+
+    let updatedReimbJSON = JSON.stringify(updatedReimb);
+
+    let xhr = new XMLHttpRequest();
+
+    xhr.open('POST', 'reimbs');
+    xhr.send(updatedReimbJSON);
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 201) { // 201 CREATED bc new data? 
+            // clear the local storage of the reimb so that all will load again when they want to view all of their reimbursements
+            localStorage.removeItem('authReimb');
+            loadHome(); // loadHome after updating a user? Could also load the allUsers again
+        } else if (xhr.readyState == 4 && xhr.status != 201) {
+            document.getElementById('update-reimb-message').removeAttribute('hidden'); // to make an attribute not hidden. TODO could use this for navbar depending on user role?
+            let err = JSON.parse(xhr.responseText);
+            document.getElementById('update-reimb-message').innerText = err.message;
+        }
+    }
+
+
+}
 
 function findReimbDetails() {
 
@@ -744,7 +866,7 @@ function findReimbDetails() {
     xhr.onreadystatechange = function () {
         
         if (xhr.readyState == 4 && xhr.status == 200) { // 201 created bc a new object will be created from the reimbId sent even though the reimb already exists.
-            localStorage.setItem('authReimb', reimb);
+            localStorage.setItem('authReimb', xhr.responseText);
             console.log(reimb);
             loadReimbDetails(); // this function sent the ID. In the servlet, this should create an object to be used in the Reimb servlet(?) 
         }
@@ -779,8 +901,7 @@ function findUserToEdit() {
             // let array = JSON.parse(xhr.responseText);
             // console.log(array);
             // console.log('If this prints the username, youre good: ' + array.username);
-            localStorage.setItem('userToUpdate', xhr.responseText); // TODO instead of this, set the responseText to an object and set
-            // that object to an item in local storage to access the fields of the object
+            localStorage.setItem('userToUpdate', xhr.responseText); 
             // console.log(xhr.responseText);
             console.log(user);
             console.log('This should print the userToUpdates information: ' + localStorage.getItem('userToUpdate'));
@@ -816,7 +937,8 @@ function submit() {
 
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 4 && xhr.status == 201) {
-            loadHome();
+            console.log('sending the reimbursement to the servlet to submit!')
+            loadAuthorReimbs();
         } else if (xhr.readyState == 4 && xhr.status != 201) {
             document.getElementById('submit-message').removeAttribute('hidden');
             let err = JSON.parse(xhr.responseText);
@@ -824,6 +946,26 @@ function submit() {
         }
     }
 
+
+}
+
+function deleteReimb() {
+
+    console.log('in delteReimb()');
+
+    // open a delete to reimbs and in reimbs delete the current reimb selected in the session
+    let xhr = new XMLHttpRequest();
+
+    xhr.open('DELETE', 'reimbs');
+    xhr.send();
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) { // 200 OK. Use this code for delete?
+            console.log('sending the reimbursement to the servlet to delete it!');
+            localStorage.removeItem('authReimb');
+            loadAuthorReimbs();
+        } // TODO add an else if for error catching
+    }
 
 }
 

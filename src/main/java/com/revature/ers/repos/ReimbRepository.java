@@ -143,6 +143,33 @@ public class ReimbRepository {
         return true;
     }
 
+    public boolean update(ErsReimbursement updatedReimb) {
+
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            System.out.println("This is the type ID: " + updatedReimb.getReimbursementType().ordinal());
+            String sql = "UPDATE project1.ers_reimbursements "
+                    + "SET amount = '" + updatedReimb.getResolved() + "', "
+                    + "reimb_type_id = '" + (updatedReimb.getReimbursementType().ordinal() + 1) + "' "
+                    + "description = '" + updatedReimb.getDescription() + "' "
+                    + "WHERE reimb_id = '" + updatedReimb.getId() + "' ";
+
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.executeUpdate();
+
+            ResultSet rs = pstmt.getGeneratedKeys();
+
+            rs.next();
+
+//            }
+
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
+
+        return true;
+
+    }
 
     public void save(ErsReimbursement newReimbursement) {
 
@@ -198,6 +225,28 @@ public class ReimbRepository {
         }
 
         return reimbs;
+
+    }
+
+    public void delete(ErsReimbursement reimb) {
+
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            String sql = "DELETE from project1.ers_reimbursements WHERE reimb_id = " + reimb.getId();
+
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.executeUpdate();
+
+            ResultSet rs = pstmt.getGeneratedKeys();
+
+            rs.next();
+            System.out.println("reimbursement deleted in the DB");
+
+//            }
+
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
 
     }
 

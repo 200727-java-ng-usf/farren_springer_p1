@@ -253,34 +253,79 @@ public class ReimbServlet extends HttpServlet {
                 ErsReimbursement reimbToUpdate = reimbService.getReimbById(integer);
                 System.out.println("This is the reimbursement to update: " + reimbToUpdate);
 
-                // all fields must be filled out for it to be resolved
-                // this might be where you put another if statement if you
-                // add feature where employees can update their reimbursement
+                // if the user is a finance manager...then they should be resolving
+                // first, get the authorId
+                Object object = req.getSession().getAttribute("authorIdToFindReimbs");
+                String astring = String.valueOf(object);
+                String acleanstring = astring.replaceAll("\\D+", "");
+                Integer anInteger = Integer.parseInt(acleanstring);
+                System.out.println("integer to see what the role is");
 
-                // find the updated information to set the original reimb to
-                System.out.println("about to read the information from the request...");
-                ErsReimbursement reimbursementWithResolvedInfo = mapper.readValue(req.getInputStream(), ErsReimbursement.class);
+                // then, find them in the DB and get their role
+                ErsUser ersUser = userService.getUserById(anInteger);
 
-                System.out.println("This contains the updated information: " + reimbursementWithResolvedInfo);
-                System.out.println("Note that ID may be null");
+                // find the role
+                Role role = ersUser.getRole();
 
-                // assign fields to service layer object
-                reimbToUpdate.setResolverId(reimbursementWithResolvedInfo.getResolverId());
-                reimbToUpdate.setResolved(reimbursementWithResolvedInfo.getResolved());
-                reimbToUpdate.setReimbursementStatus(reimbursementWithResolvedInfo.getReimbursementStatus());
+                // then, if they are a finance manager, resolve the reimbursement
+                if (role == Role.FINANCE_MANAGER) {
+                    // find the updated information to set the original reimb to
+                    System.out.println("about to read the information from the request...");
+                    ErsReimbursement reimbursementWithResolvedInfo = mapper.readValue(req.getInputStream(), ErsReimbursement.class);
 
-                // update the DB
-                reimbService.resolve(reimbToUpdate);
+                    System.out.println("This contains the updated information: " + reimbursementWithResolvedInfo);
+                    System.out.println("Note that ID may be null");
 
-                HttpSession session = req.getSession();
-                session.setAttribute("reimbUpdated", reimbToUpdate); // assign that user to the session. TODO unset this attribute once they are updated?
+                    // assign fields to service layer object
+                    reimbToUpdate.setResolverId(reimbursementWithResolvedInfo.getResolverId());
+                    reimbToUpdate.setResolved(reimbursementWithResolvedInfo.getResolved());
+                    reimbToUpdate.setReimbursementStatus(reimbursementWithResolvedInfo.getReimbursementStatus());
 
-                req.getSession().removeAttribute("reimbursement"); // resets so that managers can see all users again when this method is requested
+                    // update the DB
+                    reimbService.resolve(reimbToUpdate);
 
-                String reimbUpdatedJSON = mapper.writeValueAsString(reimbToUpdate);
-                respWriter.write(reimbUpdatedJSON); // return the user (if found) to the response
+                    HttpSession session = req.getSession();
+                    session.setAttribute("reimbUpdated", reimbToUpdate); // assign that user to the session. TODO unset this attribute once they are updated?
 
-                resp.setStatus(201); // 201 = CREATED because new information?
+                    req.getSession().removeAttribute("reimbursement"); // resets so that managers can see all users again when this method is requested
+
+                    String reimbUpdatedJSON = mapper.writeValueAsString(reimbToUpdate);
+                    respWriter.write(reimbUpdatedJSON); // return the user (if found) to the response
+
+                    resp.setStatus(201); // 201 = CREATED because new information?
+                }
+                // else, they are an employee; so they are updating (since the reimbursement is not null)
+                else {
+
+                    System.out.println("current user must be employee! Updating their reimb...");
+
+                    // get the information from the browser
+                    ErsReimbursement ersReimbursement = mapper.readValue(req.getInputStream(), ErsReimbursement.class);
+                    System.out.println("ID: of this should be null: " + ersReimbursement);
+
+                    // assign amount, type, and description to the original reimb (even if they left some null or empty,
+                    // the values from the browser should have been assigned the og values if that's the case, so still
+                    // reassign all).
+                    reimbToUpdate.setAmount(ersReimbursement.getAmount());
+                    reimbToUpdate.setReimbursementType(ersReimbursement.getReimbursementType());
+                    reimbToUpdate.setDescription(ersReimbursement.getDescription());
+
+                    // update the reimbursement
+                    reimbService.update(reimbToUpdate);
+
+                    // return things.
+                    HttpSession session = req.getSession();
+                    session.setAttribute("reimbUpdatedByEmployee", reimbToUpdate); // assign that user to the session. TODO unset this attribute once they are updated?
+
+                    req.getSession().removeAttribute("reimbursement"); // resets so that managers can see all users again when this method is requested
+
+                    String reimbUpdatedJSON = mapper.writeValueAsString(reimbToUpdate);
+                    respWriter.write(reimbUpdatedJSON); // return the user (if found) to the response
+
+                    resp.setStatus(201); // 201 = CREATED because new information?
+
+                }
+
             }
 
 
@@ -300,5 +345,49 @@ public class ReimbServlet extends HttpServlet {
             ErrorResponse err = new ErrorResponse(500, "It's not you, it's us. Our bad");
             respWriter.write(mapper.writeValueAsString(err));
         }
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        System.out.println("In doDelete of ReimbServlet!");
+
+        resp.setContentType("application/json");
+
+//        ObjectMapper mapper = new ObjectMapper();
+//        PrintWriter respWriter = resp.getWriter(); // won't respond. Deleting.
+
+        try {
+
+            if (req.getSession().getAttribute("reimbIdToUpdate") != null) { // if the reimbursement has been set in the session...
+
+                // find the original reimbursement ID
+                Object reimbId = req.getSession().getAttribute("reimbIdToUpdate");
+                System.out.println("This is the reimb ID: " + reimbId);
+
+                String string = String.valueOf(reimbId);
+                System.out.println(string);
+
+                String cleanString = string.replaceAll("\\D+", "");
+                System.out.println(cleanString);
+
+                Integer integer = Integer.parseInt(cleanString);
+                System.out.println(integer);
+
+                // find the reimbursement with that ID
+                ErsReimbursement reimbToDelete= reimbService.getReimbById(integer);
+                System.out.println("This is the reimbursement to delete: " + reimbToDelete);
+
+                reimbService.delete(reimbToDelete);
+
+                req.getSession().removeAttribute("reimbursement"); // clear the session data for this
+
+                resp.setStatus(200); // 200 = OK
+
+            }
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+
     }
 }

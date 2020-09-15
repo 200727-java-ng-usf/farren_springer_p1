@@ -95,11 +95,32 @@ public class ReimbService {
     public boolean resolve(ErsReimbursement updatedReimb) {
 
         if (updatedReimb == null) {
-            throw new InvalidRequestException("reimbs not found...");
+            throw new InvalidRequestException("reimb to resolve not found...");
         }
 
         reimbRepo.resolve(updatedReimb);
         return true;
+    }
+
+    public boolean update(ErsReimbursement updatedReimb) {
+
+        if(updatedReimb == null) {
+            throw new InvalidRequestException("reimb to update not found...");
+        }
+
+        reimbRepo.update(updatedReimb);
+        return true;
+
+    }
+
+    public void delete(ErsReimbursement reimb) {
+
+        if (reimb == null) {
+            throw new InvalidRequestException("reimb to delete not found...");
+        } // null checking in SERVICE layer
+
+        reimbRepo.delete(reimb);
+
     }
 
     public boolean isReimbValid(ErsReimbursement reimb) {
