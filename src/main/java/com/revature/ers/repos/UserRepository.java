@@ -167,7 +167,7 @@ public class UserRepository {
             pstmt.setString(3, newUser.getFirstName());
             pstmt.setString(4, newUser.getLastName());
             pstmt.setString(5, newUser.getEmail());
-            pstmt.setInt(6, newUser.getRole().ordinal() + 1);
+            pstmt.setInt(6, newUser.getRole().ordinal());
 
             int rowsInserted = pstmt.executeUpdate();
 

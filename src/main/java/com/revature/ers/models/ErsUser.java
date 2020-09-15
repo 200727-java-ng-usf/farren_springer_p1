@@ -140,6 +140,6 @@ public class ErsUser {
                 ", First Name: '" + firstName + '\'' +
                 ", Last Name: '" + lastName + '\'' +
                 ", Email: '" + email + '\'' +
-                ", Role: " + role.toString();
+                ", Role: " + (role.ordinal());
     }
 }

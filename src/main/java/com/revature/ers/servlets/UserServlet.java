@@ -142,6 +142,8 @@ public class UserServlet extends HttpServlet {
                 userToUpdate.setEmail(userWithUpdatedInfo.getEmail());
                 userToUpdate.setUsername(userWithUpdatedInfo.getUsername());
                 userToUpdate.setPassword(userWithUpdatedInfo.getPassword());
+                userToUpdate.setRole(userWithUpdatedInfo.getRole());
+                System.out.println(userToUpdate);
 
                 // update the DB
                 userService.update(userToUpdate);
@@ -157,6 +159,7 @@ public class UserServlet extends HttpServlet {
             }
             else { // if this block is executed, the admin has not chosen a user to update
                 // So, this is a new user to register
+                System.out.println("registering a new user!");
                 ErsUser newUser = mapper.readValue(req.getInputStream(), ErsUser.class);
                 userService.register(newUser);
                 System.out.println(newUser);

@@ -87,9 +87,7 @@ function loadHome() {
 
     xhr.onreadystatechange = function() {
         if (xhr.readyState == 4 && xhr.status == 200) {
-            console.log('after onreadystatechange');
             APP_VIEW.innerHTML = xhr.responseText;
-            console.log('after loading the username from the response text');
             configureHomeView();
         }
     }
@@ -587,6 +585,7 @@ function login() {
 
             document.getElementById('login-message').setAttribute('hidden', true);
             localStorage.setItem('authUser', xhr.responseText);
+            console.log('current logged in user is: ' + localStorage.getItem('authUser'));
             loadHome();
 
         } else if (xhr.readyState == 4 && xhr.status == 401) {
@@ -610,13 +609,15 @@ function register() {
     let email = document.getElementById('email').value;
     let un = document.getElementById('reg-username').value;
     let pw = document.getElementById('reg-password').value;
+    let role = document.getElementById('reg-role').value;
 
     let newUser = {
         firstName: fn,
         lastName: ln,
         email: email,
         username: un,
-        password: pw
+        password: pw,
+        role: role
     }
 
     let newUserJSON = JSON.stringify(newUser);
@@ -646,24 +647,33 @@ function updateUser() {
     let newEmail = document.getElementById('email-update').value;
     let newun = document.getElementById('username-update').value;
     let newpw = document.getElementById('password-update').value;
+    let newRole = document.getElementById('role-update').value;
 
-    let oldUser = localStorage.getItem('userToUpdate'); // the userToUpdate was set in findUserToUpdate()
+    console.log(localStorage.getItem('userToUpdate'));
+    
+    let oldUser = JSON.parse(localStorage.getItem('userToUpdate')); // the userToUpdate was set in findUserToUpdate()
+    console.log(oldUser);
+    console.log(oldUser.username);
 
     // if any of the fields in the update form are null, assign the original user fields to that field.
-    if (newfn == null) {
+    if (newfn == null || newfn == "") {
         newfn = oldUser.firstName;
+        console.log(newfn);
     }
-    if (newln == null) {
+    if (newln == null || newln == "") {
         newln = oldUser.lastName;
     }
-    if (newEmail == null) {
+    if (newEmail == null || newEmail == "") {
         newEmail = oldUser.email;
     }
-    if (newun == null) {
+    if (newun == null || newun == "") {
         newun = oldUser.username;
     }
-    if (newpw == null) {
+    if (newpw == null || newpw == "") {
         newpw = oldUser.password;
+    }
+    if (newRole == null || newRole == "") {
+        newRole = oldUser.role;
     }
 
     // this will have either the values entered in the form or the old information if nothing was entered
@@ -672,7 +682,8 @@ function updateUser() {
         lastName: newln,
         email: newEmail,
         username: newun,
-        password: newpw
+        password: newpw,
+        role: newRole
     }
 
     let updatedUserJSON = JSON.stringify(updatedUser);
@@ -684,6 +695,7 @@ function updateUser() {
 
     xhr.onreadystatechange = function() {
         if (xhr.readyState == 4 && xhr.status == 201) { // 201 CREATED bc new data? 
+        
             loadHome(); // loadHome after updating a user? Could also load the allUsers again
         } else if (xhr.readyState == 4 && xhr.status != 201) {
             document.getElementById('update-message').removeAttribute('hidden'); // to make an attribute not hidden. TODO could use this for navbar depending on user role?
@@ -739,7 +751,7 @@ function findUserToEdit() {
 
     let userJSON = JSON.stringify(user);
     console.log(userJSON);
-    console.log(userJSON.id);
+    console.log(userJSON[0]);
 
     let xhr = new XMLHttpRequest();
 
@@ -749,8 +761,15 @@ function findUserToEdit() {
     xhr.onreadystatechange = function() {
 
         if (xhr.readyState == 4 && xhr.status == 200) {
-            localStorage.setItem('userToUpdate', user);
+            // let array = JSON.parse(xhr.responseText);
+            // console.log(array);
+            // console.log('If this prints the username, youre good: ' + array.username);
+            localStorage.setItem('userToUpdate', xhr.responseText); // TODO instead of this, set the responseText to an object and set
+            // that object to an item in local storage to access the fields of the object
+            // console.log(xhr.responseText);
             console.log(user);
+            console.log('This should print the userToUpdates information: ' + localStorage.getItem('userToUpdate'));
+            // console.log('This should be the userToUpdate as a string' + array.stringify);
             loadUpdateUser();
         }
     }
@@ -844,6 +863,8 @@ function logout() {
         if (xhr.readyState == 4 && xhr.status == 204) {
             console.log('logout successful!');
             localStorage.removeItem('authUser');
+            localStorage.clear(); // clear the local storage
+            console.log('local storage cleared!');
             // need to re-hide the user-role-specific options
             document.getElementById('toRegister').setAttribute('hidden', true); // initially hidden
             document.getElementById('toAllUsers').setAttribute('hidden', true); // initially hidden

@@ -63,7 +63,7 @@ public class UserService {
             throw new RuntimeException("Provided username is already in use!");
         }
 
-        newUser.setRole(Role.EMPLOYEE);
+//        newUser.setRole(Role.EMPLOYEE);
         userRepo.save(newUser);
         System.out.println(newUser);
 //        app.setCurrentUser(newUser);
@@ -114,7 +114,8 @@ public class UserService {
                     + "username = '" + updatedUser.getUsername() + "', "
                     + "password = '" + updatedUser.getPassword() + "', "
                     + "first_name = '" + updatedUser.getFirstName() + "', "
-                    + "last_name = '" + updatedUser.getLastName() + "' "
+                    + "last_name = '" + updatedUser.getLastName() + "', "
+                    + "user_role_id = '" + updatedUser.getRole().ordinal() + "' "
 //                    + "', " // TODO update role
                     + "WHERE ers_user_id = " + updatedUser.getId();
 

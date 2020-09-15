@@ -217,6 +217,7 @@ public class ReimbServlet extends HttpServlet {
         try {
 
             // if the attribute that the Manager chose for a reimbursement is not already present...
+            // ...it means this is an employee SUBMITTING a reimbursement.
             if (req.getSession().getAttribute("reimbursement") == null) {
                 //then register!
                 System.out.println("reimbursement attribute not present. Starting submit!");
