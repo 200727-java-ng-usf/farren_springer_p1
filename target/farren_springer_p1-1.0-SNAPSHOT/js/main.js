@@ -929,7 +929,7 @@ function updateReimb() {
 
     let xhr = new XMLHttpRequest();
 
-    xhr.open('POST', 'reimbs');
+    xhr.open('PUT', 'reimbs');
     xhr.send(updatedReimbJSON);
 
     xhr.onreadystatechange = function() {
@@ -1129,7 +1129,7 @@ function approveItOrDenyIt() {
 
     let xhr = new XMLHttpRequest();
 
-    xhr.open('POST', 'reimbs');
+    xhr.open('PUT', 'reimbs');
     xhr.send(reimbResolverUpdatesJSON);
 
     xhr.onreadystatechange = function() {

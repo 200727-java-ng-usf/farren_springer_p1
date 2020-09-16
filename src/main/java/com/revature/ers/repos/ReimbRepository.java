@@ -27,6 +27,10 @@ public class ReimbRepository {
         System.out.println("[LOG] - Instantiating " + this.getClass().getName());
     }
 
+    /**
+     * CREATE operation
+     * @param newReimbursement
+     */
     public void save(ErsReimbursement newReimbursement) {
 
         System.out.println("in reimbursement save method");
@@ -62,6 +66,11 @@ public class ReimbRepository {
 
     }
 
+    /**
+     * READ operation
+     * @param id
+     * @return
+     */
     public Optional<ErsReimbursement> findReimbById(int id) {
 
         Optional<ErsReimbursement> _reimb = Optional.empty();
@@ -85,6 +94,10 @@ public class ReimbRepository {
         return _reimb;
     }
 
+    /**
+     * READ operation
+     * @return
+     */
     public Set<ErsReimbursement> findAllReimbs() {
 
         Set<ErsReimbursement> reimbs = new HashSet<>();
@@ -105,6 +118,11 @@ public class ReimbRepository {
 
     }
 
+    /**
+     * READ operation
+     * @param authorId
+     * @return
+     */
     public Set<ErsReimbursement> findAllReimbsByAuthorId(Integer authorId) {
 
         Set<ErsReimbursement> reimbs = new HashSet<>();
@@ -127,6 +145,11 @@ public class ReimbRepository {
 
     }
 
+    /**
+     * READ operation
+     * @param status
+     * @return
+     */
     public Set<ErsReimbursement> findAllReimbsByStatus(Status status) {
 
         Set<ErsReimbursement> reimbs = new HashSet<>();
@@ -150,6 +173,11 @@ public class ReimbRepository {
 
     }
 
+    /**
+     * READ operation
+     * @param type
+     * @return
+     */
     public Set<ErsReimbursement> findAllReimbsByType(Type type) {
 
         Set<ErsReimbursement> reimbs = new HashSet<>();
@@ -173,6 +201,11 @@ public class ReimbRepository {
 
     }
 
+    /**
+     * UPDATE operation
+     * @param updatedReimb
+     * @return
+     */
     public boolean resolve(ErsReimbursement updatedReimb) {
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
@@ -201,6 +234,11 @@ public class ReimbRepository {
         return true;
     }
 
+    /**
+     * UPDATE operation
+     * @param updatedReimb
+     * @return
+     */
     public boolean update(ErsReimbursement updatedReimb) {
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
@@ -229,6 +267,10 @@ public class ReimbRepository {
 
     }
 
+    /**
+     * DELETE operation
+     * @param reimb
+     */
     public void delete(ErsReimbursement reimb) {
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
@@ -251,7 +293,12 @@ public class ReimbRepository {
 
     }
 
-
+    /**
+     * Convenience method (to call in READ operations)
+     * @param rs
+     * @return
+     * @throws SQLException
+     */
     private Set<ErsReimbursement> mapResultSet(ResultSet rs) throws SQLException {
 
         Set<ErsReimbursement> reimbs = new HashSet<>();

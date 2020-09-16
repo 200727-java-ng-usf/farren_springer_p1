@@ -242,6 +242,10 @@ public class UserRepository {
 
     }
 
+    /**
+     * DELETE operation
+     * @param newUser
+     */
     public void makeInactive(ErsUser newUser) {
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
@@ -260,6 +264,12 @@ public class UserRepository {
 
     }
 
+    /**
+     * Convenience method (to call in READ operations)
+     * @param rs
+     * @return
+     * @throws SQLException
+     */
     private Set<ErsUser> mapResultSet(ResultSet rs) throws SQLException {
 
         Set<ErsUser> users = new HashSet<>();

@@ -27,6 +27,7 @@ public class ReimbServlet extends HttpServlet {
     private final UserService userService = new UserService();
 
     /**
+     * READ operation
      * If this method is called, the user is either a Finance Manager or an Employee.
      * If they are a Finance Manager, they are either getting all reimbs or the details for one.
      * If they are an employee, they are getting all of their reimbs or the details for one.
@@ -169,9 +170,8 @@ public class ReimbServlet extends HttpServlet {
     }
 
     /**
-     * This method will be called to:
-     * If the user is a Finance manager, resolve a reimbursement.
-     * If the user is an employee, submit a reimbursement or update if one is already set.
+     * This method will be called to submit a reimbursement
+
      *
      * @param req
      * @param resp
@@ -190,11 +190,60 @@ public class ReimbServlet extends HttpServlet {
 
 
         try {
-            /**
-             * Find if the user is an employee or a finance manager
-             */
-            if (req.getSession().getAttribute("userWhoIsDefinitelyAFinanceManager") != null) { // the user is a finance manager
 
+            System.out.println("Starting submit!");
+            ErsReimbursement newReimbursement = mapper.readValue(req.getInputStream(), ErsReimbursement.class);
+            System.out.println("read the input stream: " + newReimbursement);
+            reimbService.register(newReimbursement);
+            System.out.println(newReimbursement);
+            String newReimbursementJSON = mapper.writeValueAsString(newReimbursement);
+            respWriter.write(newReimbursementJSON);
+            resp.setStatus(201); // 201 = CREATED
+
+
+        } catch(MismatchedInputException mie) {
+
+            resp.setStatus(400); // 400 = BAD REQUEST
+
+            ErrorResponse err = new ErrorResponse(400, "Bad Request: Malformed reimb object found in request body");
+            String errJSON = mapper.writeValueAsString(err);
+            respWriter.write(errJSON);
+
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            resp.setStatus(500); // 500 = INTERNAL SERVER ERROR
+            ErrorResponse err = new ErrorResponse(500, "It's not you, it's us. Our bad");
+            respWriter.write(mapper.writeValueAsString(err));
+        }
+    }
+
+    /**
+     * If this method is called, a user is either:
+     * A finance manager resolving a reimbursement, or
+     * an employee updating their PENDING reimbursement TODO check to make sure reimb is PENDING in service layer?
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        System.out.println("In doPut of ReimbServlet!");
+
+        resp.setContentType("application/json");
+        ObjectMapper mapper = new ObjectMapper();
+        PrintWriter respWriter = resp.getWriter();
+
+        try {
+            if (req.getSession().getAttribute("userWhoIsDefinitelyAFinanceManager") != null) { // user is a finance manager
+
+                System.out.println("User is a finance manager! Resolving the reimb...");
+
+                /**
+                 * Find the reimbursement from the session
+                  */
                 // find the original reimbursement ID
                 Object reimbId = req.getSession().getAttribute("reimbIdToUpdate");
                 System.out.println("This is the reimb ID: " + reimbId);
@@ -212,6 +261,9 @@ public class ReimbServlet extends HttpServlet {
                 ErsReimbursement reimbToUpdate = reimbService.getReimbById(integer);
                 System.out.println("This is the reimbursement to update: " + reimbToUpdate);
 
+                /**
+                 * Map the input stream from the XMLHttpRequest to a reimbursement object that will use the constructor that has resolve values
+                 */
                 // find the updated information to set the original reimb to
                 System.out.println("about to read the information from the request...");
                 ErsReimbursement reimbursementWithResolvedInfo = mapper.readValue(req.getInputStream(), ErsReimbursement.class);
@@ -219,6 +271,9 @@ public class ReimbServlet extends HttpServlet {
                 System.out.println("This contains the updated information: " + reimbursementWithResolvedInfo);
                 System.out.println("Note that ID may be null");
 
+                /**
+                 * set the fields of the original reimbursement to the fields of the resolve reimbursement object (which will have no ID bc it is temporary)
+                 */
                 // assign fields to service layer object
                 reimbToUpdate.setResolverId(reimbursementWithResolvedInfo.getResolverId());
                 reimbToUpdate.setResolved(reimbursementWithResolvedInfo.getResolved());
@@ -237,89 +292,68 @@ public class ReimbServlet extends HttpServlet {
 
                 resp.setStatus(201); // 201 = CREATED because new information?
 
-            } else if (req.getSession().getAttribute("authorIdToFindReimbs") != null) { // the user is an employee
+
+            } else if (req.getSession().getAttribute("authorIdToFindReimbs") != null) { // user is an employee
+
+                System.out.println("User is an employee! Updating their reimb...");
+
                 /**
-                 * An employee will be either submitting if no specific reimbursement was set to the session or updating if one has
+                 * find the reimbursement from the session
                  */
-                if (req.getSession().getAttribute("reimbursement") == null) {
-                    //then register!
-                    System.out.println("reimbursement attribute not present. Starting submit!");
-                    ErsReimbursement newReimbursement = mapper.readValue(req.getInputStream(), ErsReimbursement.class);
-                    System.out.println("read the input stream: " + newReimbursement);
-                    reimbService.register(newReimbursement);
-                    System.out.println(newReimbursement);
-                    String newReimbursementJSON = mapper.writeValueAsString(newReimbursement);
-                    respWriter.write(newReimbursementJSON);
-                    resp.setStatus(201); // 201 = CREATED
-                }
-                // otherwise, update.
-                else {
+                // find the original reimbursement ID
+                Object reimbId = req.getSession().getAttribute("reimbIdToUpdate");
+                System.out.println("This is the reimb ID: " + reimbId);
 
-                    System.out.println("reimbursement to update exists!");
+                String string = String.valueOf(reimbId);
+                System.out.println(string);
 
-                    // find the original reimbursement ID
-                    Object reimbId = req.getSession().getAttribute("reimbIdToUpdate");
-                    System.out.println("This is the reimb ID: " + reimbId);
+                String cleanString = string.replaceAll("\\D+", "");
+                System.out.println(cleanString);
 
-                    String string = String.valueOf(reimbId);
-                    System.out.println(string);
+                Integer integer = Integer.parseInt(cleanString);
+                System.out.println(integer);
 
-                    String cleanString = string.replaceAll("\\D+", "");
-                    System.out.println(cleanString);
+                // find the reimbursement with that ID
+                ErsReimbursement reimbToUpdate = reimbService.getReimbById(integer);
+                System.out.println("This is the reimbursement to update: " + reimbToUpdate);
 
-                    Integer integer = Integer.parseInt(cleanString);
-                    System.out.println(integer);
+                /**
+                 * Map the input stream from the XMLHttpRequest to a reimbursement object with the new values
+                 */
+                // get the information from the browser
+                ErsReimbursement ersReimbursement = mapper.readValue(req.getInputStream(), ErsReimbursement.class);
+                System.out.println("ID: of this should be null: " + ersReimbursement);
 
-                    // find the reimbursement with that ID
-                    ErsReimbursement reimbToUpdate = reimbService.getReimbById(integer);
-                    System.out.println("This is the reimbursement to update: " + reimbToUpdate);
+                /**
+                 * Set the fields of the og reimbursement to the fields of the reimb with updated values (which will have no ID bc it is temporary)
+                 */
+                // assign amount, type, and description to the original reimb (even if they left some null or empty,
+                // the values from the browser should have been assigned the og values if that's the case, so still
+                // reassign all).
+                reimbToUpdate.setAmount(ersReimbursement.getAmount());
+                reimbToUpdate.setReimbursementType(ersReimbursement.getReimbursementType());
+                reimbToUpdate.setDescription(ersReimbursement.getDescription());
 
-                    // get the information from the browser
-                    ErsReimbursement ersReimbursement = mapper.readValue(req.getInputStream(), ErsReimbursement.class);
-                    System.out.println("ID: of this should be null: " + ersReimbursement);
+                // update the reimbursement
+                reimbService.update(reimbToUpdate);
 
-                    // assign amount, type, and description to the original reimb (even if they left some null or empty,
-                    // the values from the browser should have been assigned the og values if that's the case, so still
-                    // reassign all).
-                    reimbToUpdate.setAmount(ersReimbursement.getAmount());
-                    reimbToUpdate.setReimbursementType(ersReimbursement.getReimbursementType());
-                    reimbToUpdate.setDescription(ersReimbursement.getDescription());
+                // return things.
+                HttpSession session = req.getSession();
+                session.setAttribute("reimbUpdatedByEmployee", reimbToUpdate); // assign that reimb to the session. TODO unset this attribute once they are updated?
 
-                    // update the reimbursement
-                    reimbService.update(reimbToUpdate);
+                req.getSession().removeAttribute("reimbursement"); // resets so that employees can see all of their reimbs again when this method is requested
 
-                    // return things.
-                    HttpSession session = req.getSession();
-                    session.setAttribute("reimbUpdatedByEmployee", reimbToUpdate); // assign that reimb to the session. TODO unset this attribute once they are updated?
+                String reimbUpdatedJSON = mapper.writeValueAsString(reimbToUpdate);
+                respWriter.write(reimbUpdatedJSON); // return the user (if found) to the response
 
-                    req.getSession().removeAttribute("reimbursement"); // resets so that employees can see all of their reimbs again when this method is requested
-
-                    String reimbUpdatedJSON = mapper.writeValueAsString(reimbToUpdate);
-                    respWriter.write(reimbUpdatedJSON); // return the user (if found) to the response
-
-                    resp.setStatus(201); // 201 = CREATED because new information?
-
-
-                }
-
+                resp.setStatus(201); // 201 = CREATED because new information?
 
             }
-
-        } catch(MismatchedInputException mie) {
-
-            resp.setStatus(400); // 400 = BAD REQUEST
-
-            ErrorResponse err = new ErrorResponse(400, "Bad Request: Malformed reimb object found in request body");
-            String errJSON = mapper.writeValueAsString(err);
-            respWriter.write(errJSON);
-
+        } catch (Exception e) {
+            e.printStackTrace(); // TODO custom exceptions
         }
-        catch (Exception e) {
-            e.printStackTrace();
-            resp.setStatus(500); // 500 = INTERNAL SERVER ERROR
-            ErrorResponse err = new ErrorResponse(500, "It's not you, it's us. Our bad");
-            respWriter.write(mapper.writeValueAsString(err));
-        }
+
+
     }
 
     @Override
