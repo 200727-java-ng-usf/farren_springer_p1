@@ -26,29 +26,7 @@ public class ReimbService {
         return reimbs;
     }
 
-    public Set<ErsReimbursement> getAllByStatus(Status status) {
 
-        Set<ErsReimbursement> reimbs = reimbRepo.findAllReimbsByStatus(status);
-
-        if (reimbs.isEmpty()) {
-            throw new ResourceNotFoundException();
-        }
-
-        return reimbs;
-
-    }
-
-    public Set<ErsReimbursement> getAllByType(Type type) {
-
-        Set<ErsReimbursement> reimbs = reimbRepo.findAllReimbsByType(type);
-
-        if (reimbs.isEmpty()) {
-            throw new ResourceNotFoundException();
-        }
-
-        return reimbs;
-
-    }
 
     public Set<ErsReimbursement> getAllByAuthorId(Integer authorId) {
 
@@ -131,3 +109,31 @@ public class ReimbService {
     }
 
 }
+
+
+
+
+// not using these
+//    public Set<ErsReimbursement> getAllByStatus(Status status) {
+//
+//        Set<ErsReimbursement> reimbs = reimbRepo.findAllReimbsByStatus(status);
+//
+//        if (reimbs.isEmpty()) {
+//            throw new ResourceNotFoundException();
+//        }
+//
+//        return reimbs;
+//
+//    }
+//
+//    public Set<ErsReimbursement> getAllByType(Type type) {
+//
+//        Set<ErsReimbursement> reimbs = reimbRepo.findAllReimbsByType(type);
+//
+//        if (reimbs.isEmpty()) {
+//            throw new ResourceNotFoundException();
+//        }
+//
+//        return reimbs;
+//
+//    }
