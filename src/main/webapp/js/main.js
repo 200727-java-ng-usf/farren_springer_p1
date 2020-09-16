@@ -223,6 +223,30 @@ function loadReimbDetails() {
                                         + "<button type='submit' class='btn btn-primary' id='chooseToUpdateReimb'>Edit This Reimbursement</button>";
             }
 
+            //format resolved field
+            if (array.resolved == null) {
+                array.resolved == "";
+            } else {
+                array.resolved = new Date(array.resolved);
+                array.resolved = array.resolved.toLocaleDateString("en-US");
+            }
+
+            // format submitted field
+            console.log(array.submitted);
+            array.submitted = new Date(array.submitted);
+            console.log(array.submitted);
+
+            // format resolverId field
+            if(array.resolverId == '0') {
+                array.resolverId = "";
+            } 
+
+            // format amount field
+            array.amount = array.amount.toLocaleString("en-US", {
+                style: "currency",
+                currency: "USD"
+              });
+
             APP_VIEW.innerHTML = "<h1>Reimb Details:</h1>"
                                 + roleSpecificOption
                                 // + "<div class='form-group'>"
@@ -231,15 +255,15 @@ function loadReimbDetails() {
                                 // + "</div>"
                                 // + "<div id='reimb-button-container'>"
                                 // + "<button type='submit' class='btn btn-primary' id='approveItOrDenyIt'>Choose</button>"
-                                + "<h3> ID:" + array.id + "</h3>"
-                                + "<h3> Amount:" + array.amount + "</h3>"
-                                + "<h3> Submitted:" + array.submitted + "</h3>"
-                                + "<h3> Resolved:" + array.resolved + "</h3>"
-                                + "<h3> Description:" + array.description + "</h3>"
-                                + "<h3> Author:" + array.authorId + "</h3>"
-                                + "<h3> Resolver:" + array.resolverId + "</h3>"
-                                + "<h3> Status:" + array.reimbursementStatus + "</h3>"
-                                + "<h3> Type:" + array.reimbursementType + "</h3>";
+                                + "<h3> ID: " + array.id + "</h3>"
+                                + "<h3> Amount: " + array.amount + "</h3>"
+                                + "<h3> Submitted: " + array.submitted.toLocaleDateString("en-US") + "</h3>"
+                                + "<h3> Resolved: " + array.resolved + "</h3>"
+                                + "<h3> Description: " + array.description + "</h3>"
+                                + "<h3> Author: " + array.authorId + "</h3>"
+                                + "<h3> Resolver: " + array.resolverId + "</h3>"
+                                + "<h3> Status: " + array.reimbursementStatus + "</h3>"
+                                + "<h3> Type: " + array.reimbursementType + "</h3>";
                                 
                 // add event listeners to both even though only one is there. TODO could make both and hide one depending on role.
                 if (authUser.role == 'FinManager') {
@@ -524,7 +548,7 @@ function configureAllReimbsView() {
                 array[i].submitted = new Date(array[i].submitted); // change submitted to the correct format
 
                 if (array[i].resolved != null) {
-                    array[i].resolved = new Date(array[i].resolved); // if the resolved date is not null, format it
+                    array[i].resolved = new Date(array[i].resolved).toLocaleDateString("en-US"); // if the resolved date is not null, format it
                 } 
 
                 // each row has multiple data cells with information corresponsing the key value pairs in the response text
@@ -532,7 +556,7 @@ function configureAllReimbsView() {
                                     + "<td>" + array[i].authorId + "</td>"
                                     + "<td>" + array[i].description + "</td>"
                                     + "<td>$" + array[i].amount + ".00</td>"
-                                    + "<td>" + array[i].submitted + "</td>"
+                                    + "<td>" + array[i].submitted.toLocaleDateString("en-US") + "</td>"
                                     + "<td>" + array[i].reimbursementType + "</td>"
                                     + "<td>" + array[i].reimbursementStatus + "</td>"
                                     + "<td>" + array[i].resolved + "</td>"
@@ -614,7 +638,7 @@ function configureAuthorReimbsView() {
                 array[i].submitted = new Date(array[i].submitted); // reformat
 
                 if (array[i].resolved != null) {
-                    array[i].resolved = new Date(array[i].resolved); // if the resolved date is not null, format it
+                    array[i].resolved = new Date(array[i].resolved).toLocaleDateString("en-US"); // if the resolved date is not null, format it
                 } else {
                     array[i].resolved = "";
                 }
@@ -628,7 +652,7 @@ function configureAuthorReimbsView() {
                                     + "<td>" + array[i].authorId + "</td>"
                                     + "<td>" + array[i].description + "</td>"
                                     + "<td>$" + array[i].amount + ".00</td>"
-                                    + "<td>" + array[i].submitted + "</td>"
+                                    + "<td>" + array[i].submitted.toLocaleDateString("en-US") + "</td>"
                                     + "<td>" + array[i].reimbursementType + "</td>"
                                     + "<td>" + array[i].reimbursementStatus + "</td>"
                                     + "<td>" + array[i].resolved + "</td>"
