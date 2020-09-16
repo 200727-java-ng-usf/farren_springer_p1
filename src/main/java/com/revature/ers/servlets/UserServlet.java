@@ -143,7 +143,7 @@ public class UserServlet extends HttpServlet {
 
     /**
      * UPDATE operation
-     * This method is used by admins to update users.
+     * This method is used by admins to update users or render them inactive
      * @param req
      * @param resp
      * @throws ServletException

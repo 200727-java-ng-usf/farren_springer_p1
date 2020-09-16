@@ -3,6 +3,9 @@
     <hr/>
     <h3>Update User</h3>
     <h3>If you would like to delete a user, change their role to Inactive.</h3>
+    <div id="make-user-inactive-container">
+        <button type="submit" class="btn btn-primary" id="makeUserInactive">Delete User (soft delete)</button>
+    </div>
     <div class="form-group">
         <label for="fn-update">New First Name</label>
         <input type="text" class="form-control" id="fn-update" placeholder="Enter user's first name">
@@ -24,7 +27,7 @@
         <input type="text" class="form-control" id="password-update" placeholder="Enter user's password">
     </div>
     <div class="form-group">
-        <label for="role-update">Enter 1 for Admin, 2 for Finance Manager, 3 for Employee, and 4 for Inactive (Soft Delete)</label>
+        <label for="role-update">Enter 1 for Admin, 2 for Finance Manager, and 3 for Employee</label>
         <input type="text" class="form-control" id="role-update" placeholder="Ex: 3">
     </div>
     <div id="update-button-container">

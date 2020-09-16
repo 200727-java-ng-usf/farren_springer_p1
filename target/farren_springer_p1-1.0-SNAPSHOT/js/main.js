@@ -682,6 +682,7 @@ function configureUpdateUserView() {
     // document.getElementById('update').setAttribute('disabled', true);
     // document.getElementById('update-button-container').addEventListener('mouseover', validateUpdateForm);
     document.getElementById('update').addEventListener('click', updateUser);
+    document.getElementById('makeUserInactive').addEventListener('click', makeUserInactive);
 
 }
 
@@ -872,6 +873,50 @@ function updateUser() {
 
 
 }
+
+function makeUserInactive() {
+
+    console.log('in makeUserInactive()');
+    console.log(localStorage.getItem('userToUpdate'));
+
+    let oldUser = JSON.parse(localStorage.getItem('userToUpdate')); // the userToUpdate was set in findUserToUpdate()
+    console.log(oldUser);
+    console.log(oldUser.username);
+
+    // old data 
+    let fn = oldUser.firstName;
+    let ln = oldUser.lastName;
+    let oldEmail = oldUser.email;
+    let un = oldUser.username;
+    let pw = oldUser.password;
+
+    let userToMakeInactive = {
+        firstName: fn,
+        lastName: ln,
+        email: oldEmail,
+        username: un,
+        password: pw,
+        role: 'INACTIVE'
+    }
+
+    let userToMakeInactiveJSON = JSON.stringify(userToMakeInactive);
+    console.log(userToMakeInactive);
+
+    let xhr = new XMLHttpRequest();
+
+    xhr.open('PUT', 'users');
+    xhr.send(userToMakeInactiveJSON); // just send the updated status; the ID of the user to update should be a session attribute already
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 201) { // 200 OK. Use this code for update?
+            console.log('sending the user to the servlet to make them inactive!');
+            localStorage.removeItem('userToUpdate');
+            loadAllUsers();
+        } // TODO add an else if for error catching
+    }
+
+}
+
 function updateReimb() {
 
     console.log('in updateReimb()');
@@ -1075,7 +1120,7 @@ function deleteReimb() {
 
     console.log('in delteReimb()');
 
-    // TODO check to make sure reimbursement is PENDING before allowing employee to revoke reimbursement
+    // TODO check to make sure reimbursement is PENDING before allowing employee to revoke reimbursement instead of on browser?
 
     // open a delete to reimbs and in reimbs delete the current reimb selected in the session
     let xhr = new XMLHttpRequest();
@@ -1092,6 +1137,8 @@ function deleteReimb() {
     }
 
 }
+
+
 
 function approveItOrDenyIt() {
 

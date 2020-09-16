@@ -227,7 +227,7 @@ public class UserRepository {
                     + "password = '" + ersUser.getPassword() + "', "
                     + "first_name = '" + ersUser.getFirstName() + "', "
                     + "last_name = '" + ersUser.getLastName() + "', "
-                    + "user_role_id = '" + ersUser.getRole().ordinal() + "' "
+                    + "user_role_id = '" + (ersUser.getRole().ordinal()+1) + "' "
                     + "WHERE ers_user_id = '" + ersUser.getId() + "' ";
 
             PreparedStatement pstmt = conn.prepareStatement(sql);
