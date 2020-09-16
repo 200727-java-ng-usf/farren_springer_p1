@@ -27,6 +27,55 @@ public class ReimbServlet extends HttpServlet {
     private final UserService userService = new UserService();
 
     /**
+     * CREATE operation
+     * This method will be called to submit a reimbursement
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        System.out.println("in ReimbServlet doPost");
+
+        resp.setContentType("application/json");
+        ObjectMapper mapper = new ObjectMapper();
+        PrintWriter respWriter = resp.getWriter();
+
+
+
+        try {
+
+            System.out.println("Starting submit!");
+            ErsReimbursement newReimbursement = mapper.readValue(req.getInputStream(), ErsReimbursement.class);
+            System.out.println("read the input stream: " + newReimbursement);
+            reimbService.register(newReimbursement);
+            System.out.println(newReimbursement);
+            String newReimbursementJSON = mapper.writeValueAsString(newReimbursement);
+            respWriter.write(newReimbursementJSON);
+            resp.setStatus(201); // 201 = CREATED
+
+
+        } catch(MismatchedInputException mie) {
+
+            resp.setStatus(400); // 400 = BAD REQUEST
+
+            ErrorResponse err = new ErrorResponse(400, "Bad Request: Malformed reimb object found in request body");
+            String errJSON = mapper.writeValueAsString(err);
+            respWriter.write(errJSON);
+
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            resp.setStatus(500); // 500 = INTERNAL SERVER ERROR
+            ErrorResponse err = new ErrorResponse(500, "It's not you, it's us. Our bad");
+            respWriter.write(mapper.writeValueAsString(err));
+        }
+    }
+
+
+    /**
      * READ operation
      * If this method is called, the user is either a Finance Manager or an Employee.
      * If they are a Finance Manager, they are either getting all reimbs or the details for one.
@@ -169,56 +218,10 @@ public class ReimbServlet extends HttpServlet {
 
     }
 
-    /**
-     * This method will be called to submit a reimbursement
 
-     *
-     * @param req
-     * @param resp
-     * @throws ServletException
-     * @throws IOException
-     */
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        System.out.println("in ReimbServlet doPost");
-
-        resp.setContentType("application/json");
-        ObjectMapper mapper = new ObjectMapper();
-        PrintWriter respWriter = resp.getWriter();
-
-
-
-        try {
-
-            System.out.println("Starting submit!");
-            ErsReimbursement newReimbursement = mapper.readValue(req.getInputStream(), ErsReimbursement.class);
-            System.out.println("read the input stream: " + newReimbursement);
-            reimbService.register(newReimbursement);
-            System.out.println(newReimbursement);
-            String newReimbursementJSON = mapper.writeValueAsString(newReimbursement);
-            respWriter.write(newReimbursementJSON);
-            resp.setStatus(201); // 201 = CREATED
-
-
-        } catch(MismatchedInputException mie) {
-
-            resp.setStatus(400); // 400 = BAD REQUEST
-
-            ErrorResponse err = new ErrorResponse(400, "Bad Request: Malformed reimb object found in request body");
-            String errJSON = mapper.writeValueAsString(err);
-            respWriter.write(errJSON);
-
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-            resp.setStatus(500); // 500 = INTERNAL SERVER ERROR
-            ErrorResponse err = new ErrorResponse(500, "It's not you, it's us. Our bad");
-            respWriter.write(mapper.writeValueAsString(err));
-        }
-    }
 
     /**
+     * UPDATE operation
      * If this method is called, a user is either:
      * A finance manager resolving a reimbursement, or
      * an employee updating their PENDING reimbursement TODO check to make sure reimb is PENDING in service layer?
@@ -356,6 +359,13 @@ public class ReimbServlet extends HttpServlet {
 
     }
 
+    /**
+     * DELETE operation
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -400,7 +410,7 @@ public class ReimbServlet extends HttpServlet {
 
 
 
-
+// Don't need this bc DataTables has built in filter
 //            else { // should get here if the
 //
 //                System.out.println("No authorID found. Finding all reimbs");

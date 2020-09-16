@@ -30,15 +30,16 @@ public class AuthServlet extends HttpServlet {
     private final UserService userService = new UserService();
     private final ReimbService reimbService = new ReimbService();
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        System.out.println("in AuthServlet doGet");
-        req.getSession().invalidate();
-        resp.setStatus(204);
-
-    }
-
+    /**
+     * CREATE operation
+     * This method is used to create a credentials and a principle object.
+     * These objects are assigned to the session and can be used in other servlets.
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -182,6 +183,22 @@ public class AuthServlet extends HttpServlet {
             ErrorResponse err = new ErrorResponse(500, "It's not you, it's us. Our bad");
             respWriter.write(mapper.writeValueAsString(err));
         }
+
+    }
+
+    /**
+     * (Should not get to here)
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        System.out.println("in AuthServlet doGet");
+        req.getSession().invalidate();
+        resp.setStatus(204);
 
     }
 }
