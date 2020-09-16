@@ -16,20 +16,6 @@ window.onload = function() {
     
 }
 
-// //JQUERY
-// $(document).ready( function () {
-//     $('#reimbsTable').DataTable();
-//     } );(jQuery);
-
-// $(document).ready( function () {
-//     $('#AllUsersTable').DataTable();
-//     } );(jQuery);
-
-//     $(document).ready( function () {
-//         $('#test-table').DataTable();
-//      } );(jQuery);
-
-
 
 //----------------------LOAD VIEWS-------------------------
 
@@ -294,17 +280,33 @@ function loadUpdateReimb() {
 
     console.log('in loadUpdateReimb()');
 
-    let xhr = new XMLHttpRequest();
+    console.log('is the reimbursement not pending? Checking...');
+    let isReimbPending = JSON.parse(localStorage.getItem('authReimb'));
+    console.log(isReimbPending.reimbursementStatus);
+    if (isReimbPending.reimbursementStatus != 'PENDING') { // check is the reimb is not pending
 
-    xhr.open('GET', 'updatereimb.view'); // third parameter of this method is optional (defaults to true)
-    xhr.send();
+        alert('You cannot update a reimbursement that has already been resolved!');
+        localStorage.removeItem('authReimb'); // clear the storage so that if the employee goes to look at their reimbs again, it will show them all
+        console('this should be null now (the authReimb should be removed): ' + localStorage.getItem('authReimb'));
 
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-            APP_VIEW.innerHTML = xhr.responseText;
-            configureUpdateReimbView();
-        }
+    } else {
+
+        console.log('reimb is pending!');
+
+        let xhr = new XMLHttpRequest();
+
+        xhr.open('GET', 'updatereimb.view'); // third parameter of this method is optional (defaults to true)
+        xhr.send();
+
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                APP_VIEW.innerHTML = xhr.responseText;
+                configureUpdateReimbView();
+            }
     }
+    }
+
+    
 
 }
 
@@ -356,8 +358,8 @@ function configureHomeView() {
 
         console.log('user is an admin! Configuring admin view');
 
-        options.innerHTML = "<a class='nav-item nav-link' id='toRegister'>Register</a>"
-                            + "<a class='nav-item nav-link' id='toAllUsers'>All Users</a>"; // add these to the div. Might not use this
+        // options.innerHTML = "<a class='nav-item nav-link' id='toRegister'>Register</a>"
+        //                     + "<a class='nav-item nav-link' id='toAllUsers'>All Users</a>"; // add these to the div. Might not use this
 
         // Show the options specific to admins (Register, See All Users to edit).
         document.getElementById('toAllUsers').removeAttribute('hidden'); 
@@ -373,7 +375,7 @@ function configureHomeView() {
 
         console.log('user is a finance manager! Configuring manager view');
 
-        options.innerHTML = "<a class='nav-item nav-link' id='toAllReimbs'>All Reimbursements</a>";
+        // options.innerHTML = "<a class='nav-item nav-link' id='toAllReimbs'>All Reimbursements</a>";
 
         // show the options specific to finance managers (See All Reimbs to approve/deny).
         document.getElementById('toAllReimbs').removeAttribute('hidden');
@@ -385,8 +387,8 @@ function configureHomeView() {
 
         console.log ('user is an employee! Configuring employee view');
 
-        options.innerHTML = "<a class='nav-item nav-link' id='toSubmit'>Submit</a>"
-                            + "<a class='nav-item nav-link' id='toAuthorReimbs'>My Reimbursements</a>";
+        // options.innerHTML = "<a class='nav-item nav-link' id='toSubmit'>Submit</a>"
+        //                     + "<a class='nav-item nav-link' id='toAuthorReimbs'>My Reimbursements</a>";
 
         // show the options specific to employees (Submit or See Your Reimbs to edit).
         document.getElementById('toSubmit').removeAttribute('hidden');
@@ -421,6 +423,13 @@ function configureAllUsersView() {
             let array = JSON.parse(xhr.responseText); // the response from a GET request to reimbs
             console.log(array);
             let table = document.createElement("table"); // create a table
+            table.setAttribute('id', 'userTableToAddFilterTo');
+
+            // special table formatting to allow filters
+            $(document).ready( function () {
+                $('#userTableToAddFilterTo').DataTable();
+            } );
+
             document.getElementById('anotherTable').append(table); // attach the table
             let head = document.createElement("thead"); // create the table head
             let body = document.createElement("tbody"); // creating a tbody element
@@ -467,7 +476,7 @@ function configureAllReimbsView() {
 
     console.log('in configureAllReimbsView');
     let authUser = JSON.parse(localStorage.getItem('authUser'));
-    document.getElementById('loggedInUsername').innerText = authUser.username;
+    // document.getElementById('loggedInUsername').innerText = authUser.username;
     document.getElementById('viewReimbDetails').addEventListener('click', findReimbDetails);
 
     let xhr = new XMLHttpRequest();
@@ -482,6 +491,13 @@ function configureAllReimbsView() {
             let array = JSON.parse(xhr.responseText); // the response from a GET request to reimbs
             console.log(array);
             let table = document.createElement("table"); // create a table
+            table.setAttribute('id', 'reimbTableToAddFilterTo');
+
+            // special table formatting to allow filters
+            $(document).ready( function () {
+                $('#reimbTableToAddFilterTo').DataTable();
+            } );
+
             document.getElementById('anotherReimbTable').append(table); // attach the table
             let head = document.createElement("thead"); // create the table head
             let body = document.createElement("tbody"); // creating a tbody element
@@ -503,12 +519,19 @@ function configureAllReimbsView() {
             for (let i=0; i < array.length; i++) { // for every object in the response text...
 
                 let row = document.createElement("tr"); // create a row for that object
+                
+
+                array[i].submitted = new Date(array[i].submitted); // change submitted to the correct format
+
+                if (array[i].resolved != null) {
+                    array[i].resolved = new Date(array[i].resolved); // if the resolved date is not null, format it
+                } 
 
                 // each row has multiple data cells with information corresponsing the key value pairs in the response text
                 row.innerHTML = "<td>" + array[i].id + "</td>" 
                                     + "<td>" + array[i].authorId + "</td>"
                                     + "<td>" + array[i].description + "</td>"
-                                    + "<td>" + array[i].amount + "</td>"
+                                    + "<td>$" + array[i].amount + ".00</td>"
                                     + "<td>" + array[i].submitted + "</td>"
                                     + "<td>" + array[i].reimbursementType + "</td>"
                                     + "<td>" + array[i].reimbursementStatus + "</td>"
@@ -544,7 +567,7 @@ function configureAuthorReimbsView() {
     console.log('in configureAuthorReimbsView()');
 
     let authUser = JSON.parse(localStorage.getItem('authUser'));
-    document.getElementById('loggedInUsername').innerText = authUser.username;
+    // document.getElementById('loggedInUsername').innerText = authUser.username;
     document.getElementById('viewReimbDetails').addEventListener('click', findReimbDetails);
 
     console.log(authUser.id);
@@ -560,6 +583,13 @@ function configureAuthorReimbsView() {
 
             var array = JSON.parse(xhr.responseText); // the response from a GET request to reimbs
             let table = document.getElementById("reimbsTable"); // accessing the HTML tag with this ID
+            table.setAttribute('id', 'authorReimbTableToAddFilterTo');
+
+            // special table formatting to allow filters
+            $(document).ready( function () {
+                $('#authorReimbTableToAddFilterTo').DataTable();
+            } );
+            
             let head = document.createElement("thead"); // create the table head
             let body = document.createElement("tbody"); // creating a tbody element
 
@@ -581,11 +611,23 @@ function configureAuthorReimbsView() {
 
                 let row = document.createElement("tr"); // create a row for that object
 
+                array[i].submitted = new Date(array[i].submitted); // reformat
+
+                if (array[i].resolved != null) {
+                    array[i].resolved = new Date(array[i].resolved); // if the resolved date is not null, format it
+                } else {
+                    array[i].resolved = "";
+                }
+
+                if (array[i].resolverId == '0') {
+                    array[i].resolverId = ""; // no resolver yet. This makes it empty in the table!
+                }
+
                 // each row has multiple data cells with information corresponsing the key value pairs in the response text
                 row.innerHTML = "<td>" + array[i].id + "</td>" 
                                     + "<td>" + array[i].authorId + "</td>"
                                     + "<td>" + array[i].description + "</td>"
-                                    + "<td>" + array[i].amount + "</td>"
+                                    + "<td>$" + array[i].amount + ".00</td>"
                                     + "<td>" + array[i].submitted + "</td>"
                                     + "<td>" + array[i].reimbursementType + "</td>"
                                     + "<td>" + array[i].reimbursementStatus + "</td>"
@@ -754,7 +796,27 @@ function updateUser() {
     }
     if (newRole == null || newRole == "") {
         newRole = oldUser.role;
-    }
+    } 
+    // else { // if a number was entered in the role field, change it to an enum constant
+    //     if (newRole == '1') {
+    //         console.log('Update to Admin chosen!');
+    //         newRole = 'ADMIN';
+    //     }
+    //     if (newRole == '2') {
+    //         console.log('Update to FinManager chosen!');
+    //         newRole = 'FINANCE_MANAGER';
+    //     }
+    //     if (newRole == '3') {
+    //         console.log('Update to Employee chosen!');
+    //         newRole = 'EMPLOYEE';
+    //     }
+    //     if (newRole == '4') {
+    //         console.log('Update to Inactive chosen!');
+    //         newRole = 'INACTIVE';
+    //     }
+
+    // }
+    console.log("This should be the new role or the old if nothing was entered in update role field: " + newRole);
 
     // this will have either the values entered in the form or the old information if nothing was entered
     let updatedUser = {
@@ -775,8 +837,8 @@ function updateUser() {
 
     xhr.onreadystatechange = function() {
         if (xhr.readyState == 4 && xhr.status == 201) { // 201 CREATED bc new data? 
-        
-            loadHome(); // loadHome after updating a user? Could also load the allUsers again
+            console.log('loading all users page!')
+            loadAllUsers(); 
         } else if (xhr.readyState == 4 && xhr.status != 201) {
             document.getElementById('update-message').removeAttribute('hidden'); // to make an attribute not hidden. TODO could use this for navbar depending on user role?
             let err = JSON.parse(xhr.responseText);
@@ -812,6 +874,23 @@ function updateReimb() {
     if (newDescription == null || newDescription == "") {
         newDescription = oldReimb.amount;
         console.log(newDescription);
+    } else { // if the employee DID enter a number into the type field for update, change it to an enum constant
+            if (newType == '1') {
+                console.log('Update to Lodging chosen!');
+                newType = 'LODGING';
+            }
+            if (newType == '2') {
+                console.log('Update to Travel chosen!');
+                newType = 'TRAVEL';
+            }
+            if (newType == '3') {
+                console.log('Update to Food chosen!');
+                newType = 'FOOD';
+            }
+            if (newType == '4') {
+                console.log('Update to Other chosen!');
+                newType = 'OTHER';
+            }
     }
     
 
@@ -833,7 +912,7 @@ function updateReimb() {
         if (xhr.readyState == 4 && xhr.status == 201) { // 201 CREATED bc new data? 
             // clear the local storage of the reimb so that all will load again when they want to view all of their reimbursements
             localStorage.removeItem('authReimb');
-            loadHome(); // loadHome after updating a user? Could also load the allUsers again
+            loadAuthorReimbs(); // loadAUTHORReimbs because if a user is here, they are an employee
         } else if (xhr.readyState == 4 && xhr.status != 201) {
             document.getElementById('update-reimb-message').removeAttribute('hidden'); // to make an attribute not hidden. TODO could use this for navbar depending on user role?
             let err = JSON.parse(xhr.responseText);
@@ -920,6 +999,24 @@ function submit() {
     let description = document.getElementById('description').value;
     let authUser = JSON.parse(localStorage.getItem('authUser')); // authUser is the currentUser logged in. Use this to find authorId field of reimbursement object
 
+    // change type to enum constant
+    if (type == '1') {
+        console.log('lodging chosen!');
+        type = 'LODGING';
+    }
+    if (type == '2') {
+        console.log('travel chosen!');
+        type = 'TRAVEL';
+    }
+    if (type == '3') {
+        console.log('food chosen!');
+        type = 'FOOD';
+    }
+    if (type == '4') {
+        console.log('OTHER');
+    }
+
+
     let newReimb = {
         amount: amount,
         reimbursementType: type,
@@ -929,6 +1026,7 @@ function submit() {
     }
 
     let newReimbJSON = JSON.stringify(newReimb);
+    console.log(newReimbJSON);
 
     let xhr = new XMLHttpRequest();
 
@@ -953,6 +1051,8 @@ function deleteReimb() {
 
     console.log('in delteReimb()');
 
+    // TODO check to make sure reimbursement is PENDING before allowing employee to revoke reimbursement
+
     // open a delete to reimbs and in reimbs delete the current reimb selected in the session
     let xhr = new XMLHttpRequest();
 
@@ -970,6 +1070,12 @@ function deleteReimb() {
 }
 
 function approveItOrDenyIt() {
+
+    // if the Reimbursement has a status other than PENDING, then alert the user they are overriding the status
+    let reimbToCheckForOverride = JSON.parse(localStorage.getItem('authReimb'));
+    if (reimbToCheckForOverride.reimbursementStatus != 'PENDING') {
+        alert('WARNING: You are overriding the status of a reimbursement that has already been resolved!');
+    }
 
     console.log('in approveItOrDenyIt()');
 
@@ -1005,7 +1111,7 @@ function approveItOrDenyIt() {
     xhr.onreadystatechange = function() {
         if (xhr.readyState == 4 && xhr.status == 201) {
             localStorage.removeItem('authReimb'); // remove the authReimb so that all reimbs will show up with a get request to reimb servlet
-            loadHome();
+            loadAllReimbs();
         }
     }
 }

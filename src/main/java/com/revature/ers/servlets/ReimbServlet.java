@@ -71,7 +71,13 @@ public class ReimbServlet extends HttpServlet {
                 // TODO get Reimbs by Author ID
 
             }
+
+            // Having issue where Employees cannot see their reimbursements after selecting one to view.
+            // if the user is an employee, we want to reset the reimbursement to null BEFORE we
+            // view the all author reimbs screen
             else if (reimbursement != null) {
+
+                System.out.println("The reimbursement is not null!");
 
                 ErsReimbursement ersReimbursement = (ErsReimbursement) reimbursement;
 
@@ -80,7 +86,7 @@ public class ReimbServlet extends HttpServlet {
                 respWriter.write(ersReimbursementJSON);
 
                 reimbursement = null; // assign the reimbursement to null so that all will show the next time a user calls the doGet
-                System.out.println("This should say null if the reimbursement was assigned to null after the TX: " + reimbursement);
+                req.getSession().removeAttribute("reimbursement");
 
                 resp.setStatus(200); // 200 OK
             }
@@ -118,63 +124,7 @@ public class ReimbServlet extends HttpServlet {
 
             }
 
-//            else { // should get here if the
-//
-//                System.out.println("No authorID found. Finding all reimbs");
-//
-//                Set<ErsReimbursement> reimbs = reimbService.getAllReimbs();
-//
-//                String reimbsJSON = mapper.writeValueAsString(reimbs);
-//                respWriter.write(reimbsJSON);
-//
-//                resp.setStatus(200); // 200 = OK
-//                System.out.println(resp.getStatus());
-//                System.out.println(req.getRequestURI());
-//
-//            }
 
-//
-//            else {
-//                String JSON; // string to be written as response
-//                switch (req.getRequestURI()) {
-//                    case "/reimbs/pending":
-//                        Set<ErsReimbursement> pendingReimbs = reimbService.getAllByStatus(Status.PENDING);
-//                        JSON = mapper.writeValueAsString(pendingReimbs);
-//                        break;
-//                    case "/reimbs/approved":
-//                        Set<ErsReimbursement> approvedReimbs = reimbService.getAllByStatus(Status.APPROVED);
-//                        JSON = mapper.writeValueAsString(approvedReimbs);
-//                        break;
-//                    case "reimbs/denied":
-//                        Set<ErsReimbursement> deniedReimbs = reimbService.getAllByStatus(Status.DENIED);
-//                        JSON = mapper.writeValueAsString(deniedReimbs);
-//                        break;
-//                    case "reimbs/lodging":
-//                        Set<ErsReimbursement> lodgingReimbs = reimbService.getAllByType(Type.LODGING);
-//                        JSON = mapper.writeValueAsString(lodgingReimbs);
-//                        break;
-//                    case "reimbs/travel":
-//                        Set<ErsReimbursement> travelReimbs = reimbService.getAllByType(Type.TRAVEL);
-//                        JSON = mapper.writeValueAsString(travelReimbs);
-//                        break;
-//                    case "reimbs/food":
-//                        Set<ErsReimbursement> foodReimbs = reimbService.getAllByType(Type.FOOD);
-//                        JSON = mapper.writeValueAsString(foodReimbs);
-//                        break;
-//                    case "reimbs/other":
-//                        Set<ErsReimbursement> otherReimbs = reimbService.getAllByType(Type.OTHER);
-//                        JSON = mapper.writeValueAsString(otherReimbs);
-//                        break;
-//                    case "reimbs/":
-//                        Set<ErsReimbursement> reimbs = reimbService.getAllReimbs();
-//                        JSON = mapper.writeValueAsString(reimbs);
-//                    default:
-//                        throw new IllegalStateException("Unexpected value: " + req.getRequestURI());
-//                }
-//                respWriter.write(JSON); // response string based on switch case
-//                resp.setStatus(200); // 200 = OK
-//                System.out.println(resp.getStatus());
-//            }
 
 
         } catch (ResourceNotFoundException rnfe) {
@@ -225,6 +175,7 @@ public class ReimbServlet extends HttpServlet {
                 //then register!
                 System.out.println("reimbursement attribute not present. Starting submit!");
                 ErsReimbursement newReimbursement = mapper.readValue(req.getInputStream(), ErsReimbursement.class);
+                System.out.println("read the input stream: " + newReimbursement);
                 reimbService.register(newReimbursement);
                 System.out.println(newReimbursement);
                 String newReimbursementJSON = mapper.writeValueAsString(newReimbursement);
@@ -315,9 +266,9 @@ public class ReimbServlet extends HttpServlet {
 
                     // return things.
                     HttpSession session = req.getSession();
-                    session.setAttribute("reimbUpdatedByEmployee", reimbToUpdate); // assign that user to the session. TODO unset this attribute once they are updated?
+                    session.setAttribute("reimbUpdatedByEmployee", reimbToUpdate); // assign that reimb to the session. TODO unset this attribute once they are updated?
 
-                    req.getSession().removeAttribute("reimbursement"); // resets so that managers can see all users again when this method is requested
+                    req.getSession().removeAttribute("reimbursement"); // resets so that employees can see all of their reimbs again when this method is requested
 
                     String reimbUpdatedJSON = mapper.writeValueAsString(reimbToUpdate);
                     respWriter.write(reimbUpdatedJSON); // return the user (if found) to the response
@@ -391,3 +342,64 @@ public class ReimbServlet extends HttpServlet {
 
     }
 }
+
+
+
+
+//            else { // should get here if the
+//
+//                System.out.println("No authorID found. Finding all reimbs");
+//
+//                Set<ErsReimbursement> reimbs = reimbService.getAllReimbs();
+//
+//                String reimbsJSON = mapper.writeValueAsString(reimbs);
+//                respWriter.write(reimbsJSON);
+//
+//                resp.setStatus(200); // 200 = OK
+//                System.out.println(resp.getStatus());
+//                System.out.println(req.getRequestURI());
+//
+//            }
+
+//
+//            else {
+//                String JSON; // string to be written as response
+//                switch (req.getRequestURI()) {
+//                    case "/reimbs/pending":
+//                        Set<ErsReimbursement> pendingReimbs = reimbService.getAllByStatus(Status.PENDING);
+//                        JSON = mapper.writeValueAsString(pendingReimbs);
+//                        break;
+//                    case "/reimbs/approved":
+//                        Set<ErsReimbursement> approvedReimbs = reimbService.getAllByStatus(Status.APPROVED);
+//                        JSON = mapper.writeValueAsString(approvedReimbs);
+//                        break;
+//                    case "reimbs/denied":
+//                        Set<ErsReimbursement> deniedReimbs = reimbService.getAllByStatus(Status.DENIED);
+//                        JSON = mapper.writeValueAsString(deniedReimbs);
+//                        break;
+//                    case "reimbs/lodging":
+//                        Set<ErsReimbursement> lodgingReimbs = reimbService.getAllByType(Type.LODGING);
+//                        JSON = mapper.writeValueAsString(lodgingReimbs);
+//                        break;
+//                    case "reimbs/travel":
+//                        Set<ErsReimbursement> travelReimbs = reimbService.getAllByType(Type.TRAVEL);
+//                        JSON = mapper.writeValueAsString(travelReimbs);
+//                        break;
+//                    case "reimbs/food":
+//                        Set<ErsReimbursement> foodReimbs = reimbService.getAllByType(Type.FOOD);
+//                        JSON = mapper.writeValueAsString(foodReimbs);
+//                        break;
+//                    case "reimbs/other":
+//                        Set<ErsReimbursement> otherReimbs = reimbService.getAllByType(Type.OTHER);
+//                        JSON = mapper.writeValueAsString(otherReimbs);
+//                        break;
+//                    case "reimbs/":
+//                        Set<ErsReimbursement> reimbs = reimbService.getAllReimbs();
+//                        JSON = mapper.writeValueAsString(reimbs);
+//                    default:
+//                        throw new IllegalStateException("Unexpected value: " + req.getRequestURI());
+//                }
+//                respWriter.write(JSON); // response string based on switch case
+//                resp.setStatus(200); // 200 = OK
+//                System.out.println(resp.getStatus());
+//            }

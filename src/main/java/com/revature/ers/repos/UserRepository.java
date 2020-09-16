@@ -30,6 +30,49 @@ public class UserRepository {
         System.out.println("[LOG] - Instantiating " + this.getClass().getName());
     }
 
+    /**
+     * CREATE operation
+     * @param newUser
+     */
+    public void save(ErsUser newUser) {
+
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            String sql = "INSERT INTO project1.ers_users (username, password, first_name, last_name, email, user_role_id) " +
+                    "VALUES (?, ?, ?, ?, ?, ?)";
+
+            // second parameter here is used to indicate column names that will have generated values
+            PreparedStatement pstmt = conn.prepareStatement(sql, new String[] {"ers_user_id"});
+            pstmt.setString(1, newUser.getUsername());
+            pstmt.setString(2, newUser.getPassword());
+            pstmt.setString(3, newUser.getFirstName());
+            pstmt.setString(4, newUser.getLastName());
+            pstmt.setString(5, newUser.getEmail());
+            pstmt.setInt(6, newUser.getRole().ordinal());
+
+            int rowsInserted = pstmt.executeUpdate();
+
+            if (rowsInserted != 0) {
+
+                ResultSet rs = pstmt.getGeneratedKeys();
+
+                rs.next();
+                System.out.println(rs.getInt(1));
+                newUser.setId(rs.getInt(1));
+
+            }
+
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
+
+    }
+
+    /**
+     * READ operation
+     * @param id
+     * @return
+     */
     public Optional<ErsUser> findUserById(int id) {
 
         Optional<ErsUser> _user = Optional.empty();
@@ -55,7 +98,10 @@ public class UserRepository {
 
     }
 
-
+    /**
+     * READ operation
+     * @return
+     */
     public Set<ErsUser> findAllUsers() {
 
         Set<ErsUser> users = new HashSet<>();
@@ -76,8 +122,12 @@ public class UserRepository {
 
     }
 
-    // TODO find all users by role? Same as filter by enum in ReimbRepository
-
+    /**
+     * READ operation
+     * @param username
+     * @param password
+     * @return
+     */
     public Optional<ErsUser> findUserByCredentials(String username, String password) {
 
         Optional<ErsUser> _user = Optional.empty();
@@ -101,6 +151,11 @@ public class UserRepository {
         return _user;
     }
 
+    /**
+     * READ operation
+     * @param username
+     * @return
+     */
     public Optional<ErsUser> findUserByUsername(String username) {
 
         Optional<ErsUser> _user = Optional.empty();
@@ -131,6 +186,11 @@ public class UserRepository {
 
     }
 
+    /**
+     * READ operation
+     * @param email
+     * @return
+     */
     public Optional<ErsUser> findUserByEmail(String email) {
 
         Optional<ErsUser> _user = Optional.empty();
@@ -153,40 +213,11 @@ public class UserRepository {
 
     }
 
-    public void save(ErsUser newUser) {
-
-        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
-
-            String sql = "INSERT INTO project1.ers_users (username, password, first_name, last_name, email, user_role_id) " +
-                         "VALUES (?, ?, ?, ?, ?, ?)";
-
-            // second parameter here is used to indicate column names that will have generated values
-            PreparedStatement pstmt = conn.prepareStatement(sql, new String[] {"ers_user_id"});
-            pstmt.setString(1, newUser.getUsername());
-            pstmt.setString(2, newUser.getPassword());
-            pstmt.setString(3, newUser.getFirstName());
-            pstmt.setString(4, newUser.getLastName());
-            pstmt.setString(5, newUser.getEmail());
-            pstmt.setInt(6, newUser.getRole().ordinal());
-
-            int rowsInserted = pstmt.executeUpdate();
-
-            if (rowsInserted != 0) {
-
-                ResultSet rs = pstmt.getGeneratedKeys();
-
-                rs.next();
-                System.out.println(rs.getInt(1));
-                newUser.setId(rs.getInt(1));
-
-            }
-
-        } catch (SQLException sqle) {
-            sqle.printStackTrace();
-        }
-
-    }
-
+    /**
+     * UPDATE operation
+     * @param ersUser
+     * @return
+     */
     public boolean update(ErsUser ersUser) {
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
@@ -196,8 +227,8 @@ public class UserRepository {
                     + "password = '" + ersUser.getPassword() + "', "
                     + "first_name = '" + ersUser.getFirstName() + "', "
                     + "last_name = '" + ersUser.getLastName() + "', "
-                    + "'user_role_id '" + ersUser.getRole().ordinal() + 1 + "' "
-                    + "WHERE ers_user_id = " + ersUser.getId();
+                    + "user_role_id = '" + ersUser.getRole().ordinal() + "', "
+                    + "WHERE ers_user_id = '" + ersUser.getId() + "' ";
 
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.executeUpdate(); //

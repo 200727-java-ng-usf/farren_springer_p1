@@ -29,12 +29,18 @@ public class ErsUser {
         this.username = username;
         this.password = password;
         this.email = email;
-        this.role = Role.EMPLOYEE;  // role not specified? Employee
+        this.role = Role.INACTIVE;  // role not specified? Employee
     }
 
     public ErsUser (String username, String password, String firstName, String lastName, String email, Role role) {
         this(username, password, firstName, lastName, email); // constructor chaining
         this.role = role; // role can be specified with this constructor
+    }
+
+    // for the JSON where everything is a string
+    public ErsUser (String username, String password, String firstName, String lastName, String email, String roleAsString) {
+        this(username, password, firstName, lastName, email);
+        this.role = Role.getByName(roleAsString);
     }
 
     public ErsUser (Integer id, String username, String password, String firstName, String lastName, String email, Role role) {

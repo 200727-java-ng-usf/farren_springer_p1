@@ -27,6 +27,41 @@ public class ReimbRepository {
         System.out.println("[LOG] - Instantiating " + this.getClass().getName());
     }
 
+    public void save(ErsReimbursement newReimbursement) {
+
+        System.out.println("in reimbursement save method");
+
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            String sql = "INSERT INTO project1.ers_reimbursements (amount, submitted, description, author_id, reimb_status_id, reimb_type_id) " +
+                    "VALUES (?, ?, ?, ?, ?, ?)";
+
+            // second paramter here is used to indicate column names that will have generated values
+            PreparedStatement pstmt = conn.prepareStatement(sql, new String[] {"reimb_id"});
+            pstmt.setDouble(1, newReimbursement.getAmount());
+            pstmt.setTimestamp(2, newReimbursement.getSubmitted());
+            pstmt.setString(3, newReimbursement.getDescription());
+            pstmt.setInt(4, newReimbursement.getAuthorId());
+            pstmt.setInt(5, 1); // all new reimbursements will be set to pending
+            pstmt.setInt(6, (newReimbursement.getReimbursementType().ordinal()+1));
+
+            int rowsInserted = pstmt.executeUpdate();
+
+            if (rowsInserted != 0) {
+
+                ResultSet rs = pstmt.getGeneratedKeys(); // use second parameter of prepare statement
+
+                rs.next(); // for each reimbursement saved
+                newReimbursement.setId(rs.getInt(1)); // get the ID and set it in the service layer
+
+            }
+
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
+
+    }
+
     public Optional<ErsReimbursement> findReimbById(int id) {
 
         Optional<ErsReimbursement> _reimb = Optional.empty();
@@ -56,7 +91,7 @@ public class ReimbRepository {
 
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-            String sql = baseQuery;
+            String sql = baseQuery + "ORDER BY er.reimb_status_id";
 
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
@@ -64,6 +99,28 @@ public class ReimbRepository {
 
         } catch (Exception e) {
             e.printStackTrace();
+        }
+
+        return reimbs;
+
+    }
+
+    public Set<ErsReimbursement> findAllReimbsByAuthorId(Integer authorId) {
+
+        Set<ErsReimbursement> reimbs = new HashSet<>();
+
+        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+            String sql = baseQuery + "WHERE author_id = ?";
+
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, authorId);
+
+            ResultSet rs = pstmt.executeQuery();
+            reimbs = mapResultSet(rs);
+
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
         }
 
         return reimbs;
@@ -149,8 +206,8 @@ public class ReimbRepository {
 
             System.out.println("This is the type ID: " + updatedReimb.getReimbursementType().ordinal());
             String sql = "UPDATE project1.ers_reimbursements "
-                    + "SET amount = '" + updatedReimb.getResolved() + "', "
-                    + "reimb_type_id = '" + (updatedReimb.getReimbursementType().ordinal() + 1) + "' "
+                    + "SET amount = '" + updatedReimb.getAmount() + "', "
+                    + "reimb_type_id = '" + (updatedReimb.getReimbursementType().ordinal() + 1) + "', "
                     + "description = '" + updatedReimb.getDescription() + "' "
                     + "WHERE reimb_id = '" + updatedReimb.getId() + "' ";
 
@@ -168,63 +225,6 @@ public class ReimbRepository {
         }
 
         return true;
-
-    }
-
-    public void save(ErsReimbursement newReimbursement) {
-
-        System.out.println("in reimbursement save method");
-
-        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
-
-            String sql = "INSERT INTO project1.ers_reimbursements (amount, submitted, description, author_id, reimb_status_id, reimb_type_id) " +
-                    "VALUES (?, ?, ?, ?, ?, ?)";
-
-            // second paramter here is used to indicate column names that will have generated values
-            PreparedStatement pstmt = conn.prepareStatement(sql, new String[] {"reimb_id"});
-            pstmt.setDouble(1, newReimbursement.getAmount());
-            pstmt.setTimestamp(2, newReimbursement.getSubmitted());
-            pstmt.setString(3, newReimbursement.getDescription());
-            pstmt.setInt(4, newReimbursement.getAuthorId());
-            pstmt.setInt(5, 1); // all new reimbursements will be set to pending
-            pstmt.setInt(6, newReimbursement.getReimbursementType().ordinal());
-
-            int rowsInserted = pstmt.executeUpdate();
-
-            if (rowsInserted != 0) {
-
-                ResultSet rs = pstmt.getGeneratedKeys(); // use second parameter of prepare statement
-
-                rs.next(); // for each reimbursement saved
-                newReimbursement.setId(rs.getInt(1)); // get the ID and set it in the service layer
-
-            }
-
-        } catch (SQLException sqle) {
-            sqle.printStackTrace();
-        }
-
-    }
-
-    public Set<ErsReimbursement> findAllReimbsByAuthorId(Integer authorId) {
-
-        Set<ErsReimbursement> reimbs = new HashSet<>();
-
-        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
-
-            String sql = baseQuery + "WHERE author_id = ?";
-
-            PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, authorId);
-
-            ResultSet rs = pstmt.executeQuery();
-            reimbs = mapResultSet(rs);
-
-        } catch (SQLException sqle) {
-            sqle.printStackTrace();
-        }
-
-        return reimbs;
 
     }
 

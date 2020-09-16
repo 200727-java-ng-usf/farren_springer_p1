@@ -23,23 +23,49 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="acd0345a-037a-4ae4-bb0f-bf52e2b6afbe" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/revature/ers/services/ReimbServiceTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/revature/ers/services/UserServiceTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/models/ErsUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/models/ErsUser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/repos/ReimbRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/repos/ReimbRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/services/ReimbService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/services/ReimbService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/repos/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/repos/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/services/UserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/servlets/ReimbServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/servlets/ReimbServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/util/RequestViewHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/util/RequestViewHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/project1.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/project1.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/partials/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/partials/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/partials/reimbs.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/partials/reimbs.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/partials/submit.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/partials/submit.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/partials/updatereimb.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/partials/updatereimb.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/partials/updateuser.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/partials/updateuser.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/partials/users.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/partials/users.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/revature/ers/models/ErsUser.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/revature/ers/models/ErsUser.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/revature/ers/repos/ReimbRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/revature/ers/repos/ReimbRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/revature/ers/services/ReimbService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/revature/ers/services/ReimbService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/revature/ers/repos/UserRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/revature/ers/repos/UserRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/revature/ers/services/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/revature/ers/services/UserService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/revature/ers/servlets/ReimbServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/revature/ers/servlets/ReimbServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/revature/ers/util/RequestViewHelper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/revature/ers/util/RequestViewHelper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/revature/ers/servlets/UserServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/revature/ers/servlets/UserServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/project1.sql" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/project1.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT.war" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT.war" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/WEB-INF/classes/com/revature/ers/models/ErsUser.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/WEB-INF/classes/com/revature/ers/models/ErsUser.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/WEB-INF/classes/com/revature/ers/repos/ReimbRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/WEB-INF/classes/com/revature/ers/repos/ReimbRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/WEB-INF/classes/com/revature/ers/services/ReimbService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/WEB-INF/classes/com/revature/ers/services/ReimbService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/WEB-INF/classes/com/revature/ers/repos/UserRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/WEB-INF/classes/com/revature/ers/repos/UserRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/WEB-INF/classes/com/revature/ers/services/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/WEB-INF/classes/com/revature/ers/services/UserService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/WEB-INF/classes/com/revature/ers/servlets/ReimbServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/WEB-INF/classes/com/revature/ers/servlets/ReimbServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/WEB-INF/classes/com/revature/ers/util/RequestViewHelper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/WEB-INF/classes/com/revature/ers/util/RequestViewHelper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/WEB-INF/classes/com/revature/ers/servlets/UserServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/WEB-INF/classes/com/revature/ers/servlets/UserServlet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/WEB-INF/classes/project1.sql" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/WEB-INF/classes/project1.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/js/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/partials/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/partials/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/partials/reimbs.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/partials/reimbs.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/partials/submit.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/partials/submit.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/partials/updatereimb.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/partials/updatereimb.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/partials/updateuser.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/partials/updateuser.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/partials/users.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/partials/users.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-com.revature.ers.util.ConnectionFactoryTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-com.revature.ers.util.ConnectionFactoryTest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/surefire-reports/com.revature.ers.util.ConnectionFactoryTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/com.revature.ers.util.ConnectionFactoryTest.txt" afterDir="false" />
     </list>
@@ -102,34 +128,81 @@
       <recent name="com.revature.ers.controllers" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.ConnectionFactoryTest.ensureThatAConnectionIsObtained">
-    <configuration name="ConnectionFactoryTest.ensureConnectionFactoryIsSingleton" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.UserServiceTests">
+    <configuration name="UserServiceTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="farren_springer_p1" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.revature.ers.util.*" />
+          <option name="PATTERN" value="com.revature.ers.services.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.revature.ers.util" />
-      <option name="MAIN_CLASS_NAME" value="com.revature.ers.util.ConnectionFactoryTest" />
-      <option name="METHOD_NAME" value="ensureConnectionFactoryIsSingleton" />
+      <option name="PACKAGE_NAME" value="com.revature.ers.services" />
+      <option name="MAIN_CLASS_NAME" value="com.revature.ers.services.UserServiceTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserServiceTests.getAllUsersWithNoUsers" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="farren_springer_p1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.revature.ers.services.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.revature.ers.services" />
+      <option name="MAIN_CLASS_NAME" value="com.revature.ers.services.UserServiceTests" />
+      <option name="METHOD_NAME" value="getAllUsersWithNoUsers" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ConnectionFactoryTest.ensureThatAConnectionIsObtained" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="UserServiceTests.getAllUsersWithNoUsersMockRepo" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="farren_springer_p1" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.revature.ers.util.*" />
+          <option name="PATTERN" value="com.revature.ers.services.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.revature.ers.util" />
-      <option name="MAIN_CLASS_NAME" value="com.revature.ers.util.ConnectionFactoryTest" />
-      <option name="METHOD_NAME" value="ensureThatAConnectionIsObtained" />
+      <option name="PACKAGE_NAME" value="com.revature.ers.services" />
+      <option name="MAIN_CLASS_NAME" value="com.revature.ers.services.UserServiceTests" />
+      <option name="METHOD_NAME" value="getAllUsersWithNoUsersMockRepo" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserServiceTests.registerAUserThatAlreadyExists" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="farren_springer_p1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.revature.ers.services.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.revature.ers.services" />
+      <option name="MAIN_CLASS_NAME" value="com.revature.ers.services.UserServiceTests" />
+      <option name="METHOD_NAME" value="registerAUserThatAlreadyExists" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserServiceTests.updateUserThatDoesNotExist" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="farren_springer_p1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.revature.ers.services.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.revature.ers.services" />
+      <option name="MAIN_CLASS_NAME" value="com.revature.ers.services.UserServiceTests" />
+      <option name="METHOD_NAME" value="updateUserThatDoesNotExist" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -137,8 +210,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.ConnectionFactoryTest.ensureThatAConnectionIsObtained" />
-        <item itemvalue="JUnit.ConnectionFactoryTest.ensureConnectionFactoryIsSingleton" />
+        <item itemvalue="JUnit.UserServiceTests" />
+        <item itemvalue="JUnit.UserServiceTests.getAllUsersWithNoUsersMockRepo" />
+        <item itemvalue="JUnit.UserServiceTests.getAllUsersWithNoUsers" />
+        <item itemvalue="JUnit.UserServiceTests.registerAUserThatAlreadyExists" />
+        <item itemvalue="JUnit.UserServiceTests.updateUserThatDoesNotExist" />
       </list>
     </recent_temporary>
   </component>
@@ -191,22 +267,22 @@
     </state>
     <state x="-1660" y="69" key="FileChooserDialogImpl/0.0.1920.1040/-1920.-209.1920.1040@-1920.-209.1920.1040" timestamp="1600205024190" />
     <state x="260" y="278" key="FileChooserDialogImpl/0.0.1920.1040/-1920.-209.1920.1040@0.0.1920.1040" timestamp="1599853212005" />
-    <state width="914" height="278" key="GridCell.Tab.0.bottom" timestamp="1599761339222">
+    <state width="1877" height="280" key="GridCell.Tab.0.bottom" timestamp="1600211639349">
       <screen x="-1920" y="-209" width="1920" height="1040" />
     </state>
-    <state width="914" height="278" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.-209.1920.1040@-1920.-209.1920.1040" timestamp="1599761339222" />
-    <state width="914" height="278" key="GridCell.Tab.0.center" timestamp="1599761339222">
+    <state width="1877" height="280" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.-209.1920.1040@-1920.-209.1920.1040" timestamp="1600211639349" />
+    <state width="1877" height="280" key="GridCell.Tab.0.center" timestamp="1600211639348">
       <screen x="-1920" y="-209" width="1920" height="1040" />
     </state>
-    <state width="914" height="278" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.-209.1920.1040@-1920.-209.1920.1040" timestamp="1599761339222" />
-    <state width="914" height="278" key="GridCell.Tab.0.left" timestamp="1599761339221">
+    <state width="1877" height="280" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.-209.1920.1040@-1920.-209.1920.1040" timestamp="1600211639348" />
+    <state width="1877" height="280" key="GridCell.Tab.0.left" timestamp="1600211639346">
       <screen x="-1920" y="-209" width="1920" height="1040" />
     </state>
-    <state width="914" height="278" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.-209.1920.1040@-1920.-209.1920.1040" timestamp="1599761339221" />
-    <state width="914" height="278" key="GridCell.Tab.0.right" timestamp="1599761339222">
+    <state width="1877" height="280" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.-209.1920.1040@-1920.-209.1920.1040" timestamp="1600211639346" />
+    <state width="1877" height="280" key="GridCell.Tab.0.right" timestamp="1600211639348">
       <screen x="-1920" y="-209" width="1920" height="1040" />
     </state>
-    <state width="914" height="278" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.-209.1920.1040@-1920.-209.1920.1040" timestamp="1599761339222" />
+    <state width="1877" height="280" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.-209.1920.1040@-1920.-209.1920.1040" timestamp="1600211639348" />
     <state x="-1430" y="-34" key="Maven.ArtifactSearchDialog" timestamp="1599188383155">
       <screen x="-1920" y="-209" width="1920" height="1040" />
     </state>
@@ -235,5 +311,10 @@
       <screen x="-1920" y="-209" width="1920" height="1040" />
     </state>
     <state x="-1777" y="21" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/-1920.-209.1920.1040@-1920.-209.1920.1040" timestamp="1598802777733" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/farren_springer_p1$UserServiceTests.ic" NAME="UserServiceTests Coverage Results" MODIFIED="1600207893366" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.revature.ers.services.*</FILTER>
+    </SUITE>
   </component>
 </project>

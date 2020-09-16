@@ -197,5 +197,12 @@ JOIN project1.ers_reimbursement_statuses ers
 ON er.reimb_status_id = ers.reimb_status_id 
 where er.reimb_id = 9;
 
+SELECT * FROM project1.ers_reimbursements er 
+JOIN project1.ers_reimbursement_types ert 
+ON er.reimb_type_id = ert.reimb_type_id 
+JOIN project1.ers_reimbursement_statuses ers 
+ON er.reimb_status_id = ers.reimb_status_id 
+order by er.reimb_status_id;
+
 commit;
 
