@@ -856,7 +856,7 @@ function updateUser() {
 
     let xhr = new XMLHttpRequest();
 
-    xhr.open('POST', 'users');
+    xhr.open('PUT', 'users');
     xhr.send(updatedUserJSON);
 
     xhr.onreadystatechange = function() {

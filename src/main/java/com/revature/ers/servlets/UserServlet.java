@@ -23,6 +23,63 @@ public class UserServlet extends HttpServlet {
 
     private final UserService userService = new UserService();
 
+
+
+    /**
+     * CREATE operation
+     * Used to handle incoming requests to register new users for the application.
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        System.out.println("in UserServlet doPost");
+
+        resp.setContentType("application/json");
+
+        ObjectMapper mapper = new ObjectMapper();
+        PrintWriter respWriter = resp.getWriter();
+
+        try {
+
+            // if this block is executed, the admin has not chosen a user to update
+                // So, this is a new user to register
+                System.out.println("registering a new user!");
+                ErsUser newUser = mapper.readValue(req.getInputStream(), ErsUser.class);
+                userService.register(newUser);
+                System.out.println(newUser);
+                String newUserJSON = mapper.writeValueAsString(newUser);
+                respWriter.write(newUserJSON);
+                resp.setStatus(201); // 201 = CREATED
+                System.out.println(resp.getStatus());
+
+        } catch(MismatchedInputException mie) {
+
+            resp.setStatus(400); // 400 = BAD REQUEST
+
+            ErrorResponse err = new ErrorResponse(400, "Bad Request: Malformed user object found in request body");
+            String errJSON = mapper.writeValueAsString(err);
+            respWriter.write(errJSON);
+
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            resp.setStatus(500); // 500 = INTERNAL SERVER ERROR
+            ErrorResponse err = new ErrorResponse(500, "It's not you, it's us. Our bad");
+            respWriter.write(mapper.writeValueAsString(err));
+        }
+    }
+
+    /**
+     * READ operation
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -82,22 +139,20 @@ public class UserServlet extends HttpServlet {
             respWriter.write(mapper.writeValueAsString(err));
         } // don't set message for err response unless you know EXACTLY what it says
 
-
-
     }
 
     /**
-     * Used to handle incoming requests to register new users for the application.
-     *
+     * UPDATE operation
+     * This method is used by admins to update users.
      * @param req
      * @param resp
      * @throws ServletException
      * @throws IOException
      */
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        System.out.println("in UserServlet doPost");
+        System.out.println("In UserServlet doPut!");
 
         resp.setContentType("application/json");
 
@@ -106,84 +161,105 @@ public class UserServlet extends HttpServlet {
 
         try {
 
+            System.out.println("Updating an existing user!");
 
-            // first, see if the userToUpdate attribute exists
-            // find the original user in the database
+            // find the original user to update
+            Object userId = req.getSession().getAttribute("userIdToUpdate");
+            System.out.println("This is the user ID: " + userId);
 
-            if (req.getSession().getAttribute("userIdToUpdate") != null) { // if this attribute is NOT null, then it is an update
+            String string = String.valueOf(userId); // turn the object to a string first
+            System.out.println("This is the string version of the request value: " + string);
 
-                System.out.println("User to update exists!");
+            String cleanString = string.replaceAll("\\D+", ""); // take the characters out of the string to leave just numbers
+            System.out.println("This is the string with only numbers: " + cleanString);
 
-                // find the original user to update
-                Object userId = req.getSession().getAttribute("userIdToUpdate");
-                System.out.println("This is the user ID: " + userId);
+            Integer integer = Integer.parseInt(cleanString); // parse the string for int
+            System.out.println("This is that same string as an integer: " + integer);
 
-                String string = String.valueOf(userId); // turn the object to a string first
-                System.out.println("This is the string version of the request value: " + string);
+            ErsUser userToUpdate = userService.getUserById(integer); // find the user
+            System.out.println("This is the user that was found based on the request: " + userToUpdate);
 
-                String cleanString = string.replaceAll("\\D+", ""); // take the characters out of the string to leave just numbers
-                System.out.println("This is the string with only numbers: " + cleanString);
+            // find the updated information to set the original user to
+            ErsUser userWithUpdatedInfo = mapper.readValue(req.getInputStream(), ErsUser.class);
 
-                Integer integer = Integer.parseInt(cleanString); // parse the string for int
-                System.out.println("This is that same string as an integer: " + integer);
+            System.out.println("This contains the updated information:" + userWithUpdatedInfo.toString());
+            System.out.println("Note that the ID will be null...");
 
-                ErsUser userToUpdate = userService.getUserById(integer); // find the user
-                System.out.println("This is the user that was found based on the request: " + userToUpdate);
+            // reassign the fields to the new info in the service layer
+            userToUpdate.setFirstName(userWithUpdatedInfo.getFirstName());
+            userToUpdate.setLastName(userWithUpdatedInfo.getLastName());
+            userToUpdate.setEmail(userWithUpdatedInfo.getEmail());
+            userToUpdate.setUsername(userWithUpdatedInfo.getUsername());
+            userToUpdate.setPassword(userWithUpdatedInfo.getPassword());
+            userToUpdate.setRole(userWithUpdatedInfo.getRole());
+            System.out.println(userToUpdate);
 
-                // find the updated information to set the original user to
-                ErsUser userWithUpdatedInfo = mapper.readValue(req.getInputStream(), ErsUser.class);
+            // update the DB
+            userService.update(userToUpdate);
 
-                System.out.println("This contains the updated information:" + userWithUpdatedInfo.toString());
-                System.out.println("Note that the ID will be null...");
+            HttpSession session = req.getSession();
+            session.setAttribute("userUpdated", userToUpdate); // assign that user to the session. TODO unset this attribute once they are updated?
 
-                // reassign the fields to the new info in the service layer
-                userToUpdate.setFirstName(userWithUpdatedInfo.getFirstName());
-                userToUpdate.setLastName(userWithUpdatedInfo.getLastName());
-                userToUpdate.setEmail(userWithUpdatedInfo.getEmail());
-                userToUpdate.setUsername(userWithUpdatedInfo.getUsername());
-                userToUpdate.setPassword(userWithUpdatedInfo.getPassword());
-                userToUpdate.setRole(userWithUpdatedInfo.getRole());
-                System.out.println(userToUpdate);
+            String userUpdatedJSON = mapper.writeValueAsString(userToUpdate);
+            respWriter.write(userUpdatedJSON); // return the user (if found) to the response
 
-                // update the DB
-                userService.update(userToUpdate);
+            resp.setStatus(201); // 201 = CREATED because new information?
 
-                HttpSession session = req.getSession();
-                session.setAttribute("userUpdated", userToUpdate); // assign that user to the session. TODO unset this attribute once they are updated?
-
-                String userUpdatedJSON = mapper.writeValueAsString(userToUpdate);
-                respWriter.write(userUpdatedJSON); // return the user (if found) to the response
-
-                resp.setStatus(201); // 201 = CREATED because new information?
-
-            }
-            else { // if this block is executed, the admin has not chosen a user to update
-                // So, this is a new user to register
-                System.out.println("registering a new user!");
-                ErsUser newUser = mapper.readValue(req.getInputStream(), ErsUser.class);
-                userService.register(newUser);
-                System.out.println(newUser);
-                String newUserJSON = mapper.writeValueAsString(newUser);
-                respWriter.write(newUserJSON);
-                resp.setStatus(201); // 201 = CREATED
-                System.out.println(resp.getStatus());
-            }
-
-
-        } catch(MismatchedInputException mie) {
-
-            resp.setStatus(400); // 400 = BAD REQUEST
-
-            ErrorResponse err = new ErrorResponse(400, "Bad Request: Malformed user object found in request body");
-            String errJSON = mapper.writeValueAsString(err);
-            respWriter.write(errJSON);
-
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-            resp.setStatus(500); // 500 = INTERNAL SERVER ERROR
-            ErrorResponse err = new ErrorResponse(500, "It's not you, it's us. Our bad");
-            respWriter.write(mapper.writeValueAsString(err));
+        } catch (Exception e) {
+            e.printStackTrace(); // TODO custom exceptions
         }
     }
 }
+
+
+// don't need this; put it in doPut
+// first, see if the userToUpdate attribute exists
+// find the original user in the database
+//
+//            if (req.getSession().getAttribute("userIdToUpdate") != null) { // if this attribute is NOT null, then it is an update
+//
+//                    System.out.println("User to update exists!");
+//
+//                    // find the original user to update
+//                    Object userId = req.getSession().getAttribute("userIdToUpdate");
+//                    System.out.println("This is the user ID: " + userId);
+//
+//                    String string = String.valueOf(userId); // turn the object to a string first
+//                    System.out.println("This is the string version of the request value: " + string);
+//
+//                    String cleanString = string.replaceAll("\\D+", ""); // take the characters out of the string to leave just numbers
+//                    System.out.println("This is the string with only numbers: " + cleanString);
+//
+//                    Integer integer = Integer.parseInt(cleanString); // parse the string for int
+//                    System.out.println("This is that same string as an integer: " + integer);
+//
+//                    ErsUser userToUpdate = userService.getUserById(integer); // find the user
+//                    System.out.println("This is the user that was found based on the request: " + userToUpdate);
+//
+//                    // find the updated information to set the original user to
+//                    ErsUser userWithUpdatedInfo = mapper.readValue(req.getInputStream(), ErsUser.class);
+//
+//        System.out.println("This contains the updated information:" + userWithUpdatedInfo.toString());
+//        System.out.println("Note that the ID will be null...");
+//
+//        // reassign the fields to the new info in the service layer
+//        userToUpdate.setFirstName(userWithUpdatedInfo.getFirstName());
+//        userToUpdate.setLastName(userWithUpdatedInfo.getLastName());
+//        userToUpdate.setEmail(userWithUpdatedInfo.getEmail());
+//        userToUpdate.setUsername(userWithUpdatedInfo.getUsername());
+//        userToUpdate.setPassword(userWithUpdatedInfo.getPassword());
+//        userToUpdate.setRole(userWithUpdatedInfo.getRole());
+//        System.out.println(userToUpdate);
+//
+//        // update the DB
+//        userService.update(userToUpdate);
+//
+//        HttpSession session = req.getSession();
+//        session.setAttribute("userUpdated", userToUpdate); // assign that user to the session. TODO unset this attribute once they are updated?
+//
+//        String userUpdatedJSON = mapper.writeValueAsString(userToUpdate);
+//        respWriter.write(userUpdatedJSON); // return the user (if found) to the response
+//
+//        resp.setStatus(201); // 201 = CREATED because new information?
+//
+//        }
