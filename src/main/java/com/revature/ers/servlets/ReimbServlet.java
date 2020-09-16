@@ -239,7 +239,7 @@ public class ReimbServlet extends HttpServlet {
 
             } else if (req.getSession().getAttribute("authorIdToFindReimbs") != null) { // the user is an employee
                 /**
-                 * An employee will be either submitting or updating their reimbursement if one is present
+                 * An employee will be either submitting if no specific reimbursement was set to the session or updating if one has
                  */
                 if (req.getSession().getAttribute("reimbursement") == null) {
                     //then register!
