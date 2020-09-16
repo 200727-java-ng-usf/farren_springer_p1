@@ -74,6 +74,12 @@ public class ErsReimbursement {
         this.reimbursementStatus = reimbursementStatus;
     }
 
+    public ErsReimbursement(Integer resolverId, Timestamp resolved, String reimbursementStatusAsString) {
+        this.resolverId = resolverId;
+        this.resolved = resolved;
+        this.reimbursementStatus = Status.getByName(reimbursementStatusAsString);
+    }
+
 
     /**
      * Constructor

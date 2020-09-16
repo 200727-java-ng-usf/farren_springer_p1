@@ -52,8 +52,15 @@ public class AuthServlet extends HttpServlet {
         try {
 
             // if a user in the session already exists
-            if (req.getSession().getAttribute("authorIdToFindReimbs") != null) { // if this parameter has already been created... (will be if the user has logged in)
+            if (req.getSession().getAttribute("authorIdToFindReimbs") != null || req.getSession().getAttribute("userWhoIsDefinitelyAFinanceManager") != null || req.getSession().getAttribute("adminId") != null) { // if this parameter has already been created... (will be if the user has logged in)
 
+                System.out.println("The user is logged in! Finding details...");
+                /**
+                 * The user is either a Finance Manager, Employee, or Admin.
+                 * Finance Managers are here if they finding a reimbursement.
+                 * Employees are here if they are finding a reimbursement.
+                 * Admins are here if they are finding a user.
+                 */
                 System.out.println("in first if of AuthServlet doPost");
                 System.out.println("Current user's ID: " + req.getSession().getAttribute("authorIdToFindReimbs"));
                 /**
@@ -62,19 +69,7 @@ public class AuthServlet extends HttpServlet {
                  * TODO Could add the case that the user is trying to update their own information...
                  */
 
-                //find the user to find their role
-                String astring = String.valueOf(req.getSession().getAttribute("authorIdToFindReimbs"));
-                System.out.println("This is the current user's ID as a string: " + astring);
-                Integer aninteger = Integer.parseInt(astring);
-                System.out.println("This is the current user's ID as an integer: " + aninteger);
-                ErsUser ersUser = userService.getUserById(aninteger);
-                // even though above says "authorIdToFindReimbs...this is just the id of the user logged in. TODO change name of attribute
-                System.out.println(ersUser.toString());
-
-                Role role = ersUser.getRole(); // the role of the user logged in
-                System.out.println(role); // print the role for logging...
-
-                if (role == Role.ADMIN) { // if the user is an admin, we are authorizing that the user id they chose exists in the DB
+                if (req.getSession().getAttribute("adminId") != null) { // if the user is an admin, we are authorizing that the user id they chose exists in the DB
 
                     System.out.println("in the case where the user is an admin and is in doPost of auth");
 
@@ -144,7 +139,19 @@ public class AuthServlet extends HttpServlet {
 
                 HttpSession session = req.getSession();
                 session.setAttribute("principal", principal);
-                session.setAttribute("authorIdToFindReimbs", principal.getId());
+
+                // to separate by role, first find identify the role of the logged in user
+                ErsUser whatRoleIsThisUser = userService.getUserById(principal.getId());
+                if (whatRoleIsThisUser.getRole() == Role.FINANCE_MANAGER) {
+                    System.out.println("User is a finance manager!");
+                    session.setAttribute("userWhoIsDefinitelyAFinanceManager", principal.getId());
+                } else if (whatRoleIsThisUser.getRole() == Role.EMPLOYEE){
+                    System.out.println("User is an employee!");
+                    session.setAttribute("authorIdToFindReimbs", principal.getId()); // rename this attribute? For Admins?
+                } else {
+                    System.out.println("User is an admin!");
+                    session.setAttribute("adminId", principal.getId());
+                }
 
                 String principalJSON = mapper.writeValueAsString(principal);
                 respWriter.write(principalJSON);
