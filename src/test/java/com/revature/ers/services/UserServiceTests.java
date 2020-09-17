@@ -87,24 +87,6 @@ public class UserServiceTests {
 
     }
 
-
-//    @Test
-//    public void authenticationWithValidCredentials() {
-//
-//        // Arrange. Mock findUserByCredentials, because we want the test to only test authenticate
-//        ErsUser expectedUser = new ErsUser("Adam", "Inn", "admin", "secret", "ainn@revature.com", Role.ADMIN);
-//        Mockito.when(mockUserRepo.findUserByCredentials("admin", "secret"))
-//                .thenReturn(Optional.of(expectedUser));
-//
-//        // Act
-//        sut.authenticate("admin", "secret");
-//        ErsUser actualResult = app.getCurrentUser();
-//
-//        // Assert
-//        Assert.assertEquals(expectedUser, actualResult);
-//
-//    }
-
     @Test(expected = AuthenticationException.class)
     public void authenticationWithUnknownCredentials() {
         sut.authenticate("garbage", "user");

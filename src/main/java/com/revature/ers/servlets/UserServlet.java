@@ -106,36 +106,36 @@ public class UserServlet extends HttpServlet {
 
         try {
 
-//            /**
-//             * To view PROFILE, use doGet in UserServlet
-//             */
-//            // if the user is NOT an admin, find their id and return their corresponding ErsUser object
-//            if (req.getSession().getAttribute("adminId") == null) {
-//
-//                System.out.println("User is not an admin. Finding their profile!");
-//
-//                if (req.getSession().getAttribute("userWhoIsDefinitelyAFinanceManager") != null) { // user is a finance manager
-//
-//                    Object managerId = req.getSession().getAttribute("userWhoIsDefinitelyAFinanceManager");
-//                    String managerIdAsString = String.valueOf(managerId);
-//                    Integer managerIdAsInteger = Integer.parseInt(managerIdAsString);
-//                    ErsUser userToSeeProfile = userService.getUserById(managerIdAsInteger);
-//                    String userToSeeProfileJSON = mapper.writeValueAsString(userToSeeProfile);
-//                    respWriter.write(userToSeeProfileJSON);
-//                    resp.setStatus(200); // 200 = OK
-//
-//                } else if (req.getSession().getAttribute("authorIdToFindReimbs") != null) { // user is an employee
-//
-//                    Object employeeId = req.getSession().getAttribute("authorIdToFindReimbs");
-//                    String employeeIdAsString = String.valueOf(employeeId);
-//                    Integer employeeIdAsInteger = Integer.parseInt(employeeIdAsString);
-//                    ErsUser userToSeeProfile = userService.getUserById(employeeIdAsInteger);
-//                    String userToSeeProfileJSON = mapper.writeValueAsString(userToSeeProfile);
-//                    respWriter.write(userToSeeProfileJSON);
-//                    resp.setStatus(200); // 200 = OK
-//
-//                }
-//            }
+            /**
+             * To view PROFILE, use doGet in UserServlet
+             */
+            // if the user is NOT an admin, find their id and return their corresponding ErsUser object
+            if (req.getSession().getAttribute("adminId") == null) {
+
+                System.out.println("User is not an admin. Finding their profile!");
+
+                if (req.getSession().getAttribute("userWhoIsDefinitelyAFinanceManager") != null) { // user is a finance manager
+
+                    Object managerId = req.getSession().getAttribute("userWhoIsDefinitelyAFinanceManager");
+                    String managerIdAsString = String.valueOf(managerId);
+                    Integer managerIdAsInteger = Integer.parseInt(managerIdAsString);
+                    ErsUser userToSeeProfile = userService.getUserById(managerIdAsInteger);
+                    String userToSeeProfileJSON = mapper.writeValueAsString(userToSeeProfile);
+                    respWriter.write(userToSeeProfileJSON);
+                    resp.setStatus(200); // 200 = OK
+
+                } else if (req.getSession().getAttribute("authorIdToFindReimbs") != null) { // user is an employee
+
+                    Object employeeId = req.getSession().getAttribute("authorIdToFindReimbs");
+                    String employeeIdAsString = String.valueOf(employeeId);
+                    Integer employeeIdAsInteger = Integer.parseInt(employeeIdAsString);
+                    ErsUser userToSeeProfile = userService.getUserById(employeeIdAsInteger);
+                    String userToSeeProfileJSON = mapper.writeValueAsString(userToSeeProfile);
+                    respWriter.write(userToSeeProfileJSON);
+                    resp.setStatus(200); // 200 = OK
+
+                }
+            }
             String idParam = req.getParameter("ers_user_id");
 
             if (idParam != null) {
