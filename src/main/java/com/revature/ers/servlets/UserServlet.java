@@ -45,14 +45,23 @@ public class UserServlet extends HttpServlet {
 
         try {
 
-            // if this block is executed, the admin has not chosen a user to update
-                // So, this is a new user to register
+                /**
+                * Read the input stream and register the user in the DB
+                */
                 System.out.println("registering a new user!");
                 ErsUser newUser = mapper.readValue(req.getInputStream(), ErsUser.class);
                 userService.register(newUser);
                 System.out.println(newUser);
+
+                /**
+                * Write back the response
+                */
                 String newUserJSON = mapper.writeValueAsString(newUser);
                 respWriter.write(newUserJSON);
+
+                /**
+                * Set the status
+                */
                 resp.setStatus(201); // 201 = CREATED
                 System.out.println(resp.getStatus());
 
