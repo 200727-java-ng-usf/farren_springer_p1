@@ -138,7 +138,7 @@ public class ReimbServlet extends HttpServlet {
                     String ersReimbursementJSON = mapper.writeValueAsString(ersReimbursement);
 
                     respWriter.write(ersReimbursementJSON);
-
+                    req.getSession().removeAttribute("reimbursement");
 
                     resp.setStatus(200);
 

@@ -3,16 +3,20 @@ const APP_VIEW = document.getElementById('app-view');
 window.onload = function() {
     loadLogin();
     console.log('test beginning');
+    // options for users of every role
     document.getElementById('toLogin').addEventListener('click', loadLogin);
     document.getElementById('toHome').addEventListener('click', loadHome);
     document.getElementById('toLogout').addEventListener('click', logout);
+    document.getElementById('toProfile').addEventListener('click', loadProfile);
 
     // all user-role-specific options are initially hidden until their specific home view is configured
-    document.getElementById('toRegister').setAttribute('hidden', true); // initially hidden
-    document.getElementById('toAllUsers').setAttribute('hidden', true); // initially hidden
-    document.getElementById('toAllReimbs').setAttribute('hidden', true); // initially hidden
-    document.getElementById('toSubmit').setAttribute('hidden', true); // initially hidden
-    document.getElementById('toAuthorReimbs').setAttribute('hidden', true); // initially hidden
+    document.getElementById('toProfile').setAttribute('hidden', true);
+    document.getElementById('toRegister').setAttribute('hidden', true); 
+    document.getElementById('toAllUsers').setAttribute('hidden', true); 
+    document.getElementById('toAllReimbs').setAttribute('hidden', true); 
+    document.getElementById('toSubmit').setAttribute('hidden', true); 
+    document.getElementById('toAuthorReimbs').setAttribute('hidden', true); 
+    document.getElementById('toLogout').setAttribute('hidden', true);
     
 }
 
@@ -334,6 +338,52 @@ function loadUpdateReimb() {
 
 }
 
+function loadProfile() {
+    console.log('in loadProfile()');
+
+    if (!localStorage.getItem('authUser')) {
+        console.log('No user logged in, navigating to login screen');
+        loadLogin();
+        return;
+    }
+
+    let xhr = new XMLHttpRequest();
+
+    xhr.open('GET', 'profile.view');
+    xhr.send();
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            
+            let array = JSON.parse(xhr.responseText);
+            console.log(array);
+
+            let authUser = JSON.parse(localStorage.getItem('authUser'));
+
+            APP_VIEW.innerHTML = "<h1>User Details:</h1>"
+                                // + roleSpecificOption
+                                // + "<div class='form-group'>"
+                                // + "<label for='approveOrDeny'> Enter approve or deny</label>" // TODO make this button different for managers or employees
+                                // + "<input type='text' class='form-control' id='approveOrDeny' placeholder='Ex: approve'>"
+                                // + "</div>"
+                                // + "<div id='reimb-button-container'>"
+                                // + "<button type='submit' class='btn btn-primary' id='approveItOrDenyIt'>Choose</button>"
+                                + "<h3> ID: " + array.id + "</h3>"
+                                + "<h3> Username: " + array.username + "</h3>"
+                                + "<h3> Password: " + array.password + "</h3>"
+                                + "<h3> First Name: " + array.firstName + "</h3>"
+                                + "<h3> Last Name: " + array.lastName + "</h3>"
+                                + "<h3> Email: " + array.email + "</h3>"
+                                + "<h3> Role: " + array.role + "</h3>";
+                                
+        }
+    }
+
+
+
+
+}
+
 
 //----------------CONFIGURE VIEWS--------------------
 
@@ -374,16 +424,15 @@ function configureHomeView() {
     console.log(authUser.role);
     console.log('User role should be logged above');
 
-    // after logging the user in, hide the login option
+    // after logging the user in, hide the login option and show the profile and logout option
     document.getElementById('toLogin').setAttribute('hidden', true);
+    document.getElementById('toProfile').removeAttribute('hidden');
+    document.getElementById('toLogout').removeAttribute('hidden');
 
     // if the authUser's role is admin, configure the admin page
     if (authUser.role == 'Admin') {
 
         console.log('user is an admin! Configuring admin view');
-
-        // options.innerHTML = "<a class='nav-item nav-link' id='toRegister'>Register</a>"
-        //                     + "<a class='nav-item nav-link' id='toAllUsers'>All Users</a>"; // add these to the div. Might not use this
 
         // Show the options specific to admins (Register, See All Users to edit).
         document.getElementById('toAllUsers').removeAttribute('hidden'); 
@@ -399,8 +448,6 @@ function configureHomeView() {
 
         console.log('user is a finance manager! Configuring manager view');
 
-        // options.innerHTML = "<a class='nav-item nav-link' id='toAllReimbs'>All Reimbursements</a>";
-
         // show the options specific to finance managers (See All Reimbs to approve/deny).
         document.getElementById('toAllReimbs').removeAttribute('hidden');
 
@@ -410,9 +457,6 @@ function configureHomeView() {
     } else if (authUser.role == 'Employee') {
 
         console.log ('user is an employee! Configuring employee view');
-
-        // options.innerHTML = "<a class='nav-item nav-link' id='toSubmit'>Submit</a>"
-        //                     + "<a class='nav-item nav-link' id='toAuthorReimbs'>My Reimbursements</a>";
 
         // show the options specific to employees (Submit or See Your Reimbs to edit).
         document.getElementById('toSubmit').removeAttribute('hidden');
@@ -700,6 +744,12 @@ function configureUpdateReimbView() {
 
 }
 
+function configureProfileView() {
+    console.log('in configureProfileView()');
+
+ 
+}
+
 
 
  
@@ -937,11 +987,11 @@ function updateReimb() {
         console.log(newAmount);
     }
     if (newType == null || newType == "") {
-        newType = oldReimb.amount;
+        newType = oldReimb.reimbursementType;
         console.log(newType);
     }
     if (newDescription == null || newDescription == "") {
-        newDescription = oldReimb.amount;
+        newDescription = oldReimb.description;
         console.log(newDescription);
     } else { // if the employee DID enter a number into the type field for update, change it to an enum constant
             if (newType == '1') {
@@ -982,7 +1032,7 @@ function updateReimb() {
             // clear the local storage of the reimb so that all will load again when they want to view all of their reimbursements
             localStorage.removeItem('authReimb');
             loadAuthorReimbs(); // loadAUTHORReimbs because if a user is here, they are an employee
-        } else if (xhr.readyState == 4 && xhr.status != 201) {
+        } else if (xhr.readyState == 4 && xhr.status != 400) {
             document.getElementById('update-reimb-message').removeAttribute('hidden'); // to make an attribute not hidden. TODO could use this for navbar depending on user role?
             let err = JSON.parse(xhr.responseText);
             document.getElementById('update-reimb-message').innerText = err.message;
@@ -1082,6 +1132,7 @@ function submit() {
         type = 'FOOD';
     }
     if (type == '4') {
+        console.log('other chosen!');
         console.log('OTHER');
     }
 
@@ -1106,7 +1157,7 @@ function submit() {
         if (xhr.readyState == 4 && xhr.status == 201) {
             console.log('sending the reimbursement to the servlet to submit!')
             loadAuthorReimbs();
-        } else if (xhr.readyState == 4 && xhr.status != 201) {
+        } else if (xhr.readyState == 4 && xhr.status != 400) {
             document.getElementById('submit-message').removeAttribute('hidden');
             let err = JSON.parse(xhr.responseText);
             document.getElementById('submit-message').innerText = err.message;

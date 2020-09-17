@@ -17,6 +17,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.sql.Timestamp;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -72,6 +73,26 @@ public class ReimbServiceTests {
     @Test (expected = InvalidRequestException.class)
     public void registerWithNullObject() { sut.register(null); }
 
+    @Test
+    public void resolveReturnsTrue() {
+        // arrange
+        Timestamp timestamp = new Timestamp(1930, 4, 10, 8, 20, 20, 5);
+        ErsReimbursement mockResolveReimb = new ErsReimbursement(800, timestamp, Status.APPROVED);
+        ErsReimbursement reimbToResolve = mockReimbs.stream().findAny()
+                                            .orElseThrow(RuntimeException::new);
+        reimbToResolve.setResolverId(800);
+        reimbToResolve.setResolved(timestamp);
+        reimbToResolve.setReimbursementStatus(Status.APPROVED);
+        Mockito.when(mockReimbRepo.resolve(reimbToResolve))
+                    .thenReturn(true);
+
+        // act and assert
+        Assert.assertEquals(true, sut.resolve(reimbToResolve));
+    }
+
+    @Test (expected = InvalidRequestException.class)
+    public void getReimbByIdNegativeId() { sut.getReimbById(-30); }
+
     // TODO test getReimbById(int id)
     // TODO test resolve
     // TODO test update
@@ -87,6 +108,18 @@ public class ReimbServiceTests {
     @Test
     public void isReimbValidReturnsFalse() {
         ErsReimbursement mockReimb = null;
+
+        Assert.assertEquals(false, sut.isReimbValid(mockReimb));
+    }
+    @Test
+    public void isReimbValidNullAmountReturnsFalse() {
+        ErsReimbursement mockReimb = new ErsReimbursement(null, Type.LODGING, "Description");
+
+        Assert.assertEquals(false, sut.isReimbValid(mockReimb));
+    }
+    @Test
+    public void isReimbValidNullDescriptionReturnsFalse() {
+        ErsReimbursement mockReimb = new ErsReimbursement(300.00, Type.LODGING, null);
 
         Assert.assertEquals(false, sut.isReimbValid(mockReimb));
     }
