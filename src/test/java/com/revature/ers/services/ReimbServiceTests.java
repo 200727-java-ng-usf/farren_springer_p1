@@ -47,29 +47,7 @@ public class ReimbServiceTests {
     }
 
     // TODO test getAllReimbs()
-//    @Test
-//    public void getAllReimbsReturnsSet() {
-//        // arrange
-//        Set<ErsReimbursement> expectedReimbSet = mockReimbs;
-//        Mockito.when(mockReimbRepo.findAllReimbs())
-//                .thenReturn((mockReimbs));
-//
-//        // act
-//        Set<ErsReimbursement> actualReimbSet = sut.getAllReimbs();
-//
-//        // assert
-//        Assert.assertEquals(expectedReimbSet, actualReimbSet);
-//    }
-    // test that it returns a set
-    // mock the repo?
-    // test that it throws ResourceNotFoundException
-    // TODO test getAllByAuthorId(Integer authorId)
-    // test that it returns the right author
-    // mock the repo?
-    // test that it throws ResourceNotFoundException
-    // TODO test register
-    // test that it registers
-    // test that it doesn't register a null user
+
     @Test (expected = InvalidRequestException.class)
     public void registerWithNullObject() { sut.register(null); }
 
