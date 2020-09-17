@@ -21,9 +21,7 @@ import java.util.Set;
 @WebServlet("/users/*")
 public class UserServlet extends HttpServlet {
 
-    /**
-     * Use the userService for all CRUD operations in the servlet
-     */
+    // Use the userService for all CRUD operations in the servlet
     private final UserService userService = new UserService();
 
     /**
@@ -46,23 +44,17 @@ public class UserServlet extends HttpServlet {
 
         try {
 
-                /**
-                * Read the input stream and register the user in the DB
-                */
+                // Read the input stream and register the user in the DB
                 System.out.println("registering a new user!");
                 ErsUser newUser = mapper.readValue(req.getInputStream(), ErsUser.class);
                 userService.register(newUser);
                 System.out.println(newUser);
 
-                /**
-                * Write back the response
-                */
+                // Write back the response
                 String newUserJSON = mapper.writeValueAsString(newUser);
                 respWriter.write(newUserJSON);
 
-                /**
-                * Set the status
-                */
+                // Set the status
                 resp.setStatus(201); // 201 = CREATED
                 System.out.println(resp.getStatus());
 
@@ -106,9 +98,7 @@ public class UserServlet extends HttpServlet {
 
         try {
 
-            /**
-             * To view PROFILE, use doGet in UserServlet
-             */
+            // To view PROFILE, use doGet in UserServlet
             // if the user is NOT an admin, find their id and return their corresponding ErsUser object
             if (req.getSession().getAttribute("adminId") == null) {
 

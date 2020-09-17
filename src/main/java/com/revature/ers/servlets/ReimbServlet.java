@@ -47,6 +47,7 @@ public class ReimbServlet extends HttpServlet {
 
         try {
 
+            // Get data, register the user, write back the registered user, and set the status
             System.out.println("Starting submit!");
             ErsReimbursement newReimbursement = mapper.readValue(req.getInputStream(), ErsReimbursement.class);
             System.out.println("read the input stream: " + newReimbursement);
@@ -90,19 +91,14 @@ public class ReimbServlet extends HttpServlet {
 
         System.out.println("in ReimbServlet doGet");
 
-        /**
-         * Set up objects to write back to the browser
-         */
+        // Set up objects to write back to the browser
         ObjectMapper mapper = new ObjectMapper();
         PrintWriter respWriter = resp.getWriter();
         resp.setContentType("application/json");
 
-        /**
-         * First, get the principle to identify the user as a Finance Manager or an Employee.
-         * Also, get the reimbursement if one was assigned. If this is present, return only
-         * one reimbursement.
-         */
-
+        // First, get the principle to identify the user as a Finance Manager or an Employee.
+        // Also, get the reimbursement if one was assigned. If this is present, return only
+        // one reimbursement.
         System.out.println("below should be the reimb_id (may be null)");
         System.out.println(req.getParameter("reimb_id"));
 
@@ -117,41 +113,37 @@ public class ReimbServlet extends HttpServlet {
 
         try {
 
-            /**
-             * See which ID is present (one for employee or one for finance manager)
-             */
+            // See which ID is present (one for employee or one for finance manager)
             if (req.getSession().getAttribute("authorIdToFindReimbs") != null) { // if the user is an employee...
 
                 Object authorIdParam = req.getSession().getAttribute("authorIdToFindReimbs"); // assign this attribute to an object in the service layer
                 System.out.println("User is an employee!" + authorIdParam.toString());
 
-                /**
-                 * Now, we need to see if one reimbursement has been selected.
-                 */
+                // Now, we need to see if one reimbursement has been selected.
                 if (req.getSession().getAttribute("reimbursement") != null) { // if a reimbursement has been selected...
 
+                    // Get the reimbursement
                     Object reimbursement = req.getSession().getAttribute("reimbursement");
                     System.out.println("A specific reimbursement has been selected!");
 
                     ErsReimbursement ersReimbursement = (ErsReimbursement) reimbursement;
 
+                    // write the JSON back to the browser and set the status
                     String ersReimbursementJSON = mapper.writeValueAsString(ersReimbursement);
-
                     respWriter.write(ersReimbursementJSON);
                     req.getSession().removeAttribute("reimbursement");
-
                     resp.setStatus(200);
 
-                } else { // else, return the reimbursements by the employee
+                } else { // else, return all of the reimbursements by the employee
 
+                    // convert information
                     String authorIdParamString = String.valueOf(authorIdParam);
                     Integer authorIdParamInteger = Integer.parseInt(authorIdParamString);
 
+                    // get the reimbursements, write it back to the browser, and set the status
                     Set<ErsReimbursement> reimbsByAuthor = reimbService.getAllByAuthorId(authorIdParamInteger);
-
                     String principalJSON = mapper.writeValueAsString(reimbsByAuthor);
                     respWriter.write(principalJSON);
-
                     resp.setStatus(200); // 200 OK
 
                 }
@@ -161,9 +153,7 @@ public class ReimbServlet extends HttpServlet {
                 Object userWhoIsDefinitelyAFinanceManager = req.getSession().getAttribute("userWhoIsDefinitelyAFinanceManager");
                 System.out.println("User is a finance manager!" + userWhoIsDefinitelyAFinanceManager.toString());
 
-                /**
-                 * Now, we need to see if one reimbursement has been selected
-                 */
+                // Now, we need to see if one reimbursement has been selected
                 if (req.getSession().getAttribute("reimbursement") != null) { // if a reimbursement has been selected...
 
                     Object reimbursement = req.getSession().getAttribute("reimbursement");
@@ -244,19 +234,15 @@ public class ReimbServlet extends HttpServlet {
 
                 System.out.println("User is a finance manager! Resolving the reimb...");
 
-                /**
-                 * Find the reimbursement from the session
-                  */
-                // find the original reimbursement ID
+                // Find the reimbursement from the session
                 Object reimbId = req.getSession().getAttribute("reimbIdToUpdate");
                 System.out.println("This is the reimb ID: " + reimbId);
 
+                // Convert
                 String string = String.valueOf(reimbId);
                 System.out.println(string);
-
                 String cleanString = string.replaceAll("\\D+", "");
                 System.out.println(cleanString);
-
                 Integer integer = Integer.parseInt(cleanString);
                 System.out.println(integer);
 
@@ -264,9 +250,7 @@ public class ReimbServlet extends HttpServlet {
                 ErsReimbursement reimbToUpdate = reimbService.getReimbById(integer);
                 System.out.println("This is the reimbursement to update: " + reimbToUpdate);
 
-                /**
-                 * Map the input stream from the XMLHttpRequest to a reimbursement object that will use the constructor that has resolve values
-                 */
+                // Map the input stream from the XMLHttpRequest to a reimbursement object that will use the constructor that has resolve values
                 // find the updated information to set the original reimb to
                 System.out.println("about to read the information from the request...");
                 ErsReimbursement reimbursementWithResolvedInfo = mapper.readValue(req.getInputStream(), ErsReimbursement.class);
@@ -274,25 +258,23 @@ public class ReimbServlet extends HttpServlet {
                 System.out.println("This contains the updated information: " + reimbursementWithResolvedInfo);
                 System.out.println("Note that ID may be null");
 
-                /**
-                 * set the fields of the original reimbursement to the fields of the resolve reimbursement object (which will have no ID bc it is temporary)
-                 */
+                // set the fields of the original reimbursement to the fields of the resolve reimbursement object (which will have no ID bc it is temporary)
                 // assign fields to service layer object
                 reimbToUpdate.setResolverId(reimbursementWithResolvedInfo.getResolverId());
                 reimbToUpdate.setResolved(reimbursementWithResolvedInfo.getResolved());
                 reimbToUpdate.setReimbursementStatus(reimbursementWithResolvedInfo.getReimbursementStatus());
 
-                // update the DB
+                // Update the DB
                 reimbService.resolve(reimbToUpdate);
 
+                // Session changes
                 HttpSession session = req.getSession();
                 session.setAttribute("reimbUpdated", reimbToUpdate); // assign that user to the session. TODO unset this attribute once they are updated?
-
                 req.getSession().removeAttribute("reimbursement"); // resets so that managers can see all users again when this method is requested
 
+                // Write back to the browser
                 String reimbUpdatedJSON = mapper.writeValueAsString(reimbToUpdate);
                 respWriter.write(reimbUpdatedJSON); // return the user (if found) to the response
-
                 resp.setStatus(201); // 201 = CREATED because new information?
 
 
@@ -300,19 +282,15 @@ public class ReimbServlet extends HttpServlet {
 
                 System.out.println("User is an employee! Updating their reimb...");
 
-                /**
-                 * find the reimbursement from the session
-                 */
-                // find the original reimbursement ID
+                // Find the original reimbursement ID
                 Object reimbId = req.getSession().getAttribute("reimbIdToUpdate");
                 System.out.println("This is the reimb ID: " + reimbId);
 
+                // Convert
                 String string = String.valueOf(reimbId);
                 System.out.println(string);
-
                 String cleanString = string.replaceAll("\\D+", "");
                 System.out.println(cleanString);
-
                 Integer integer = Integer.parseInt(cleanString);
                 System.out.println(integer);
 
@@ -320,10 +298,7 @@ public class ReimbServlet extends HttpServlet {
                 ErsReimbursement reimbToUpdate = reimbService.getReimbById(integer);
                 System.out.println("This is the reimbursement to update: " + reimbToUpdate);
 
-                /**
-                 * Map the input stream from the XMLHttpRequest to a reimbursement object with the new values
-                 */
-                // get the information from the browser
+                // Map the input stream from the XMLHttpRequest to a reimbursement object with the new values
                 ErsReimbursement ersReimbursement = mapper.readValue(req.getInputStream(), ErsReimbursement.class);
                 System.out.println("ID: of this should be null: " + ersReimbursement);
 
@@ -340,15 +315,14 @@ public class ReimbServlet extends HttpServlet {
                 // update the reimbursement
                 reimbService.update(reimbToUpdate);
 
-                // return things.
+                // Session changes
                 HttpSession session = req.getSession();
                 session.setAttribute("reimbUpdatedByEmployee", reimbToUpdate); // assign that reimb to the session. TODO unset this attribute once they are updated?
-
                 req.getSession().removeAttribute("reimbursement"); // resets so that employees can see all of their reimbs again when this method is requested
 
+                // Write back to JS and set status
                 String reimbUpdatedJSON = mapper.writeValueAsString(reimbToUpdate);
                 respWriter.write(reimbUpdatedJSON); // return the user (if found) to the response
-
                 resp.setStatus(201); // 201 = CREATED because new information?
 
             }

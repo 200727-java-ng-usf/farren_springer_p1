@@ -45,6 +45,7 @@ public class AuthServlet extends HttpServlet {
 
         System.out.println("in AuthServlet doPost");
 
+        // Set up
         ObjectMapper mapper = new ObjectMapper();
         PrintWriter respWriter = resp.getWriter();
         resp.setContentType("application/json");
@@ -52,59 +53,60 @@ public class AuthServlet extends HttpServlet {
 
         try {
 
-            // if a user in the session already exists
+            // Check that a user of any role exists in the session
             if (req.getSession().getAttribute("authorIdToFindReimbs") != null || req.getSession().getAttribute("userWhoIsDefinitelyAFinanceManager") != null || req.getSession().getAttribute("adminId") != null) { // if this parameter has already been created... (will be if the user has logged in)
 
                 System.out.println("The user is logged in! Finding details...");
-                /**
-                 * The user is either a Finance Manager, Employee, or Admin.
-                 * Finance Managers are here if they finding a reimbursement.
-                 * Employees are here if they are finding a reimbursement.
-                 * Admins are here if they are finding a user.
-                 */
+
+                // The user is either a Finance Manager, Employee, or Admin.
+                // Finance Managers are here if they finding a reimbursement.
+                // Employees are here if they are finding a reimbursement.
+                // Admins are here if they are finding a user.
                 System.out.println("in first if of AuthServlet doPost");
                 System.out.println("Current user's ID: " + req.getSession().getAttribute("authorIdToFindReimbs"));
-                /**
-                 * If the user is an admin, take the id and assume it is a USER
-                 * If the user is not an admin, take the id and assume it is a REIMBURSEMENT
-                 * TODO Could add the case that the user is trying to update their own information...
-                 */
 
+                // If the user is an admin, take the id and assume it is a USER
+                // If the user is not an admin, take the id and assume it is a REIMBURSEMENT
+                // TODO Could add the case that the user is trying to update their own information...
                 if (req.getSession().getAttribute("adminId") != null) { // if the user is an admin, we are authorizing that the user id they chose exists in the DB
 
                     System.out.println("in the case where the user is an admin and is in doPost of auth");
 
+                    // Take data from browser
                     Object userId = mapper.readValue(req.getInputStream(), Object.class);
                     System.out.println("This is the user ID: " + userId);
 
+                    // Convert
                     String string = String.valueOf(userId); // turn the object to a string first
                     System.out.println("This is the string version of the request value: " + string);
-
                     String cleanString = string.replaceAll("\\D+", ""); // take the characters out of the string to leave just numbers
                     System.out.println("This is the string with only numbers: " + cleanString);
-
                     Integer integer = Integer.parseInt(cleanString); // parse the string for int
                     System.out.println("This is that same string as an integer: " + integer);
-
                     ErsUser userToUpdate = userService.getUserById(integer); // find the user
                     System.out.println("This is the user that was found based on the request: " + userToUpdate);
 
+                    // Set session attribute
                     HttpSession session = req.getSession();
                     Integer userIdToUpdate = userToUpdate.getId();
                     session.setAttribute("userIdToUpdate", userIdToUpdate); // assign that user to the session. TODO unset this attribute once they are updated?
 
+                    // Write back to JS
                     String userToUpdateJSON = mapper.writeValueAsString(userToUpdate);
                     respWriter.write(userToUpdateJSON); // return the user (if found) to the response
 
+                    // Set status
                     resp.setStatus(200); // 200 OK
 
                 } else { // if this block is executed, the user is not an admin, and is therefore authorizing that a reimbursement exists
 
                     System.out.println("in case where user is not an Admin of doPost of AuthServlet");
 
+                    // Take in data from the browser
                     Object reimbId = mapper.readValue(req.getInputStream(), Object.class);
                     System.out.println(reimbId);
 
+                    // Convert
                     String string = String.valueOf(reimbId);
                     System.out.println(string);
                     String cleanString = string.replaceAll("\\D+","");
@@ -112,6 +114,7 @@ public class AuthServlet extends HttpServlet {
                     Integer integer = Integer.parseInt(cleanString);
                     System.out.println(integer);
 
+                    // Set the session attribute
                     req.getSession().setAttribute("reimbIdToUpdate", integer);
 
                     ErsReimbursement ersReimbursement = reimbService.getReimbById(integer);
@@ -134,10 +137,12 @@ public class AuthServlet extends HttpServlet {
                 // User Jackson to read the request body and map the provided JSON to a Java POJO
                 Credentials creds = mapper.readValue(req.getInputStream(), Credentials.class);
 
+                // Create a principal object from the authenticated user
                 ErsUser authUser = userService.authenticate(creds.getUsername(), creds.getPassword());
                 System.out.println("Authentication done! User is: " + authUser.toString());
                 Principal principal = new Principal(authUser);
 
+                // Set session attribute
                 HttpSession session = req.getSession();
                 session.setAttribute("principal", principal);
 
@@ -154,9 +159,11 @@ public class AuthServlet extends HttpServlet {
                     session.setAttribute("adminId", principal.getId());
                 }
 
+                // Write back to JS
                 String principalJSON = mapper.writeValueAsString(principal);
                 respWriter.write(principalJSON);
 
+                // Set status
                 resp.setStatus(200); // 200 OK
 
             }
