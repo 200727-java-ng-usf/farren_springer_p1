@@ -7,10 +7,10 @@ window.onload = function() {
     document.getElementById('toLogin').addEventListener('click', loadLogin);
     document.getElementById('toHome').addEventListener('click', loadHome);
     document.getElementById('toLogout').addEventListener('click', logout);
-    document.getElementById('toProfile').addEventListener('click', loadProfile);
+    // document.getElementById('toProfile').addEventListener('click', loadProfile);
 
     // all user-role-specific options are initially hidden until their specific home view is configured
-    document.getElementById('toProfile').setAttribute('hidden', true);
+    // document.getElementById('toProfile').setAttribute('hidden', true);
     document.getElementById('toRegister').setAttribute('hidden', true); 
     document.getElementById('toAllUsers').setAttribute('hidden', true); 
     document.getElementById('toAllReimbs').setAttribute('hidden', true); 
@@ -338,51 +338,52 @@ function loadUpdateReimb() {
 
 }
 
-function loadProfile() {
-    console.log('in loadProfile()');
+// function loadProfile() {
+//     console.log('in loadProfile()');
 
-    if (!localStorage.getItem('authUser')) {
-        console.log('No user logged in, navigating to login screen');
-        loadLogin();
-        return;
-    }
+//     if (!localStorage.getItem('authUser')) {
+//         console.log('No user logged in, navigating to login screen');
+//         loadLogin();
+//         return;
+//     }
 
-    let xhr = new XMLHttpRequest();
+//     let xhr = new XMLHttpRequest();
 
-    xhr.open('GET', 'profile.view');
-    xhr.send();
+//     xhr.open('GET', 'profile.view');
+//     console.log('past open');
+//     xhr.send();
 
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState == 4 && xhr.status == 200) {
+//     xhr.onreadystatechange = function() {
+//         if (xhr.readyState == 4 && xhr.status == 200) {
             
-            let array = JSON.parse(xhr.responseText);
-            console.log(array);
+//             let array = JSON.parse(xhr.responseText);
+//             console.log(array);
 
-            let authUser = JSON.parse(localStorage.getItem('authUser'));
+//             // let authUser = JSON.parse(localStorage.getItem('authUser'));
 
-            APP_VIEW.innerHTML = "<h1>User Details:</h1>"
-                                // + roleSpecificOption
-                                // + "<div class='form-group'>"
-                                // + "<label for='approveOrDeny'> Enter approve or deny</label>" // TODO make this button different for managers or employees
-                                // + "<input type='text' class='form-control' id='approveOrDeny' placeholder='Ex: approve'>"
-                                // + "</div>"
-                                // + "<div id='reimb-button-container'>"
-                                // + "<button type='submit' class='btn btn-primary' id='approveItOrDenyIt'>Choose</button>"
-                                + "<h3> ID: " + array.id + "</h3>"
-                                + "<h3> Username: " + array.username + "</h3>"
-                                + "<h3> Password: " + array.password + "</h3>"
-                                + "<h3> First Name: " + array.firstName + "</h3>"
-                                + "<h3> Last Name: " + array.lastName + "</h3>"
-                                + "<h3> Email: " + array.email + "</h3>"
-                                + "<h3> Role: " + array.role + "</h3>";
+//             APP_VIEW.innerHTML = "<h1>Your User Details:</h1>"
+//                                 // + roleSpecificOption
+//                                 // + "<div class='form-group'>"
+//                                 // + "<label for='approveOrDeny'> Enter approve or deny</label>" // TODO make this button different for managers or employees
+//                                 // + "<input type='text' class='form-control' id='approveOrDeny' placeholder='Ex: approve'>"
+//                                 // + "</div>"
+//                                 // + "<div id='reimb-button-container'>"
+//                                 // + "<button type='submit' class='btn btn-primary' id='approveItOrDenyIt'>Choose</button>"
+//                                 + "<h3> ID: " + array.id + "</h3>"
+//                                 + "<h3> Username: " + array.username + "</h3>"
+//                                 + "<h3> Password: " + array.password + "</h3>"
+//                                 + "<h3> First Name: " + array.firstName + "</h3>"
+//                                 + "<h3> Last Name: " + array.lastName + "</h3>"
+//                                 + "<h3> Email: " + array.email + "</h3>"
+//                                 + "<h3> Role: " + array.role + "</h3>";
                                 
-        }
-    }
+//         }
+//     }
 
 
 
 
-}
+// }
 
 
 //----------------CONFIGURE VIEWS--------------------
@@ -426,7 +427,7 @@ function configureHomeView() {
 
     // after logging the user in, hide the login option and show the profile and logout option
     document.getElementById('toLogin').setAttribute('hidden', true);
-    document.getElementById('toProfile').removeAttribute('hidden');
+    // document.getElementById('toProfile').removeAttribute('hidden');
     document.getElementById('toLogout').removeAttribute('hidden');
 
     // if the authUser's role is admin, configure the admin page
@@ -752,11 +753,11 @@ function configureUpdateReimbView() {
 
 }
 
-function configureProfileView() {
-    console.log('in configureProfileView()');
+// function configureProfileView() {
+//     console.log('in configureProfileView()');
 
  
-}
+// }
 
 
 
@@ -880,25 +881,25 @@ function updateUser() {
     if (newRole == null || newRole == "") {
         newRole = oldUser.role;
     } 
-    // else { // if a number was entered in the role field, change it to an enum constant
-    //     if (newRole == '1') {
-    //         console.log('Update to Admin chosen!');
-    //         newRole = 'ADMIN';
-    //     }
-    //     if (newRole == '2') {
-    //         console.log('Update to FinManager chosen!');
-    //         newRole = 'FINANCE_MANAGER';
-    //     }
-    //     if (newRole == '3') {
-    //         console.log('Update to Employee chosen!');
-    //         newRole = 'EMPLOYEE';
-    //     }
-    //     if (newRole == '4') {
-    //         console.log('Update to Inactive chosen!');
-    //         newRole = 'INACTIVE';
-    //     }
+    else { // if a number was entered in the role field, change it to an enum constant
+        if (newRole == '1') {
+            console.log('Update to Admin chosen!');
+            newRole = 'ADMIN';
+        }
+        if (newRole == '2') {
+            console.log('Update to FinManager chosen!');
+            newRole = 'FINANCE_MANAGER';
+        }
+        if (newRole == '3') {
+            console.log('Update to Employee chosen!');
+            newRole = 'EMPLOYEE';
+        }
+        if (newRole == '4') {
+            console.log('Update to Inactive chosen!');
+            newRole = 'INACTIVE';
+        }
 
-    // }
+    }
     console.log("This should be the new role or the old if nothing was entered in update role field: " + newRole);
 
     // this will have either the values entered in the form or the old information if nothing was entered
@@ -1080,6 +1081,26 @@ function findReimbDetails() {
     }
 
 }
+
+// TODO let users see their profile!
+// function findUserForProfile() {
+//     console.log('in findUserForProfile');
+//     let authUser = JSON.parse(localStorage.getItem('authUser'));
+//     let user = {
+//         id: authUser.id
+//     }
+
+//     let userJSON = JSON.stringify(user);
+//     console.log(userJSON);
+//     console.log(authUser.id);
+
+//     let xhr = new XMLHttpRequest();
+
+//     xhr.open('GET', 'users');
+//     xhr.send();
+
+//     xhr.onreadystatechange = function
+// }
 
 function findUserToEdit() {
 
