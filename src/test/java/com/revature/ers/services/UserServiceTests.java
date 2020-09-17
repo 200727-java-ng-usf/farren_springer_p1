@@ -131,6 +131,18 @@ public class UserServiceTests {
         // act
         sut.getAllUsers();
     }
+    @Test
+    public void isEmailAvailableReturnsTrue() {
+        String nullString = null;
+        boolean actual = sut.isEmailAvailable(nullString);
+        Assert.assertEquals(true, actual);
+    }
+    @Test
+    public void isUsernameAvailableReturnsTrue() {
+        String nullString = null;
+        boolean actual = sut.isUsernameAvailable(nullString);
+        Assert.assertEquals(true, actual);
+    }
 
     // TODO test that asserts that getAllUsers returns all users
     // TODO test for isUsernameAvailable where user does not exist

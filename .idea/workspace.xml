@@ -24,7 +24,9 @@
   <component name="ChangeListManager">
     <list default="true" id="acd0345a-037a-4ae4-bb0f-bf52e2b6afbe" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/servlets/UserServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/servlets/UserServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/revature/ers/services/UserServiceTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/revature/ers/services/UserServiceTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/revature/ers/servlets/UserServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/revature/ers/servlets/UserServlet.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT.war" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT.war" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/WEB-INF/classes/com/revature/ers/servlets/UserServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/farren_springer_p1-1.0-SNAPSHOT/WEB-INF/classes/com/revature/ers/servlets/UserServlet.class" afterDir="false" />
@@ -33,6 +35,7 @@
       <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-com.revature.ers.util.ConnectionFactoryTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-com.revature.ers.util.ConnectionFactoryTest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/surefire-reports/com.revature.ers.util.ConnectionFactoryTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/com.revature.ers.util.ConnectionFactoryTest.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/test-classes/com/revature/ers/services/ReimbServiceTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/revature/ers/services/ReimbServiceTests.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/revature/ers/services/UserServiceTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/revature/ers/services/UserServiceTests.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,7 +96,7 @@
       <recent name="com.revature.ers.controllers" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.ReimbServiceTests.getAllWithEmptySet">
+  <component name="RunManager" selected="JUnit.com.revature.ers.services in farren_springer_p1">
     <configuration name="ReimbServiceTests.getAllReturnsASet" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="farren_springer_p1" />
       <extension name="coverage">
@@ -126,7 +129,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ReimbServiceTests.isReimbValidNullAmountReturnsFalse" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="UserServiceTests.isEmailValidForNullUserReturnsFalse" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="farren_springer_p1" />
       <extension name="coverage">
         <pattern>
@@ -135,14 +138,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.revature.ers.services" />
-      <option name="MAIN_CLASS_NAME" value="com.revature.ers.services.ReimbServiceTests" />
-      <option name="METHOD_NAME" value="isReimbValidNullAmountReturnsFalse" />
+      <option name="MAIN_CLASS_NAME" value="com.revature.ers.services.UserServiceTests" />
+      <option name="METHOD_NAME" value="isEmailValidForNullUserReturnsFalse" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ReimbServiceTests.isReimbValidNullDescriptionReturnsFalse" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="UserServiceTests.isUsernameAvailableReturnsTrue" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="farren_springer_p1" />
       <extension name="coverage">
         <pattern>
@@ -151,8 +154,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.revature.ers.services" />
-      <option name="MAIN_CLASS_NAME" value="com.revature.ers.services.ReimbServiceTests" />
-      <option name="METHOD_NAME" value="isReimbValidNullDescriptionReturnsFalse" />
+      <option name="MAIN_CLASS_NAME" value="com.revature.ers.services.UserServiceTests" />
+      <option name="METHOD_NAME" value="isUsernameAvailableReturnsTrue" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -174,11 +177,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.ReimbServiceTests.getAllWithEmptySet" />
         <item itemvalue="JUnit.com.revature.ers.services in farren_springer_p1" />
+        <item itemvalue="JUnit.UserServiceTests.isUsernameAvailableReturnsTrue" />
+        <item itemvalue="JUnit.UserServiceTests.isEmailValidForNullUserReturnsFalse" />
+        <item itemvalue="JUnit.ReimbServiceTests.getAllWithEmptySet" />
         <item itemvalue="JUnit.ReimbServiceTests.getAllReturnsASet" />
-        <item itemvalue="JUnit.ReimbServiceTests.isReimbValidNullDescriptionReturnsFalse" />
-        <item itemvalue="JUnit.ReimbServiceTests.isReimbValidNullAmountReturnsFalse" />
       </list>
     </recent_temporary>
   </component>
@@ -235,22 +238,22 @@
     </state>
     <state x="-1660" y="69" key="FileChooserDialogImpl/0.0.1920.1040/-1920.-209.1920.1040@-1920.-209.1920.1040" timestamp="1600368278092" />
     <state x="260" y="278" key="FileChooserDialogImpl/0.0.1920.1040/-1920.-209.1920.1040@0.0.1920.1040" timestamp="1599853212005" />
-    <state width="1877" height="280" key="GridCell.Tab.0.bottom" timestamp="1600352894540">
+    <state width="1877" height="280" key="GridCell.Tab.0.bottom" timestamp="1600378543572">
       <screen x="-1920" y="-209" width="1920" height="1040" />
     </state>
-    <state width="1877" height="280" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.-209.1920.1040@-1920.-209.1920.1040" timestamp="1600352894540" />
-    <state width="1877" height="280" key="GridCell.Tab.0.center" timestamp="1600352894540">
+    <state width="1877" height="280" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.-209.1920.1040@-1920.-209.1920.1040" timestamp="1600378543572" />
+    <state width="1877" height="280" key="GridCell.Tab.0.center" timestamp="1600378543569">
       <screen x="-1920" y="-209" width="1920" height="1040" />
     </state>
-    <state width="1877" height="280" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.-209.1920.1040@-1920.-209.1920.1040" timestamp="1600352894540" />
-    <state width="1877" height="280" key="GridCell.Tab.0.left" timestamp="1600352894539">
+    <state width="1877" height="280" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.-209.1920.1040@-1920.-209.1920.1040" timestamp="1600378543569" />
+    <state width="1877" height="280" key="GridCell.Tab.0.left" timestamp="1600378543569">
       <screen x="-1920" y="-209" width="1920" height="1040" />
     </state>
-    <state width="1877" height="280" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.-209.1920.1040@-1920.-209.1920.1040" timestamp="1600352894539" />
-    <state width="1877" height="280" key="GridCell.Tab.0.right" timestamp="1600352894540">
+    <state width="1877" height="280" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.-209.1920.1040@-1920.-209.1920.1040" timestamp="1600378543569" />
+    <state width="1877" height="280" key="GridCell.Tab.0.right" timestamp="1600378543570">
       <screen x="-1920" y="-209" width="1920" height="1040" />
     </state>
-    <state width="1877" height="280" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.-209.1920.1040@-1920.-209.1920.1040" timestamp="1600352894540" />
+    <state width="1877" height="280" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.-209.1920.1040@-1920.-209.1920.1040" timestamp="1600378543570" />
     <state x="-1430" y="-34" key="Maven.ArtifactSearchDialog" timestamp="1599188383155">
       <screen x="-1920" y="-209" width="1920" height="1040" />
     </state>

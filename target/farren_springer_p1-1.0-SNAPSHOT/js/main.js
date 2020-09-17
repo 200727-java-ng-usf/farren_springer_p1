@@ -1141,7 +1141,7 @@ function submit() {
     }
     if (type == '4') {
         console.log('other chosen!');
-        console.log('OTHER');
+        type = 'OTHER';
     }
 
 
