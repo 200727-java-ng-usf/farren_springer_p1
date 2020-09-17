@@ -587,13 +587,21 @@ function configureAllReimbsView() {
             for (let i=0; i < array.length; i++) { // for every object in the response text...
 
                 let row = document.createElement("tr"); // create a row for that object
+
+                // formatting
                 
+                if (array[i].resolverId == '0') {
+                    array[i].resolverId = '';
+                }
 
                 array[i].submitted = new Date(array[i].submitted); // change submitted to the correct format
 
                 if (array[i].resolved != null) {
                     array[i].resolved = new Date(array[i].resolved).toLocaleDateString("en-US"); // if the resolved date is not null, format it
                 } 
+                if (array[i].resolved == null) {
+                    array[i].resolved = '';
+                }
 
                 // each row has multiple data cells with information corresponsing the key value pairs in the response text
                 row.innerHTML = "<td>" + array[i].id + "</td>" 
