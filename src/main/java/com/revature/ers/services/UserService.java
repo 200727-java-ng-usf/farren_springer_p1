@@ -4,14 +4,8 @@ import com.revature.ers.exceptions.AuthenticationException;
 import com.revature.ers.exceptions.InvalidRequestException;
 import com.revature.ers.exceptions.ResourceNotFoundException;
 import com.revature.ers.models.ErsUser;
-import com.revature.ers.models.Role;
 import com.revature.ers.repos.UserRepository;
-import com.revature.ers.util.ConnectionFactory;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
@@ -20,37 +14,10 @@ public class UserService {
 
     private UserRepository userRepo = new UserRepository();
 
-//    public UserService(UserRepository repo) {
-//        System.out.println("[LOG] - Instantiating " + this.getClass().getName());
-//        userRepo = repo;
-////        userRepo = new UserRepository(); // tight coupling! ~hard~ impossible to unit test
-//    }
-
-    public Set<ErsUser> getAllUsers() {
-
-        Set<ErsUser> users = userRepo.findAllUsers();
-
-        if (users.isEmpty()) {
-            throw new ResourceNotFoundException();
-        }
-
-        return users;
-    }
-
-    public ErsUser authenticate(String username, String password) {
-
-        // validate that the provided username and password are not non-values
-        if (username == null || username.trim().equals("") || password == null || password.trim().equals("")) {
-            throw new InvalidRequestException("Invalid credential values provided!");
-        }
-
-        return userRepo.findUserByCredentials(username, password)
-                                    .orElseThrow(AuthenticationException::new);
-
-//        app.setCurrentUser(authUser);
-
-    }
-
+    /**
+     * CREATE operation
+     * @param newUser
+     */
     public void register(ErsUser newUser) {
 
         if (!isUserValid(newUser)) {
@@ -70,10 +37,46 @@ public class UserService {
 
     }
 
-//    public Set<ErsUser> getUsersByRole() {
-//        return new HashSet<>();
-//    }
+    /**
+     * READ operation
+     * @return
+     */
+    public Set<ErsUser> getAllUsers() {
 
+        Set<ErsUser> users = userRepo.findAllUsers();
+
+        if (users.isEmpty()) {
+            throw new ResourceNotFoundException();
+        }
+
+        return users;
+    }
+
+    /**
+     * READ operation
+     * @param username
+     * @param password
+     * @return
+     */
+    public ErsUser authenticate(String username, String password) {
+
+        // validate that the provided username and password are not non-values
+        if (username == null || username.trim().equals("") || password == null || password.trim().equals("")) {
+            throw new InvalidRequestException("Invalid credential values provided!");
+        }
+
+        return userRepo.findUserByCredentials(username, password)
+                                    .orElseThrow(AuthenticationException::new);
+
+//        app.setCurrentUser(authUser);
+
+    }
+
+    /**
+     * READ operation
+     * @param id
+     * @return
+     */
     public ErsUser getUserById(int id) {
 
         if(id <= 0) {
@@ -85,24 +88,30 @@ public class UserService {
 
     }
 
+    /**
+     * Validation
+     * @param username
+     * @return
+     */
     public boolean isUsernameAvailable(String username) {
         ErsUser user = userRepo.findUserByUsername(username).orElse(null); // todo custom exception?
         return user == null;
     }
 
+    /**
+     * Validation
+     * @param email
+     * @return
+     */
     public boolean isEmailAvailable(String email) {
         ErsUser user = userRepo.findUserByEmail(email).orElse(null); // todo custom exception?
         return user == null;
     }
 
-//    public ErsUser getUserByUsername(String username) {
-//        return null;
-//    }
-//
-//    public boolean deleteUserById(int id) {
-//        return false;
-//    }
-
+    /**
+     * UPDATE operation
+     * @param updatedUser
+     */
     public void update(ErsUser updatedUser) {
 
         if (!isUserValid(updatedUser)) {
@@ -111,35 +120,12 @@ public class UserService {
 
         userRepo.update(updatedUser);
 
-//        // updated user will either have field values that are new or that are assigned
-//        // to the original values, so it is okay to reassign all of them.
-//        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
-//
-//            String sql = "UPDATE project1.ers_users "
-//                    + "SET email = '" + updatedUser.getEmail() + "', "
-//                    + "username = '" + updatedUser.getUsername() + "', "
-//                    + "password = '" + updatedUser.getPassword() + "', "
-//                    + "first_name = '" + updatedUser.getFirstName() + "', "
-//                    + "last_name = '" + updatedUser.getLastName() + "', "
-//                    + "user_role_id = '" + updatedUser.getRole().ordinal() + "' "
-////                    + "', " // TODO update role
-//                    + "WHERE ers_user_id = " + updatedUser.getId();
-//
-//            PreparedStatement pstmt = conn.prepareStatement(sql);
-//            pstmt.executeUpdate(); //
-//            pstmt.close();
-//
-//        } catch (SQLException sqle) {
-//            sqle.printStackTrace();
-//        }
-//
-//        return true;
     }
 
     /**
      * Validates that the given user and its fields are valid (not null or empty strings). Does
      * not perform validation on id or role fields.
-     *
+     * Convenience method to be used in READ operation methods
      * @param user
      * @return true or false depending on if the user was valid or not
      */
@@ -154,3 +140,31 @@ public class UserService {
 
 
 }
+
+
+
+
+
+//        // updated user will either have field values that are new or that are assigned
+//        // to the original values, so it is okay to reassign all of them.
+//        try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+//
+//            String sql = "UPDATE project1.ers_users "
+//                    + "SET email = '" + updatedUser.getEmail() + "', "
+//                    + "username = '" + updatedUser.getUsername() + "', "
+//                    + "password = '" + updatedUser.getPassword() + "', "
+//                    + "first_name = '" + updatedUser.getFirstName() + "', "
+//                    + "last_name = '" + updatedUser.getLastName() + "', "
+//                    + "user_role_id = '" + updatedUser.getRole().ordinal() + "' "
+////                    + "', "
+//                    + "WHERE ers_user_id = " + updatedUser.getId();
+//
+//            PreparedStatement pstmt = conn.prepareStatement(sql);
+//            pstmt.executeUpdate(); //
+//            pstmt.close();
+//
+//        } catch (SQLException sqle) {
+//            sqle.printStackTrace();
+//        }
+//
+//        return true;

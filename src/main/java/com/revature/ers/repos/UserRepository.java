@@ -9,15 +9,7 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-/*
-    Recommended methods to implement:
-        - Set<ErsUser> findAllUsers()
-        - Optional<ErsUser> findUserById(int id)
-        - Set<ErsUser> findUsersByRole(String rolename)
-        - boolean/void updateUser(ErsUser updatedUser)
-        - boolean/void deleteUserById(int id)
-        - Optional<ErsUser> findUserByEmail(String email)
- */
+
 public class UserRepository {
 
     // extract common query clauses into a easily referenced member for reusability.

@@ -1,18 +1,18 @@
 package com.revature.ers.repos;
 
 import com.revature.ers.models.ErsReimbursement;
-import com.revature.ers.models.Role;
+
 import com.revature.ers.models.Status;
 import com.revature.ers.models.Type;
 import com.revature.ers.util.ConnectionFactory;
 
 import java.sql.*;
-import java.time.LocalDateTime;
+
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-import static java.time.LocalDate.now;
+
 
 public class ReimbRepository {
 
