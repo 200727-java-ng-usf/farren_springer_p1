@@ -24,10 +24,8 @@
   <component name="ChangeListManager">
     <list default="true" id="acd0345a-037a-4ae4-bb0f-bf52e2b6afbe" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/repos/ReimbRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/repos/ReimbRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/repos/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/repos/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/services/ReimbService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/services/ReimbService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/services/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/servlets/ReimbServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/servlets/ReimbServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/revature/ers/servlets/UserServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/revature/ers/servlets/UserServlet.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

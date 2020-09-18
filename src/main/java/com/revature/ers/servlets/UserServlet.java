@@ -87,8 +87,7 @@ public class UserServlet extends HttpServlet {
 
         System.out.println("in UserServlet doGet");
 
-        // TODO validate that a user is the same user that is trying to view itself
-        // TODO validate that a user is an admin before viewing all users
+        // TODO (for profile!) validate that a user is the same user that is trying to view itself
 
         ObjectMapper mapper = new ObjectMapper();
         PrintWriter respWriter = resp.getWriter();
@@ -235,8 +234,17 @@ public class UserServlet extends HttpServlet {
 
             resp.setStatus(201); // 201 = CREATED because new information?
 
+        } catch (InvalidRequestException ire) {
+            resp.setStatus(400);
+            ire.printStackTrace();
+            ErrorResponse err = new ErrorResponse(400, "User provided is not valid.");
+            String errJSON = mapper.writeValueAsString(err);
+            respWriter.write(errJSON);
         } catch (Exception e) {
-            e.printStackTrace(); // TODO custom exceptions
+            e.printStackTrace();
+            resp.setStatus(500); // 500 = INTERNAL SERVER ERROR
+            ErrorResponse err = new ErrorResponse(500, "It's not you, it's us. Our bad");
+            respWriter.write(mapper.writeValueAsString(err));
         }
     }
 }

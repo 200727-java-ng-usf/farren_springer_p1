@@ -326,8 +326,17 @@ public class ReimbServlet extends HttpServlet {
                 resp.setStatus(201); // 201 = CREATED because new information?
 
             }
+        } catch (InvalidRequestException ire) {
+            resp.setStatus(400);
+            ire.printStackTrace();
+            ErrorResponse err = new ErrorResponse(400, "Reimbursement provided is null.");
+            String errJSON = mapper.writeValueAsString(err);
+            respWriter.write(errJSON);
         } catch (Exception e) {
-            e.printStackTrace(); // TODO custom exceptions
+            e.printStackTrace();
+            resp.setStatus(500);
+            ErrorResponse err = new ErrorResponse(500, "An Internal Service Error occured");
+            respWriter.write(mapper.writeValueAsString(err));
         }
 
 
@@ -376,7 +385,7 @@ public class ReimbServlet extends HttpServlet {
 
             }
         } catch (NumberFormatException e) {
-            e.printStackTrace();
+            e.printStackTrace(); // TODO status and write back error stack trace
         }
 
     }
